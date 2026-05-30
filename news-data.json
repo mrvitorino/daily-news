@@ -1,88 +1,88 @@
 {
-  "resumo_editorial": "O cenário político-econômico brasileiro dos últimos dois dias de maio de 2026 foi marcado por intensos debates sobre a política fiscal do governo, com o Congresso Nacional em destaque na discussão de medidas de ajuste. O Banco Central manteve o foco no controle da inflação, enquanto indicadores econômicos recentes trouxeram um misto de cautela e otimismo para o mercado. Decisões do Supremo Tribunal Federal também reverberaram no ambiente político, adicionando complexidade ao panorama nacional.",
+  "resumo_editorial": "Os últimos dois dias no Brasil foram marcados por importantes desenvolvimentos econômicos, com o crescimento do PIB no primeiro trimestre de 2026 e a projeção de retorno do país ao posto de 10ª maior economia global. No cenário político, a tensão se elevou com a reação do governo à classificação de facções criminosas pelos EUA e a polêmica indicação de Lula para o STF, enquanto o Congresso lida com cortes orçamentários e o esvaziamento em ano eleitoral.",
   "noticias": [
     {
-      "titulo": "Governo Federal busca apoio no Congresso para aprovação de novo arcabouço fiscal",
+      "titulo": "Economia Brasileira Cresce 1,1% no 1º Trimestre de 2026, Impulsionada por Agropecuária e Consumo",
       "fonte": "Folha de S.Paulo",
-      "categoria": "Politica",
-      "resumo": "O governo federal intensificou as negociações com líderes partidários no Congresso Nacional para garantir a aprovação de um novo arcabouço fiscal. A proposta visa equilibrar as contas públicas e sinalizar compromisso com a responsabilidade fiscal, mas enfrenta resistência de setores que demandam mais investimentos.",
-      "url": "https://www.folha.uol.com.br",
-      "importancia": 9
+      "categoria": "Economia",
+      "resumo": "O Produto Interno Bruto (PIB) do Brasil cresceu 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, superando as expectativas do mercado. O resultado foi impulsionado principalmente pelo bom desempenho da agropecuária e pelo aumento do consumo das famílias, indicando uma recuperação econômica.",
+      "url": "https://www.folha.uol.com.br/economia/2026/05/pib-ibge-economia-cresce-11-no-1o-trimestre-de-2026.shtml",
+      "importancia": 10
     },
     {
-      "titulo": "Banco Central mantém taxa Selic em patamar elevado para conter inflação",
+      "titulo": "Brasil Deve Retomar Posto de 10ª Maior Economia do Mundo em 2026, Aponta FMI",
       "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "Em sua última reunião, o Comitê de Política Monetária (Copom) do Banco Central decidiu manter a taxa básica de juros (Selic) em patamar elevado. A decisão visa consolidar a desinflação e ancorar as expectativas para os próximos meses, apesar das pressões por um afrouxamento monetário para estimular o crescimento.",
-      "url": "https://agenciabrasil.ebc.com.br",
+      "resumo": "Projeções do Fundo Monetário Internacional (FMI), compiladas pela Austin Ratings, indicam que o Brasil deve retornar ao grupo das dez maiores economias do mundo em 2026, superando o Canadá. A expectativa é reforçada pelo crescimento do PIB no primeiro trimestre, marcando uma melhora na posição econômica global do país.",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/05/brasil-deve-retomar-posto-de-10a-maior-economia-do-mundo-em-2026",
       "importancia": 9
     },
     {
-      "titulo": "Crescimento do PIB no primeiro trimestre de 2026 surpreende positivamente o mercado",
-      "fonte": "Valor Econômico",
+      "titulo": "Governo Federal Bloqueia R$ 22,1 Bilhões no Orçamento de 2026, Afetando Emendas Parlamentares e Ministérios",
+      "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "Dados divulgados nesta sexta-feira indicam que o Produto Interno Bruto (PIB) brasileiro registrou um crescimento acima do esperado no primeiro trimestre de 2026. O resultado, impulsionado principalmente pelo setor de serviços e agronegócio, trouxe um alívio e otimismo cauteloso para analistas e investidores.",
-      "url": "https://valor.globo.com",
+      "resumo": "O governo federal detalhou um bloqueio adicional de R$ 22,1 bilhões no Orçamento de 2026, com impacto significativo sobre as emendas parlamentares (quase R$ 5 bilhões) e ministérios como Defesa, Cidades e Educação. A medida visa garantir o cumprimento da meta fiscal e o equilíbrio das contas públicas.",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/05/governo-bloqueia-quase-r-5-bi-em-emendas-para-cumprir-meta-fiscal",
+      "importancia": 9
+    },
+    {
+      "titulo": "Lula Anuncia que Indicará Novamente Jorge Messias para Vaga no STF Após Rejeição Anterior",
+      "fonte": "Agência Brasil",
+      "categoria": "Política",
+      "resumo": "O presidente Luiz Inácio Lula da Silva declarou que indicará novamente o advogado Jorge Messias para uma vaga de ministro no Supremo Tribunal Federal (STF), apesar da rejeição anterior pelo Senado. Lula criticou a decisão do Senado como 'política' e defendeu a qualificação de Messias.",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026/05/lula-diz-que-vai-indicar-novamente-messias-ao-stf",
+      "importancia": 9
+    },
+    {
+      "titulo": "Governo Brasileiro Reage a Classificação de PCC e CV como Terroristas pelos EUA, Alertando para Impactos no PIX",
+      "fonte": "VEJA",
+      "categoria": "Política",
+      "resumo": "O governo brasileiro criticou a decisão dos Estados Unidos de classificar o PCC e o Comando Vermelho como organizações terroristas, alertando para possíveis impactos negativos na economia brasileira e no sistema de pagamentos PIX. O Planalto acusou 'falsos patriotas' de incentivarem a interferência estrangeira.",
+      "url": "https://veja.abril.com.br/politica/lula-deve-telefonar-para-trump-apos-eua-classificarem-pcc-e-cv-como-terroristas/",
+      "importancia": 10
+    },
+    {
+      "titulo": "Mercado Financeiro Eleva Previsão de Inflação para 5,04% em 2026, Aponta Boletim Focus",
+      "fonte": "Diário Digital",
+      "categoria": "Economia",
+      "resumo": "A previsão do mercado financeiro para o Índice Nacional de Preços ao Consumidor Amplo (IPCA), o índice oficial de inflação, foi elevada para 5,04% em 2026, segundo o Boletim Focus do Banco Central. A alta, a décima primeira consecutiva, estoura o intervalo da meta e reflete preocupações com a pressão de preços.",
+      "url": "https://www.diariodigital.com.br/economia/mercado-eleva-previsao-da-inflacao-para-504-este-ano-no-brasil/182602/",
       "importancia": 8
     },
     {
-      "titulo": "STF adia julgamento de ação que pode impactar grandes empresas estatais",
-      "fonte": "G1",
-      "categoria": "Politica",
-      "resumo": "O Supremo Tribunal Federal (STF) adiou o julgamento de uma ação de grande repercussão que pode redefinir os limites de atuação e governança de empresas estatais. A decisão é aguardada com expectativa pelo mercado e pelo governo, devido aos potenciais impactos econômicos e jurídicos.",
-      "url": "https://g1.globo.com",
-      "importancia": 8
-    },
-    {
-      "titulo": "Taxa de desemprego apresenta leve queda, mas mercado de trabalho ainda preocupa",
-      "fonte": "UOL Economia",
+      "titulo": "CNI Vê Avanço da Desindustrialização do Brasil em 2026 e Alerta para Impactos",
+      "fonte": "Revista Oeste",
       "categoria": "Economia",
-      "resumo": "A Pesquisa Nacional por Amostra de Domicílios Contínua (PNADC) revelou uma leve queda na taxa de desemprego no último trimestre. Apesar da melhora, o número de trabalhadores informais e a subutilização da força de trabalho continuam sendo desafios significativos para a recuperação plena do mercado.",
-      "url": "https://economia.uol.com.br",
+      "resumo": "A Confederação Nacional da Indústria (CNI) expressou preocupação com o avanço da desindustrialização no Brasil em 2026. A entidade aponta que o setor enfrenta desafios como maior carga tributária, redução de incentivos fiscais e discussões sobre a jornada de trabalho, impactando a competitividade da indústria nacional.",
+      "url": "https://revistaoeste.com/economia/cni-ve-avanco-da-desindustrializacao-do-brasil-em-2026/",
       "importancia": 7
     },
     {
-      "titulo": "Debate sobre a Reforma Tributária volta à pauta do Senado com novas propostas",
-      "fonte": "Estadão",
-      "categoria": "Politica",
-      "resumo": "A discussão sobre a Reforma Tributária ganhou novo fôlego no Senado Federal, com a apresentação de emendas e propostas que buscam conciliar os interesses de estados e municípios. A expectativa é de que o texto final possa simplificar o sistema e impulsionar a competitividade da economia brasileira.",
-      "url": "https://www.estadao.com.br",
-      "importancia": 7
-    },
-    {
-      "titulo": "Ministério da Fazenda anuncia medidas para incentivar investimentos em infraestrutura",
-      "fonte": "CNN Brasil",
-      "categoria": "Economia",
-      "resumo": "O Ministério da Fazenda divulgou um pacote de medidas para atrair investimentos privados em projetos de infraestrutura. A iniciativa visa destravar obras paralisadas e impulsionar o crescimento econômico, com foco em setores como energia, saneamento e transportes.",
-      "url": "https://www.cnnbrasil.com.br",
-      "importancia": 7
-    },
-    {
-      "titulo": "Críticas à política ambiental do governo ganham força após novos dados de desmatamento",
-      "fonte": "Intercept Brasil",
-      "categoria": "Politica",
-      "resumo": "Novos dados sobre o desmatamento na Amazônia e em outros biomas brasileiros reacenderam as críticas à política ambiental do governo. Organizações não governamentais e especialistas cobram ações mais efetivas e fiscalização rigorosa para conter a destruição.",
-      "url": "https://theintercept.com/brasil/",
-      "importancia": 6
-    },
-    {
-      "titulo": "Setor de serviços impulsiona arrecadação federal em abril, aponta Receita Federal",
+      "titulo": "PSD Discute Lançar Kassab como Vice de Caiado para Frear Aliança com Zema nas Eleições de 2026",
       "fonte": "Folha de S.Paulo",
-      "categoria": "Economia",
-      "resumo": "A arrecadação de impostos federais em abril de 2026 registrou alta, impulsionada principalmente pelo bom desempenho do setor de serviços. Os números reforçam a importância do setor para a economia nacional e para o cumprimento das metas fiscais do governo.",
-      "url": "https://www.folha.uol.com.br",
-      "importancia": 6
+      "categoria": "Política",
+      "resumo": "O Partido Social Democrático (PSD) está em discussões para lançar Gilberto Kassab como vice na chapa de Ronaldo Caiado (União Brasil) para as eleições presidenciais de 2026. A movimentação visa frear uma possível aliança entre Caiado e Romeu Zema (Novo), indicando as complexas articulações políticas para o próximo pleito.",
+      "url": "https://www1.folha.uol.com.br/poder/2026/05/psd-discute-lancar-kassab-como-vice-de-caiado-para-frear-alianca-com-zema.shtml",
+      "importancia": 8
     },
     {
-      "titulo": "Movimentos sociais pressionam governo por ampliação de programas de assistência",
-      "fonte": "Revista Fórum",
-      "categoria": "Politica",
-      "resumo": "Movimentos sociais e entidades da sociedade civil intensificaram a pressão sobre o governo federal para a ampliação e o fortalecimento de programas de assistência social. A demanda surge em meio a desafios econômicos e sociais que afetam parcelas vulneráveis da população.",
-      "url": "https://revistaforum.com.br",
-      "importancia": 6
+      "titulo": "Comissão de Mortos e Desaparecidos Aprova Relatório e Conclui que JK Foi Assassinado pela Ditadura",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Política",
+      "resumo": "A Comissão Especial sobre Mortos e Desaparecidos aprovou um relatório que conclui que o ex-presidente Juscelino Kubitschek foi assassinado pela ditadura militar. A decisão pode levar à modificação da certidão de óbito de JK, representando uma importante revisão histórica com implicações políticas.",
+      "url": "https://www1.folha.uol.com.br/politica/2026/05/comissao-de-mortos-e-desaparecidos-aprova-relatorio-e-conclui-que-jk-foi-assassinado-pela-ditadura.shtml",
+      "importancia": 8
+    },
+    {
+      "titulo": "Congresso Nacional Esvaziado e Pautas Relevantes Atrasadas Devido a Eleições de 2026",
+      "fonte": "Anajustra",
+      "categoria": "Política",
+      "resumo": "O Congresso Nacional enfrenta um esvaziamento de suas atividades e o atraso na votação de pautas relevantes, um fenômeno comum em anos eleitorais. Deputados e senadores direcionam suas atenções para as campanhas nos estados, dificultando a manutenção do quórum e o debate aprofundado de matérias de interesse nacional.",
+      "url": "https://www.anajustra.org.br/noticia/congresso-esvaziado-e-prioridades-cada-vez-mais-distantes-da-populacao/",
+      "importancia": 7
     }
   ],
-  "generated_at": "2026-05-30T13:51:43",
-  "edition_label": "Edicao do Meio-Dia (12h)",
+  "generated_at": "2026-05-30T14:17:52",
+  "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
