@@ -1,98 +1,35 @@
 {
-  "resumo_editorial": "A economia brasileira registrou um crescimento robusto de 1,1% no primeiro trimestre de 2026, impulsionando o país de volta à posição de 10ª maior economia global. Este desempenho, um dos mais altos entre 45 nações, foi parcialmente atribuído a estímulos governamentais pré-eleitorais. Contudo, especialistas alertam que, apesar da recuperação de posições globais, a relevância relativa do Brasil no Sul Global tem diminuído ao longo das décadas.",
+  "resumo_editorial": "A economia brasileira demonstra resiliência com",
   "noticias": [
     {
-      "titulo": "PIB do Brasil tem o 6º maior crescimento entre 45 países e volta a ser o 10º maior do mundo",
-      "fonte": "VEJA",
+      "titulo": "PIB/IBGE: economia cresce 1,1% no 1º trimestre de 2026",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Economia",
-      "resumo": "A economia brasileira cresceu 1,1% no primeiro trimestre de 2026, tornando-se a 10ª maior economia global e superando o Canadá. Essa taxa de crescimento foi a sexta mais alta entre 45 grandes economias analisadas.",
-      "corpo": "O Produto Interno Bruto (PIB) do Brasil expandiu 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, conforme dados compilados por Alex Agostini, economista-chefe da Austin Rating.\n\nEsse desempenho permitiu ao Brasil recuperar sua posição como a décima maior economia do mundo, um avanço significativo em relação à 11ª posição ocupada no final do ano passado.\n\nA taxa de crescimento de 1,1% também colocou o Brasil como a sexta economia de crescimento mais rápido entre 45 países analisados, demonstrando uma recuperação robusta.\n\nO aumento do PIB, medido em dólares correntes, atingiu US$ 2,635 trilhões, ultrapassando o Canadá.\n\nEste resultado positivo é um indicador chave de recuperação e estabilidade econômica, refletindo um ambiente favorável para investimentos e produção.",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGec1NZ6oybJCILk63Rvo6VV1MfME_pZjQid3c1VHZ5IEJTZuYznkTDKXaJMUYwmhxiPGO2dYg2igx04_gSAXHn2b14Mkp_xLe1AWWuIJaN4XMOph-abTmhxcar_e_QO3IBmEyOpdP8-V5Xl3k6k4IK5Om_gRVK146967X7BFqXHS10JGySnKGtkwQOmocmETT1s1pNxiB4Z6Bs9Dybs1lSXkOOICaNAwMB-LzbUm0Pw-7PSpYHIIcK9D4=",
-      "importancia": 9
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8VvFtdDRIUuqvQfiLYafe3D4EoLIiEFkf9W5TdHiHeuJcjSoL2WReSeUt7ky0YEz1AER4_z5qj9tZ-1Eb23KmX8cwMm3fldiUcBqP1nonC4APk6eLSzEDbLx0dLbDe8kKw9pBNslpwaQvbcdsx4fcOUJcbjK2B6AyoTGCFdqKe7Xce4vzsISa4MUHQyVI4VdqySBrzh0=",
+      "importancia": 9,
+      "resumo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme",
+      "corpo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme"
     },
     {
-      "titulo": "PIB do Brasil ganha força e cresce 1,1% no 1º trimestre de 2026, diz IBGE",
+      "titulo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda",
       "fonte": "UOL Economia",
       "categoria": "Economia",
-      "resumo": "A economia brasileira cresceu 1,1% no primeiro trimestre de 2026 em comparação com o último trimestre de 2025, conforme divulgado pelo IBGE. Esse crescimento foi impulsionado pelo desempenho positivo da agropecuária e da indústria.",
-      "corpo": "O Instituto Brasileiro de Geografia e Estatística (IBGE) anunciou que o Produto Interno Bruto (PIB) do país expandiu 1,1% nos primeiros três meses de 2026, em comparação com o trimestre final de 2025.\n\nEste resultado, embora ligeiramente inferior aos 1,3% registrados no mesmo período do ano passado, indica um fortalecimento da economia.\n\nO setor agropecuário registrou um aumento de 2%, enquanto a indústria cresceu 1%, contribuindo significativamente para o resultado positivo geral.\n\nO setor de serviços também desempenhou um papel crucial nesta expansão.\n\nO mercado esperava um crescimento de 1%, tornando o 1,1% real uma surpresa positiva.\n\nIsso marca o 21º trimestre consecutivo de crescimento anual para a economia brasileira, demonstrando resiliência desde a última contração no final de 2020 devido à pandemia de COVID-19.",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEx-aN5JMvO_MY0gwpXaBjDCHE45HQF0u_u8MHzALqBQPM5wEYVCrbbl4rpAMxZp_iz8zn_u4aD8Axcr7qIafzMX3fzJaNgH4wCptfipQcB1cYVzLDhMLKTdrWZH221LD9B9V_628V-7jOZSQ8uyVaZrov1wDkJ9AorsnFtArF97--XIMPNPdyIG8-Hd5PjcqOn",
-      "importancia": 9
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHb1kz3IDD01x7mXSb5DcLyBC1oY8YstDanMAc2aPLghPURYO7-Pm0Fq5W814Jvj2ATtN5m2ShjNi_2FiNnQcw1WpC4ZGVxq6wJmUpjVnRtCojT05nmEVd6HHVazCgjQXcVNpgP3wQ3bu1hQlCTW0AyHgWnmAOaaWz7cOEaQhgNVLWoz6Yp5mI7cP4SwL6sUSJ9dFKi_ert8WsTtln83pDAKA==",
+      "importancia": 8,
+      "resumo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda",
+      "corpo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda"
     },
     {
-      "titulo": "Brasil deve voltar a ser 10ª maior economia após resultado do PIB",
+      "titulo": "Acordo Mercosul-Canadá avança em décima rodada de negociações",
       "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "O Brasil deve retornar à posição de 10ª maior economia do mundo em 2026, de acordo com projeções do FMI compiladas pela Austin Ratings, após seu crescimento de 1,1% do PIB no 1º trimestre. Isso representa uma melhoria em relação à 11ª posição em 2024 e 2025.",
-      "corpo": "A Agência Brasil noticiou que o Brasil deve recuperar seu status de 10ª maior economia do mundo em 2026.\n\nEssa projeção, baseada em dados do Fundo Monetário Internacional (FMI) compilados pela Austin Ratings, segue o crescimento de 1,1% do PIB do país no primeiro trimestre do ano, superando as expectativas do mercado.\n\nA análise de 45 países indica que o Brasil ultrapassará o Canadá no ranking global de economias medido em dólares correntes.\n\nNos dois anos anteriores, 2024 e 2025, o Brasil havia caído para a 11ª posição, sendo superado pela Rússia e pelo Canadá.\n\nO crescimento de 1,1% foi o sexto maior entre as 45 nações analisadas, superando grandes economias como Estados Unidos, Alemanha e Reino Unido.\n\nEmbora o país recupere sua posição global, o relatório também observa que o Brasil ainda está atrás em renda per capita em comparação com nações mais ricas.",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFom-XdSjq2vdT89oJJq-vzm9oSc5urnLjZBzKSrnvxmRPxVtN_13rVe5IFXx-oaioUHGPhxL9p8g6JEM3XjMfrTm9azJLX78Mi8nns4LeZLOhrKa0AlVQo7OuiZ55Mq3TNVfYUoUdiG0ux7Fo6k9ClG5KRsoTZsHZJ_sRoDcT2I_NkDnGYz9ZcYmzc05szQVcOV3UrFGdIaBgU9ZG8lz70BJN5MLzHvAyWl1CPuCGMgFDeT4=",
-      "importancia": 9
-    },
-    {
-      "titulo": "Economia brasileira acelera no primeiro tri com estímulos de Lula antes da eleição",
-      "fonte": "Bloomberg Línea",
-      "categoria": "Economia / Política",
-      "resumo": "O crescimento econômico do Brasil acelerou no primeiro trimestre de 2026, em parte devido a estímulos governamentais anunciados pelo Presidente Lula, antes de sua tentativa de reeleição em outubro. O PIB cresceu 1,1%, superando as expectativas dos analistas.",
-      "corpo": "A economia brasileira demonstrou uma aceleração significativa no primeiro trimestre de 2026, com um aumento de 1,1% em seu Produto Interno Bruto (PIB), superando a estimativa mediana de 1,0% dos analistas da Bloomberg.\n\nEste crescimento é atribuído, em parte, a vários programas de assistência social e estímulos econômicos introduzidos pelo Presidente Luiz Inácio Lula da Silva.\n\nEssas medidas, que incluem renegociação de dívidas, redução de impostos sobre combustíveis e subsídios para populações de baixa renda, são vistas como esforços para mitigar o impacto da guerra com o Irã nos preços da energia e estimular o consumo.\n\nCom o Presidente Lula buscando a reeleição em outubro, esses estímulos pré-eleitorais são estrategicamente direcionados para melhorar seus índices de aprovação, que atualmente estão abaixo de 50%.\n\nO efeito combinado desses programas é projetado para adicionar mais de um ponto percentual ao crescimento do PIB deste ano, destacando a interação entre política econômica e estratégia política.",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF5Dt1wx9le_7uU69Rv_QPS5Ap62LsK3eANpYXxLPjxb2wYSpdvw7AawTZI0jenGR9Qj-esWHEz4AyyhvFeSMj-gcNY6stjhAjGCT8FtZOnM4pSx2UYMUaWKMjAq70ldB312HX9DXCKPcHP65xlOhXFgJ4-g1GA7wnbPh-SXqzLsTUMOxeYM49SnG6CPlegHLy9VOWLh9aKwnUWEEIpyOf4yyptBMrMoVocfL5wQM5sgPW5jLpfDAA=",
-      "importancia": 8
-    },
-    {
-      "titulo": "Brasil recupera posições globais, mas perde relevância relativa no Sul Global, aponta economista",
-      "fonte": "Brasil de Fato",
-      "categoria": "Economia / Internacional",
-      "resumo": "Embora o recente crescimento do PIB do Brasil o coloque entre as 10 maiores economias globais, o economista José Luis Oreiro alerta que sua importância relativa no Sul Global diminuiu significativamente ao longo das décadas, especialmente em comparação com a China e a Índia.",
-      "corpo": "Apesar dos recentes indicadores econômicos do Brasil mostrarem um retorno às 10 maiores economias globais, o economista José Luis Oreiro, professor da Universidade de Brasília (UnB), adverte contra a interpretação isolada desses dados.\n\nOreiro destaca uma retração estrutural na importância relativa do Brasil dentro do Sul Global nas últimas décadas, particularmente em contraste com os rápidos avanços da China e da Índia.\n\nEle aponta que em 1980, os PIBs combinados da China e da Índia não superavam a economia brasileira sozinha.\n\nHoje, dentro do bloco BRICS, o Brasil ocupa a quarta posição econômica entre os membros fundadores, com sua produção nacional significativamente menor que a da China e da Índia.\n\nEssa posição diminuída afeta a alavancagem política e econômica do Brasil, que era mais substancial na década de 1990, quando seu PIB ainda superava o da Índia.\n\nNo entanto, Oreiro também observa que a fragmentação dentro do chamado Norte Global apresenta novas oportunidades estratégicas para a diplomacia e a economia brasileiras.",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjf61rgJa-Y9SFLElMSXjBj1uKDhbA1i_mbk4uqSj8AO9m-BocKm-9hGI5prQ6qUKGxXo8lCxhde3kJx62rp0sd9_B6UO2OFxzVghfwCRrzqiE742zDZSof3NivyyFHNkH5gHbcnhSu_jEBG4lIrxzmT2edXlpXdnYrYnyIYMAqYzXU8NMCw9C2i1NKbFTzxBAJl6HTdG5KTi8C8fvvZyHSXU4CP7K94uyWI_IO16Froxgl7UckRcVZifICN6jEDRf-L_HSP8=",
-      "importancia": 8
-    },
-    {
-      "titulo": "Não foi possível encontrar notícias adicionais sobre política ou economia no Brasil publicadas entre 28 e 30 de maio de 2026 nas fontes especificadas.",
-      "fonte": "N/A",
-      "categoria": "N/A",
-      "resumo": "N/A",
-      "corpo": "As buscas realizadas nas fontes prioritárias (Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum) e complementares (G1, UOL, Estadao, Valor Economico, CNN Brasil) para notícias sobre política e economia no Brasil publicadas entre 28 e 30 de maio de 2026 retornaram resultados predominantemente focados no crescimento do PIB do primeiro trimestre de 2026. Não foram encontrados outros eventos políticos ou econômicos distintos e de grande relevância que pudessem compor as 10 notícias solicitadas dentro do período e critérios estabelecidos.",
       "url": "",
-      "importancia": 1
-    },
-    {
-      "titulo": "Não foi possível encontrar notícias adicionais sobre política ou economia no Brasil publicadas entre 28 e 30 de maio de 2026 nas fontes especificadas.",
-      "fonte": "N/A",
-      "categoria": "N/A",
-      "resumo": "N/A",
-      "corpo": "As buscas realizadas nas fontes prioritárias (Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum) e complementares (G1, UOL, Estadao, Valor Economico, CNN Brasil) para notícias sobre política e economia no Brasil publicadas entre 28 e 30 de maio de 2026 retornaram resultados predominantemente focados no crescimento do PIB do primeiro trimestre de 2026. Não foram encontrados outros eventos políticos ou econômicos distintos e de grande relevância que pudessem compor as 10 notícias solicitadas dentro do período e critérios estabelecidos.",
-      "url": "",
-      "importancia": 1
-    },
-    {
-      "titulo": "Não foi possível encontrar notícias adicionais sobre política ou economia no Brasil publicadas entre 28 e 30 de maio de 2026 nas fontes especificadas.",
-      "fonte": "N/A",
-      "categoria": "N/A",
-      "resumo": "N/A",
-      "corpo": "As buscas realizadas nas fontes prioritárias (Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum) e complementares (G1, UOL, Estadao, Valor Economico, CNN Brasil) para notícias sobre política e economia no Brasil publicadas entre 28 e 30 de maio de 2026 retornaram resultados predominantemente focados no crescimento do PIB do primeiro trimestre de 2026. Não foram encontrados outros eventos políticos ou econômicos distintos e de grande relevância que pudessem compor as 10 notícias solicitadas dentro do período e critérios estabelecidos.",
-      "url": "",
-      "importancia": 1
-    },
-    {
-      "titulo": "Não foi possível encontrar notícias adicionais sobre política ou economia no Brasil publicadas entre 28 e 30 de maio de 2026 nas fontes especificadas.",
-      "fonte": "N/A",
-      "categoria": "N/A",
-      "resumo": "N/A",
-      "corpo": "As buscas realizadas nas fontes prioritárias (Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum) e complementares (G1, UOL, Estadao, Valor Economico, CNN Brasil) para notícias sobre política e economia no Brasil publicadas entre 28 e 30 de maio de 2026 retornaram resultados predominantemente focados no crescimento do PIB do primeiro trimestre de 2026. Não foram encontrados outros eventos políticos ou econômicos distintos e de grande relevância que pudessem compor as 10 notícias solicitadas dentro do período e critérios estabelecidos.",
-      "url": "",
-      "importancia": 1
-    },
-    {
-      "titulo": "Não foi possível encontrar notícias adicionais sobre política ou economia no Brasil publicadas entre 28 e 30 de maio de 2026 nas fontes especificadas.",
-      "fonte": "N/A",
-      "categoria": "N/A",
-      "resumo": "N/A",
-      "corpo": "As buscas realizadas nas fontes prioritárias (Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum) e complementares (G1, UOL, Estadao, Valor Economico, CNN Brasil) para notícias sobre política e economia no Brasil publicadas entre 28 e 30 de maio de 2026 retornaram resultados predominantemente focados no crescimento do PIB do primeiro trimestre de 2026. Não foram encontrados outros eventos políticos ou econômicos distintos e de grande relevância que pudessem compor as 10 notícias solicitadas dentro do período e critérios estabelecidos.",
-      "url": "",
-      "importancia": 1
+      "importancia": 7,
+      "resumo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá progrediram significativamente",
+      "corpo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá progrediram significativamente"
     }
   ],
-  "generated_at": "2026-05-30T15:23:02",
+  "generated_at": "2026-05-30T16:51:47",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
