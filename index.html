@@ -368,40 +368,52 @@ async function fetchCambio() {
 }
 
 // ─────────────────────────────────────────
-// IPCA + SELIC — AwesomeAPI indicadores
+// IPCA + SELIC — Banco Central do Brasil API
+// sgb.bcb.gov.br — sem CORS no browser
+// IPCA acum 12m: série 13522
+// SELIC meta:    série 432
 // ─────────────────────────────────────────
+async function fetchBCB(serie, n=2) {
+  const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${serie}/dados/ultimos/${n}?formato=json`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('BCB HTTP ' + r.status);
+  return await r.json();
+}
+
 async function fetchIndicadores() {
+  // IPCA acumulado 12 meses (série 13522)
   try {
-    // IPCA mensal mais recente
-    const ri = await fetch('https://economia.awesomeapi.com.br/json/daily/IPCA/2');
-    const di = await ri.json();
-    if (di && di[0]) {
-      const v = parseFloat(di[0].value);
-      // value pode ser acumulado 12 meses (%) ou mensal
+    const d = await fetchBCB(13522, 2);
+    if (d && d.length) {
+      const v    = parseFloat(d[d.length-1].valor.replace(',','.'));
+      const prev = d.length > 1 ? parseFloat(d[d.length-2].valor.replace(',','.')) : null;
+      const ref  = d[d.length-1].data; // "dd/MM/yyyy"
+      const mes  = ref ? ref.substring(3,10) : '';
       document.getElementById('val-ipca').textContent = fmtN(v, 2) + '%';
-      document.getElementById('ref-ipca').textContent = 'Acum. 12 meses';
-      const prev = di[1] ? parseFloat(di[1].value) : null;
+      document.getElementById('ref-ipca').textContent = 'Acum. 12m · ' + mes;
       if (prev !== null) {
         const diff = v - prev;
         const el = document.getElementById('chg-ipca');
-        el.textContent = (diff >= 0 ? '▲ +' : '▼ ') + fmtN(Math.abs(diff), 2) + 'pp vs anterior';
+        el.textContent = (diff >= 0 ? '▲ +' : '▼ ') + fmtN(Math.abs(diff), 2) + 'pp';
         el.className = 'macro-change ' + cc(diff);
       }
     }
   } catch(e) {
     document.getElementById('val-ipca').textContent = '—';
-    document.getElementById('ref-ipca').textContent = 'indisponível';
+    document.getElementById('ref-ipca').textContent = 'BCB indisponível';
+    console.warn('IPCA error:', e);
   }
 
+  // SELIC meta % a.a. (série 432)
   try {
-    // SELIC
-    const rs = await fetch('https://economia.awesomeapi.com.br/json/daily/SELIC/2');
-    const ds = await rs.json();
-    if (ds && ds[0]) {
-      const v = parseFloat(ds[0].value);
+    const d = await fetchBCB(432, 2);
+    if (d && d.length) {
+      const v    = parseFloat(d[d.length-1].valor.replace(',','.'));
+      const prev = d.length > 1 ? parseFloat(d[d.length-2].valor.replace(',','.')) : null;
+      const ref  = d[d.length-1].data;
+      const mes  = ref ? ref.substring(3,10) : '';
       document.getElementById('val-selic').textContent = fmtN(v, 2) + '%';
-      document.getElementById('ref-selic').textContent = 'ao ano';
-      const prev = ds[1] ? parseFloat(ds[1].value) : null;
+      document.getElementById('ref-selic').textContent = 'a.a. · ' + mes;
       if (prev !== null) {
         const diff = v - prev;
         const el = document.getElementById('chg-selic');
@@ -416,7 +428,8 @@ async function fetchIndicadores() {
     }
   } catch(e) {
     document.getElementById('val-selic').textContent = '—';
-    document.getElementById('ref-selic').textContent = 'indisponível';
+    document.getElementById('ref-selic').textContent = 'BCB indisponível';
+    console.warn('SELIC error:', e);
   }
 }
 
@@ -453,14 +466,7 @@ async function fetchYahoo(symbol) {
   throw new Error('Todos os proxies falharam para ' + symbol);
 }
 
-// ── IBOVESPA via brapi.dev (sem CORS, sem key)
-async function fetchBrapi(tickers) {
-  const syms = tickers.map(t => t.symbol).join(',');
-  const r = await fetch(`https://brapi.dev/api/quote/${syms}`, { signal: AbortSignal.timeout(10000) });
-  if (!r.ok) throw new Error('brapi HTTP '+r.status);
-  const d = await r.json();
-  return d.results || [];
-}
+// brapi.dev removed — usando Yahoo Finance para todas as bolsas
 
 function renderAcoes(id, acoes) {
   const el = document.getElementById(id);
@@ -481,35 +487,18 @@ function renderAcoes(id, acoes) {
 }
 
 async function loadIBOV() {
-  const tickers = [
-    {symbol:'PETR4', name:'Petrobras'},
-    {symbol:'VALE3', name:'Vale'},
-    {symbol:'ITUB4', name:'Itaú'},
-    {symbol:'BBDC4', name:'Bradesco'},
-    {symbol:'ABEV3', name:'Ambev'},
-  ];
-  try {
-    // Índice via Yahoo (com fallback)
-    fetchYahoo('^BVSP').then(idx => {
-      document.getElementById('val-ibov').textContent = fmtN(idx.price, 0);
-      const el = document.getElementById('chg-ibov');
-      el.textContent = cs(idx.change); el.className = 'bolsa-change '+cc(idx.change);
-      document.getElementById('prev-ibov').textContent = 'Anterior: '+fmtN(idx.prev, 0);
-    }).catch(() => {});
-
-    // Ações via brapi.dev (confiável)
-    const results = await fetchBrapi(tickers);
-    const acoes = results.map(r => ({
-      ticker: r.symbol.replace('.SA',''),
-      name:   r.shortName || r.longName || r.symbol,
-      price:  r.regularMarketPrice,
-      change: r.regularMarketChangePercent,
-      currency: 'BRL'
-    }));
-    renderAcoes('acoes-ibov', acoes);
-  } catch(e) {
-    document.getElementById('acoes-ibov').innerHTML='<div class="ind-error">Erro ao carregar dados</div>';
-  }
+  // Usa o mesmo loadYahooIndex dos outros índices — sem brapi.dev
+  await loadYahooIndex({
+    indexSymbol: '^BVSP',
+    valId: 'val-ibov', chgId: 'chg-ibov', prevId: 'prev-ibov', acoesId: 'acoes-ibov',
+    stocks: [
+      {ticker:'PETR4', name:'Petrobras', symbol:'PETR4.SA'},
+      {ticker:'VALE3', name:'Vale',      symbol:'VALE3.SA'},
+      {ticker:'ITUB4', name:'Itaú',      symbol:'ITUB4.SA'},
+      {ticker:'BBDC4', name:'Bradesco',  symbol:'BBDC4.SA'},
+      {ticker:'ABEV3', name:'Ambev',     symbol:'ABEV3.SA'},
+    ]
+  });
 }
 
 async function loadYahooIndex(cfg) {
