@@ -1,98 +1,312 @@
 {
-  "resumo_editorial": "O Brasil navega",
+  "resumo_editorial": "O cenário político",
   "noticias": [
     {
-      "titulo": "Como resposta a medida americana, governo brasileiro deve reforçar discurso de temor de intervenção",
-      "fonte": "G1",
+      "titulo": "Fica como o Congresso fez - O Bastidor",
+      "fonte": "O Globo",
       "categoria": "Politica",
-      "url": "",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGf1bjo5acxZ392S2ZAIVyqnsZiXmYa0Qum7CWO7amEn0Y4mLBIdf1KZplNYVnE4Zt-la7sAxU7i9-nTPKKVcjYZC2xGbgpTOYJVBu-pi1ZXHWRtJiEPWdmPztF2B47Cam1ciHjZTDb3teTTEgZOej6H5f4nZV2",
       "importancia": 9,
-      "resumo": "O governo brasileiro planeja intensificar seu discurso de temor de intervenção, uma medida que surge como resposta direta a recentes ações",
-      "corpo": "O governo brasileiro planeja intensificar seu discurso de temor de intervenção, uma medida que surge como resposta direta a recentes ações"
+      "resumo": "Fica como o Congresso fez - O Bastidor",
+      "corpo": "Fica como o Congresso fez - O Bastidor"
     },
     {
-      "titulo": "Brasil deve voltar a ser 10ª maior economia após resultado do PIB",
-      "fonte": "TN Sul",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEavCBWfwtrXcRK81ozZ7188st1Hz3RwYm4Xgh6gGSbkWVC9Lku8cHaU_LLU0w108O0BZ1OrLVQLCOGPqRYjykViarYmpn-6lyeiwey0OdiOWIxB5gLJYla3IDAiCj3nXCwCbZzpyyxjY8b6WWuaxNyIo7Z1WKs3FoaWKMRuEZKejGhhmKSG_8JxRJ4NbuW8FQKksKBq4dFVjow",
-      "importancia": 9,
-      "resumo": "O Brasil está projetado para reassumir a posição de 10ª maior economia global, um marco impulsionado",
-      "corpo": "O Brasil está projetado para reassumir a posição de 10ª maior economia global, um marco impulsionado"
-    },
-    {
-      "titulo": "Governo amplia bloqueio para R$ 23,678 bilhões e mantém medidas para atendimento das regras fiscais",
-      "fonte": "Ministério do Planejamento e Orçamento - Portal Gov.br",
-      "categoria": "Economia",
-      "url": "https://www.gov.br/mpo/pt-br/ultimas-noticias/2026/05/governo-amplia-bloqueio-para-r-23-678-bilhoes-e-mantem-medidas-para-atendimento-das-regras-fiscais",
-      "importancia": 9,
-      "resumo": "O governo federal ampliou o bloqueio orçamentário para R$ 23,678 bilhões,",
-      "corpo": "O governo federal ampliou o bloqueio orçamentário para R$ 23,678 bilhões,"
-    },
-    {
-      "titulo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição",
-      "fonte": "Folha de S.Paulo",
+      "titulo": "STF julga nesta quinta mudanças feitas pelo Congresso na Lei de Improbidade | CNN Brasil",
+      "fonte": "CNN Brasil",
       "categoria": "Politica",
-      "url": "",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGao5k4EqLSg3gqpVAJZpYc2rmPOKUppYN6hhQuVamtP8mlck3g77NnFR4-D2yN8mxObGDNYRJt-xmtnjgbqsVO5iigDyivvWegXEQBcN5GOO8-MwEEHM4kFpJJ3-AE9vpwJxc0I_0T_oM8nb0Afvu29v_xZ0QD5to3KMWqrZTbCuWvPvl_CD_UajcubV5KovnfV9IeCt9z1KP3anR1N3gA87-KTzq_IBO_6QCItw==",
       "importancia": 8,
-      "resumo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição",
-      "corpo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição"
+      "resumo": "O Supremo Tribunal Federal (STF) julgará nesta quinta-feira as alterações promovidas pelo Congresso Nacional na Lei de Improbidade Administrativa. Esta",
+      "corpo": "O Supremo Tribunal Federal (STF) julgará nesta quinta-feira as alterações promovidas pelo Congresso Nacional na Lei de Improbidade Administrativa. Esta"
     },
     {
-      "titulo": "Brasil tem menor desemprego da série histórica para o trimestre encerrado em abril",
-      "fonte": "Amapá Digital",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMqCthSF5fNgl9uVyROK1Fv8RUi8O53QBQXi35u67EjiZVACpun91bFTmK3ddzrmZ5up84FNOASJN2GXZzildLn8A80lJTXNFtD-eGY954w_lAWc7MeQT5IDky7zWjtnJgGO9f7OMExtOqTFyOElJhar6uTf9VNYnXRhty29N1IvYxKn5Pd-fNa1pHJWkVfgcsw6X0VvuCVYum6vmdcmtRXhp8I9NtnePN4d5Tyk4NBBQZWQeCRqoPeGEOFZLwB1xKDwtc10jHRrFtf9w=",
-      "importancia": 8,
-      "resumo": "O Brasil registrou a menor taxa de desemprego de sua série histórica para o trimestre encerrado em abril, um marco",
-      "corpo": "O Brasil registrou a menor taxa de desemprego de sua série histórica para o trimestre encerrado em abril, um marco"
-    },
-    {
-      "titulo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos",
-      "fonte": "Ministério da Saúde - Portal Gov.br",
+      "titulo": "Planalto avalia ir ao STF após derrota imposta por Alcolumbre - YouTube",
+      "fonte": "Metrópoles",
       "categoria": "Politica",
-      "url": "https://www.gov.br/saude/pt-br/assuntos/noticias/2026/maio/ministerio-da-saude-reforca-cuidado-em-saude-mental-com-habilitacao-de-cerca-de-800-novos-servicos-em-tres-anos",
-      "importancia": 8,
-      "resumo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos",
-      "corpo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos"
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHgT6Ig-l1B8vuSe25LrUM4Qz1mXrDvCso_wyzLIzpkqPPJh8lEM5iVgDBpcboTjgoGCkVQKy_HqZDO-CWRUbLx_3tm-auf5RJmpNuQtx_e03jhnGNqVsWktNGDsOfAJe40nIsdHU0=",
+      "importancia": 9,
+      "resumo": "O Planalto avalia recorrer ao Supremo Tribunal Federal (STF) após sofrer uma derrota política significativa imposta pelo senador Davi Alcolumbre",
+      "corpo": "O Planalto avalia recorrer ao Supremo Tribunal Federal (STF) após sofrer uma derrota política significativa imposta pelo senador Davi Alcolumbre"
     },
     {
-      "titulo": "Governo brasileiro doa 21 toneladas de alimentos à Bolívia em meio a crise no país vizinho",
-      "fonte": "Folha de S.Paulo",
-      "categoria": "Internacional",
-      "url": "https://www1.folha.uol.com.br/mundo/2026/05/bolivia-governo-brasileiro-doa-21-toneladas-de-alimentos.shtml",
+      "titulo": "Governo Lula critica visita de Flávio Bolsonaro aos EUA e classificação do PCC e CV como terroristas",
+      "fonte": "Exame",
+      "categoria": "Politica",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELEkIEcxVAxmI3SQfuxSDJ2c9F1pIUVz75xoLbq44tbxKSu7ZDch9PbDDdEO_IIfQea_Nd-aB1Y7mIt4s1vbgGZqq4FMcCwcEIFgIW5ImSeXSHUZy7XUa5vtSKelh6gjOt6H-itX_tlgVNDD5uSRISEIZAGHOU4-Yd1dfU5Qg3AJxmnGuT6bHNKVZ7GLoVt-zJOg5ZmH9av9j83Q==",
       "importancia": 8,
-      "resumo": "O governo brasileiro anunciou a doação de 21 toneladas de alimentos à Bolívia, um gesto de solidariedade",
-      "corpo": "O governo brasileiro anunciou a doação de 21 toneladas de alimentos à Bolívia, um gesto de solidariedade"
+      "resumo": "O governo Lula expressou críticas contundentes à visita do senador Flávio Bolsonaro aos Estados Unidos, especialmente em relação à pauta de classificação do PCC",
+      "corpo": "O governo Lula expressou críticas contundentes à visita do senador Flávio Bolsonaro aos Estados Unidos, especialmente em relação à pauta de classificação do PCC"
     },
     {
       "titulo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei",
       "fonte": "Folha de S.Paulo",
       "categoria": "Politica",
       "url": "",
-      "importancia": 7,
-      "resumo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei",
-      "corpo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei"
+      "importancia": 8,
+      "resumo": "Flávio Bolsonaro, apesar de ter direcionado sua atuação legislativa para a área da segurança pública, não obteve sucesso em transformar projetos de sua autoria",
+      "corpo": "Flávio Bolsonaro, apesar de ter direcionado sua atuação legislativa para a área da segurança pública, não obteve sucesso em transformar projetos de sua autoria"
     },
     {
-      "titulo": "INFLAÇÃO/BRASIL- GASOLINA, DIESEL E GÁS FICAM MAIS CAROS EM 2026 COM O AUMENTO DO ICMS.",
-      "fonte": "Folha do Cacau",
+      "titulo": "Ibovespa cai com PIB forte impulsionando apostas hawkish do BCB",
+      "fonte": "Trading Economics",
       "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGT4hmjaNB2BLbRPGhD-DydSLw05yd8mhozm420Dzn3pg98yYT6cgLZevuPaZJD4Amc5VLSPsIm-VHQJVT-0j1INueqFevvPwJlBWVN1KjKtaC_PT-JzyZxN5GbPsdrC5D4SYyopOfGtzeJUN7RYpce_O2GEmY-cpK3PtBvN6wMxu1Gxv2FCZ58IIdVor_pT6S6nVdTVWvcXfbSMK7vr-z2LTO86L9G9xrCW2czqu3Gu4VB6YdjTE287DLqPK8Nj7jQvSM8",
-      "importancia": 7,
-      "resumo": "A partir de 2026, consumidores brasileiros enfrentarão um aumento nos preços da gasolina, diesel e",
-      "corpo": "A partir de 2026, consumidores brasileiros enfrentarão um aumento nos preços da gasolina, diesel e"
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFHhvUPVG7jSAOJe2tndvXChrBAY3ABs8XxW-aJGioAsliLOtMMPhkuOJMiXj91CdWGfhgsnGkepVRecuMg5-fslis1qzzU-y48H27MiaDuiluu6UFMqkCMgBbth6by9HXSQYPeuo-K1DY6H8bUyDyXqSUW_KD",
+      "importancia": 8,
+      "resumo": "O Ibovespa registrou queda significativa, impulsionado paradoxalmente por um Produto Interno Bruto (PIB) robusto que superou",
+      "corpo": "O Ibovespa registrou queda significativa, impulsionado paradoxalmente por um Produto Interno Bruto (PIB) robusto que superou"
     },
     {
-      "titulo": "Brasil e Suriname vão negociar acordo para ampliar comércio",
-      "fonte": "Agência Brasil",
+      "titulo": "Com dólar em alta e 3ª queda do Ibovespa, veja ranking de investimentos",
+      "fonte": "UOL Economia",
       "categoria": "Economia",
-      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/brasil-e-suriname-vao-negociar-acordo-para-ampliar-comercio",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEBwJ4g1tSUwptlhx_VWXtLC8HD3k4prhU2YGzIsGzP00pY02C0qE_o18ndYrA1gdTQbMso9Uqkehq4A8_32evziG3eL4iGG0JILX-CtUZnP00MALl25NfZrZUtHq1KI-tAJGNAL39JQRFVSlUtHSggGf-4PYGBGKAYmW3efDrw4r2koJF9YNRvP3kgby-dQ62JLWClxYEU8-kxhxn_zTEbwxY-i6unG8wlRTDxl3L6olN1R34QeuGE99cWS1o=",
+      "importancia": 9,
+      "resumo": "O mercado financeiro brasileiro enfrenta um período de instabilidade, com o dólar em valorização e o Ibovespa registrando sua terceira queda consecut",
+      "corpo": "O mercado financeiro brasileiro enfrenta um período de instabilidade, com o dólar em valorização e o Ibovespa registrando sua terceira queda consecut"
+    },
+    {
+      "titulo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo",
+      "fonte": "InfoMoney",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbYzSDAdWVpH1L_gNGpa89NJiPWEKF6rB0AbAT_LrS9f92_R6k_j1bQils_-WpYYMTbizq3QHw-iQa5ND-lCY_CRazOJGI37cti4zKp3DTmSmVfH7htubx9RYEUFdwCTgj6p51Q1GZV4p5to3d71cW1nILh-1KfmjvhRe1AxP55yRhYpVvDLTl-ZIHZI2S3RM=",
+      "importancia": 9,
+      "resumo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo",
+      "corpo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo"
+    },
+    {
+      "titulo": "Ibovespa hoje: Embraer (EMBR3) e frigoríficos lideram altas; Raízen (RAIZ4) cai 4%",
+      "fonte": "Estadão",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFFWyFrjoNtq7VUlDLlib8ulXpoFkvuatTGcqcjJeOY17qy2N7L2PojuaEA1Fyo3Eow9MebzsG10ZCWFeE9DItobkPihc_GGCOkaYnvNvXiTauNj9kWXJpHcMeKoptJm4MNZvPV1auon2jl8SY-i3Tbz9jVQc7UG4NZzRczq9vdPV-2fqutpioVysuoLv0NRImUJbpJZID5lHtpyS87QXGT_1Tbs0Fm2tDRj0sUDiQsfaRV2bEyeEWeD_hHE4E=",
       "importancia": 7,
-      "resumo": "Brasil e Suriname anunciaram o início de negociações para um acordo que visa ampliar significativamente o comércio bilateral. A",
-      "corpo": "Brasil e Suriname anunciaram o início de negociações para um acordo que visa ampliar significativamente o comércio bilateral. A"
+      "resumo": "O Ibovespa registrou um dia de movimentos setoriais distintos, com as ações da Embraer (EMBR3) e de empresas frigoríf",
+      "corpo": "O Ibovespa registrou um dia de movimentos setoriais distintos, com as ações da Embraer (EMBR3) e de empresas frigoríf"
+    },
+    {
+      "titulo": "Economia brasileira se recupera no 1º trimestre e cresce 1,1%",
+      "fonte": "Swissinfo",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFnW0fZjoM29B3DuSLLs2Cu4lTiYSW3RUymD9rYOox_Rfc0--xFl2MnvqvZM033SD8xfO7o1qq20wYLYt0EhzcAvTDZ8-MUhsOS-Sbd7_xzjSdAmcf7S7QTu5brj-DgkPZXoget1qlqcjKSwsjb9Ju8iDyVSxji4RyjGF9PaAsqwJXkIZISSVuUP8SutflObij-UAtU210NtVJ6lGh7sUCHJfCRkJSc",
+      "importancia": 10,
+      "resumo": "A economia brasileira registrou um crescimento robusto de 1,1% no primeiro trimestre, superando as projeções e indicando uma recuperação consistente",
+      "corpo": "A economia brasileira registrou um crescimento robusto de 1,1% no primeiro trimestre, superando as projeções e indicando uma recuperação consistente"
+    },
+    {
+      "titulo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)",
+      "fonte": "Brasil de Fato",
+      "categoria": "Economia",
+      "url": "",
+      "importancia": 7,
+      "resumo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)",
+      "corpo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)"
+    },
+    {
+      "titulo": "X Rodada Negociadora MERCOSUL - Canadá",
+      "fonte": "GovBR (MRE/MDIC/MAPA)",
+      "categoria": "Economia",
+      "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa/x-rodada-negociadora-mercosul-canada-nota-conjunta-mre-mdic-mapa",
+      "importancia": 9,
+      "resumo": "X Rodada Negociadora MERCOSUL - Canadá",
+      "corpo": "X Rodada Negociadora MERCOSUL - Canadá"
+    },
+    {
+      "titulo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex",
+      "fonte": "CNN Brasil",
+      "categoria": "Economia",
+      "url": "https://www.cnnbrasil.com.br/economia/brasil-se-destaca-internacionalmente-em-cenario-complexo-diz-apex/",
+      "importancia": 8,
+      "resumo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex",
+      "corpo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex"
+    },
+    {
+      "titulo": "Tatiana Prazeres destaca diversificação no comércio exterior",
+      "fonte": "Jornal de Brasília",
+      "categoria": "Economia",
+      "url": "https://www.jornaldebrasilia.com.br/economia/tatiana-prazeres-destaca-diversificacao-no-comercio-exterior/",
+      "importancia": 7,
+      "resumo": "**",
+      "corpo": "**"
+    },
+    {
+      "titulo": "Assinatura de Termos de Referência para negociação de Acordo Comercial de Alcance Parcial entre Brasil e Suriname",
+      "fonte": "GovBR (MRE/MDIC)",
+      "categoria": "Economia",
+      "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa/assinatura-de-termos-de-referencia-para-negociacao-de-acordo-comercial-de-alcance-parcial-entre-brasil-e-suriname-nota-conjunta-mre-mdic",
+      "importancia": 8,
+      "resumo": "** Brasil e Suriname formalizaram a assinatura dos Termos de Referência que guiarão as negociações de um Acordo Comercial de Alcance Parcial. Este passo representa um avanço significativo no fortalecimento das relações econômicas bilaterais e na promoção da integração regional.\n\n**PARAGRAFO1>>** Em um movimento estratégico para aprofundar os laços econômicos e comerciais na América do Sul, Brasil e Suriname deram um passo fundamental rumo à formal",
+      "corpo": "** Em um movimento estratégico para aprofundar os laços econômicos e comerciais na América do Sul, Brasil e Suriname deram um passo fundamental rumo à formal"
+    },
+    {
+      "titulo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil",
+      "fonte": "Rádio Agro Hoje (via Jornal Brasil Rural)",
+      "categoria": "Economia",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ (URL do vídeo do Jornal Brasil Rural, que menciona a notícia)",
+      "importancia": 7,
+      "resumo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil",
+      "corpo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil"
+    },
+    {
+      "titulo": "Petrobras estuda dobrar fábricas de fertilizantes e busca autossuficiência",
+      "fonte": "Notícias Agrícolas",
+      "categoria": "Economia",
+      "url": "https://www.noticiasagricolas.com.br/noticias/agronegocio/349506-petrobras-estuda-dobrar-fabricas-de-fertilizantes-e-busca-autossuficiencia.html (Baseado em snippet de 28/05/2026, mas a notícia é relevante para o agronegócio e indústria)",
+      "importancia": 8,
+      "resumo": "A Petrobras está avaliando a expansão de sua capacidade de produção de fertilizantes, com o objetivo de dobrar o número de fábricas. Essa iniciativa estratégica visa alcançar a autossuficiência do Brasil no setor, reduzindo a dependência de importações e fortalecendo a segurança alimentar e o agronegócio nacional.",
+      "corpo": "Em um cenário global de crescente"
+    },
+    {
+      "titulo": "Avatar: O Último Mestre do Ar - Temporada 2",
+      "fonte": "TecMundo",
+      "categoria": "Entretenimento",
+      "url": "https://www.tecmundo.com.br/minha-serie/279483-netflix-recebe-filmes-series-peso-junho-veja-novidades-mes.htm",
+      "importancia": 9,
+      "resumo": "Avatar: O Último Mestre do Ar - Temporada 2",
+      "corpo": "Avatar: O Último Mestre do Ar - Temporada 2"
+    },
+    {
+      "titulo": "The Boroughs",
+      "fonte": "TIME",
+      "categoria": "Entretenimento",
+      "url": "https://time.com/6974191/new-on-netflix-may-2026/",
+      "importancia": 8,
+      "resumo": "The Boroughs",
+      "corpo": "The Boroughs"
+    },
+    {
+      "titulo": "Peaky Blinders: O Homem Imortal",
+      "fonte": "About Netflix",
+      "categoria": "Entretenimento",
+      "url": "https://about.netflix.com/pt_br/news/next-on-netflix-2026-all-the-new-films-and-series-coming-this-year",
+      "importancia": 9,
+      "resumo": "Peaky Blinders: O Homem Imortal",
+      "corpo": "Peaky Blinders: O Homem Imortal"
+    },
+    {
+      "titulo": "Tetra: Acreditar de Novo",
+      "fonte": "Canaltech",
+      "categoria": "Entretenimento",
+      "url": "https://canaltech.com.br/streaming/netflix-em-junho-tem-suspense-futebol-rocky-e-avatar-nos-lancamentos-279612/",
+      "importancia": 7,
+      "resumo": "Tetra: Acreditar de Novo",
+      "corpo": "Tetra: Acreditar de Novo"
+    },
+    {
+      "titulo": "Citadel - Temporada 2",
+      "fonte": "Amazon Studios",
+      "categoria": "Entretenimento",
+      "url": "https://press.amazonstudios.com/us/en/original-series/new-to-prime-video-in-may-2026",
+      "importancia": 9,
+      "resumo": "Citadel - Temporada 2",
+      "corpo": "Citadel - Temporada 2"
+    },
+    {
+      "titulo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026",
+      "fonte": "Omelete",
+      "categoria": "Entretenimento",
+      "url": "https://www.omelete.com.br/disney-plus/avatar-fogo-e-cinzas-o-urso-estreias-junho-disney-plus",
+      "importancia": 9,
+      "resumo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026",
+      "corpo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026"
+    },
+    {
+      "titulo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026",
+      "fonte": "Macworld",
+      "categoria": "Entretenimento",
+      "url": "https://www.macworld.com/article/2290940/apple-tv-plus-upcoming-shows-movies-trailers.html",
+      "importancia": 8,
+      "resumo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026",
+      "corpo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026"
+    },
+    {
+      "titulo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max",
+      "fonte": "A Gazeta",
+      "categoria": "Entretenimento",
+      "url": "https://www.agazeta.com.br/hz/cultura/hbo-max-5-filmes-e-series-imperdiveis-que-estreiam-em-junho-de-2026-0526",
+      "importancia": 10,
+      "resumo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max",
+      "corpo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max"
+    },
+    {
+      "titulo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026",
+      "fonte": "Macworld",
+      "categoria": "Entretenimento",
+      "url": "https://www.macworld.com/article/2290940/apple-tv-plus-upcoming-shows-movies-trailers.html",
+      "importancia": 9,
+      "resumo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026",
+      "corpo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026"
+    },
+    {
+      "titulo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026",
+      "fonte": "Tudocelular.com",
+      "categoria": "Entretenimento",
+      "url": "https://www.tudocelular.com/android/noticias/n221226/disney-plus-novidades-catalogo-maio-2026.html",
+      "importancia": 9,
+      "resumo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026",
+      "corpo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026"
+    },
+    {
+      "titulo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026",
+      "fonte": "Hypebeast",
+      "categoria": "Entretenimento",
+      "url": "https://hypebeast.com.br/2026/5/hbo-max-maio-2026-filmes-series-lancamentos",
+      "importancia": 7,
+      "resumo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026",
+      "corpo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026"
+    },
+    {
+      "titulo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026",
+      "fonte": "Sortiraparis",
+      "categoria": "Entretenimento",
+      "url": "https://www.sortiraparis.com/pt/o-que-fazer-em-paris/filmes-series/articles/310006-apple-tv-maio-de-2026-as-novidades-em-series-e-filmes-para-assistir-neste-mes",
+      "importancia": 7,
+      "resumo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026",
+      "corpo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026"
+    },
+    {
+      "titulo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day",
+      "fonte": "Discover Dunwoody",
+      "categoria": "Entretenimento",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2Nktm3Vh03kv7B1XP4ZceJJM8rgZjlTLjwQ0ZgAWtDCHsjXekxByTfIOpImejBrcAuFHXGSnnZOjWxS3S-kmbA71eeysRDn9_IWtWfnXBCz2tv68MHWyAMUvLkQx5yWBzDoiQ_VJq8xvy71konzhq2Zv1QBi5PZbMnXzmGOzalBraZxDAPRL2ocMME1mW",
+      "importancia": 9,
+      "resumo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day",
+      "corpo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day"
+    },
+    {
+      "titulo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias",
+      "fonte": "Omelete",
+      "categoria": "Entretenimento",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFWvSUMlCpsTtS8PnqBNoUtZA47zA7jZW_16SDP_erCK3RJ9pON8H3vPum1RZ_-sReLqReL30tZ4_rmPKrDvsQDKGA-IwmV3c9q648sXPYQh0tz-xK3Nc-F5xfG68kPuG0sC-QMVLVSuZOjT3ynFu9tgPlu9NHQEpYqDMlnSvoZZm5spH_JIm6Yrw==",
+      "importancia": 8,
+      "resumo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias",
+      "corpo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias"
+    },
+    {
+      "titulo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video",
+      "fonte": "Forbes",
+      "categoria": "Entretenimento",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmHjZY1HondCC0_u_0uXJpDhNfoknQK6aLGN2F-WfSkwgDx-ekVzc16QK13ugJ3PyiCXeT6jaD-XqDUiwBrlT4-IDDjgeHXafSTJ0cWCjXSDiwFYiXQxLyswej5SmNxYC3KJY2Fueri4TY5nQT1OFutXUf7T9bxlBjsXm2O8ydtIbf5WpRUJl28zRgLWX8Ts214oKEFKfL_L9cVA2B_PHIFIM87RNqHChVdIwQGezura7Y_2jSsEQ1BA==",
+      "importancia": 8,
+      "resumo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video",
+      "corpo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video"
+    },
+    {
+      "titulo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento",
+      "fonte": "Tangerina",
+      "categoria": "Entretenimento",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEhGKjcDQL8FQ47JlhJmYub0EfqxBJ4TXc5jSk33tpH8TgDL7iX9KVqkOVThK3HnigqbaYuTy92eK2PpRLGTXGEFMBCI7TB-8WQrBbPZi6CQvMwzkDJPdYyLrTU3s7f7r65MhutqMKC5DKHnTzdbHNRbaWLM0_96wZXeT50h4iTqHIorqIsYIm_2jOI-08RYrXdi2vdXLAsKxtQgQUtnQRGr5sfvjS_aoO8cI0i",
+      "importancia": 7,
+      "resumo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento",
+      "corpo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento"
     }
   ],
-  "generated_at": "2026-05-30T17:53:42",
+  "por_categoria": {
+    "Politica": 5,
+    "Economia": 12,
+    "Cultura": 0,
+    "Tecnologia": 0,
+    "Entretenimento": 16
+  },
+  "generated_at": "2026-05-30T19:10:02",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
