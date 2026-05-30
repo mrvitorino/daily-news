@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Busca noticias via Google Gemini API + Google Search e grava news-data.json
+Busca noticias via Google Gemini API (google-genai SDK) + Google Search
 """
 
 import json
@@ -17,8 +17,8 @@ try:
 except Exception:
     BRASILIA = timezone(timedelta(hours=-3))
 
-import google.generativeai as genai
-from google.generativeai.types import Tool, GenerateContentConfig
+from google import genai
+from google.genai import types
 
 NUM_NEWS = 10
 OUTPUT   = "news-data.json"
@@ -48,18 +48,18 @@ def fetch_news():
     if not api_key:
         raise RuntimeError(
             "GEMINI_API_KEY nao encontrada. "
-            "Configure em: Settings -> Secrets and variables -> Actions -> New repository secret"
+            "Configure em: Settings -> Secrets and variables -> Actions"
         )
 
     print(f"[OK] API key encontrada ({len(api_key)} chars)")
 
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 
     now_br    = datetime.now(BRASILIA)
     today_str = format_date_pt(now_br)
     print(f"[OK] Data: {today_str}")
     print(f"[OK] Edicao: {get_edition_label(now_br.hour)}")
-    print(f"[..] Chamando Gemini API com Google Search...")
+    print("[..] Chamando Gemini API com Google Search...")
 
     prompt = f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
 
@@ -78,14 +78,11 @@ Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem bloc
 
 Exatamente {NUM_NEWS} noticias. importancia e inteiro de 1 a 10."""
 
-    model = genai.GenerativeModel(
-        model_name=MODEL,
-        tools=[Tool(google_search={})]
-    )
-
-    response = model.generate_content(
-        prompt,
-        generation_config=GenerateContentConfig(
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
             temperature=0.2,
             max_output_tokens=2048,
         )
@@ -94,7 +91,6 @@ Exatamente {NUM_NEWS} noticias. importancia e inteiro de 1 a 10."""
     raw = response.text
     print(f"[OK] Resposta recebida ({len(raw)} chars)")
 
-    # Limpar e parsear JSON
     clean = raw.replace("```json", "").replace("```", "").strip()
     s = clean.find("{")
     e = clean.rfind("}")
