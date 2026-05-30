@@ -162,69 +162,63 @@ def buscar_entretenimento(client, today_str):
 
 # ── GERAR CORPO ──────────────────────────────────────────────────────────────
 def gerar_corpo(client, noticia):
-    """Gera resumo e corpo em texto puro usando multiturno para garantir qualidade."""
+    """
+    Gera resumo (2 frases) e corpo (3 paragrafos) em texto simples.
+    Sem marcadores — paragrafos separados por linha em branco.
+    """
     titulo = noticia["titulo"]
     fonte  = noticia["fonte"]
     cat    = noticia["categoria"]
 
-    # Instrucao muito explicita para evitar resposta de uma linha
-    prompt = f"""Voce e um jornalista. Escreva um texto completo sobre esta noticia:
-
-TITULO: {titulo}
-FONTE: {fonte}
-CATEGORIA: {cat}
-
-Escreva em 4 secoes separadas. Cada secao comeca com o marcador em maiusculas seguido de dois sinais de maior (>>).
-
-RESUMO>> [Escreva aqui exatamente 2 frases completas descrevendo o fato principal e sua importancia. Minimo 30 palavras.]
-
-PARAGRAFO1>> [Escreva aqui um paragrafo completo de pelo menos 4 linhas sobre o contexto e antecedentes desta noticia.]
-
-PARAGRAFO2>> [Escreva aqui um paragrafo completo de pelo menos 4 linhas com os fatos detalhados, numeros e declaracoes de envolvidos.]
-
-PARAGRAFO3>> [Escreva aqui um paragrafo completo de pelo menos 4 linhas sobre o impacto, consequencias e proximo passos esperados.]
-
-IMPORTANTE:
-- Use APENAS aspas simples se precisar de aspas
-- Escreva em portugues brasileiro formal
-- Cada secao deve ter conteudo substantivo — nao repita o titulo
-- Base-se no titulo e categoria para inferir contexto plausivel"""
+    prompt = (
+        "Voce e um jornalista brasileiro. Escreva um artigo jornalistico sobre:\n\n"
+        f"Titulo: {titulo}\nFonte: {fonte}\nCategoria: {cat}\n\n"
+        "Escreva exatamente 4 blocos de texto separados por linha em branco:\n\n"
+        "Bloco 1: Duas frases de resumo descrevendo o fato e sua importancia.\n\n"
+        "Bloco 2: Paragrafo de contexto e antecedentes. Minimo 60 palavras.\n\n"
+        "Bloco 3: Paragrafo com fatos detalhados, dados e declaracoes. Minimo 60 palavras.\n\n"
+        "Bloco 4: Paragrafo sobre impacto e proximos passos. Minimo 60 palavras.\n\n"
+        "REGRAS: escreva APENAS os 4 blocos, sem cabecalhos nem marcadores. "
+        "Use aspas simples. Portugues brasileiro formal. Minimo 250 palavras no total."
+    )
 
     try:
-        txt = gtext(client, prompt, max_tokens=1200, temp=0.4)
+        txt = gtext(client, prompt, max_tokens=2048, temp=0.4)
 
-        def ex(campo):
-            # Regex robusto: captura tudo ate o proximo marcador ou fim
-            m = re.search(
-                rf'{campo}>>\s*([\s\S]+?)(?=\n[A-Z]+[0-9]*>>|\Z)',
-                txt, re.IGNORECASE)
-            return m.group(1).strip() if m else ""
+        # Limpa possiveis cabecalhos do modelo (ex: "Bloco 1:", "[Resumo]" etc)
+        txt = re.sub(r'(?m)^\s*(Bloco\s*\d+|Paragrafo\s*\d+|\[.*?\])\s*:?\s*$', '', txt)
 
-        resumo = ex("RESUMO")
-        p1 = ex("PARAGRAFO1")
-        p2 = ex("PARAGRAFO2")
-        p3 = ex("PARAGRAFO3")
+        # Divide em blocos por linha em branco
+        blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 30]
 
-        # Valida que temos conteudo real
-        if not resumo or len(resumo) < 20:
-            # Tenta extrair qualquer paragrafo substancial do texto
-            paragrafos = [p.strip() for p in txt.split('\n\n') if len(p.strip()) > 50]
-            resumo = paragrafos[0] if paragrafos else titulo
-            p1 = paragrafos[1] if len(paragrafos) > 1 else ""
-            p2 = paragrafos[2] if len(paragrafos) > 2 else ""
-            p3 = paragrafos[3] if len(paragrafos) > 3 else ""
+        if len(blocos) >= 4:
+            resumo = blocos[0]
+            corpo  = "\n\n".join(blocos[1:4])
+        elif len(blocos) == 3:
+            resumo = blocos[0]
+            corpo  = "\n\n".join(blocos[1:])
+        elif len(blocos) == 2:
+            resumo = blocos[0]
+            corpo  = blocos[1]
+        elif len(blocos) == 1:
+            palavras = blocos[0].split()
+            mid = max(2, len(palavras) // 4)
+            resumo = " ".join(palavras[:mid])
+            corpo  = " ".join(palavras[mid:])
+        else:
+            return titulo, titulo
 
-        corpo = "\n\n".join(p for p in [p1, p2, p3] if p and len(p) > 20)
-        if not corpo:
-            corpo = resumo
+        # Resumo: no maximo 2 frases
+        frases_r = re.split(r'(?<=[.!?])\s+', resumo.strip())
+        if len(frases_r) > 2:
+            resumo = " ".join(frases_r[:2])
 
-        return resumo, corpo
+        return resumo.strip(), corpo.strip()
 
     except Exception as e:
         print(f"      [WARN] corpo: {e}")
         return titulo, titulo
 
-# ── GERAR URL REAL ───────────────────────────────────────────────────────────
 def buscar_url(client, noticia):
     """Busca a URL real do artigo quando nao veio na etapa anterior."""
     titulo = noticia["titulo"]
