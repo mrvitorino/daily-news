@@ -1,0 +1,74 @@
+name: Gerar e Publicar Boletim Diário
+
+on:
+  schedule:
+    # Horários em UTC — Brasil (BRT) = UTC-3
+    # 08h BRT = 11h UTC
+    - cron: '0 11 * * *'
+    # 12h BRT = 15h UTC
+    - cron: '0 15 * * *'
+    # 17h BRT = 20h UTC
+    - cron: '0 20 * * *'
+  # Permite rodar manualmente pelo GitHub Actions
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: pip install anthropic
+
+      - name: Gerar news-data.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_news.py
+
+      - name: Verificar news-data.json
+        run: |
+          echo "Conteúdo gerado:"
+          python3 -c "
+          import json
+          with open('news-data.json') as f:
+            d = json.load(f)
+          print(f'Edição: {d.get(\"edition_label\",\"?\")}')
+          print(f'Data: {d.get(\"date_display\",\"?\")}')
+          print(f'Notícias: {len(d.get(\"noticias\",[]))}')
+          "
+
+      - name: Commitar news-data.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add news-data.json
+          git diff --cached --quiet || git commit -m "boletim: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Fazer upload dos artefatos
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy para GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
