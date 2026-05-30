@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Passo A: busca com google_search → texto livre
-Passo B: converte em JSON SEM corpo (curto, seguro)
-Passo C: para cada noticia, busca corpo individualmente (chamadas pequenas)
+
+Passo A: busca com google_search → texto livre estruturado
+Passo B: extrai metadados SEGUROS em JSON (so campos sem texto livre)
+Passo C: gera resumo + corpo em texto puro por noticia (sem JSON)
 """
 
 import json
 import os
+import re
 import sys
 import time
 import traceback
@@ -45,67 +47,77 @@ def get_edition_label(hour):
     elif hour < 14: return "Edicao do Meio-Dia (12h)"
     else:           return "Edicao Vespertina (17h)"
 
+def call_gemini(client, prompt, use_search=False, max_tokens=4000, temp=0.1,
+                mime_type=None, schema=None):
+    """Wrapper unificado para chamadas ao Gemini."""
+    cfg = dict(temperature=temp, max_output_tokens=max_tokens)
+    if use_search:
+        cfg["tools"] = [types.Tool(google_search=types.GoogleSearch())]
+    if mime_type:
+        cfg["response_mime_type"] = mime_type
+    if schema:
+        cfg["response_schema"] = schema
+    resp = client.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(**cfg)
+    )
+    return resp.text
+
 
 # ─────────────────────────────────────────
-# PASSO A — busca com google_search, retorna texto livre
+# PASSO A — busca ampla, retorna texto livre
 # ─────────────────────────────────────────
 def passo_a_buscar(client, today_str):
-    print("[..] Passo A: buscando noticias com Google Search...")
+    print("[..] Passo A: buscando com Google Search...")
 
-    prompt = f"""Hoje e {today_str}. Voce e um pesquisador jornalistico cobrindo o Brasil.
+    prompt = f"""Hoje e {today_str}. Voce e um jornalista brasileiro experiente.
 
-Faca buscas e liste as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA
-brasileira das ultimas 48 horas. Faca pelo menos 5 buscas diferentes:
-1. "politica brasil hoje"
-2. "economia brasil hoje"
-3. "governo lula congresso hoje"
-4. "mercado financeiro brasil hoje"
-5. "STF eleicoes brasil recente"
+Faca MULTIPLAS buscas (minimo 6) e encontre {NUM_NEWS} noticias reais sobre
+POLITICA e ECONOMIA do Brasil das ultimas 48 horas.
+
+Buscas sugeridas:
+1. politica brasil {today_str}
+2. economia brasil {today_str}
+3. governo lula hoje
+4. congresso nacional hoje
+5. mercado financeiro brasil hoje
+6. STF decisao recente
+7. Se faltar noticias: saude educacao meio ambiente seguranca brasil recente
 
 FONTES ACEITAS: Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao,
 Valor Economico, ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato,
 Carta Capital, CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal,
 Bloomberg Linea, Agencia Publica, Piaui, Epoca, IstoE, Exame, InfoMoney,
-Opera Mundi, Correio Braziliense, Band News, AFP Brasil.
+Opera Mundi, Correio Braziliense, Band News, AFP Brasil, R7 Noticias.
 
-FONTES PROIBIDAS: Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News,
-O Antagonista, Gazeta do Povo opiniao, Oeste, Crusoe, extrema-direita.
+PROIBIDO: Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista.
 
-IMPORTANTE: Liste exatamente {NUM_NEWS} noticias reais. NUNCA escreva N/A ou
-"nao foi possivel encontrar". Se precisar, amplie os temas para saude,
-educacao, meio ambiente, seguranca publica, relacoes internacionais do Brasil.
+Escreva cada noticia exatamente neste formato (sem variacao):
+===NOTICIA===
+TITULO: [titulo completo da noticia]
+FONTE: [nome do veiculo]
+CATEGORIA: [Politica ou Economia ou Internacional]
+IMPORTANCIA: [numero de 1 a 10]
+URL: [url completa ou vazio]
+===FIM===
 
-Para cada noticia escreva:
-NOTICIA [n]
-TITULO: texto do titulo
-FONTE: nome do veiculo
-CATEGORIA: Politica ou Economia ou Internacional
-RESUMO: duas ou tres frases sobre o fato
-URL: url completa se disponivel
-IMPORTANCIA: numero de 1 a 10
-FIM"""
+REGRA ABSOLUTA: escreva exatamente {NUM_NEWS} blocos ===NOTICIA=== ... ===FIM===
+Nunca escreva N/A, nunca deixe campos vazios, nunca diga que nao encontrou noticias."""
 
-    resp = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.1,
-            max_output_tokens=6000,
-        )
-    )
-    txt = resp.text
+    txt = call_gemini(client, prompt, use_search=True, max_tokens=6000, temp=0.1)
     print(f"[OK] Passo A: {len(txt)} chars")
     return txt
 
 
 # ─────────────────────────────────────────
-# PASSO B — converte texto em JSON CURTO (sem corpo)
-# Sem google_search → response_mime_type funciona
+# PASSO B — extrai metadados do texto (só campos seguros)
+# Usa schema com APENAS strings curtas sem texto livre
 # ─────────────────────────────────────────
-def passo_b_estruturar(client, raw_text, today_str):
-    print("[..] Passo B: estruturando em JSON (sem corpo)...")
+def passo_b_extrair_meta(client, raw_text, today_str):
+    print("[..] Passo B: extraindo metadados em JSON...")
 
+    # Schema minimo: so campos que nunca contem aspas ou texto longo
     schema = {
         "type": "object",
         "properties": {
@@ -118,52 +130,41 @@ def passo_b_estruturar(client, raw_text, today_str):
                         "titulo":      {"type": "string"},
                         "fonte":       {"type": "string"},
                         "categoria":   {"type": "string"},
-                        "resumo":      {"type": "string"},
                         "url":         {"type": "string"},
                         "importancia": {"type": "integer"}
                     },
-                    "required": ["titulo","fonte","categoria","resumo","url","importancia"]
+                    "required": ["titulo","fonte","categoria","url","importancia"]
                 }
             }
         },
         "required": ["resumo_editorial","noticias"]
     }
 
-    prompt = f"""Converta o texto abaixo em JSON estruturado.
+    prompt = f"""Extraia os dados do texto abaixo em JSON.
 
-Regras:
-- resumo_editorial: 2-3 frases sobre o panorama politico-economico do dia
-- noticias: array com os itens encontrados no texto
-- resumo: apenas 2-3 frases curtas (nao inclua texto longo)
-- url: URL do artigo se disponivel no texto, senao string vazia
-- importancia: inteiro 1-10
-- IGNORE entradas com titulo "N/A" ou "nao foi possivel"
-- NAO invente nada que nao esteja no texto
+Para resumo_editorial: escreva 2 frases simples sobre o panorama do dia.
+Para cada noticia: extraia titulo, fonte, categoria, url e importancia.
+Titulo deve ser curto (maximo 15 palavras).
+Ignore entradas com titulo vazio, N/A ou "nao encontrado".
 
 TEXTO:
-{raw_text[:6000]}"""
+{raw_text[:5000]}"""
 
-    resp = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            temperature=0.0,
-            max_output_tokens=4000,
-            response_mime_type="application/json",
-            response_schema=schema,
-        )
-    )
+    txt = call_gemini(client, prompt, use_search=False, max_tokens=3000, temp=0.0,
+                      mime_type="application/json", schema=schema)
 
-    data = json.loads(resp.text)
+    data = json.loads(txt)
 
-    # Filtrar N/A
+    # Filtrar invalidas
     validas = []
     for n in data.get("noticias", []):
-        t = n.get("titulo", "").strip()
-        if (not t or len(t) < 10
-                or t.lower().startswith("n/a")
-                or "nao foi possivel" in t.lower()
-                or "não foi possível" in t.lower()):
+        t = n.get("titulo","").strip()
+        bad = (not t or len(t) < 8
+               or t.lower().startswith("n/a")
+               or "nao foi possivel" in t.lower()
+               or "nao encontrado" in t.lower()
+               or "não foi" in t.lower())
+        if bad:
             print(f"   [SKIP] {t[:60]}")
             continue
         if not n.get("url","").startswith("http"):
@@ -174,50 +175,61 @@ TEXTO:
     print(f"[OK] Passo B: {len(validas)} noticias validas.")
 
     if len(validas) < 5:
-        raise RuntimeError(f"Apenas {len(validas)} noticias validas — minimo e 5.")
+        raise RuntimeError(f"Apenas {len(validas)} noticias validas apos filtro.")
     return data
 
 
 # ─────────────────────────────────────────
-# PASSO C — corpo individual por noticia
-# Chamada pequena e isolada por noticia
+# PASSO C — gera resumo + corpo em TEXTO PURO
+# Sem JSON, sem schema → zero risco de parse error
 # ─────────────────────────────────────────
-def passo_c_corpo(client, noticia, today_str):
+def passo_c_texto(client, noticia, today_str):
     titulo = noticia.get("titulo","")
     fonte  = noticia.get("fonte","")
-    resumo = noticia.get("resumo","")
-    print(f"   [..] Corpo: {titulo[:55]}...")
+    print(f"   [..] Texto: {titulo[:55]}...")
 
-    prompt = f"""Escreva um texto jornalistico completo sobre esta noticia:
+    prompt = f"""Escreva um texto jornalistico sobre esta noticia brasileira:
 
 Titulo: {titulo}
 Fonte: {fonte}
-Resumo: {resumo}
 
-Escreva 3 paragrafos em portugues brasileiro formal, separados pela sequencia PARAGRAFO.
-Inclua contexto historico, fatos principais, declaracoes relevantes e impacto.
-Use apenas informacoes que condizem com o titulo e resumo acima.
-Nao use aspas duplas no texto.
-Escreva apenas os paragrafos, sem titulo nem introducao."""
+Formato de saida (siga exatamente):
+RESUMO: [escreva aqui 2 frases descrevendo o fato e sua importancia]
+CORPO: [escreva aqui 3 paragrafos separados por // descrevendo contexto, fatos e impacto]
+
+Regras:
+- Use apenas aspas simples se precisar de aspas
+- Nao use markdown, nao use asteriscos
+- Escreva em portugues brasileiro formal
+- Base-se apenas no titulo e fonte fornecidos"""
 
     try:
-        resp = client.models.generate_content(
-            model=MODEL,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.2,
-                max_output_tokens=1500,
-            )
-        )
-        txt = resp.text.strip()
-        # Converte separador em quebras reais
-        corpo = txt.replace("PARAGRAFO", "\n\n").strip()
-        # Remove aspas duplas que possam ter sobrado
-        corpo = corpo.replace('"', "'")
-        return corpo
+        txt = call_gemini(client, prompt, use_search=False, max_tokens=800, temp=0.3)
+
+        resumo = ""
+        corpo  = ""
+
+        # Extrai RESUMO
+        m = re.search(r'RESUMO:\s*(.+?)(?=CORPO:|$)', txt, re.DOTALL | re.IGNORECASE)
+        if m:
+            resumo = m.group(1).strip()
+
+        # Extrai CORPO
+        m2 = re.search(r'CORPO:\s*(.+?)$', txt, re.DOTALL | re.IGNORECASE)
+        if m2:
+            corpo = m2.group(1).strip().replace(" // ", "\n\n").replace("//", "\n\n")
+
+        # Fallbacks
+        if not resumo:
+            resumo = titulo
+        if not corpo:
+            corpo = resumo
+
+        return resumo, corpo
+
     except Exception as e:
-        print(f"   [WARN] Corpo falhou: {e}")
-        return resumo  # fallback: usa o resumo
+        print(f"   [WARN] {e}")
+        return titulo, titulo
 
 
 # ─────────────────────────────────────────
@@ -234,18 +246,16 @@ def fetch_news():
     today_str = format_date_pt(now_br)
     print(f"[OK] {today_str} | {get_edition_label(now_br.hour)}")
 
-    # Passo A: busca
-    raw = passo_a_buscar(client, today_str)
+    raw  = passo_a_buscar(client, today_str)
+    time.sleep(3)
+    data = passo_b_extrair_meta(client, raw, today_str)
     time.sleep(2)
 
-    # Passo B: estrutura em JSON curto
-    data = passo_b_estruturar(client, raw, today_str)
-    time.sleep(2)
-
-    # Passo C: corpo de cada noticia (sem google_search, sem JSON forçado)
-    print(f"[..] Passo C: gerando corpo de {len(data['noticias'])} noticias...")
+    print(f"[..] Passo C: gerando textos para {len(data['noticias'])} noticias...")
     for i, n in enumerate(data["noticias"]):
-        n["corpo"] = passo_c_corpo(client, n, today_str)
+        resumo, corpo = passo_c_texto(client, n, today_str)
+        n["resumo"] = resumo
+        n["corpo"]  = corpo
         if i < len(data["noticias"]) - 1:
             time.sleep(2)
 
@@ -277,7 +287,6 @@ def main():
                 time.sleep(20)
             else:
                 sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
