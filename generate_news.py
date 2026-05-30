@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Busca noticias via Anthropic API + web_search e grava news-data.json
+Busca noticias via Google Gemini API + Google Search e grava news-data.json
 """
 
 import json
@@ -11,16 +11,18 @@ import time
 import traceback
 from datetime import datetime, timezone, timedelta
 
-# Timezone Brasil (UTC-3)
 try:
     from zoneinfo import ZoneInfo
     BRASILIA = ZoneInfo("America/Sao_Paulo")
 except Exception:
     BRASILIA = timezone(timedelta(hours=-3))
 
+import google.generativeai as genai
+from google.generativeai.types import Tool, GenerateContentConfig
+
 NUM_NEWS = 10
 OUTPUT   = "news-data.json"
-MODEL    = "claude-sonnet-4-6"
+MODEL    = "gemini-2.0-flash"
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
@@ -42,64 +44,62 @@ def get_edition_label(hour):
     else:           return "Edicao Vespertina (17h)"
 
 def fetch_news():
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         raise RuntimeError(
-            "ANTHROPIC_API_KEY nao encontrada. "
+            "GEMINI_API_KEY nao encontrada. "
             "Configure em: Settings -> Secrets and variables -> Actions -> New repository secret"
         )
 
     print(f"[OK] API key encontrada ({len(api_key)} chars)")
 
-    import anthropic
-    client = anthropic.Anthropic(api_key=api_key)
+    genai.configure(api_key=api_key)
 
     now_br    = datetime.now(BRASILIA)
     today_str = format_date_pt(now_br)
     print(f"[OK] Data: {today_str}")
     print(f"[OK] Edicao: {get_edition_label(now_br.hour)}")
-    print("[..] Chamando API Anthropic com web_search...")
+    print(f"[..] Chamando Gemini API com Google Search...")
 
     prompt = f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
 
-Use sua ferramenta de busca web para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 24 horas.
+Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 24 horas.
 
-Busque em: ICL Noticias (iclnoticias.com.br), Intercept Brasil (theintercept.com/brasil), Revista Forum (revistaforum.com.br), Folha de Sao Paulo (folha.uol.com.br), Agencia Brasil (agenciabrasil.ebc.com.br).
+Busque especificamente nestas fontes:
+- ICL Noticias (iclnoticias.com.br)
+- Intercept Brasil (theintercept.com/brasil)
+- Revista Forum (revistaforum.com.br)
+- Folha de Sao Paulo (folha.uol.com.br)
+- Agencia Brasil (agenciabrasil.ebc.com.br)
 
-Retorne SOMENTE este JSON, sem texto antes ou depois:
+Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem blocos de codigo:
 
-{{"resumo_editorial":"2-3 frases sobre o panorama do dia.","noticias":[{{"titulo":"titulo","fonte":"fonte","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases.","importancia":8}}]}}
+{{"resumo_editorial":"2-3 frases sobre o panorama politico-economico do dia.","noticias":[{{"titulo":"titulo claro e direto","fonte":"nome da fonte","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases sobre o fato e sua relevancia.","importancia":8}}]}}
 
-Exatamente {NUM_NEWS} noticias. importancia e inteiro 1-10."""
+Exatamente {NUM_NEWS} noticias. importancia e inteiro de 1 a 10."""
 
-    resp = client.messages.create(
-        model=MODEL,
-        max_tokens=1000,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        messages=[{"role": "user", "content": prompt}],
+    model = genai.GenerativeModel(
+        model_name=MODEL,
+        tools=[Tool(google_search={})]
     )
 
-    print(f"[OK] Resposta recebida. Blocos: {len(resp.content)}")
-    for i, block in enumerate(resp.content):
-        print(f"     bloco[{i}] type={block.type}")
+    response = model.generate_content(
+        prompt,
+        generation_config=GenerateContentConfig(
+            temperature=0.2,
+            max_output_tokens=2048,
+        )
+    )
 
-    # Extrair texto
-    json_text = ""
-    for block in resp.content:
-        if block.type == "text":
-            json_text = block.text
-            print(f"[OK] Texto extraido ({len(json_text)} chars)")
-            break
-
-    if not json_text:
-        raise RuntimeError("API nao retornou bloco de texto na resposta.")
+    raw = response.text
+    print(f"[OK] Resposta recebida ({len(raw)} chars)")
 
     # Limpar e parsear JSON
-    clean = json_text.replace("```json", "").replace("```", "").strip()
+    clean = raw.replace("```json", "").replace("```", "").strip()
     s = clean.find("{")
     e = clean.rfind("}")
     if s == -1 or e == -1:
-        print(f"[ERR] Texto recebido:\n{json_text[:500]}")
+        print(f"[ERR] Texto recebido:\n{raw[:500]}")
         raise RuntimeError("JSON nao encontrado na resposta da API.")
 
     clean = clean[s:e+1]
@@ -116,7 +116,7 @@ Exatamente {NUM_NEWS} noticias. importancia e inteiro 1-10."""
 
 def main():
     print("=" * 50)
-    print("PANORAMA — Gerador de Boletim")
+    print("PANORAMA — Gerador de Boletim (Gemini)")
     print("=" * 50)
 
     retries = 3
@@ -133,7 +133,7 @@ def main():
             print(f"\n[ERRO] {e}", file=sys.stderr)
             traceback.print_exc()
             if attempt < retries:
-                print(f"Aguardando 15s antes da proxima tentativa...", file=sys.stderr)
+                print("Aguardando 15s antes da proxima tentativa...", file=sys.stderr)
                 time.sleep(15)
             else:
                 print("Todas as tentativas falharam.", file=sys.stderr)
