@@ -20,7 +20,7 @@ except Exception:
 
 NUM_NEWS = 10
 OUTPUT   = "news-data.json"
-MODEL    = "claude-sonnet-4-20250514"
+MODEL    = "claude-sonnet-4-6"
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
