@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Busca noticias via Google Gemini API (google-genai SDK) + Google Search
+Busca noticias via Google Gemini API + Google Search e grava news-data.json
 """
 
 import json
@@ -46,10 +46,7 @@ def get_edition_label(hour):
 def fetch_news():
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
-        raise RuntimeError(
-            "GEMINI_API_KEY nao encontrada. "
-            "Configure em: Settings -> Secrets and variables -> Actions"
-        )
+        raise RuntimeError("GEMINI_API_KEY nao encontrada.")
 
     print(f"[OK] API key encontrada ({len(api_key)} chars)")
 
@@ -57,52 +54,61 @@ def fetch_news():
 
     now_br    = datetime.now(BRASILIA)
     today_str = format_date_pt(now_br)
+    yesterday = now_br - timedelta(days=1)
+    yesterday_str = format_date_pt(yesterday)
+
     print(f"[OK] Data: {today_str}")
     print(f"[OK] Edicao: {get_edition_label(now_br.hour)}")
     print("[..] Chamando Gemini API com Google Search...")
 
-    prompt = f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
+    prompt = f"""Voce e um editor jornalistico especializado em politica e economia brasileira. Hoje e {today_str}.
 
-Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 24 horas.
+Sua tarefa: buscar e listar as {NUM_NEWS} noticias mais importantes sobre politica e economia do Brasil dos ultimos 2 dias ({yesterday_str} e {today_str}).
 
-Busque especificamente nestas fontes:
-- ICL Noticias (iclnoticias.com.br)
-- Intercept Brasil (theintercept.com/brasil)
-- Revista Forum (revistaforum.com.br)
-- Folha de Sao Paulo (folha.uol.com.br)
-- Agencia Brasil (agenciabrasil.ebc.com.br)
+INSTRUCOES DE BUSCA:
+- Faca multiplas buscas em portugues sobre politica e economia brasileira recente
+- Priorize estas fontes: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum
+- Se nao encontrar nas fontes prioritarias, use qualquer fonte jornalistica brasileira confiavel (G1, UOL, Estadao, Valor Economico, CNN Brasil, etc)
+- Busque por temas como: governo federal, congresso nacional, economia brasileira, mercado financeiro, politicas publicas, eleicoes, STF, banco central, inflacao, emprego
+- Retorne sempre {NUM_NEWS} noticias, mesmo que precise usar fontes alternativas ou noticias de ate 48 horas atras
 
+FORMATO DE RESPOSTA:
 Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem blocos de codigo:
 
-{{"resumo_editorial":"2-3 frases sobre o panorama politico-economico do dia.","noticias":[{{"titulo":"titulo claro e direto","fonte":"nome da fonte","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases sobre o fato e sua relevancia.","importancia":8}}]}}
+{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","importancia":8}}]}}
 
-Exatamente {NUM_NEWS} noticias. importancia e inteiro de 1 a 10."""
+OBRIGATORIO: retorne exatamente {NUM_NEWS} noticias. O campo importancia e um inteiro de 1 a 10."""
 
     response = client.models.generate_content(
         model=MODEL,
         contents=prompt,
         config=types.GenerateContentConfig(
             tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.2,
-            max_output_tokens=2048,
+            temperature=0.3,
+            max_output_tokens=4096,
         )
     )
 
     raw = response.text
     print(f"[OK] Resposta recebida ({len(raw)} chars)")
 
+    # Limpar e parsear JSON
     clean = raw.replace("```json", "").replace("```", "").strip()
     s = clean.find("{")
     e = clean.rfind("}")
     if s == -1 or e == -1:
-        print(f"[ERR] Texto recebido:\n{raw[:500]}")
+        print(f"[ERR] Texto recebido:\n{raw[:800]}")
         raise RuntimeError("JSON nao encontrado na resposta da API.")
 
     clean = clean[s:e+1]
     data  = json.loads(clean)
 
-    n = len(data.get("noticias", []))
-    print(f"[OK] {n} noticias parseadas com sucesso.")
+    noticias = data.get("noticias", [])
+    print(f"[OK] {len(noticias)} noticias parseadas.")
+
+    if len(noticias) == 0:
+        print(f"[ERR] Resposta completa:\n{raw[:1000]}")
+        raise RuntimeError("API retornou 0 noticias.")
 
     data["generated_at"]  = now_br.strftime("%Y-%m-%dT%H:%M:%S")
     data["edition_label"] = get_edition_label(now_br.hour)
