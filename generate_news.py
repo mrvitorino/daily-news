@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Busca noticias via Google Gemini API + Google Search e grava news-data.json
+Etapa 1: busca as 10 noticias (JSON pequeno e seguro)
+Etapa 2: para cada noticia, busca o corpo completo numa chamada separada
 """
 
 import json
@@ -43,76 +44,129 @@ def get_edition_label(hour):
     elif hour < 14: return "Edicao do Meio-Dia (12h)"
     else:           return "Edicao Vespertina (17h)"
 
-def fetch_news():
+def make_client():
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY nao encontrada.")
+    return genai.Client(api_key=api_key)
 
-    print(f"[OK] API key encontrada ({len(api_key)} chars)")
+def parse_json(text):
+    """Extrai e parseia JSON de uma resposta de texto."""
+    clean = text.replace("```json", "").replace("```", "").strip()
+    s = clean.find("{")
+    e = clean.rfind("}")
+    if s == -1 or e == -1:
+        raise RuntimeError("JSON nao encontrado na resposta.")
+    return json.loads(clean[s:e+1])
 
-    client = genai.Client(api_key=api_key)
+# ─────────────────────────────────────────
+# ETAPA 1: buscar lista de noticias (JSON curto, sem corpo)
+# ─────────────────────────────────────────
+def fetch_noticias(client, today_str):
+    print("[..] Etapa 1: buscando lista de noticias...")
 
-    now_br    = datetime.now(BRASILIA)
-    today_str = format_date_pt(now_br)
-    yesterday = now_br - timedelta(days=1)
-    yesterday_str = format_date_pt(yesterday)
+    prompt = f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
 
-    print(f"[OK] Data: {today_str}")
-    print(f"[OK] Edicao: {get_edition_label(now_br.hour)}")
-    print("[..] Chamando Gemini API com Google Search...")
+Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 48 horas.
 
-    prompt = f"""Voce e um editor jornalistico especializado em politica e economia brasileira. Hoje e {today_str}.
+Priorize estas fontes: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum.
+Se necessario, use: G1, UOL, Estadao, Valor Economico, CNN Brasil.
 
-Sua tarefa: buscar e listar as {NUM_NEWS} noticias mais importantes sobre politica e economia do Brasil dos ultimos 2 dias ({yesterday_str} e {today_str}).
+Retorne SOMENTE este JSON minimo, sem texto antes ou depois:
 
-INSTRUCOES DE BUSCA:
-- Faca multiplas buscas em portugues sobre politica e economia brasileira recente
-- Priorize estas fontes: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum
-- Se nao encontrar nas fontes prioritarias, use qualquer fonte jornalistica brasileira confiavel (G1, UOL, Estadao, Valor Economico, CNN Brasil, etc)
-- Busque por temas como: governo federal, congresso nacional, economia brasileira, mercado financeiro, politicas publicas, eleicoes, STF, banco central, inflacao, emprego
-- Retorne sempre {NUM_NEWS} noticias, mesmo que precise usar fontes alternativas ou noticias de ate 48 horas atras
+{{"resumo_editorial":"2-3 frases sobre o panorama do dia.","noticias":[{{"id":1,"titulo":"titulo da noticia","fonte":"nome da fonte","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases sobre o fato e sua relevancia.","importancia":8}}]}}
 
-FORMATO DE RESPOSTA:
-Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem blocos de codigo:
-
-{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","corpo":"texto completo e detalhado da noticia em 4-6 paragrafos separados por \n\n descrevendo contexto historico, fatos relevantes, declaracoes e possivel impacto","url":"https://url-direta-do-artigo-se-encontrada.com.br","importancia":8}}]}}
-
-OBRIGATORIO:
-- Retorne exatamente {NUM_NEWS} noticias
+REGRAS:
+- Exatamente {NUM_NEWS} noticias
+- id e inteiro sequencial de 1 a {NUM_NEWS}
 - importancia e inteiro de 1 a 10
-- url DEVE ser a URL direta e completa do artigo (ex: https://folha.uol.com.br/poder/2026/05/titulo-da-noticia.shtml). NAO use apenas a homepage da fonte (ex: NAO use https://folha.uol.com.br). Se nao encontrar a URL exata do artigo, omita o campo url ou deixe como string vazia."""
+- NAO inclua campo url nem corpo neste JSON
+- Mantenha o resumo curto (max 3 frases)"""
 
-    response = client.models.generate_content(
+    resp = client.models.generate_content(
         model=MODEL,
         contents=prompt,
         config=types.GenerateContentConfig(
             tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.3,
-            max_output_tokens=8192,
+            temperature=0.2,
+            max_output_tokens=3000,
         )
     )
 
-    raw = response.text
-    print(f"[OK] Resposta recebida ({len(raw)} chars)")
-
-    # Limpar e parsear JSON
-    clean = raw.replace("```json", "").replace("```", "").strip()
-    s = clean.find("{")
-    e = clean.rfind("}")
-    if s == -1 or e == -1:
-        print(f"[ERR] Texto recebido:\n{raw[:800]}")
-        raise RuntimeError("JSON nao encontrado na resposta da API.")
-
-    clean = clean[s:e+1]
-    data  = json.loads(clean)
+    raw = resp.text
+    print(f"[OK] Resposta etapa 1: {len(raw)} chars")
+    data = parse_json(raw)
 
     noticias = data.get("noticias", [])
     print(f"[OK] {len(noticias)} noticias parseadas.")
-
     if len(noticias) == 0:
-        print(f"[ERR] Resposta completa:\n{raw[:1000]}")
-        raise RuntimeError("API retornou 0 noticias.")
+        raise RuntimeError("Nenhuma noticia retornada.")
+    return data
 
+# ─────────────────────────────────────────
+# ETAPA 2: para cada noticia, buscar corpo e URL individualmente
+# ─────────────────────────────────────────
+def fetch_corpo(client, noticia, today_str):
+    titulo = noticia.get("titulo", "")
+    fonte  = noticia.get("fonte", "")
+    print(f"   [..] Buscando corpo: {titulo[:60]}...")
+
+    prompt = f"""Hoje e {today_str}. Busque a seguinte noticia:
+
+Titulo: {titulo}
+Fonte: {fonte}
+
+Use a ferramenta de busca para encontrar o artigo original e retorne SOMENTE este JSON:
+
+{{"corpo":"texto completo em 3-5 paragrafos. Use \\n\\n para separar paragrafos. Escreva em portugues brasileiro formal. Inclua contexto, fatos, declaracoes e impacto.","url":"URL direta e completa do artigo (https://...) ou string vazia se nao encontrar"}}
+
+NAO inclua nenhum texto fora do JSON. NAO use aspas duplas dentro dos valores - use aspas simples se necessario."""
+
+    try:
+        resp = client.models.generate_content(
+            model=MODEL,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                tools=[types.Tool(google_search=types.GoogleSearch())],
+                temperature=0.1,
+                max_output_tokens=2048,
+            )
+        )
+        raw = resp.text
+        result = parse_json(raw)
+        return result.get("corpo", ""), result.get("url", "")
+    except Exception as e:
+        print(f"   [WARN] Falha ao buscar corpo: {e}")
+        return noticia.get("resumo", ""), ""
+
+# ─────────────────────────────────────────
+# MAIN FETCH
+# ─────────────────────────────────────────
+def fetch_news():
+    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("GEMINI_API_KEY nao encontrada.")
+    print(f"[OK] API key encontrada ({len(api_key)} chars)")
+
+    client   = make_client()
+    now_br   = datetime.now(BRASILIA)
+    today_str = format_date_pt(now_br)
+    print(f"[OK] Data: {today_str}")
+    print(f"[OK] Edicao: {get_edition_label(now_br.hour)}")
+
+    # Etapa 1: lista de noticias
+    data = fetch_noticias(client, today_str)
+
+    # Etapa 2: corpo de cada noticia (com pausa para evitar rate limit)
+    print(f"\n[..] Etapa 2: buscando corpo das {len(data['noticias'])} noticias...")
+    for i, noticia in enumerate(data["noticias"]):
+        corpo, url = fetch_corpo(client, noticia, today_str)
+        noticia["corpo"] = corpo
+        noticia["url"]   = url
+        if i < len(data["noticias"]) - 1:
+            time.sleep(2)  # pausa entre chamadas
+
+    print(f"\n[OK] Todas as noticias processadas.")
     data["generated_at"]  = now_br.strftime("%Y-%m-%dT%H:%M:%S")
     data["edition_label"] = get_edition_label(now_br.hour)
     data["date_display"]  = today_str.upper()
@@ -124,7 +178,7 @@ def main():
     print("PANORAMA — Gerador de Boletim (Gemini)")
     print("=" * 50)
 
-    retries = 3
+    retries = 2
     for attempt in range(1, retries + 1):
         try:
             print(f"\n[Tentativa {attempt}/{retries}]")
@@ -138,8 +192,8 @@ def main():
             print(f"\n[ERRO] {e}", file=sys.stderr)
             traceback.print_exc()
             if attempt < retries:
-                print("Aguardando 15s antes da proxima tentativa...", file=sys.stderr)
-                time.sleep(15)
+                print("Aguardando 20s antes da proxima tentativa...", file=sys.stderr)
+                time.sleep(20)
             else:
                 print("Todas as tentativas falharam.", file=sys.stderr)
                 sys.exit(1)
