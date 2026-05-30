@@ -161,86 +161,97 @@ def buscar_entretenimento(client, today_str):
     ], extra="Inclua filmes em cartaz, series lancadas, renovacoes e cancelamentos.")
 
 # ── GERAR CORPO ──────────────────────────────────────────────────────────────
+def _strip_md(txt):
+    """Remove formatacao markdown do texto."""
+    txt = re.sub(r'\*{1,3}([^*]+)\*{1,3}', r'\1', txt)   # **bold** e *italic*
+    txt = re.sub(r'#{1,6}\s+', '', txt)                     # # headings
+    txt = re.sub(r'`([^`]+)`', r'\1', txt)                  # `code`
+    txt = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', txt)      # [link](url)
+    txt = re.sub(r'^[-*]\s+', '', txt, flags=re.MULTILINE)  # listas
+    # Remove prefixos do modelo: "Fonte: X | Categoria: Y"
+    txt = re.sub(r'\*{0,2}Fonte\s*:\s*[^|*\n]+(\|[^*\n]+)?\*{0,2}', '', txt, flags=re.IGNORECASE)
+    txt = re.sub(r'\*{0,2}Categoria\s*:\s*[^\n*]+\*{0,2}', '', txt, flags=re.IGNORECASE)
+    return txt.strip()
+
+
+def _limpa_resumo(texto):
+    """No maximo 2 frases, sem markdown."""
+    texto = _strip_md(texto)
+    frases = re.split(r'(?<=[.!?])\s+', texto.strip())
+    return " ".join(frases[:2]).strip()
+
+
 def gerar_corpo(client, noticia):
     """
-    Gera resumo + corpo. Pede 3 paragrafos numerados explicitamente.
-    Divide por sentencas se o modelo nao inserir quebras de linha.
+    Gera resumo (2 frases) + corpo (3 paragrafos completos).
+    Prompt minimalista sem marcadores — texto corrido que depois dividimos.
     """
     titulo = noticia["titulo"]
     fonte  = noticia["fonte"]
     cat    = noticia["categoria"]
 
     prompt = (
-        f"Titulo da noticia: {titulo}\n"
-        f"Fonte: {fonte} | Categoria: {cat}\n\n"
-        "Escreva um texto jornalistico completo em portugues brasileiro sobre esta noticia.\n\n"
-        "PARAGRAFO 1 - RESUMO:\n"
-        "Escreva 2 frases descrevendo o fato principal e sua importancia. (minimo 40 palavras)\n\n"
-        "PARAGRAFO 2 - CONTEXTO:\n"
-        "Escreva um paragrafo sobre o contexto, antecedentes e o cenario atual. (minimo 80 palavras)\n\n"
-        "PARAGRAFO 3 - DETALHES:\n"
-        "Escreva um paragrafo com fatos, dados, numeros e declaracoes de envolvidos. (minimo 80 palavras)\n\n"
-        "PARAGRAFO 4 - IMPACTO:\n"
-        "Escreva um paragrafo sobre o impacto, consequencias e proximos passos. (minimo 80 palavras)\n\n"
-        "Use aspas simples se precisar de aspas. Total minimo: 300 palavras."
+        f"Escreva um artigo jornalistico em portugues brasileiro sobre:\n"
+        f"'{titulo}' — publicado por {fonte} na categoria {cat}.\n\n"
+        "O artigo deve ter exatamente 4 paragrafos numerados:\n\n"
+        "1) Dois frases de resumo (quem, o que, por que e importante).\n"
+        "2) Paragrafo de contexto e antecedentes (minimo 4 frases).\n"
+        "3) Paragrafo com fatos, dados e declaracoes (minimo 4 frases).\n"
+        "4) Paragrafo com impacto e proximos passos (minimo 4 frases).\n\n"
+        "Separe cada paragrafo numerado com uma linha em branco. "
+        "NAO use asteriscos, negrito, italico ou qualquer formatacao markdown. "
+        "Escreva em texto puro. Total minimo: 350 palavras."
     )
 
     try:
         txt = gtext(client, prompt, max_tokens=2048, temp=0.35)
 
-        # Estrategia 1: extrai por cabecalhos "PARAGRAFO N"
-        partes = re.split(r'(?i)par[aá]grafo\s*\d+\s*[-–—:]?\s*(?:[A-Z\s]+:)?\n?', txt)
-        partes = [p.strip() for p in partes if len(p.strip()) > 30]
+        # Remove markdown residual
+        txt = _strip_md(txt)
 
+        # Estrategia 1: divide por "1)" "2)" "3)" "4)" no inicio de linha
+        partes = re.split(r'(?m)^\s*[1-4]\)\s*', txt)
+        partes = [p.strip() for p in partes if len(p.strip()) > 40]
         if len(partes) >= 4:
-            resumo = partes[0]
-            corpo  = "\n\n".join(partes[1:4])
-            return _limpa_resumo(resumo), corpo.strip()
-
+            return _limpa_resumo(partes[0]), "\n\n".join(partes[1:4])
         if len(partes) == 3:
-            resumo = partes[0]
-            corpo  = "\n\n".join(partes[1:])
-            return _limpa_resumo(resumo), corpo.strip()
+            return _limpa_resumo(partes[0]), "\n\n".join(partes[1:])
 
         # Estrategia 2: divide por linha em branco
-        blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 30]
-        if len(blocos) >= 3:
-            resumo = blocos[0]
-            corpo  = "\n\n".join(blocos[1:4])
-            return _limpa_resumo(resumo), corpo.strip()
+        blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 40]
+        if len(blocos) >= 4:
+            return _limpa_resumo(blocos[0]), "\n\n".join(blocos[1:4])
+        if len(blocos) == 3:
+            return _limpa_resumo(blocos[0]), "\n\n".join(blocos[1:])
+        if len(blocos) == 2:
+            return _limpa_resumo(blocos[0]), blocos[1]
 
-        # Estrategia 3: divide por sentencas em grupos de 3
-        sentencas = re.split(r'(?<=[.!?])\s+', txt.strip())
-        sentencas = [s.strip() for s in sentencas if len(s.strip()) > 20]
-        if len(sentencas) >= 6:
-            n = max(2, len(sentencas) // 4)
-            s0 = " ".join(sentencas[:n])
-            s1 = " ".join(sentencas[n:2*n])
-            s2 = " ".join(sentencas[2*n:3*n])
-            s3 = " ".join(sentencas[3*n:])
-            resumo = s0
-            corpo  = "\n\n".join(s for s in [s1, s2, s3] if s)
-            return _limpa_resumo(resumo), corpo.strip()
+        # Estrategia 3: divide por "PARAGRAFO N"
+        partes3 = re.split(r'(?i)par[aá]grafo\s*\d+\s*[-–:]?\s*', txt)
+        partes3 = [p.strip() for p in partes3 if len(p.strip()) > 40]
+        if len(partes3) >= 3:
+            return _limpa_resumo(partes3[0]), "\n\n".join(partes3[1:4])
 
-        # Estrategia 4: divide o texto bruto em 4 partes iguais
-        palavras = txt.split()
-        if len(palavras) >= 40:
-            q = len(palavras) // 4
-            partes4 = [
-                " ".join(palavras[:q]),
-                " ".join(palavras[q:2*q]),
-                " ".join(palavras[2*q:3*q]),
-                " ".join(palavras[3*q:]),
-            ]
-            return _limpa_resumo(partes4[0]), "\n\n".join(partes4[1:])
+        # Estrategia 4: divide por sentencas em 4 grupos IGUAIS (sem cortar no meio)
+        sentencas = [s.strip() for s in re.split(r'(?<=[.!?])\s+', txt) if len(s.strip()) > 15]
+        total = len(sentencas)
+        if total >= 8:
+            q = total // 4
+            g0 = " ".join(sentencas[:q])
+            g1 = " ".join(sentencas[q:2*q])
+            g2 = " ".join(sentencas[2*q:3*q])
+            g3 = " ".join(sentencas[3*q:])   # pega o restante todo
+            return _limpa_resumo(g0), "\n\n".join(g for g in [g1, g2, g3] if g)
 
-        # Fallback absoluto
-        return titulo, txt.strip() or titulo
+        # Estrategia 5: texto inteiro como corpo
+        if txt and len(txt) > 50:
+            return titulo, txt
+
+        return titulo, titulo
 
     except Exception as e:
         print(f"      [WARN] corpo: {e}")
         return titulo, titulo
-
 
 def _limpa_resumo(texto):
     """Garante que o resumo seja no maximo 2 frases."""
