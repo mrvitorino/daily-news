@@ -75,7 +75,7 @@ INSTRUCOES DE BUSCA:
 FORMATO DE RESPOSTA:
 Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem blocos de codigo:
 
-{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","url":"https://url-completa-da-noticia.com.br","importancia":8}}]}}
+{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","corpo":"texto completo e detalhado da noticia em 4-6 paragrafos separados por \n\n descrevendo contexto historico, fatos relevantes, declaracoes e possivel impacto","url":"https://url-direta-do-artigo-se-encontrada.com.br","importancia":8}}]}}
 
 OBRIGATORIO:
 - Retorne exatamente {NUM_NEWS} noticias
@@ -88,7 +88,7 @@ OBRIGATORIO:
         config=types.GenerateContentConfig(
             tools=[types.Tool(google_search=types.GoogleSearch())],
             temperature=0.3,
-            max_output_tokens=4096,
+            max_output_tokens=8192,
         )
     )
 
