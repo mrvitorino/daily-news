@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
+Abordagem 100% texto puro — zero JSON intermediario.
 
-Passo A: busca com google_search → texto livre estruturado
-Passo B: extrai metadados SEGUROS em JSON (so campos sem texto livre)
-Passo C: gera resumo + corpo em texto puro por noticia (sem JSON)
+Passo A: busca com google_search, retorna blocos de texto estruturado
+Passo B: parseia os blocos com regex (sem JSON, sem risco de parse error)
+Passo C: gera resumo + corpo em texto puro para cada noticia
+Passo D: serializa tudo em JSON somente no final (json.dump nativo do Python)
 """
 
 import json
@@ -47,43 +49,36 @@ def get_edition_label(hour):
     elif hour < 14: return "Edicao do Meio-Dia (12h)"
     else:           return "Edicao Vespertina (17h)"
 
-def call_gemini(client, prompt, use_search=False, max_tokens=4000, temp=0.1,
-                mime_type=None, schema=None):
-    """Wrapper unificado para chamadas ao Gemini."""
+def gemini(client, prompt, search=False, max_tokens=4000, temp=0.1):
     cfg = dict(temperature=temp, max_output_tokens=max_tokens)
-    if use_search:
+    if search:
         cfg["tools"] = [types.Tool(google_search=types.GoogleSearch())]
-    if mime_type:
-        cfg["response_mime_type"] = mime_type
-    if schema:
-        cfg["response_schema"] = schema
     resp = client.models.generate_content(
-        model=MODEL,
-        contents=prompt,
+        model=MODEL, contents=prompt,
         config=types.GenerateContentConfig(**cfg)
     )
-    return resp.text
+    return resp.text or ""
 
 
 # ─────────────────────────────────────────
-# PASSO A — busca ampla, retorna texto livre
+# PASSO A — busca e retorna blocos de texto
+# Formato fixo com delimitadores que nao aparecem em titulos
 # ─────────────────────────────────────────
-def passo_a_buscar(client, today_str):
-    print("[..] Passo A: buscando com Google Search...")
+def passo_a(client, today_str):
+    print("[..] Passo A: buscando noticias...")
 
-    prompt = f"""Hoje e {today_str}. Voce e um jornalista brasileiro experiente.
+    prompt = f"""Hoje e {today_str}. Voce e um jornalista brasileiro.
 
-Faca MULTIPLAS buscas (minimo 6) e encontre {NUM_NEWS} noticias reais sobre
-POLITICA e ECONOMIA do Brasil das ultimas 48 horas.
+Faca pelo menos 6 buscas e encontre {NUM_NEWS} noticias reais sobre
+politica e economia brasileira das ultimas 48 horas.
 
-Buscas sugeridas:
-1. politica brasil {today_str}
-2. economia brasil {today_str}
-3. governo lula hoje
-4. congresso nacional hoje
-5. mercado financeiro brasil hoje
-6. STF decisao recente
-7. Se faltar noticias: saude educacao meio ambiente seguranca brasil recente
+Buscas obrigatorias:
+1. politica brasil hoje
+2. economia brasil hoje
+3. governo lula congresso hoje
+4. mercado financeiro brasil hoje
+5. STF senado camara hoje
+6. Se faltar: saude publica educacao eleicoes meio ambiente brasil recente
 
 FONTES ACEITAS: Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao,
 Valor Economico, ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato,
@@ -93,143 +88,169 @@ Opera Mundi, Correio Braziliense, Band News, AFP Brasil, R7 Noticias.
 
 PROIBIDO: Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista.
 
-Escreva cada noticia exatamente neste formato (sem variacao):
-===NOTICIA===
-TITULO: [titulo completo da noticia]
-FONTE: [nome do veiculo]
-CATEGORIA: [Politica ou Economia ou Internacional]
-IMPORTANCIA: [numero de 1 a 10]
-URL: [url completa ou vazio]
-===FIM===
+FORMATO DE SAIDA — use exatamente estes separadores:
+##INICIO##
+TITULO>> [titulo da noticia sem aspas]
+FONTE>> [nome do veiculo]
+CATEGORIA>> [Politica ou Economia ou Internacional]
+IMPORTANCIA>> [numero de 1 a 10]
+URL>> [url completa ou deixe em branco]
+##FIM##
 
-REGRA ABSOLUTA: escreva exatamente {NUM_NEWS} blocos ===NOTICIA=== ... ===FIM===
-Nunca escreva N/A, nunca deixe campos vazios, nunca diga que nao encontrou noticias."""
+Repita o bloco ##INICIO## ... ##FIM## exatamente {NUM_NEWS} vezes.
+NUNCA use N/A. NUNCA diga que nao encontrou noticias."""
 
-    txt = call_gemini(client, prompt, use_search=True, max_tokens=6000, temp=0.1)
-    print(f"[OK] Passo A: {len(txt)} chars")
+    txt = gemini(client, prompt, search=True, max_tokens=6000, temp=0.1)
+    print(f"[OK] Passo A: {len(txt)} chars, {txt.count('##INICIO##')} blocos")
     return txt
 
 
 # ─────────────────────────────────────────
-# PASSO B — extrai metadados do texto (só campos seguros)
-# Usa schema com APENAS strings curtas sem texto livre
+# PASSO B — parseia blocos com regex, zero JSON
 # ─────────────────────────────────────────
-def passo_b_extrair_meta(client, raw_text, today_str):
-    print("[..] Passo B: extraindo metadados em JSON...")
+def passo_b(raw_text, today_str):
+    print("[..] Passo B: parseando blocos com regex...")
 
-    # Schema minimo: so campos que nunca contem aspas ou texto longo
-    schema = {
-        "type": "object",
-        "properties": {
-            "resumo_editorial": {"type": "string"},
-            "noticias": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "titulo":      {"type": "string"},
-                        "fonte":       {"type": "string"},
-                        "categoria":   {"type": "string"},
-                        "url":         {"type": "string"},
-                        "importancia": {"type": "integer"}
-                    },
-                    "required": ["titulo","fonte","categoria","url","importancia"]
-                }
-            }
-        },
-        "required": ["resumo_editorial","noticias"]
-    }
+    blocos = re.findall(r'##INICIO##(.*?)##FIM##', raw_text, re.DOTALL)
+    print(f"   Blocos encontrados: {len(blocos)}")
 
-    prompt = f"""Extraia os dados do texto abaixo em JSON.
+    def extrai(bloco, campo):
+        m = re.search(rf'{campo}>>\s*(.+)', bloco)
+        return m.group(1).strip() if m else ""
 
-Para resumo_editorial: escreva 2 frases simples sobre o panorama do dia.
-Para cada noticia: extraia titulo, fonte, categoria, url e importancia.
-Titulo deve ser curto (maximo 15 palavras).
-Ignore entradas com titulo vazio, N/A ou "nao encontrado".
+    noticias = []
+    for bloco in blocos:
+        titulo     = extrai(bloco, "TITULO")
+        fonte      = extrai(bloco, "FONTE")
+        categoria  = extrai(bloco, "CATEGORIA")
+        imp_str    = extrai(bloco, "IMPORTANCIA")
+        url        = extrai(bloco, "URL")
 
-TEXTO:
-{raw_text[:5000]}"""
-
-    txt = call_gemini(client, prompt, use_search=False, max_tokens=3000, temp=0.0,
-                      mime_type="application/json", schema=schema)
-
-    data = json.loads(txt)
-
-    # Filtrar invalidas
-    validas = []
-    for n in data.get("noticias", []):
-        t = n.get("titulo","").strip()
-        bad = (not t or len(t) < 8
-               or t.lower().startswith("n/a")
-               or "nao foi possivel" in t.lower()
-               or "nao encontrado" in t.lower()
-               or "não foi" in t.lower())
-        if bad:
-            print(f"   [SKIP] {t[:60]}")
+        # Validar
+        if not titulo or len(titulo) < 8:
             continue
-        if not n.get("url","").startswith("http"):
-            n["url"] = ""
-        validas.append(n)
+        bad = any(x in titulo.lower() for x in ["n/a","nao foi possivel","nao encontrado","não foi"])
+        if bad:
+            print(f"   [SKIP] {titulo[:60]}")
+            continue
 
-    data["noticias"] = validas
-    print(f"[OK] Passo B: {len(validas)} noticias validas.")
+        try:
+            importancia = int(re.search(r'\d+', imp_str).group())
+        except Exception:
+            importancia = 5
 
-    if len(validas) < 5:
-        raise RuntimeError(f"Apenas {len(validas)} noticias validas apos filtro.")
-    return data
+        if not url.startswith("http"):
+            url = ""
+
+        if not categoria or categoria not in ["Politica","Economia","Internacional"]:
+            categoria = "Politica"
+
+        noticias.append({
+            "titulo": titulo,
+            "fonte": fonte or "Brasil",
+            "categoria": categoria,
+            "url": url,
+            "importancia": min(10, max(1, importancia)),
+        })
+
+    print(f"[OK] Passo B: {len(noticias)} noticias validas.")
+
+    if len(noticias) < 5:
+        # Tenta fallback: parseia linha a linha sem blocos
+        print("   [WARN] Poucos blocos — tentando parse linha a linha...")
+        noticias = parse_fallback(raw_text)
+        print(f"   Fallback: {len(noticias)} noticias.")
+
+    if len(noticias) < 3:
+        raise RuntimeError(f"Apenas {len(noticias)} noticias — insuficiente.")
+
+    return noticias
+
+
+def parse_fallback(txt):
+    """Parse alternativo para quando o modelo nao segue o formato de blocos."""
+    noticias = []
+    linhas = txt.split("\n")
+    atual = {}
+    for linha in linhas:
+        linha = linha.strip()
+        if "TITULO>>" in linha:
+            if atual.get("titulo"):
+                noticias.append(atual)
+            t = linha.split(">>",1)[1].strip()
+            atual = {"titulo":t,"fonte":"Brasil","categoria":"Politica","url":"","importancia":5}
+        elif "FONTE>>" in linha and atual:
+            atual["fonte"] = linha.split(">>",1)[1].strip() or "Brasil"
+        elif "CATEGORIA>>" in linha and atual:
+            c = linha.split(">>",1)[1].strip()
+            atual["categoria"] = c if c in ["Politica","Economia","Internacional"] else "Politica"
+        elif "IMPORTANCIA>>" in linha and atual:
+            m = re.search(r'\d+', linha)
+            atual["importancia"] = int(m.group()) if m else 5
+        elif "URL>>" in linha and atual:
+            u = linha.split(">>",1)[1].strip()
+            atual["url"] = u if u.startswith("http") else ""
+    if atual.get("titulo"):
+        noticias.append(atual)
+    return [n for n in noticias if len(n.get("titulo","")) >= 8]
 
 
 # ─────────────────────────────────────────
-# PASSO C — gera resumo + corpo em TEXTO PURO
-# Sem JSON, sem schema → zero risco de parse error
+# PASSO C — resumo + corpo em texto puro
 # ─────────────────────────────────────────
-def passo_c_texto(client, noticia, today_str):
-    titulo = noticia.get("titulo","")
-    fonte  = noticia.get("fonte","")
-    print(f"   [..] Texto: {titulo[:55]}...")
+def passo_c(client, noticia, today_str):
+    titulo = noticia["titulo"]
+    fonte  = noticia["fonte"]
+    print(f"   [..] {titulo[:55]}...")
 
-    prompt = f"""Escreva um texto jornalistico sobre esta noticia brasileira:
+    prompt = f"""Escreva um texto jornalistico sobre esta noticia:
 
 Titulo: {titulo}
 Fonte: {fonte}
 
-Formato de saida (siga exatamente):
-RESUMO: [escreva aqui 2 frases descrevendo o fato e sua importancia]
-CORPO: [escreva aqui 3 paragrafos separados por // descrevendo contexto, fatos e impacto]
+Siga este formato exato:
+RESUMO>> [duas frases descrevendo o fato e sua importancia]
+PARAGRAFO1>> [primeiro paragrafo com contexto historico]
+PARAGRAFO2>> [segundo paragrafo com os fatos principais e declaracoes]
+PARAGRAFO3>> [terceiro paragrafo com impacto e desdobramentos]
 
-Regras:
-- Use apenas aspas simples se precisar de aspas
-- Nao use markdown, nao use asteriscos
-- Escreva em portugues brasileiro formal
-- Base-se apenas no titulo e fonte fornecidos"""
+Use apenas aspas simples se precisar de aspas.
+Escreva em portugues brasileiro formal."""
 
     try:
-        txt = call_gemini(client, prompt, use_search=False, max_tokens=800, temp=0.3)
+        txt = gemini(client, prompt, search=False, max_tokens=700, temp=0.3)
 
-        resumo = ""
-        corpo  = ""
+        def ex(campo):
+            m = re.search(rf'{campo}>>\s*(.+?)(?=\n[A-Z]+>>|\Z)', txt, re.DOTALL)
+            return m.group(1).strip() if m else ""
 
-        # Extrai RESUMO
-        m = re.search(r'RESUMO:\s*(.+?)(?=CORPO:|$)', txt, re.DOTALL | re.IGNORECASE)
-        if m:
-            resumo = m.group(1).strip()
-
-        # Extrai CORPO
-        m2 = re.search(r'CORPO:\s*(.+?)$', txt, re.DOTALL | re.IGNORECASE)
-        if m2:
-            corpo = m2.group(1).strip().replace(" // ", "\n\n").replace("//", "\n\n")
-
-        # Fallbacks
-        if not resumo:
-            resumo = titulo
-        if not corpo:
-            corpo = resumo
-
+        resumo = ex("RESUMO") or titulo
+        p1 = ex("PARAGRAFO1")
+        p2 = ex("PARAGRAFO2")
+        p3 = ex("PARAGRAFO3")
+        corpo = "\n\n".join(p for p in [p1, p2, p3] if p) or resumo
         return resumo, corpo
 
     except Exception as e:
         print(f"   [WARN] {e}")
         return titulo, titulo
+
+
+# ─────────────────────────────────────────
+# PASSO D — gera resumo editorial
+# ─────────────────────────────────────────
+def passo_d_editorial(client, noticias, today_str):
+    titulos = "\n".join(f"- {n['titulo']}" for n in noticias[:5])
+    prompt = f"""Com base nestas noticias brasileiras de hoje:
+{titulos}
+
+Escreva um resumo editorial em 2 frases sobre o panorama politico-economico do dia.
+Escreva apenas as 2 frases, sem titulo, sem aspas duplas."""
+    try:
+        txt = gemini(client, prompt, search=False, max_tokens=200, temp=0.2)
+        return txt.strip()
+    except Exception:
+        return "O cenario politico e economico brasileiro segue movimentado."
 
 
 # ─────────────────────────────────────────
@@ -246,23 +267,33 @@ def fetch_news():
     today_str = format_date_pt(now_br)
     print(f"[OK] {today_str} | {get_edition_label(now_br.hour)}")
 
-    raw  = passo_a_buscar(client, today_str)
-    time.sleep(3)
-    data = passo_b_extrair_meta(client, raw, today_str)
+    # Passos A e B: busca e parse
+    raw      = passo_a(client, today_str)
+    time.sleep(2)
+    noticias = passo_b(raw, today_str)
     time.sleep(2)
 
-    print(f"[..] Passo C: gerando textos para {len(data['noticias'])} noticias...")
-    for i, n in enumerate(data["noticias"]):
-        resumo, corpo = passo_c_texto(client, n, today_str)
+    # Passo C: textos individuais
+    print(f"[..] Passo C: gerando textos ({len(noticias)} noticias)...")
+    for i, n in enumerate(noticias):
+        resumo, corpo = passo_c(client, n, today_str)
         n["resumo"] = resumo
         n["corpo"]  = corpo
-        if i < len(data["noticias"]) - 1:
-            time.sleep(2)
+        if i < len(noticias) - 1:
+            time.sleep(1)
 
-    data["generated_at"]  = now_br.strftime("%Y-%m-%dT%H:%M:%S")
-    data["edition_label"] = get_edition_label(now_br.hour)
-    data["date_display"]  = today_str.upper()
-    print(f"[OK] Concluido: {len(data['noticias'])} noticias.")
+    # Passo D: editorial
+    editorial = passo_d_editorial(client, noticias, today_str)
+
+    # Monta estrutura final — json.dump cuida da serialização correta
+    data = {
+        "resumo_editorial": editorial,
+        "noticias": noticias,
+        "generated_at":  now_br.strftime("%Y-%m-%dT%H:%M:%S"),
+        "edition_label": get_edition_label(now_br.hour),
+        "date_display":  today_str.upper(),
+    }
+    print(f"[OK] Concluido: {len(noticias)} noticias.")
     return data
 
 
