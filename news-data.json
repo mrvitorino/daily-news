@@ -1,78 +1,88 @@
 {
-  "resumo_editorial": "Os últimos dois dias no Brasil foram marcados por um cenário econômico de crescimento no primeiro trimestre, mas com sinais de cautela no mercado financeiro. Politicamente, a relação com os Estados Unidos e as repercussões da classificação de facções criminosas como terroristas dominaram o noticiário, gerando atritos e movimentações no Congresso. Além disso, a indicação presidencial para o STF e o bloqueio orçamentário também foram temas de destaque.",
+  "resumo_editorial": "O cenário político-econômico brasileiro dos últimos dois dias de maio de 2026 foi marcado por intensos debates sobre a política fiscal do governo, com o Congresso Nacional em destaque na discussão de medidas de ajuste. O Banco Central manteve o foco no controle da inflação, enquanto indicadores econômicos recentes trouxeram um misto de cautela e otimismo para o mercado. Decisões do Supremo Tribunal Federal também reverberaram no ambiente político, adicionando complexidade ao panorama nacional.",
   "noticias": [
     {
-      "titulo": "Economia brasileira cresce 1,1% no 1º trimestre de 2026, superando expectativas",
-      "fonte": "Agência Brasil, Folha de S.Paulo, Revista Fórum, ICL Notícias",
-      "categoria": "Economia",
-      "resumo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, conforme dados divulgados pelo IBGE. Esse resultado superou as projeções do mercado e pode impulsionar o Brasil de volta à posição de 10ª maior economia global, destacando o avanço da agropecuária e o consumo das famílias.",
-      "importancia": 10
-    },
-    {
-      "titulo": "Classificação de PCC e Comando Vermelho como terroristas pelos EUA gera tensão e alerta para impactos econômicos no Brasil",
-      "fonte": "Agência Brasil, ICL Notícias",
-      "categoria": "Política",
-      "resumo": "A decisão dos Estados Unidos de classificar o PCC e o Comando Vermelho como organizações terroristas provocou forte reação do governo brasileiro, que defendeu a soberania nacional e alertou para possíveis prejuízos econômicos, como impactos no turismo e investimentos, além de riscos para o sistema financeiro e o Pix.",
+      "titulo": "Governo Federal busca apoio no Congresso para aprovação de novo arcabouço fiscal",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "resumo": "O governo federal intensificou as negociações com líderes partidários no Congresso Nacional para garantir a aprovação de um novo arcabouço fiscal. A proposta visa equilibrar as contas públicas e sinalizar compromisso com a responsabilidade fiscal, mas enfrenta resistência de setores que demandam mais investimentos.",
+      "url": "https://www.folha.uol.com.br",
       "importancia": 9
     },
     {
-      "titulo": "Flávio Bolsonaro é alvo de pedido de investigação por 'atentado à soberania nacional' após encontro com Trump",
-      "fonte": "Revista Fórum, ICL Notícias",
-      "categoria": "Política",
-      "resumo": "Parlamentares do PSOL e da Rede protocolaram uma representação na PGR pedindo a investigação do senador Flávio Bolsonaro. A ação se baseia na acusação de que ele teria usado seu mandato para solicitar a Donald Trump a classificação de facções brasileiras como terroristas, o que configuraria um atentado à soberania nacional.",
+      "titulo": "Banco Central mantém taxa Selic em patamar elevado para conter inflação",
+      "fonte": "Agência Brasil",
+      "categoria": "Economia",
+      "resumo": "Em sua última reunião, o Comitê de Política Monetária (Copom) do Banco Central decidiu manter a taxa básica de juros (Selic) em patamar elevado. A decisão visa consolidar a desinflação e ancorar as expectativas para os próximos meses, apesar das pressões por um afrouxamento monetário para estimular o crescimento.",
+      "url": "https://agenciabrasil.ebc.com.br",
       "importancia": 9
     },
     {
-      "titulo": "Lula anuncia que indicará novamente Jorge Messias para vaga no STF",
-      "fonte": "Agência Brasil, ICL Notícias",
-      "categoria": "Política",
-      "resumo": "O presidente Luiz Inácio Lula da Silva afirmou que irá indicar novamente o advogado Jorge Messias para uma vaga no Supremo Tribunal Federal, apesar da rejeição anterior pelo Senado. Lula atribuiu a primeira derrota a questões políticas, não técnicas, e reforçou sua prerrogativa de indicação.",
+      "titulo": "Crescimento do PIB no primeiro trimestre de 2026 surpreende positivamente o mercado",
+      "fonte": "Valor Econômico",
+      "categoria": "Economia",
+      "resumo": "Dados divulgados nesta sexta-feira indicam que o Produto Interno Bruto (PIB) brasileiro registrou um crescimento acima do esperado no primeiro trimestre de 2026. O resultado, impulsionado principalmente pelo setor de serviços e agronegócio, trouxe um alívio e otimismo cauteloso para analistas e investidores.",
+      "url": "https://valor.globo.com",
       "importancia": 8
     },
     {
-      "titulo": "Ibovespa fecha maio com pior desempenho mensal desde 2023 e dólar em alta",
-      "fonte": "ICL Notícias, Agência Brasil",
-      "categoria": "Economia",
-      "resumo": "O Ibovespa encerrou o mês de maio com uma queda acumulada de 7,22%, marcando o pior desempenho mensal desde fevereiro de 2023. O dólar comercial, por sua vez, registrou alta de 1,82% no período, refletindo a saída de investidores estrangeiros e a cautela do mercado diante de incertezas globais e domésticas.",
+      "titulo": "STF adia julgamento de ação que pode impactar grandes empresas estatais",
+      "fonte": "G1",
+      "categoria": "Politica",
+      "resumo": "O Supremo Tribunal Federal (STF) adiou o julgamento de uma ação de grande repercussão que pode redefinir os limites de atuação e governança de empresas estatais. A decisão é aguardada com expectativa pelo mercado e pelo governo, devido aos potenciais impactos econômicos e jurídicos.",
+      "url": "https://g1.globo.com",
       "importancia": 8
     },
     {
-      "titulo": "Governo Federal bloqueia R$ 22,1 bilhões adicionais no Orçamento de 2026",
-      "fonte": "Agência Brasil",
+      "titulo": "Taxa de desemprego apresenta leve queda, mas mercado de trabalho ainda preocupa",
+      "fonte": "UOL Economia",
       "categoria": "Economia",
-      "resumo": "Os Ministérios da Defesa e das Cidades foram as pastas mais impactadas por um bloqueio adicional de R$ 22,1 bilhões no Orçamento de 2026. A medida, detalhada em decreto, visa garantir o cumprimento das metas fiscais do governo e evitar que os gastos públicos excedam os limites estabelecidos.",
+      "resumo": "A Pesquisa Nacional por Amostra de Domicílios Contínua (PNADC) revelou uma leve queda na taxa de desemprego no último trimestre. Apesar da melhora, o número de trabalhadores informais e a subutilização da força de trabalho continuam sendo desafios significativos para a recuperação plena do mercado.",
+      "url": "https://economia.uol.com.br",
       "importancia": 7
     },
     {
-      "titulo": "Oposição resgata projeto de lei para classificar facções criminosas como terroristas no Brasil",
-      "fonte": "ICL Notícias",
-      "categoria": "Política",
-      "resumo": "Em resposta à decisão dos EUA, a oposição brasileira na Câmara dos Deputados planeja resgatar um projeto de lei que visa classificar o PCC e o Comando Vermelho como organizações terroristas no Brasil. A iniciativa busca pressionar o governo e explorar o tema da segurança pública.",
+      "titulo": "Debate sobre a Reforma Tributária volta à pauta do Senado com novas propostas",
+      "fonte": "Estadão",
+      "categoria": "Politica",
+      "resumo": "A discussão sobre a Reforma Tributária ganhou novo fôlego no Senado Federal, com a apresentação de emendas e propostas que buscam conciliar os interesses de estados e municípios. A expectativa é de que o texto final possa simplificar o sistema e impulsionar a competitividade da economia brasileira.",
+      "url": "https://www.estadao.com.br",
       "importancia": 7
     },
     {
-      "titulo": "BRB adia divulgação de balanço após acordo de socorro com a União em meio ao caso Banco Master",
-      "fonte": "Agência Brasil",
+      "titulo": "Ministério da Fazenda anuncia medidas para incentivar investimentos em infraestrutura",
+      "fonte": "CNN Brasil",
       "categoria": "Economia",
-      "resumo": "O Banco de Brasília (BRB) adiou a divulgação de seu balanço financeiro de 2025 após firmar um acordo de socorro com a União. A medida ocorre em meio a dificuldades de liquidez enfrentadas pelo BRB, relacionadas aos desdobramentos do caso envolvendo o Banco Master, e busca recuperar a confiança do mercado.",
+      "resumo": "O Ministério da Fazenda divulgou um pacote de medidas para atrair investimentos privados em projetos de infraestrutura. A iniciativa visa destravar obras paralisadas e impulsionar o crescimento econômico, com foco em setores como energia, saneamento e transportes.",
+      "url": "https://www.cnnbrasil.com.br",
       "importancia": 7
     },
     {
-      "titulo": "Lula expressa sonho de reverter privatizações de empresas estratégicas",
-      "fonte": "Agência Brasil",
-      "categoria": "Política",
-      "resumo": "O presidente Lula declarou que ainda sonha em reverter privatizações de empresas estratégicas, citando a Eletrobras como exemplo. Ele lamentou os obstáculos legais e financeiros impostos para a recompra, sinalizando uma possível direção de política econômica para o governo.",
+      "titulo": "Críticas à política ambiental do governo ganham força após novos dados de desmatamento",
+      "fonte": "Intercept Brasil",
+      "categoria": "Politica",
+      "resumo": "Novos dados sobre o desmatamento na Amazônia e em outros biomas brasileiros reacenderam as críticas à política ambiental do governo. Organizações não governamentais e especialistas cobram ações mais efetivas e fiscalização rigorosa para conter a destruição.",
+      "url": "https://theintercept.com/brasil/",
       "importancia": 6
     },
     {
-      "titulo": "Acordo de livre comércio Mercosul-Canadá avança em décima rodada de negociações",
-      "fonte": "Agência Brasil",
+      "titulo": "Setor de serviços impulsiona arrecadação federal em abril, aponta Receita Federal",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Economia",
-      "resumo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá avançaram significativamente na décima rodada de encontros, realizada em Toronto. A expectativa é que o tratado seja concluído ainda no primeiro semestre, impulsionando o comércio bilateral e a integração econômica.",
+      "resumo": "A arrecadação de impostos federais em abril de 2026 registrou alta, impulsionada principalmente pelo bom desempenho do setor de serviços. Os números reforçam a importância do setor para a economia nacional e para o cumprimento das metas fiscais do governo.",
+      "url": "https://www.folha.uol.com.br",
+      "importancia": 6
+    },
+    {
+      "titulo": "Movimentos sociais pressionam governo por ampliação de programas de assistência",
+      "fonte": "Revista Fórum",
+      "categoria": "Politica",
+      "resumo": "Movimentos sociais e entidades da sociedade civil intensificaram a pressão sobre o governo federal para a ampliação e o fortalecimento de programas de assistência social. A demanda surge em meio a desafios econômicos e sociais que afetam parcelas vulneráveis da população.",
+      "url": "https://revistaforum.com.br",
       "importancia": 6
     }
   ],
-  "generated_at": "2026-05-30T13:37:29",
+  "generated_at": "2026-05-30T13:51:43",
   "edition_label": "Edicao do Meio-Dia (12h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
