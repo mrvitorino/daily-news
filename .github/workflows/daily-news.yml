@@ -1,12 +1,9 @@
-name: Gerar e Publicar Boletim Diario
+name: Gerar e Publicar Boletim Geral
 
 on:
   schedule:
-    # Horarios em UTC — Brasil (BRT) = UTC-3
     # 08h BRT = 11h UTC
     - cron: '0 11 * * *'
-    # 12h BRT = 15h UTC
-    - cron: '0 15 * * *'
     # 17h BRT = 20h UTC
     - cron: '0 20 * * *'
   workflow_dispatch:
@@ -26,6 +23,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -46,25 +44,24 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          echo "Verificando API key..."
           if [ -z "$GEMINI_API_KEY" ]; then
-            echo "ERRO: GEMINI_API_KEY nao definida!"
-            echo "Adicione o secret em: Settings -> Secrets and variables -> Actions"
+            echo "ERRO: GEMINI_API_KEY nao definida."
             exit 1
           fi
-          echo "API key encontrada, gerando noticias..."
           python generate_news.py
 
-      - name: Verificar news-data.json
+      - name: Verificar resultado
         run: |
           python3 -c "
           import json
           with open('news-data.json') as f:
             d = json.load(f)
-          print('Edicao:', d.get('edition_label','?'))
-          print('Data:', d.get('date_display','?'))
-          print('Noticias:', len(d.get('noticias',[])))
-          print('Editorial:', d.get('resumo_editorial','?')[:80], '...')
+          total = len(d.get('noticias',[]))
+          cats  = d.get('por_categoria', {})
+          print(f'Edicao: {d.get(\"edition_label\",\"?\")}')
+          print(f'Total noticias: {total}')
+          for k,v in cats.items():
+              print(f'  {k}: {v}')
           "
 
       - name: Commitar news-data.json
