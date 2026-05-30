@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
-generate_news.py — Panorama Brasil
-
-Estrategia: 4 buscas tematicas separadas (politica, economia, governo, mercado)
-cada uma retorna blocos de texto. Os resultados sao agregados, deduplicados
-e limitados a NUM_NEWS. Zero JSON intermediario — tudo regex + json.dump final.
+generate_news.py — Boletim Geral de Noticias
+5 categorias: Politica, Economia, Cultura, Tecnologia, Entretenimento
+Cada categoria: ate 20 noticias
+Zero JSON intermediario — tudo regex + json.dump final
 """
 
 import json
@@ -24,9 +23,8 @@ except Exception:
 from google import genai
 from google.genai import types
 
-NUM_NEWS = 10
-OUTPUT   = "news-data.json"
-MODEL    = "gemini-2.5-flash"
+OUTPUT = "news-data.json"
+MODEL  = "gemini-2.5-flash"
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
@@ -37,207 +35,266 @@ MONTHS_PT = {
     7:"julho",8:"agosto",9:"setembro",10:"outubro",11:"novembro",12:"dezembro"
 }
 
-FONTES_ACEITAS = """Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao,
-Valor Economico, ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato,
-Carta Capital, CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal,
-Bloomberg Linea, Agencia Publica, Piaui, Epoca, IstoE, Exame, InfoMoney,
-Opera Mundi, Correio Braziliense, Band News, AFP Brasil, R7 Noticias."""
-
-FONTES_PROIBIDAS = "Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista."
-
-BLOCO_FMT = """##INICIO##
-TITULO>> [titulo da noticia]
-FONTE>> [nome do veiculo]
-CATEGORIA>> [Politica ou Economia ou Internacional]
-IMPORTANCIA>> [1 a 10]
-URL>> [url completa ou vazio]
-##FIM##"""
-
 def format_date_pt(dt):
     wd = WEEKDAYS_PT.get(dt.strftime("%A"), dt.strftime("%A"))
     mo = MONTHS_PT.get(dt.month, str(dt.month))
     return f"{wd}, {dt.day} de {mo} de {dt.year}"
 
 def get_edition_label(hour):
-    if hour < 10:   return "Edicao Matutina (08h)"
-    elif hour < 14: return "Edicao do Meio-Dia (12h)"
-    else:           return "Edicao Vespertina (17h)"
+    return "Edicao Matutina (08h)" if hour < 12 else "Edicao Vespertina (17h)"
 
-def gemini_search(client, prompt, max_tokens=3000):
+def gemini_search(client, prompt, max_tokens=4000):
     resp = client.models.generate_content(
         model=MODEL, contents=prompt,
         config=types.GenerateContentConfig(
             tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.1,
-            max_output_tokens=max_tokens,
+            temperature=0.1, max_output_tokens=max_tokens,
         )
     )
     return resp.text or ""
 
-def gemini_text(client, prompt, max_tokens=700, temp=0.3):
+def gemini_text(client, prompt, max_tokens=800, temp=0.3):
     resp = client.models.generate_content(
         model=MODEL, contents=prompt,
-        config=types.GenerateContentConfig(
-            temperature=temp,
-            max_output_tokens=max_tokens,
-        )
+        config=types.GenerateContentConfig(temperature=temp, max_output_tokens=max_tokens)
     )
     return resp.text or ""
 
+BLOCO = """##INICIO##
+TITULO>> [titulo]
+FONTE>> [fonte]
+CATEGORIA>> [categoria]
+IMPORTANCIA>> [1-10]
+URL>> [url ou vazio]
+##FIM##"""
 
-# ─────────────────────────────────────────
-# PARSE DE BLOCOS — regex robusto
-# ─────────────────────────────────────────
-def parse_blocos(txt):
+FONTES_OK = ("Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao, Valor Economico, "
+             "ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato, Carta Capital, "
+             "CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal, Bloomberg Linea, "
+             "Agencia Publica, Piaui, Epoca, IstoE, Exame, InfoMoney, Opera Mundi, Band News, "
+             "Correio Braziliense, AFP Brasil, R7 Noticias, Veja, Medio Ambiente News, "
+             "The Verge, Wired, TechCrunch, Ars Technica, MIT Technology Review, "
+             "Canaltech, TecMundo, Olhar Digital, Convergencia Digital, "
+             "Variety, Hollywood Reporter, Deadline, Screen Rant, IGN, "
+             "Movieweb, Rolling Stone Brasil, Billboard Brasil, Quatro Rodas.")
+FONTES_NO  = "Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista."
+
+def parse_blocos(txt, categoria_esperada=None):
     blocos = re.findall(r'##INICIO##(.*?)##FIM##', txt, re.DOTALL)
     noticias = []
     for bloco in blocos:
-        def ex(campo):
-            m = re.search(rf'{campo}>>\s*(.+)', bloco)
+        def ex(c):
+            m = re.search(rf'{c}>>\s*(.+)', bloco)
             return m.group(1).strip() if m else ""
-
         titulo    = ex("TITULO")
-        fonte     = ex("FONTE") or "Brasil"
-        categoria = ex("CATEGORIA")
+        fonte     = ex("FONTE") or "Redacao"
+        categoria = ex("CATEGORIA") or categoria_esperada or "Geral"
         imp_str   = ex("IMPORTANCIA")
         url       = ex("URL")
 
         if not titulo or len(titulo) < 8:
             continue
-        if any(x in titulo.lower() for x in ["n/a","nao foi possivel","nao encontrado","não foi","placeholder"]):
+        if any(x in titulo.lower() for x in ["n/a","nao foi","nao encontr","não foi","placeholder","[titulo"]):
             continue
-
         try:
-            importancia = int(re.search(r'\d+', imp_str).group())
+            imp = int(re.search(r'\d+', imp_str).group())
         except Exception:
-            importancia = 5
-
+            imp = 5
         if not url.startswith("http"):
             url = ""
-        if categoria not in ["Politica","Economia","Internacional"]:
-            categoria = "Politica"
-
         noticias.append({
             "titulo":      titulo,
             "fonte":       fonte,
             "categoria":   categoria,
             "url":         url,
-            "importancia": min(10, max(1, importancia)),
+            "importancia": min(10, max(1, imp)),
         })
     return noticias
 
-
-def prompt_busca(tema, n, today_str):
-    return f"""Hoje e {today_str}. Voce e um jornalista brasileiro especializado em {tema}.
-
-Use a ferramenta de busca e encontre {n} noticias DIFERENTES sobre {tema} no Brasil
-publicadas nas ultimas 48 horas.
-
-FONTES ACEITAS: {FONTES_ACEITAS}
-PROIBIDO: {FONTES_PROIBIDAS}
-
-Para cada noticia escreva EXATAMENTE neste formato:
-{BLOCO_FMT}
-
-Regras:
-- Escreva exatamente {n} blocos ##INICIO## ... ##FIM##
-- NUNCA escreva N/A
-- Se uma busca nao retornar resultados, tente outra busca sobre o mesmo tema
-- Cada noticia deve ser diferente das outras"""
-
-
-# ─────────────────────────────────────────
-# BUSCA POR TEMA — 4 temas separados
-# ─────────────────────────────────────────
-TEMAS = [
-    ("politica brasileira, congresso nacional, STF, eleicoes", 3),
-    ("economia brasileira, mercado financeiro, inflacao, emprego", 3),
-    ("governo federal brasileiro, ministerios, politicas publicas", 2),
-    ("relacoes internacionais do Brasil, comercio exterior, diplomacia brasileira", 2),
-]
-
-def buscar_por_temas(client, today_str):
-    todas = []
-    for tema, n in TEMAS:
-        print(f"   [..] Tema: {tema[:45]}...")
-        try:
-            txt = gemini_search(client, prompt_busca(tema, n, today_str), max_tokens=2500)
-            encontradas = parse_blocos(txt)
-            print(f"        → {len(encontradas)} noticias")
-            todas.extend(encontradas)
-            time.sleep(3)
-        except Exception as e:
-            print(f"        → ERRO: {e}", file=sys.stderr)
-            time.sleep(3)
-
-    return todas
-
-
-def deduplicar(noticias):
-    """Remove noticias com titulo muito similar (primeiras 6 palavras iguais)."""
+def deduplicar(lista):
     vistas = set()
-    unicas = []
-    for n in noticias:
-        chave = " ".join(n["titulo"].lower().split()[:6])
+    out = []
+    for n in lista:
+        chave = " ".join(n["titulo"].lower().split()[:7])
         if chave not in vistas:
             vistas.add(chave)
-            unicas.append(n)
-    return unicas
+            out.append(n)
+    return out
 
+# ─── BUSCAS POR CATEGORIA ───────────────
 
-# ─────────────────────────────────────────
-# PASSO C — resumo + corpo em texto puro
-# ─────────────────────────────────────────
+def buscar_politica(client, today_str, max_n=20):
+    print("[..] Buscando: Politica...")
+    temas = [
+        ("politica brasileira congresso STF hoje", 7),
+        ("governo lula ministerios politicas publicas hoje", 7),
+        ("eleicoes partidos politicos brasil recente", 6),
+    ]
+    todas = []
+    for tema, n in temas:
+        prompt = f"""Hoje e {today_str}. Encontre {n} noticias sobre {tema} das ultimas 48h.
+FONTES ACEITAS: {FONTES_OK}
+PROIBIDO: {FONTES_NO}
+Use o formato abaixo para CADA noticia (exatamente {n} blocos):
+{BLOCO}
+CATEGORIA deve ser: Politica
+NUNCA escreva N/A."""
+        txt = gemini_search(client, prompt, 3000)
+        enc = parse_blocos(txt, "Politica")
+        print(f"   {tema[:40]}: {len(enc)}")
+        todas.extend(enc)
+        time.sleep(3)
+    return deduplicar(todas)[:max_n]
+
+def buscar_economia(client, today_str, max_n=20):
+    print("[..] Buscando: Economia...")
+    temas = [
+        ("economia brasileira mercado financeiro bolsa hoje", 7),
+        ("inflacao emprego renda salario brasil hoje", 7),
+        ("comercio exterior agronegocio industria brasil recente", 6),
+    ]
+    todas = []
+    for tema, n in temas:
+        prompt = f"""Hoje e {today_str}. Encontre {n} noticias sobre {tema} das ultimas 48h.
+FONTES ACEITAS: {FONTES_OK}
+PROIBIDO: {FONTES_NO}
+Use o formato abaixo para CADA noticia (exatamente {n} blocos):
+{BLOCO}
+CATEGORIA deve ser: Economia
+NUNCA escreva N/A."""
+        txt = gemini_search(client, prompt, 3000)
+        enc = parse_blocos(txt, "Economia")
+        print(f"   {tema[:40]}: {len(enc)}")
+        todas.extend(enc)
+        time.sleep(3)
+    return deduplicar(todas)[:max_n]
+
+def buscar_cultura(client, today_str, max_n=20):
+    print("[..] Buscando: Cultura...")
+    temas = [
+        ("cultura arte literatura musica brasil hoje", 7),
+        ("teatro cinema exposicao museu festival brasil recente", 7),
+        ("patrimonio historico gastronomia moda design brasil hoje", 6),
+    ]
+    todas = []
+    for tema, n in temas:
+        prompt = f"""Hoje e {today_str}. Encontre {n} noticias sobre {tema} das ultimas 48h.
+FONTES ACEITAS: {FONTES_OK}
+PROIBIDO: {FONTES_NO}
+Use o formato abaixo para CADA noticia (exatamente {n} blocos):
+{BLOCO}
+CATEGORIA deve ser: Cultura
+NUNCA escreva N/A."""
+        txt = gemini_search(client, prompt, 3000)
+        enc = parse_blocos(txt, "Cultura")
+        print(f"   {tema[:40]}: {len(enc)}")
+        todas.extend(enc)
+        time.sleep(3)
+    return deduplicar(todas)[:max_n]
+
+def buscar_tecnologia(client, today_str, max_n=20):
+    print("[..] Buscando: Tecnologia...")
+    temas = [
+        ("tecnologia inteligencia artificial startups brasil hoje", 7),
+        ("inovacao tecnologica gadgets software hardware mundial recente", 7),
+        ("ciberseguranca privacidade regulacao digital brasil mundo hoje", 6),
+    ]
+    todas = []
+    for tema, n in temas:
+        prompt = f"""Hoje e {today_str}. Encontre {n} noticias sobre {tema} das ultimas 48h.
+FONTES ACEITAS: {FONTES_OK}
+PROIBIDO: {FONTES_NO}
+Use o formato abaixo para CADA noticia (exatamente {n} blocos):
+{BLOCO}
+CATEGORIA deve ser: Tecnologia
+NUNCA escreva N/A."""
+        txt = gemini_search(client, prompt, 3000)
+        enc = parse_blocos(txt, "Tecnologia")
+        print(f"   {tema[:40]}: {len(enc)}")
+        todas.extend(enc)
+        time.sleep(3)
+    return deduplicar(todas)[:max_n]
+
+def buscar_entretenimento(client, today_str, max_n=20):
+    print("[..] Buscando: Entretenimento...")
+    temas = [
+        ("lancamentos filmes series Netflix Amazon Prime Video 2026", 8),
+        ("lancamentos HBO Max Apple TV Plus Disney Plus novidades 2026", 7),
+        ("cinema bilheteria estreias criticas filmes series recente", 5),
+    ]
+    todas = []
+    for tema, n in temas:
+        prompt = f"""Hoje e {today_str}. Encontre {n} noticias ou lancamentos sobre {tema}.
+Inclua filmes e series lancados recentemente ou anunciados para breve.
+FONTES ACEITAS: {FONTES_OK}
+Use o formato abaixo para CADA item (exatamente {n} blocos):
+{BLOCO}
+CATEGORIA deve ser: Entretenimento
+NUNCA escreva N/A."""
+        txt = gemini_search(client, prompt, 3000)
+        enc = parse_blocos(txt, "Entretenimento")
+        print(f"   {tema[:40]}: {len(enc)}")
+        todas.extend(enc)
+        time.sleep(3)
+    return deduplicar(todas)[:max_n]
+
+# ─── TEXTO EXPANDIDO ─────────────────────
+
 def gerar_texto(client, noticia):
     titulo = noticia["titulo"]
     fonte  = noticia["fonte"]
+    cat    = noticia["categoria"]
 
-    prompt = f"""Escreva um texto jornalistico sobre esta noticia:
+    prompt = f"""Escreva um texto jornalistico completo sobre:
 
 Titulo: {titulo}
 Fonte: {fonte}
+Categoria: {cat}
 
-Formato obrigatorio:
-RESUMO>> duas frases descrevendo o fato e sua importancia
-PARAGRAFO1>> primeiro paragrafo com contexto historico
-PARAGRAFO2>> segundo paragrafo com fatos e declaracoes
-PARAGRAFO3>> terceiro paragrafo com impacto e desdobramentos
+Formato obrigatorio (siga exatamente):
+RESUMO>> escreva aqui duas frases descrevendo o fato e sua importancia
+PARAGRAFO1>> escreva aqui o primeiro paragrafo com contexto e antecedentes
+PARAGRAFO2>> escreva aqui o segundo paragrafo com fatos detalhados e declaracoes relevantes
+PARAGRAFO3>> escreva aqui o terceiro paragrafo com impacto consequencias e desdobramentos esperados
 
-Use apenas aspas simples se precisar de aspas.
-Portugues brasileiro formal. Apenas o texto, sem introducao."""
+Regras:
+- Use aspas simples se precisar de aspas, NUNCA aspas duplas
+- Portugues brasileiro formal
+- Cada paragrafo deve ter no minimo 3 linhas
+- Baseie-se no titulo fornecido"""
 
     try:
-        txt = gemini_text(client, prompt, max_tokens=700, temp=0.3)
+        txt = gemini_text(client, prompt, max_tokens=900, temp=0.3)
 
         def ex(campo):
-            m = re.search(rf'{campo}>>\s*(.+?)(?=\n[A-Z]+>>|\Z)', txt, re.DOTALL)
+            m = re.search(rf'{campo}>>\s*(.+?)(?=\n[A-Z]+[0-9]*>>|\Z)', txt, re.DOTALL | re.IGNORECASE)
             return m.group(1).strip() if m else ""
 
         resumo = ex("RESUMO") or titulo
-        p1, p2, p3 = ex("PARAGRAFO1"), ex("PARAGRAFO2"), ex("PARAGRAFO3")
+        p1 = ex("PARAGRAFO1")
+        p2 = ex("PARAGRAFO2")
+        p3 = ex("PARAGRAFO3")
         corpo = "\n\n".join(p for p in [p1, p2, p3] if p) or resumo
         return resumo, corpo
     except Exception as e:
-        print(f"      [WARN] {e}")
+        print(f"      [WARN] texto: {e}")
         return titulo, titulo
 
-
-def gerar_editorial(client, noticias):
-    titulos = "\n".join(f"- {n['titulo']}" for n in noticias[:6])
-    prompt = f"""Com base nestas noticias brasileiras recentes:
+def gerar_editorial(client, todas_noticias, today_str):
+    sample = [n["titulo"] for n in todas_noticias if n["categoria"] in ["Politica","Economia"]][:6]
+    titulos = "\n".join(f"- {t}" for t in sample)
+    prompt = f"""Com base nestas noticias de hoje ({today_str}):
 {titulos}
 
-Escreva um resumo editorial de 2 frases sobre o panorama politico-economico.
-Apenas as 2 frases, sem titulo nem aspas duplas."""
+Escreva um resumo editorial de 2 frases sobre o panorama do dia no Brasil.
+Apenas as frases, sem titulo, sem aspas duplas."""
     try:
         return gemini_text(client, prompt, max_tokens=150, temp=0.2).strip()
     except Exception:
-        return "O cenario politico e economico brasileiro segue movimentado com diversas frentes em destaque."
+        return "O cenario brasileiro segue movimentado com destaque para politica, economia e cultura."
 
+# ─── ORQUESTRADOR ────────────────────────
 
-# ─────────────────────────────────────────
-# ORQUESTRADOR
-# ─────────────────────────────────────────
 def fetch_news():
     api_key = os.environ.get("GEMINI_API_KEY","").strip()
     if not api_key:
@@ -249,49 +306,51 @@ def fetch_news():
     today_str = format_date_pt(now_br)
     print(f"[OK] {today_str} | {get_edition_label(now_br.hour)}")
 
-    # Busca por 4 temas
-    print("[..] Buscando por temas...")
-    todas = buscar_por_temas(client, today_str)
-    unicas = deduplicar(todas)
+    # Busca por categoria
+    politica      = buscar_politica(client, today_str)
+    economia      = buscar_economia(client, today_str)
+    cultura       = buscar_cultura(client, today_str)
+    tecnologia    = buscar_tecnologia(client, today_str)
+    entretenimento= buscar_entretenimento(client, today_str)
 
-    print(f"[OK] Total: {len(todas)} brutas → {len(unicas)} unicas apos deduplicacao")
+    todas = politica + economia + cultura + tecnologia + entretenimento
+    print(f"\n[OK] Total: Pol={len(politica)} Eco={len(economia)} Cul={len(cultura)} "
+          f"Tec={len(tecnologia)} Ent={len(entretenimento)}")
 
-    if len(unicas) < 3:
-        raise RuntimeError(f"Apenas {len(unicas)} noticias unicas — insuficiente.")
+    if len(todas) < 5:
+        raise RuntimeError(f"Apenas {len(todas)} noticias — insuficiente.")
 
-    # Ordena por importancia e limita
-    unicas.sort(key=lambda n: n["importancia"], reverse=True)
-    noticias = unicas[:NUM_NEWS]
-
-    # Gera resumo + corpo para cada
-    print(f"[..] Gerando textos para {len(noticias)} noticias...")
-    for i, n in enumerate(noticias):
-        print(f"   [{i+1}/{len(noticias)}] {n['titulo'][:55]}...")
+    # Gera resumo + corpo
+    print(f"\n[..] Gerando textos para {len(todas)} noticias...")
+    for i, n in enumerate(todas):
+        print(f"   [{i+1}/{len(todas)}] {n['titulo'][:55]}...")
         resumo, corpo = gerar_texto(client, n)
         n["resumo"] = resumo
         n["corpo"]  = corpo
-        if i < len(noticias) - 1:
+        if i < len(todas) - 1:
             time.sleep(1)
 
-    # Editorial
-    editorial = gerar_editorial(client, noticias)
+    editorial = gerar_editorial(client, todas, today_str)
 
-    data = {
-        "resumo_editorial": editorial,
-        "noticias":         noticias,
-        "generated_at":     now_br.strftime("%Y-%m-%dT%H:%M:%S"),
-        "edition_label":    get_edition_label(now_br.hour),
-        "date_display":     today_str.upper(),
+    return {
+        "resumo_editorial":  editorial,
+        "noticias":          todas,
+        "por_categoria": {
+            "Politica":       len(politica),
+            "Economia":       len(economia),
+            "Cultura":        len(cultura),
+            "Tecnologia":     len(tecnologia),
+            "Entretenimento": len(entretenimento),
+        },
+        "generated_at":  now_br.strftime("%Y-%m-%dT%H:%M:%S"),
+        "edition_label": get_edition_label(now_br.hour),
+        "date_display":  today_str.upper(),
     }
-    print(f"[OK] Concluido: {len(noticias)} noticias.")
-    return data
-
 
 def main():
     print("=" * 52)
-    print("PANORAMA — Gerador de Boletim (Gemini)")
+    print("BOLETIM GERAL DE NOTICIAS — Gerador")
     print("=" * 52)
-
     for attempt in range(1, 3):
         try:
             print(f"\n[Tentativa {attempt}/2]")
