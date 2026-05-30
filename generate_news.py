@@ -53,25 +53,46 @@ def get_edition_label(hour):
 def search_noticias(client, today_str):
     print("[..] Passo A: buscando noticias com Google Search...")
 
-    prompt = f"""Hoje e {today_str}. Voce e um pesquisador jornalistico.
+    prompt = f"""Hoje e {today_str}. Voce e um pesquisador jornalistico experiente cobrindo Brasil.
 
-Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 48 horas.
+Sua tarefa: encontrar {NUM_NEWS} noticias reais sobre politica e economia brasileira das ultimas 48 horas.
 
-Priorize: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum.
-Complemente com: G1, UOL, Estadao, Valor Economico, CNN Brasil.
+ESTRATEGIA DE BUSCA — faca multiplas buscas ate completar {NUM_NEWS} noticias:
+1. Busque: "politica brasil hoje {today_str}"
+2. Busque: "economia brasil hoje {today_str}"
+3. Busque: "governo lula congresso nacional hoje"
+4. Busque: "mercado financeiro brasil hoje"
+5. Busque: "STF senado camara hoje brasil"
+6. Se ainda faltar noticias: busque temas como inflacao, emprego, agronegocio, eleicoes, relacoes exteriores, saude publica, educacao, seguranca publica no brasil
 
-Para cada noticia encontrada, escreva em texto simples:
+FONTES ACEITAS (use qualquer uma destas):
+Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao, Valor Economico,
+ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato, Carta Capital,
+CNN Brasil, Band News, Metropoles, Reuters Brasil, AFP Brasil, El Pais Brasil,
+CartaCapital, Agencia Publica, Opera Mundi, Piaui, Epoca, IstoE, Exame,
+InfoMoney, Bloomberg Linea, Nexo Jornal, The Intercept Brasil, Correio Braziliense,
+R7 (somente noticias factuais), Terra Noticias, UOL Noticias, MSN Noticias Brasil
+
+FONTES PROIBIDAS: Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News,
+O Antagonista, Gazeta do Povo (secao de opiniao), Oeste, Crusoe, qualquer
+veiculo de orientacao editorial de extrema-direita.
+
+REGRA CRITICA: Se nao encontrar noticias suficientes nas primeiras buscas,
+AMPLIE o tema e busque mais. NUNCA escreva "nao foi possivel encontrar" ou "N/A".
+Sempre existe noticia relevante sobre o Brasil — busque ate encontrar {NUM_NEWS}.
+
+Para cada noticia, escreva:
 NOTICIA [numero]
-Titulo: [titulo completo]
-Fonte: [nome do veiculo]
+Titulo: [titulo completo e informativo]
+Fonte: [nome do veiculo de comunicacao]
 Categoria: [Politica / Economia / Internacional]
 Resumo: [2-3 frases descrevendo o fato e sua relevancia]
-Corpo: [3-4 paragrafos detalhados com contexto, fatos, declaracoes e impacto]
-URL: [URL completa do artigo se disponivel, ou deixe em branco]
-Importancia: [numero de 1 a 10]
+Corpo: [3-4 paragrafos com contexto, fatos, declaracoes e impacto]
+URL: [URL completa do artigo ou vazio]
+Importancia: [1 a 10]
 ---
 
-Liste exatamente {NUM_NEWS} noticias."""
+Liste exatamente {NUM_NEWS} noticias reais. Nenhum placeholder. Nenhum N/A."""
 
     resp = client.models.generate_content(
         model=MODEL,
@@ -146,12 +167,29 @@ TEXTO:
     print(f"[OK] JSON parseado: {len(data.get('noticias',[]))} noticias")
 
     # Converte separador " | " em quebras de paragrafo reais
+    # e filtra entradas vazias/N/A geradas pelo modelo
+    noticias_validas = []
     for n in data.get("noticias", []):
+        titulo = n.get("titulo", "").strip()
+        # Descarta entradas N/A ou placeholder
+        if (not titulo
+                or titulo.lower().startswith("n/a")
+                or titulo.lower().startswith("nao foi possivel")
+                or titulo.lower().startswith("não foi possível")
+                or len(titulo) < 10):
+            print(f"   [SKIP] Entrada invalida descartada: {titulo[:60]}")
+            continue
         if n.get("corpo"):
             n["corpo"] = n["corpo"].replace(" | ", "\n\n")
-        # Valida URL
         if not n.get("url", "").startswith("http"):
             n["url"] = ""
+        noticias_validas.append(n)
+
+    data["noticias"] = noticias_validas
+    print(f"[OK] {len(noticias_validas)} noticias validas apos filtro.")
+
+    if len(noticias_validas) < 5:
+        raise RuntimeError(f"Poucas noticias validas: {len(noticias_validas)}. Tentando novamente.")
 
     return data
 
