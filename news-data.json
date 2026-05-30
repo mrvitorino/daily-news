@@ -1,78 +1,78 @@
 {
-  "resumo_editorial": "O panorama político-econômico do Brasil nos últimos dois dias foi marcado por notícias mistas. Enquanto a economia registrou um crescimento robusto no primeiro trimestre e projeta o retorno ao top 10 global, o mercado financeiro enfrentou um mês de maio desafiador com a queda da Bolsa e a alta do dólar. No cenário político, a decisão dos EUA de classificar facções criminosas brasileiras como terroristas gerou forte repercussão, com acusações de traição à pátria e desdobramentos em investigações contra figuras políticas.",
+  "resumo_editorial": "Os últimos dois dias no Brasil foram marcados por um cenário econômico de crescimento no primeiro trimestre, mas com sinais de cautela no mercado financeiro. Politicamente, a relação com os Estados Unidos e as repercussões da classificação de facções criminosas como terroristas dominaram o noticiário, gerando atritos e movimentações no Congresso. Além disso, a indicação presidencial para o STF e o bloqueio orçamentário também foram temas de destaque.",
   "noticias": [
     {
-      "titulo": "Economia brasileira cresce 1,1% no 1º trimestre de 2026, aponta IBGE",
-      "fonte": "Folha de S.Paulo, Agência Brasil, G1",
+      "titulo": "Economia brasileira cresce 1,1% no 1º trimestre de 2026, superando expectativas",
+      "fonte": "Agência Brasil, Folha de S.Paulo, Revista Fórum, ICL Notícias",
       "categoria": "Economia",
-      "resumo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, superando as expectativas do mercado. O resultado foi impulsionado principalmente pela agropecuária e pelo consumo das famílias, indicando uma recuperação da atividade econômica.",
+      "resumo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, conforme dados divulgados pelo IBGE. Esse resultado superou as projeções do mercado e pode impulsionar o Brasil de volta à posição de 10ª maior economia global, destacando o avanço da agropecuária e o consumo das famílias.",
       "importancia": 10
     },
     {
-      "titulo": "Brasil deve retomar posto de 10ª maior economia do mundo em 2026",
-      "fonte": "CNN Brasil, Agência Brasil, Vero Notícias",
-      "categoria": "Economia",
-      "resumo": "Projeções do FMI, compiladas pela Austin Ratings, indicam que o Brasil deve reentrar no grupo das dez maiores economias globais em 2026, superando o Canadá. Este avanço é atribuído ao desempenho positivo do PIB no primeiro trimestre do ano.",
+      "titulo": "Classificação de PCC e Comando Vermelho como terroristas pelos EUA gera tensão e alerta para impactos econômicos no Brasil",
+      "fonte": "Agência Brasil, ICL Notícias",
+      "categoria": "Política",
+      "resumo": "A decisão dos Estados Unidos de classificar o PCC e o Comando Vermelho como organizações terroristas provocou forte reação do governo brasileiro, que defendeu a soberania nacional e alertou para possíveis prejuízos econômicos, como impactos no turismo e investimentos, além de riscos para o sistema financeiro e o Pix.",
       "importancia": 9
     },
     {
-      "titulo": "Ibovespa fecha maio com pior queda desde 2023; Dólar sobe",
-      "fonte": "Agência Brasil, ICL Notícias, UOL Economia",
-      "categoria": "Economia",
-      "resumo": "O Ibovespa encerrou o mês de maio com uma queda acumulada de 7,22%, sendo o pior desempenho mensal desde fevereiro de 2023. Simultaneamente, o dólar comercial valorizou 1,82% no mês, fechando acima de R$ 5,00, influenciado pela saída de capital estrangeiro e incertezas no cenário político-econômico.",
-      "importancia": 9
-    },
-    {
-      "titulo": "EUA classificam PCC e Comando Vermelho como organizações terroristas",
-      "fonte": "ICL Notícias, UOL Economia, Revista Fórum",
-      "categoria": "Política",
-      "resumo": "Os Estados Unidos classificaram o Primeiro Comando da Capital (PCC) e o Comando Vermelho (CV) como organizações terroristas, uma medida que gerou debates sobre soberania nacional e os possíveis impactos econômicos para o Brasil. A decisão foi vista por alguns como uma interferência externa.",
-      "importancia": 10
-    },
-    {
-      "titulo": "Lula critica clã Bolsonaro por lobby nos EUA sobre facções criminosas",
-      "fonte": "ICL Notícias, Revista Fórum",
-      "categoria": "Política",
-      "resumo": "O presidente Luiz Inácio Lula da Silva criticou duramente a família Bolsonaro, acusando-os de 'traição à pátria' por supostamente terem feito lobby nos Estados Unidos para a classificação do PCC e Comando Vermelho como organizações terroristas. A declaração intensifica a polarização política no país.",
-      "importancia": 8
-    },
-    {
-      "titulo": "PF envia parecer favorável para investigar Flávio Bolsonaro por ligação com Banco Master",
+      "titulo": "Flávio Bolsonaro é alvo de pedido de investigação por 'atentado à soberania nacional' após encontro com Trump",
       "fonte": "Revista Fórum, ICL Notícias",
       "categoria": "Política",
-      "resumo": "A Polícia Federal encaminhou à Procuradoria-Geral da República um parecer favorável para investigar o senador Flávio Bolsonaro por suposto pedido de dinheiro ao banqueiro Daniel Vorcaro, do Banco Master. Este caso se entrelaça com o escândalo financeiro do banco e a recente decisão dos EUA sobre as facções.",
+      "resumo": "Parlamentares do PSOL e da Rede protocolaram uma representação na PGR pedindo a investigação do senador Flávio Bolsonaro. A ação se baseia na acusação de que ele teria usado seu mandato para solicitar a Donald Trump a classificação de facções brasileiras como terroristas, o que configuraria um atentado à soberania nacional.",
+      "importancia": 9
+    },
+    {
+      "titulo": "Lula anuncia que indicará novamente Jorge Messias para vaga no STF",
+      "fonte": "Agência Brasil, ICL Notícias",
+      "categoria": "Política",
+      "resumo": "O presidente Luiz Inácio Lula da Silva afirmou que irá indicar novamente o advogado Jorge Messias para uma vaga no Supremo Tribunal Federal, apesar da rejeição anterior pelo Senado. Lula atribuiu a primeira derrota a questões políticas, não técnicas, e reforçou sua prerrogativa de indicação.",
       "importancia": 8
     },
     {
-      "titulo": "Governo bloqueia R$ 83 bilhões do Orçamento de 2026 para cumprir metas fiscais",
+      "titulo": "Ibovespa fecha maio com pior desempenho mensal desde 2023 e dólar em alta",
+      "fonte": "ICL Notícias, Agência Brasil",
+      "categoria": "Economia",
+      "resumo": "O Ibovespa encerrou o mês de maio com uma queda acumulada de 7,22%, marcando o pior desempenho mensal desde fevereiro de 2023. O dólar comercial, por sua vez, registrou alta de 1,82% no período, refletindo a saída de investidores estrangeiros e a cautela do mercado diante de incertezas globais e domésticas.",
+      "importancia": 8
+    },
+    {
+      "titulo": "Governo Federal bloqueia R$ 22,1 bilhões adicionais no Orçamento de 2026",
       "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "O governo federal anunciou um bloqueio de mais de R$ 83 bilhões no Orçamento de 2026, com os ministérios da Defesa e das Cidades sendo os mais afetados. A medida visa garantir o cumprimento das metas fiscais e o equilíbrio das contas públicas.",
-      "importancia": 8
+      "resumo": "Os Ministérios da Defesa e das Cidades foram as pastas mais impactadas por um bloqueio adicional de R$ 22,1 bilhões no Orçamento de 2026. A medida, detalhada em decreto, visa garantir o cumprimento das metas fiscais do governo e evitar que os gastos públicos excedam os limites estabelecidos.",
+      "importancia": 7
     },
     {
-      "titulo": "Câmara aprova PEC que põe fim à escala de trabalho 6x1",
-      "fonte": "Revista Fórum, Folha de S.Paulo, ICL Notícias",
+      "titulo": "Oposição resgata projeto de lei para classificar facções criminosas como terroristas no Brasil",
+      "fonte": "ICL Notícias",
       "categoria": "Política",
-      "resumo": "A Câmara dos Deputados aprovou a Proposta de Emenda à Constituição (PEC) que estabelece o fim da escala de trabalho 6x1, um movimento considerado uma vitória para os trabalhadores. A medida deve impactar as relações de trabalho e é vista como uma aposta do governo para alavancar sua popularidade.",
+      "resumo": "Em resposta à decisão dos EUA, a oposição brasileira na Câmara dos Deputados planeja resgatar um projeto de lei que visa classificar o PCC e o Comando Vermelho como organizações terroristas no Brasil. A iniciativa busca pressionar o governo e explorar o tema da segurança pública.",
       "importancia": 7
     },
     {
-      "titulo": "BRB adia divulgação de balanço após acordo de socorro com a União",
-      "fonte": "Agência Brasil, ICL Notícias",
+      "titulo": "BRB adia divulgação de balanço após acordo de socorro com a União em meio ao caso Banco Master",
+      "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "O Banco de Brasília (BRB) adiou a divulgação de seu balanço financeiro de 2025 após fechar um acordo de socorro com a União, o Banco Central e representantes do sistema financeiro. A decisão ocorre em meio a dificuldades de liquidez enfrentadas pela instituição, ligadas aos desdobramentos do caso Banco Master.",
+      "resumo": "O Banco de Brasília (BRB) adiou a divulgação de seu balanço financeiro de 2025 após firmar um acordo de socorro com a União. A medida ocorre em meio a dificuldades de liquidez enfrentadas pelo BRB, relacionadas aos desdobramentos do caso envolvendo o Banco Master, e busca recuperar a confiança do mercado.",
       "importancia": 7
     },
     {
-      "titulo": "CNI alerta para avanço da desindustrialização no Brasil em 2026",
-      "fonte": "Revista Oeste",
+      "titulo": "Lula expressa sonho de reverter privatizações de empresas estratégicas",
+      "fonte": "Agência Brasil",
+      "categoria": "Política",
+      "resumo": "O presidente Lula declarou que ainda sonha em reverter privatizações de empresas estratégicas, citando a Eletrobras como exemplo. Ele lamentou os obstáculos legais e financeiros impostos para a recompra, sinalizando uma possível direção de política econômica para o governo.",
+      "importancia": 6
+    },
+    {
+      "titulo": "Acordo de livre comércio Mercosul-Canadá avança em décima rodada de negociações",
+      "fonte": "Agência Brasil",
       "categoria": "Economia",
-      "resumo": "A Confederação Nacional da Indústria (CNI) expressou preocupação com o avanço da desindustrialização no Brasil em 2026. A entidade aponta o aumento da carga tributária, a redução de incentivos fiscais e as discussões sobre a redução da jornada de trabalho como fatores que prejudicam o setor.",
-      "importancia": 7
+      "resumo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá avançaram significativamente na décima rodada de encontros, realizada em Toronto. A expectativa é que o tratado seja concluído ainda no primeiro semestre, impulsionando o comércio bilateral e a integração econômica.",
+      "importancia": 6
     }
   ],
-  "generated_at": "2026-05-30T13:25:36",
+  "generated_at": "2026-05-30T13:37:29",
   "edition_label": "Edicao do Meio-Dia (12h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
