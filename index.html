@@ -17,9 +17,9 @@
     --bg5:     #2a2a35;
     --border:  #2a2a35;
     --border2: #353545;
-    --text:    #e8e8f0;
-    --text2:   #9999b0;
-    --text3:   #5a5a70;
+    --text:    #f0f0f8;
+    --text2:   #c8c8de;
+    --text3:   #8888a8;
     --accent:  #4f8ef7;
     --accent2: #2d5fd4;
     --green:   #3ecf6e;
@@ -203,7 +203,7 @@
     letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
     white-space: nowrap; flex-shrink: 0; padding-top: 3px;
   }
-  .editorial-text { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--text2); }
+  .editorial-text { font-size: 14px; font-weight: 400; line-height: 1.7; color: var(--text); }
 
   /* ── NOTÍCIAS ── */
   .main-content { max-width: 1280px; margin: 0 auto; padding: 0 40px 80px; }
@@ -222,7 +222,7 @@
   .imp-tag { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); }
 
   .hero-title { font-size: clamp(20px,3vw,34px); font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 10px; letter-spacing: -0.02em; }
-  .hero-summary { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--text2); max-width: 680px; margin-bottom: 10px; }
+  .hero-summary { font-size: 15px; font-weight: 400; line-height: 1.75; color: var(--text2); max-width: 680px; margin-bottom: 10px; }
 
   .news-link {
     display: inline-flex; align-items: center; gap: 5px;
@@ -243,7 +243,7 @@
   .grid-item:nth-child(odd):last-child { border-right: none; }
 
   .item-title   { font-size: clamp(14px,2vw,18px); font-weight: 600; line-height: 1.3; color: var(--text); margin-bottom: 7px; }
-  .item-summary { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--text3); margin-bottom: 8px; }
+  .item-summary { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 8px; }
 
   .imp-bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .imp-bar      { height: 2px; flex: 1; background: var(--bg5); border-radius: 1px; overflow: hidden; }
@@ -259,7 +259,7 @@
   .single-item:last-child { border-bottom: none; }
   .item-num    { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 300; color: var(--bg5); line-height: 1; padding-top: 2px; text-align: right; }
   .single-title   { font-size: clamp(13px,1.8vw,17px); font-weight: 600; line-height: 1.3; color: var(--text); margin-bottom: 4px; }
-  .single-summary { font-size: 12px; font-weight: 300; line-height: 1.7; color: var(--text3); margin-bottom: 6px; }
+  .single-summary { font-size: 12px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 6px; }
 
   /* ── FOOTER ── */
   .site-footer { border-top: 1px solid var(--border); background: var(--bg2); }
@@ -457,19 +457,27 @@ async function fetchPIB() {
   try {
     const url = 'https://servicodados.ibge.gov.br/api/v3/agregados/1621/periodos/-4/variaveis/584?localidades=N1[all]';
     const r   = await fetch(url);
+    if (!r.ok) throw new Error('HTTP '+r.status);
     const d   = await r.json();
-    const raw = d[0].resultados[0].series[0].serie;
 
-    // raw = { "202401": "0.8", "202402": "1.4", ... }
-    const quarters = Object.entries(raw).map(([k, v]) => {
-      const year = k.slice(0,4);
-      const q    = k.slice(4); // "01","02","03","04"
-      return { q: `T${parseInt(q)}/${year.slice(2)}`, v: parseFloat(v) };
-    });
+    // Navega pela estrutura do IBGE v3
+    const serie = d[0].resultados[0].series[0].serie;
+
+    // IBGE retorna números com vírgula decimal: "0,8" → precisa trocar por "0.8"
+    const quarters = Object.entries(serie)
+      .filter(([k, v]) => v !== null && v !== '' && v !== '-')
+      .map(([k, v]) => {
+        const year = k.slice(0, 4);
+        const qNum = parseInt(k.slice(4), 10); // "01"→1, "02"→2...
+        const val  = parseFloat(String(v).replace(',', '.'));
+        return { q: `T${qNum}/${year.slice(2)}`, v: isNaN(val) ? 0 : val };
+      });
+
+    if (!quarters.length) throw new Error('Sem dados');
     return quarters;
   } catch(e) {
-    console.warn('IBGE PIB error:', e);
-    return null;
+    console.warn('IBGE PIB error:', e.message);
+    return null; // renderPIB usará fallback
   }
 }
 
@@ -622,6 +630,12 @@ function linkIcon() {
 
 function newsLink(url) {
   if (!url || url === 'N/A' || !url.startsWith('http')) return '';
+  // Detecta se é apenas homepage (sem path além de /)
+  let domain = '';
+  try {
+    const u = new URL(url);
+    domain = u.hostname.replace('www.', '');
+  } catch(e) {}
   return `<a class="news-link" href="${esc(url)}" target="_blank" rel="noopener">
     Ler notícia completa ${linkIcon()}
   </a>`;
