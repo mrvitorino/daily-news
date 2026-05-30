@@ -1,21 +1,27 @@
-name: Gerar e Publicar Boletim Diário
+name: Gerar e Publicar Boletim Diario
 
 on:
   schedule:
-    # Horários em UTC — Brasil (BRT) = UTC-3
+    # Horarios em UTC — Brasil (BRT) = UTC-3
     # 08h BRT = 11h UTC
     - cron: '0 11 * * *'
     # 12h BRT = 15h UTC
     - cron: '0 15 * * *'
     # 17h BRT = 20h UTC
     - cron: '0 20 * * *'
-  # Permite rodar manualmente pelo GitHub Actions
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: write
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -25,7 +31,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout repositório
+      - name: Checkout repositorio
         uses: actions/checkout@v4
 
       - name: Configurar Python
@@ -33,24 +39,32 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: pip install anthropic
 
       - name: Gerar news-data.json
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python generate_news.py
+        run: |
+          echo "Verificando API key..."
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "ERRO: ANTHROPIC_API_KEY nao definida!"
+            echo "Adicione o secret em: Settings -> Secrets and variables -> Actions"
+            exit 1
+          fi
+          echo "API key encontrada, gerando noticias..."
+          python generate_news.py
 
       - name: Verificar news-data.json
         run: |
-          echo "Conteúdo gerado:"
           python3 -c "
           import json
           with open('news-data.json') as f:
             d = json.load(f)
-          print(f'Edição: {d.get(\"edition_label\",\"?\")}')
-          print(f'Data: {d.get(\"date_display\",\"?\")}')
-          print(f'Notícias: {len(d.get(\"noticias\",[]))}')
+          print('Edicao:', d.get('edition_label','?'))
+          print('Data:', d.get('date_display','?'))
+          print('Noticias:', len(d.get('noticias',[])))
+          print('Editorial:', d.get('resumo_editorial','?')[:80], '...')
           "
 
       - name: Commitar news-data.json
@@ -62,9 +76,9 @@ jobs:
           git push
 
       - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
-      - name: Fazer upload dos artefatos
+      - name: Upload artefatos
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
