@@ -22,7 +22,7 @@ from google.genai import types
 
 NUM_NEWS = 10
 OUTPUT   = "news-data.json"
-MODEL    = "gemini-2.0-flash"
+MODEL    = "gemini-2.5-flash"
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
