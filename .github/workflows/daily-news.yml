@@ -40,15 +40,15 @@ jobs:
           python-version: '3.12'
 
       - name: Instalar dependencias
-        run: pip install anthropic
+        run: pip install google-generativeai
 
       - name: Gerar news-data.json
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           echo "Verificando API key..."
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "ERRO: ANTHROPIC_API_KEY nao definida!"
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "ERRO: GEMINI_API_KEY nao definida!"
             echo "Adicione o secret em: Settings -> Secrets and variables -> Actions"
             exit 1
           fi
