@@ -1,4 +1,4 @@
-# Panorama Brasil — Contexto do Projeto
+# Boletim Geral de Notícias — Contexto do Projeto
 
 > Cole este arquivo numa nova conversa com o Claude para retomar o projeto com contexto completo.
 
@@ -6,19 +6,17 @@
 
 ## O que é
 
-**Panorama Brasil** é um boletim diário de notícias sobre política e economia brasileira publicado automaticamente em:
+**Boletim Geral de Notícias** é um boletim diário com 5 categorias de notícias publicado automaticamente em:
 
 **https://mrvitorino.github.io/daily-news/**
 
-Atualizado 3 vezes ao dia via GitHub Actions: **08h, 12h e 17h (BRT)**.
+Atualizado **2 vezes ao dia** via GitHub Actions: **08h e 17h (BRT)**.
 
 ---
 
 ## Repositório
 
-**GitHub:** `mrvitorino/daily-news`
-**Branch:** `main`
-**GitHub Pages:** ativado via GitHub Actions
+**GitHub:** `mrvitorino/daily-news` · **Branch:** `main` · **GitHub Pages:** via GitHub Actions
 
 ---
 
@@ -26,62 +24,80 @@ Atualizado 3 vezes ao dia via GitHub Actions: **08h, 12h e 17h (BRT)**.
 
 ```
 daily-news/
-├── index.html          # Página da revista (tema escuro, Inter sem serifa)
-├── generate_news.py    # Script Python que gera news-data.json
-├── news-data.json      # Dados gerados a cada edição (commitado automaticamente)
+├── index.html          # Frontend da revista (tema escuro, Inter)
+├── generate_news.py    # Gerador de notícias com Gemini
+├── news-data.json      # Dados gerados (commitado a cada edição)
 ├── CONTEXT.md          # Este arquivo
-└── .github/
-    └── workflows/
-        └── daily-news.yml  # Workflow GitHub Actions (3×/dia)
+└── .github/workflows/daily-news.yml
 ```
 
-### Fluxo de geração
-1. GitHub Actions acorda nos horários programados
-2. `generate_news.py` roda em 2 passos:
-   - **Passo A:** chama Gemini 2.5 Flash **com** `google_search` → retorna texto livre com as notícias
-   - **Passo B:** chama Gemini 2.5 Flash **sem** ferramentas → converte texto em JSON estruturado com `response_mime_type="application/json"`
-   - Separação obrigatória: a API Gemini não permite `google_search` + `response_mime_type` simultaneamente
-3. `news-data.json` é commitado no repositório
-4. GitHub Pages publica automaticamente
+### Fluxo de geração (generate_news.py)
+
+**4 funções de busca temática independentes** (cada uma faz 3 sub-buscas):
+- `buscar_politica` → até 20 notícias de política
+- `buscar_economia` → até 20 notícias de economia
+- `buscar_cultura`  → até 20 notícias de cultura
+- `buscar_tecnologia` → até 20 notícias de tecnologia
+- `buscar_entretenimento` → até 20 itens de streaming/cinema
+
+**3 passos por categoria** (zero JSON intermediário — resolve erros de parse):
+1. **Passo A** — `gemini_search()` com `google_search` tool → retorna blocos de texto com delimitadores `##INICIO## ... ##FIM##`
+2. **Passo B** — `parse_blocos()` com regex extrai campos (TITULO>>, FONTE>>, etc.) sem nenhum `json.loads`
+3. **Passo C** — `gerar_texto()` sem ferramentas → texto com `RESUMO>>`, `PARAGRAFO1>>`, `PARAGRAFO2>>`, `PARAGRAFO3>>`
+
+**Serialização final:** só `json.dump()` nativo do Python — o Gemini nunca produz JSON.
+
+### Por que zero JSON intermediário
+O Gemini com `google_search` não aceita `response_mime_type="application/json"` (400 INVALID_ARGUMENT).
+Sem a ferramenta, o JSON schema ainda corromperia com aspas em títulos/resumos jornalísticos.
+Solução: delimitadores inventados (`##INICIO##`, `TITULO>>`) que nunca aparecem em notícias.
 
 ---
 
-## APIs e Secrets
+## Secret necessário
 
-### Secret necessário no GitHub
-- `GEMINI_API_KEY` — chave do Google AI Studio ([aistudio.google.com/apikey](https://aistudio.google.com/apikey))
-- O projeto Google Cloud associado deve ter **faturamento ativado** (o modelo `gemini-2.5-flash` é gratuito até 1.500 req/dia com billing ativo)
-
-### APIs usadas no frontend (sem key, sem custo)
-| Dado | API | URL |
-|------|-----|-----|
-| USD/BRL, EUR/BRL | AwesomeAPI | `economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL` |
-| IPCA acum. 12m | Banco Central (série 13522) | `api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/2` |
-| Taxa Selic | Banco Central (série 432) | `api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/2` |
-| Bovespa + ações BR | Yahoo Finance via proxies | `^BVSP`, `PETR4.SA`, `VALE3.SA`, `ITUB4.SA`, `BBDC4.SA`, `ABEV3.SA` |
-| S&P 500 + ações US | Yahoo Finance via proxies | `^GSPC`, `AAPL`, `MSFT`, `NVDA`, `AMZN`, `GOOGL` |
-| Euro Stoxx 50 + ações EU | Yahoo Finance via proxies | `^STOXX50E`, `ASML`, `SAP`, `SIE.DE`, `MC.PA`, `SAN` |
-
-### Proxies Yahoo Finance (em cascata)
-1. `api.allorigins.win`
-2. `corsproxy.io`
-3. `thingproxy.freeboard.io`
+- `GEMINI_API_KEY` — Google AI Studio ([aistudio.google.com/apikey](https://aistudio.google.com/apikey))
+- Projeto Google Cloud com **faturamento ativado** (Gemini 2.5 Flash: gratuito até 1.500 req/dia)
 
 ---
 
-## Fontes de notícias
+## APIs do frontend (sem key, sem custo)
 
-### Fontes aceitas (priorizadas)
+| Dado | API |
+|------|-----|
+| USD/BRL, EUR/BRL | `economia.awesomeapi.com.br` |
+| IPCA acum. 12m | BCB série 13522 |
+| Selic meta a.a. | BCB série 432 |
+| Bovespa + ações BR | Yahoo Finance via proxies (`^BVSP`, PETR4.SA, VALE3.SA, ITUB4.SA, BBDC4.SA, ABEV3.SA) |
+| S&P 500 + ações US | Yahoo Finance (`^GSPC`, AAPL, MSFT, NVDA, AMZN, GOOGL) |
+| Euro Stoxx 50 | Yahoo Finance (`^STOXX50E`, ASML, SAP, SIE.DE, MC.PA, SAN) |
+
+**Proxies Yahoo em cascata:** allorigins.win → corsproxy.io → thingproxy.freeboard.io
+
+---
+
+## Categorias e fontes
+
+### 5 categorias
+| Categoria | Cor | Máx. notícias |
+|-----------|-----|--------------|
+| Política | Azul `#4f8ef7` | 20 |
+| Economia | Verde `#3ecf6e` | 20 |
+| Cultura | Dourado `#e8b84b` | 20 |
+| Tecnologia | Roxo `#a78bfa` | 20 |
+| Entretenimento | Rosa `#f472b6` | 20 |
+
+### Fontes aceitas
 Agência Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadão, Valor Econômico,
 ICL Notícias, Intercept Brasil, Revista Fórum, Brasil de Fato, Carta Capital,
-CNN Brasil, Band News, Metrópoles, Reuters Brasil, AFP Brasil, El País Brasil,
-Agência Pública, Piauí, Época, IstoÉ, Exame, InfoMoney, Bloomberg Línea,
-Nexo Jornal, The Intercept Brasil, Correio Braziliense, Opera Mundi, Outras Palavras
+CNN Brasil, Metrópoles, Reuters Brasil, El País Brasil, Nexo Jornal, Bloomberg Línea,
+Agência Pública, Piauí, Época, IstoÉ, Exame, InfoMoney, Opera Mundi, Band News,
+Correio Braziliense, AFP Brasil, R7 Notícias, The Verge, Wired, TechCrunch,
+Ars Technica, Canaltech, TecMundo, Olhar Digital, Variety, Hollywood Reporter,
+Deadline, Screen Rant, Rolling Stone Brasil, Billboard Brasil.
 
-### Fontes explicitamente proibidas
-Jovem Pan, Brasil Paralelo, Terça Livre, Pleno News, O Antagonista,
-Gazeta do Povo (seção de opinião), Oeste, Cruzsoé, e qualquer veículo
-de orientação editorial de extrema-direita.
+### Fontes proibidas
+Jovem Pan, Brasil Paralelo, Terça Livre, Pleno News, O Antagonista, e qualquer veículo de extrema-direita.
 
 ---
 
@@ -89,20 +105,19 @@ de orientação editorial de extrema-direita.
 
 ```json
 {
-  "resumo_editorial": "string — panorama do dia em 2-3 frases",
-  "noticias": [
-    {
-      "titulo": "string",
-      "fonte": "string",
-      "categoria": "Política | Economia | Internacional",
-      "resumo": "string — 2-3 frases",
-      "corpo": "string — 3-4 parágrafos separados por \\n\\n",
-      "url": "string — URL do artigo ou vazio",
-      "importancia": 1-10
-    }
-  ],
+  "resumo_editorial": "string",
+  "noticias": [{
+    "titulo": "string",
+    "fonte": "string",
+    "categoria": "Politica|Economia|Cultura|Tecnologia|Entretenimento",
+    "url": "string (vazio se não encontrado)",
+    "importancia": 1-10,
+    "resumo": "string — 2 frases",
+    "corpo": "string — 3 parágrafos separados por \\n\\n"
+  }],
+  "por_categoria": {"Politica": N, "Economia": N, ...},
   "generated_at": "2026-05-30T17:00:00",
-  "edition_label": "Edição Vespertina (17h)",
+  "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SÁBADO, 30 DE MAIO DE 2026"
 }
 ```
@@ -111,65 +126,31 @@ de orientação editorial de extrema-direita.
 
 ## Design do frontend
 
-- **Tema:** escuro (`#0d0d0f` background)
+- **Nome:** Boletim Geral de Notícias
+- **Tema:** escuro `#0d0d0f`
 - **Fonte:** Inter (sem serifa)
-- **Cores de texto:** `--text: #f0f0f8`, `--text2: #c8c8de`, `--text3: #8888a8`
-- **Acento:** azul `#4f8ef7`
-- **Layout notícias:** hero (1ª notícia grande) → grid 2 colunas (2ª e 3ª) → lista numerada (restantes)
-- **Expansão:** cada notícia tem botão "Ler notícia completa ▾" que expande o `corpo` inline
+- **Layout notícias:** hero → grid 2 col → lista numerada
+- **Expansão:** botão "Ler notícia completa ▾" abre painel inline com parágrafos + link "Abrir fonte original"
+- **Navegação:** barra sticky de categorias com contadores
 
 ---
 
-## Histórico de decisões técnicas relevantes
+## Histórico de decisões técnicas
 
 | Decisão | Motivo |
 |---------|--------|
-| Gemini em 2 passos (busca + formatação) | API proíbe `google_search` + `response_mime_type` simultaneamente |
-| BCB API para IPCA/SELIC | AwesomeAPI não tem esses endpoints; BCB é oficial e sem CORS |
-| Yahoo Finance com 3 proxies | CORS bloqueia chamada direta; allorigins instável |
-| brapi.dev removido | Falhava com frequência para ações BR; substituído por Yahoo |
-| PIB removido | API IBGE com formato de número pt-BR (`0,8`) causava NaN; substituído por IPCA+SELIC |
-| Corpo em passo separado | JSON com 10 notícias + corpo longo (~43k chars) corrompía o parse |
-| Separador `\|` no corpo | Quebras de linha literais dentro de JSON causavam erros de parse |
-
----
-
-## Como fazer alterações
-
-### Adicionar/remover fontes
-Edite o prompt em `generate_news.py`, função `search_noticias()`.
-
-### Mudar horários de atualização
-Edite os `cron` em `.github/workflows/daily-news.yml`. Lembre: horários em UTC (BRT = UTC-3).
-
-### Alterar design
-Edite `index.html`. As variáveis CSS ficam no bloco `:root { }` no topo do `<style>`.
-
-### Adicionar novos indicadores de mercado
-Em `index.html`, adicione um card em `.macro-row` e a função de fetch correspondente em `<script>`.
-
-### Testar localmente
-```bash
-# Instalar dependências
-pip install google-genai
-
-# Exportar API key
-export GEMINI_API_KEY=sua_chave_aqui
-
-# Rodar gerador
-python generate_news.py
-
-# Abrir index.html no browser (precisa de servidor local para fetch funcionar)
-python -m http.server 8000
-# Acesse: http://localhost:8000
-```
-
-### Rodar workflow manualmente
-GitHub → Actions → "Gerar e Publicar Boletim Diário" → Run workflow
+| Zero JSON intermediário | Gemini corrompe JSON com texto jornalístico (aspas em títulos) |
+| Delimitadores `##INICIO##`/`TITULO>>` | Nunca aparecem em notícias reais |
+| Buscas por tema separadas | Uma busca de 10 notícias retornava 2-3 e completava com N/A |
+| Passo C sem ferramentas | `google_search` + `response_mime_type` = 400 INVALID_ARGUMENT |
+| BCB para IPCA/SELIC | AwesomeAPI não tem esses endpoints |
+| brapi.dev removido | Falhava; substituído por Yahoo Finance com 3 proxies |
+| PIB substituído por IPCA+SELIC | API IBGE retorna decimais pt-BR causando NaN |
+| 2× por dia (era 3×) | Volume de conteúdo aumentou (5 categorias × 20 notícias) |
 
 ---
 
 ## Token GitHub para Claude fazer push
 
-O token clássico com escopo `repo` + `workflow` foi usado para publicar arquivos via API.
-**Não armazene o token aqui.** Cole-o na conversa quando precisar fazer alterações via Claude.
+Token clássico com escopos `repo` + `workflow`.
+**Não armazene o token aqui.** Cole na conversa quando precisar de alterações via Claude.
