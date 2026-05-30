@@ -292,6 +292,20 @@ let allNews = [];
 let activeFilter = 'todos';
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function stripMd(s){
+  // Remove markdown: **bold**, *italic*, # heading, `code`, [link](url), "Fonte: X | Cat: Y"
+  return String(s||'')
+    .replace(/\*{1,3}([^*]+)\*{1,3}/g,'$1')
+    .replace(/#{1,6}\s+/g,'')
+    .replace(/`([^`]+)`/g,'$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+    .replace(/(?:^|\s)\*{0,2}(?:Fonte|Source|Categoria|Category)\s*:\s*[^|*\n]+(?:\|[^*\n]+)?\*{0,2}/gi,'')
+    .replace(/\*{0,2}\|\s*Categoria[^*\n]*\*{0,2}/gi,'')
+    .trim();
+}
+
+function escClean(s){ return esc(stripMd(s)); }
 function fmtN(n,d=2){return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})}
 function cc(v){return v>0?'up':v<0?'down':'neu'}
 function cs(v){return(v>0?'▲ +':'▼ ')+fmtN(Math.abs(v))+'%'}
@@ -425,9 +439,9 @@ function toggleExp(id){
 }
 
 function buildExpanded(n,id){
-  const corpo=n.corpo||n.resumo||'';
+  const corpo=stripMd(n.corpo||n.resumo||'');
   // Divide em parágrafos e envolve em <p>
-  const pars=corpo.split(/\n\n+/).filter(p=>p.trim());
+  const pars=corpo.split(/\n\n+/).filter(p=>p.trim().length>10);
   const bodyHtml=pars.map(p=>`<p>${esc(p.trim())}</p>`).join('');
   const srcLink=n.url&&n.url.startsWith('http')
     ?`<a class="source-link" href="${esc(n.url)}" target="_blank" rel="noopener">Abrir fonte original ${extLink()}</a>`
@@ -465,7 +479,7 @@ function renderNews(){
       <span class="imp-tag">Relevância ${hero.importancia||'—'}/10</span>
     </div>
     <h2 class="hero-title">${esc(hero.titulo)}</h2>
-    <p class="hero-summary">${esc(hero.resumo||'')}</p>
+    <p class="hero-summary">${escClean(hero.resumo||'')}</p>
     ${buildBtn(hid)}
     ${buildExpanded(hero,hid)}
   </div>`;
@@ -479,7 +493,7 @@ function renderNews(){
       html+=`<div class="grid-item" style="animation-delay:${i*.1}s">
         <div class="eyebrow"><span class="fonte-tag">${esc(n.fonte)}</span><span class="cat-tag cat-tag-${cat}">${esc(n.categoria)}</span></div>
         <div class="item-title">${esc(n.titulo)}</div>
-        <div class="item-summary">${esc(n.resumo||'')}</div>
+        <div class="item-summary">${escClean(n.resumo||'')}</div>
         <div class="imp-bar-wrap"><div class="imp-bar"><div class="imp-fill" style="width:${imp}%"></div></div><span class="imp-label">${n.importancia||'—'}/10</span></div>
         ${buildBtn(id)}${buildExpanded(n,id)}
       </div>`;
@@ -497,7 +511,7 @@ function renderNews(){
         <div>
           <div class="eyebrow" style="margin-bottom:4px;"><span class="fonte-tag">${esc(n.fonte)}</span><span class="cat-tag cat-tag-${cat}">${esc(n.categoria)}</span></div>
           <div class="single-title">${esc(n.titulo)}</div>
-          <div class="single-summary">${esc(n.resumo||'')}</div>
+          <div class="single-summary">${escClean(n.resumo||'')}</div>
           ${buildBtn(id)}${buildExpanded(n,id)}
         </div>
       </div>`;
@@ -520,7 +534,7 @@ async function init(){
     allNews=data.noticias||[];
     updateCounts(allNews);
     const ed=data.resumo_editorial||'';
-    if(ed){document.getElementById('editorial-text').textContent=ed;document.getElementById('editorial').style.display='block';}
+    if(ed){document.getElementById('editorial-text').textContent=stripMd(ed);document.getElementById('editorial').style.display='block';}
   }else{
     document.getElementById('error-strip').style.display='block';
     document.getElementById('error-text').textContent='Não foi possível carregar as notícias. Recarregue a página.';
