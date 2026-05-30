@@ -26,46 +26,21 @@
     --red:     #f45c5c;
     --gold:    #e8b84b;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
 
   /* ── LOADING ── */
-  #loading-screen {
-    position: fixed; inset: 0;
-    background: var(--bg);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    z-index: 200;
-    transition: opacity 0.8s ease;
-  }
+  #loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 200; transition: opacity 0.8s ease; }
   #loading-screen.fade-out { opacity: 0; pointer-events: none; }
-
   .ls-logo { font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
   .ls-logo span { color: var(--accent); }
-  .ls-sub {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text3); letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 48px;
-  }
+  .ls-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 48px; }
   .ls-track { width: 200px; height: 1px; background: var(--bg4); margin-bottom: 14px; overflow: hidden; position: relative; }
   .ls-fill  { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
   .ls-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.1em; min-height: 18px; text-align: center; }
   .ls-steps { margin-top: 36px; width: 280px; }
-  .ls-step {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text3); padding: 7px 0; border-bottom: 1px solid var(--bg4);
-    display: flex; align-items: center; gap: 10px; transition: color 0.3s;
-  }
+  .ls-step { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); padding: 7px 0; border-bottom: 1px solid var(--bg4); display: flex; align-items: center; gap: 10px; transition: color 0.3s; }
   .ls-step.done   { color: var(--green); }
   .ls-step.active { color: var(--text); }
   .ls-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--bg4); flex-shrink: 0; transition: background 0.3s; }
@@ -73,84 +48,32 @@
   .ls-step.active .ls-dot { background: var(--accent); }
 
   /* ── HEADER ── */
-  .site-header {
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 0;
-    background: rgba(13,13,15,0.94);
-    backdrop-filter: blur(12px);
-    z-index: 50;
-  }
-  .header-top {
-    max-width: 1280px; margin: 0 auto; padding: 11px 40px;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-  }
+  .site-header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(13,13,15,0.94); backdrop-filter: blur(12px); z-index: 50; }
+  .header-top { max-width: 1280px; margin: 0 auto; padding: 11px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
   .header-logo { font-size: 17px; font-weight: 600; color: var(--text); }
   .header-logo span { color: var(--accent); }
   .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .header-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; }
-  .edition-pill {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 3px 10px; border: 1px solid var(--accent2); color: var(--accent); border-radius: 100px;
-  }
+  .edition-pill { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border: 1px solid var(--accent2); color: var(--accent); border-radius: 100px; }
 
   /* ── INDICADORES ── */
   .indicators-section { background: var(--bg2); border-bottom: 1px solid var(--border); }
   .indicators-inner { max-width: 1280px; margin: 0 auto; padding: 24px 40px; }
-  .ind-section-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3);
-    margin-bottom: 16px;
-  }
+  .ind-section-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
 
-  /* Câmbio + PIB row */
-  .macro-row { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 12px; margin-bottom: 20px; }
-  @media (max-width: 900px) { .macro-row { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .macro-row { grid-template-columns: 1fr; } }
+  /* Macro row: câmbio + IPCA + SELIC */
+  .macro-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 900px) { .macro-row { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 480px) { .macro-row { grid-template-columns: 1fr 1fr; } }
 
-  .macro-card {
-    background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 20px;
-  }
-  .macro-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px;
-  }
+  .macro-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; }
+  .macro-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
   .macro-value { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; line-height: 1; }
   .macro-change { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; margin-top: 5px; }
-  .up  { color: var(--green); }
-  .down{ color: var(--red); }
-  .neu { color: var(--text3); }
-
-  /* PIB card */
-  .pib-card {
-    background: var(--bg3); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 20px;
-    display: flex; flex-direction: column;
-  }
-  .pib-chart-area {
-    flex: 1; display: flex; align-items: flex-end;
-    gap: 10px; margin-top: 12px; height: 80px;
-  }
-  .pib-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-  .pib-val-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
-    text-align: center; white-space: nowrap;
-  }
-  .pib-bar-outer {
-    width: 100%; display: flex; align-items: flex-end;
-    justify-content: center; height: 52px;
-  }
-  .pib-bar {
-    width: 80%; border-radius: 4px 4px 0 0; min-height: 4px;
-    transition: height 0.8s ease;
-  }
-  .pib-bar.pos { background: var(--green); }
-  .pib-bar.neg { background: var(--red); border-radius: 0 0 4px 4px; align-self: flex-start; }
-  .pib-q-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--text3); text-align: center;
-  }
+  .macro-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); margin-top: 3px; }
+  .up   { color: var(--green); }
+  .down { color: var(--red); }
+  .neu  { color: var(--text3); }
 
   /* Bolsas */
   .bolsas-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
@@ -160,92 +83,81 @@
   .bolsa-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
   .bolsa-name { font-size: 15px; font-weight: 600; color: var(--text); }
   .bolsa-index-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text3); margin-top: 1px; }
-  .bolsa-value { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .bolsa-value { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); line-height: 1; margin-bottom: 2px; }
   .bolsa-change { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
-  .bolsa-prev { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); margin-top: 2px; margin-bottom: 16px; }
+  .bolsa-prev { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); margin-top: 2px; margin-bottom: 14px; }
 
   .acoes-list { display: flex; flex-direction: column; }
-  .acao-row {
-    display: grid; grid-template-columns: 52px 1fr auto auto;
-    align-items: center; gap: 6px;
-    padding: 7px 0; border-top: 1px solid var(--border);
-    font-size: 12px;
-  }
+  .acao-row { display: grid; grid-template-columns: 52px 1fr auto auto; align-items: center; gap: 6px; padding: 7px 0; border-top: 1px solid var(--border); }
   .acao-ticker { font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); font-size: 11px; }
   .acao-name   { color: var(--text3); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .acao-price  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text2); text-align: right; }
   .acao-chg    { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; text-align: right; min-width: 54px; }
-
   .ind-loading { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); padding: 8px 0; }
   .ind-error   { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--red); padding: 8px 0; }
 
   /* ── FILTROS ── */
   .filter-nav { background: var(--bg2); border-bottom: 1px solid var(--border); }
   .filter-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; }
-  .filter-btn {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 10px 16px; border: none; background: none;
-    color: var(--text3); cursor: pointer;
-    border-bottom: 2px solid transparent; transition: all 0.15s;
-  }
+  .filter-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 16px; border: none; background: none; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
   .filter-btn:hover  { color: var(--text2); }
   .filter-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
   /* ── EDITORIAL ── */
   .editorial { background: var(--bg3); border-bottom: 1px solid var(--border); display: none; }
-  .editorial-inner {
-    max-width: 1280px; margin: 0 auto; padding: 16px 40px;
-    display: flex; gap: 20px; align-items: flex-start;
-  }
-  .editorial-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
-    white-space: nowrap; flex-shrink: 0; padding-top: 3px;
-  }
+  .editorial-inner { max-width: 1280px; margin: 0 auto; padding: 16px 40px; display: flex; gap: 20px; align-items: flex-start; }
+  .editorial-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); white-space: nowrap; flex-shrink: 0; padding-top: 3px; }
   .editorial-text { font-size: 14px; font-weight: 400; line-height: 1.7; color: var(--text); }
 
   /* ── NOTÍCIAS ── */
   .main-content { max-width: 1280px; margin: 0 auto; padding: 0 40px 80px; }
-
   .news-hero { padding: 32px 0 28px; border-bottom: 1px solid var(--border2); }
   .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-  .fonte-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
-  }
-  .cat-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text3); border-left: 1px solid var(--border2); padding-left: 10px;
-  }
-  .imp-tag { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); }
+  .fonte-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+  .cat-tag   { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); border-left: 1px solid var(--border2); padding-left: 10px; }
+  .imp-tag   { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gold); }
 
-  .hero-title { font-size: clamp(20px,3vw,34px); font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 10px; letter-spacing: -0.02em; }
-  .hero-summary { font-size: 15px; font-weight: 400; line-height: 1.75; color: var(--text2); max-width: 680px; margin-bottom: 10px; }
+  .hero-title   { font-size: clamp(20px,3vw,34px); font-weight: 600; line-height: 1.2; color: var(--text); margin-bottom: 10px; letter-spacing: -0.02em; }
+  .hero-summary { font-size: 15px; font-weight: 400; line-height: 1.75; color: var(--text2); max-width: 680px; margin-bottom: 12px; }
 
-  .news-link {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--accent); text-decoration: none; letter-spacing: 0.05em;
-    border-bottom: 1px solid transparent; transition: border-color 0.15s;
+  /* Botão expandir notícia */
+  .expand-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+    color: var(--accent); background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.25);
+    border-radius: 6px; padding: 5px 12px; cursor: pointer;
+    transition: all 0.15s; text-decoration: none; margin-top: 4px;
   }
-  .news-link:hover { border-bottom-color: var(--accent); }
-  .news-link svg { flex-shrink: 0; }
+  .expand-btn:hover { background: rgba(79,142,247,0.16); border-color: rgba(79,142,247,0.5); }
+  .expand-btn svg   { flex-shrink: 0; transition: transform 0.2s; }
+  .expand-btn.open svg { transform: rotate(180deg); }
+
+  /* Painel expandido */
+  .news-expanded {
+    display: none; margin-top: 14px;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px;
+    animation: fadeUp 0.3s ease;
+  }
+  .news-expanded.open { display: block; }
+  .expanded-body { font-size: 14px; font-weight: 400; line-height: 1.8; color: var(--text2); white-space: pre-wrap; }
+  .expanded-source-link {
+    display: inline-flex; align-items: center; gap: 5px; margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent);
+    text-decoration: none; opacity: 0.8; transition: opacity 0.15s;
+  }
+  .expanded-source-link:hover { opacity: 1; }
 
   /* Grid 2 col */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
   @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
-
   .grid-item { padding: 22px 0; animation: fadeUp 0.5s ease both; }
   .grid-item:nth-child(odd)  { padding-right: 28px; border-right: 1px solid var(--border); }
   .grid-item:nth-child(even) { padding-left: 28px; }
   .grid-item:nth-child(odd):last-child { border-right: none; }
-
   .item-title   { font-size: clamp(14px,2vw,18px); font-weight: 600; line-height: 1.3; color: var(--text); margin-bottom: 7px; }
-  .item-summary { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 8px; }
-
-  .imp-bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .item-summary { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 10px; }
+  .imp-bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
   .imp-bar      { height: 2px; flex: 1; background: var(--bg5); border-radius: 1px; overflow: hidden; }
   .imp-fill     { height: 100%; border-radius: 1px; background: linear-gradient(90deg,var(--accent2),var(--accent)); }
   .imp-label    { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text3); white-space: nowrap; }
@@ -254,12 +166,11 @@
   .section-divider { display: flex; align-items: center; gap: 14px; padding: 20px 0 0; border-top: 1px solid var(--border); }
   .divider-label   { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); white-space: nowrap; }
   .divider-line    { flex: 1; height: 1px; background: var(--border); }
-
   .single-item { display: grid; grid-template-columns: 44px 1fr; gap: 0 16px; padding: 18px 0; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
   .single-item:last-child { border-bottom: none; }
-  .item-num    { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 300; color: var(--bg5); line-height: 1; padding-top: 2px; text-align: right; }
+  .item-num       { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 300; color: var(--bg5); line-height: 1; padding-top: 2px; text-align: right; }
   .single-title   { font-size: clamp(13px,1.8vw,17px); font-weight: 600; line-height: 1.3; color: var(--text); margin-bottom: 4px; }
-  .single-summary { font-size: 12px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 6px; }
+  .single-summary { font-size: 12px; font-weight: 400; line-height: 1.7; color: var(--text2); margin-bottom: 8px; }
 
   /* ── FOOTER ── */
   .site-footer { border-top: 1px solid var(--border); background: var(--bg2); }
@@ -272,7 +183,7 @@
   .error-strip { background: rgba(244,92,92,0.07); border-left: 3px solid var(--red); padding: 14px 18px; margin: 24px 0; display: none; border-radius: 0 6px 6px 0; }
   .error-strip p { font-size: 13px; color: var(--red); line-height: 1.6; }
 
-  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
   .anim { animation: fadeUp 0.5s ease both; }
 
   @media (max-width: 768px) {
@@ -312,10 +223,9 @@
 <!-- INDICADORES -->
 <section class="indicators-section">
   <div class="indicators-inner">
-
     <div class="ind-section-label">Indicadores de mercado</div>
 
-    <!-- Câmbio + PIB -->
+    <!-- Câmbio + IPCA + SELIC -->
     <div class="macro-row">
       <div class="macro-card">
         <div class="macro-label">USD / BRL</div>
@@ -327,47 +237,43 @@
         <div class="macro-value" id="val-eurbrl">—</div>
         <div class="macro-change neu" id="chg-eurbrl">carregando…</div>
       </div>
-      <div class="pib-card">
-        <div class="macro-label">PIB Brasil — variação trimestral (%)</div>
-        <div class="pib-chart-area" id="pib-chart"><div class="ind-loading">carregando…</div></div>
+      <div class="macro-card">
+        <div class="macro-label">IPCA — Inflação</div>
+        <div class="macro-value" id="val-ipca">—</div>
+        <div class="macro-sub" id="ref-ipca">carregando…</div>
+        <div class="macro-change neu" id="chg-ipca" style="margin-top:4px;"></div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-label">Taxa Selic</div>
+        <div class="macro-value" id="val-selic">—</div>
+        <div class="macro-sub" id="ref-selic">carregando…</div>
+        <div class="macro-change neu" id="chg-selic" style="margin-top:4px;"></div>
       </div>
     </div>
 
     <!-- Bolsas -->
     <div class="bolsas-grid">
-      <!-- IBOVESPA -->
       <div class="bolsa-card">
         <div class="bolsa-header">
-          <div>
-            <div class="bolsa-name">Bovespa</div>
-            <div class="bolsa-index-label">IBOVESPA · B3</div>
-          </div>
+          <div><div class="bolsa-name">Bovespa</div><div class="bolsa-index-label">IBOVESPA · B3</div></div>
           <div class="bolsa-change neu" id="chg-ibov">—</div>
         </div>
         <div class="bolsa-value" id="val-ibov">—</div>
         <div class="bolsa-prev" id="prev-ibov">carregando…</div>
         <div class="acoes-list" id="acoes-ibov"><div class="ind-loading">carregando ações…</div></div>
       </div>
-      <!-- S&P 500 -->
       <div class="bolsa-card">
         <div class="bolsa-header">
-          <div>
-            <div class="bolsa-name">S&amp;P 500</div>
-            <div class="bolsa-index-label">SPX · NYSE / NASDAQ</div>
-          </div>
+          <div><div class="bolsa-name">S&amp;P 500</div><div class="bolsa-index-label">SPX · NYSE / NASDAQ</div></div>
           <div class="bolsa-change neu" id="chg-sp500">—</div>
         </div>
         <div class="bolsa-value" id="val-sp500">—</div>
         <div class="bolsa-prev" id="prev-sp500">carregando…</div>
         <div class="acoes-list" id="acoes-sp500"><div class="ind-loading">carregando ações…</div></div>
       </div>
-      <!-- Euro Stoxx 50 -->
       <div class="bolsa-card">
         <div class="bolsa-header">
-          <div>
-            <div class="bolsa-name">Euro Stoxx 50</div>
-            <div class="bolsa-index-label">SX5E · Euronext</div>
-          </div>
+          <div><div class="bolsa-name">Euro Stoxx 50</div><div class="bolsa-index-label">SX5E · Euronext</div></div>
           <div class="bolsa-change neu" id="chg-eurostoxx">—</div>
         </div>
         <div class="bolsa-value" id="val-eurostoxx">—</div>
@@ -375,7 +281,6 @@
         <div class="acoes-list" id="acoes-eurostoxx"><div class="ind-loading">carregando ações…</div></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -413,185 +318,227 @@
 
 <script>
 // ─────────────────────────────────────────
-// UTILITÁRIOS
+// ESTADO
 // ─────────────────────────────────────────
 let allNews = [];
 let activeFilter = 'todos';
 
+// ─────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function fmtNum(n, dec=2) {
+function fmtN(n, dec=2) {
   return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 }
 function cc(v) { return v>0?'up':v<0?'down':'neu'; }
-function cs(v) {
-  const s = fmtNum(Math.abs(v));
-  return v>0 ? `▲ +${s}%` : v<0 ? `▼ -${s}%` : `— ${s}%`;
-}
-function setProgress(pct, txt) {
-  document.getElementById('ls-progress').style.width = pct+'%';
-  document.getElementById('ls-status').textContent = txt;
-}
-function setStep(n, state) {
-  const el = document.getElementById('lss'+n);
-  if (el) el.className = 'ls-step '+state;
-}
+function cs(v) { return (v>0?'▲ +':'▼ ')+fmtN(Math.abs(v))+'%'; }
+function setProgress(p,t) { document.getElementById('ls-progress').style.width=p+'%'; document.getElementById('ls-status').textContent=t; }
+function setStep(n,s) { const e=document.getElementById('lss'+n); if(e) e.className='ls-step '+s; }
 function setDate() {
-  const now = new Date();
-  document.getElementById('header-date').textContent =
-    now.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).toUpperCase();
-  const h = now.getHours();
-  document.getElementById('edition-badge').textContent =
-    h<10 ? 'Edição Matutina' : h<14 ? 'Edição Meio-Dia' : 'Edição Vespertina';
-  document.getElementById('footer-meta').innerHTML =
-    'Atualizado às '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+
-    '<br>Fontes: Folha · Ag. Brasil · ICL · Intercept · Fórum · G1 · Valor';
+  const now=new Date();
+  document.getElementById('header-date').textContent=now.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).toUpperCase();
+  const h=now.getHours();
+  document.getElementById('edition-badge').textContent=h<10?'Edição Matutina':h<14?'Edição Meio-Dia':'Edição Vespertina';
+  document.getElementById('footer-meta').innerHTML='Atualizado às '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'<br>Fontes: Folha · Ag. Brasil · ICL · Intercept · Fórum · G1 · Valor';
 }
 
 // ─────────────────────────────────────────
-// PIB — API pública IBGE (no browser, sem CORS)
-// Tabela 1621: PIB a preços de mercado — variação trimestral
-// ─────────────────────────────────────────
-async function fetchPIB() {
-  try {
-    const url = 'https://servicodados.ibge.gov.br/api/v3/agregados/1621/periodos/-4/variaveis/584?localidades=N1[all]';
-    const r   = await fetch(url);
-    if (!r.ok) throw new Error('HTTP '+r.status);
-    const d   = await r.json();
-
-    // Navega pela estrutura do IBGE v3
-    const serie = d[0].resultados[0].series[0].serie;
-
-    // IBGE retorna números com vírgula decimal: "0,8" → precisa trocar por "0.8"
-    const quarters = Object.entries(serie)
-      .filter(([k, v]) => v !== null && v !== '' && v !== '-')
-      .map(([k, v]) => {
-        const year = k.slice(0, 4);
-        const qNum = parseInt(k.slice(4), 10); // "01"→1, "02"→2...
-        const val  = parseFloat(String(v).replace(',', '.'));
-        return { q: `T${qNum}/${year.slice(2)}`, v: isNaN(val) ? 0 : val };
-      });
-
-    if (!quarters.length) throw new Error('Sem dados');
-    return quarters;
-  } catch(e) {
-    console.warn('IBGE PIB error:', e.message);
-    return null; // renderPIB usará fallback
-  }
-}
-
-function renderPIB(quarters) {
-  const fallback = [
-    {q:'T1/24',v:0.8},{q:'T2/24',v:1.4},{q:'T3/24',v:0.9},{q:'T4/24',v:2.1}
-  ];
-  const data = quarters || fallback;
-  const maxAbs = Math.max(...data.map(d=>Math.abs(d.v)));
-  const BAR_MAX = 48; // px
-
-  let html = '';
-  data.forEach(d => {
-    const h   = Math.max(4, Math.round((Math.abs(d.v)/maxAbs)*BAR_MAX));
-    const cls = d.v >= 0 ? 'pos' : 'neg';
-    const vcls= d.v >= 0 ? 'up'  : 'down';
-    html += `
-    <div class="pib-col">
-      <div class="pib-val-label ${vcls}">${d.v>0?'+':''}${d.v}%</div>
-      <div class="pib-bar-outer">
-        <div class="pib-bar ${cls}" style="height:${h}px;"></div>
-      </div>
-      <div class="pib-q-label">${d.q}</div>
-    </div>`;
-  });
-  document.getElementById('pib-chart').innerHTML = html;
-}
-
-// ─────────────────────────────────────────
-// CÂMBIO — AwesomeAPI (gratuita, sem key)
+// CÂMBIO — AwesomeAPI (sem CORS, gratuita)
 // ─────────────────────────────────────────
 async function fetchCambio() {
   try {
     const r = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL');
     const d = await r.json();
-
-    const uv = parseFloat(d.USDBRL.bid);
-    const uc = parseFloat(d.USDBRL.pctChange);
-    document.getElementById('val-usdbrl').textContent = 'R$ '+fmtNum(uv);
-    const uel = document.getElementById('chg-usdbrl');
-    uel.textContent = cs(uc); uel.className = 'macro-change '+cc(uc);
-
-    const ev = parseFloat(d.EURBRL.bid);
-    const ec = parseFloat(d.EURBRL.pctChange);
-    document.getElementById('val-eurbrl').textContent = 'R$ '+fmtNum(ev);
-    const eel = document.getElementById('chg-eurbrl');
-    eel.textContent = cs(ec); eel.className = 'macro-change '+cc(ec);
+    const set = (pre, obj) => {
+      const v = parseFloat(obj.bid), c = parseFloat(obj.pctChange);
+      document.getElementById('val-'+pre).textContent = 'R$ '+fmtN(v);
+      const el = document.getElementById('chg-'+pre);
+      el.textContent = cs(c); el.className = 'macro-change '+cc(c);
+    };
+    set('usdbrl', d.USDBRL);
+    set('eurbrl', d.EURBRL);
   } catch(e) {
-    ['val-usdbrl','val-eurbrl'].forEach(id => { document.getElementById(id).textContent='—'; });
-    ['chg-usdbrl','chg-eurbrl'].forEach(id => { document.getElementById(id).textContent='indisponível'; });
+    ['usdbrl','eurbrl'].forEach(k => {
+      document.getElementById('val-'+k).textContent='—';
+      document.getElementById('chg-'+k).textContent='indisponível';
+    });
   }
 }
 
 // ─────────────────────────────────────────
-// BOLSAS — Yahoo Finance via allorigins proxy
+// IPCA + SELIC — AwesomeAPI indicadores
 // ─────────────────────────────────────────
-async function yFinance(symbol) {
-  const url   = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
-  const proxy = 'https://api.allorigins.win/raw?url='+encodeURIComponent(url);
-  const r = await fetch(proxy);
+async function fetchIndicadores() {
+  try {
+    // IPCA mensal mais recente
+    const ri = await fetch('https://economia.awesomeapi.com.br/json/daily/IPCA/2');
+    const di = await ri.json();
+    if (di && di[0]) {
+      const v = parseFloat(di[0].value);
+      // value pode ser acumulado 12 meses (%) ou mensal
+      document.getElementById('val-ipca').textContent = fmtN(v, 2) + '%';
+      document.getElementById('ref-ipca').textContent = 'Acum. 12 meses';
+      const prev = di[1] ? parseFloat(di[1].value) : null;
+      if (prev !== null) {
+        const diff = v - prev;
+        const el = document.getElementById('chg-ipca');
+        el.textContent = (diff >= 0 ? '▲ +' : '▼ ') + fmtN(Math.abs(diff), 2) + 'pp vs anterior';
+        el.className = 'macro-change ' + cc(diff);
+      }
+    }
+  } catch(e) {
+    document.getElementById('val-ipca').textContent = '—';
+    document.getElementById('ref-ipca').textContent = 'indisponível';
+  }
+
+  try {
+    // SELIC
+    const rs = await fetch('https://economia.awesomeapi.com.br/json/daily/SELIC/2');
+    const ds = await rs.json();
+    if (ds && ds[0]) {
+      const v = parseFloat(ds[0].value);
+      document.getElementById('val-selic').textContent = fmtN(v, 2) + '%';
+      document.getElementById('ref-selic').textContent = 'ao ano';
+      const prev = ds[1] ? parseFloat(ds[1].value) : null;
+      if (prev !== null) {
+        const diff = v - prev;
+        const el = document.getElementById('chg-selic');
+        if (Math.abs(diff) < 0.001) {
+          el.textContent = '— sem alteração';
+          el.className = 'macro-change neu';
+        } else {
+          el.textContent = (diff >= 0 ? '▲ +' : '▼ ') + fmtN(Math.abs(diff), 2) + 'pp';
+          el.className = 'macro-change ' + cc(diff);
+        }
+      }
+    }
+  } catch(e) {
+    document.getElementById('val-selic').textContent = '—';
+    document.getElementById('ref-selic').textContent = 'indisponível';
+  }
+}
+
+// ─────────────────────────────────────────
+// BOLSAS
+// IBOVESPA: brapi.dev (BR, sem CORS, confiável)
+// S&P500 + EuroStoxx: Yahoo Finance com 3 proxies de fallback
+// ─────────────────────────────────────────
+
+// ── Proxies Yahoo em ordem de confiabilidade
+const YF_PROXIES = [
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${url}`,
+];
+
+async function fetchYahoo(symbol) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+  for (const mkProxy of YF_PROXIES) {
+    try {
+      const r = await fetch(mkProxy(url), { signal: AbortSignal.timeout(8000) });
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (!d?.chart?.result?.[0]) continue;
+      const m = d.chart.result[0].meta;
+      return {
+        price:  m.regularMarketPrice,
+        prev:   m.chartPreviousClose,
+        change: ((m.regularMarketPrice - m.chartPreviousClose) / m.chartPreviousClose) * 100,
+        currency: m.currency
+      };
+    } catch(e) { continue; }
+  }
+  throw new Error('Todos os proxies falharam para ' + symbol);
+}
+
+// ── IBOVESPA via brapi.dev (sem CORS, sem key)
+async function fetchBrapi(tickers) {
+  const syms = tickers.map(t => t.symbol).join(',');
+  const r = await fetch(`https://brapi.dev/api/quote/${syms}`, { signal: AbortSignal.timeout(10000) });
+  if (!r.ok) throw new Error('brapi HTTP '+r.status);
   const d = await r.json();
-  const m = d.chart.result[0].meta;
-  const chg = ((m.regularMarketPrice - m.chartPreviousClose) / m.chartPreviousClose) * 100;
-  return { price: m.regularMarketPrice, prev: m.chartPreviousClose, change: chg, currency: m.currency };
+  return d.results || [];
 }
 
 function renderAcoes(id, acoes) {
   const el = document.getElementById(id);
   if (!el) return;
+  if (!acoes.length) { el.innerHTML='<div class="ind-error">Sem dados disponíveis</div>'; return; }
   el.innerHTML = acoes.map(a => {
-    const prefix = a.change > 0 ? '+' : '';
-    const curr   = a.currency === 'BRL' ? 'R$' : '$';
+    const chg = typeof a.change === 'number' ? a.change : parseFloat(a.regularMarketChangePercent||0);
+    const price = typeof a.price === 'number' ? a.price : parseFloat(a.regularMarketPrice||0);
+    const curr = (a.currency==='BRL'||a.ticker?.endsWith('.SA')) ? 'R$' : '$';
+    const prefix = chg >= 0 ? '+' : '';
     return `<div class="acao-row">
-      <span class="acao-ticker">${a.ticker}</span>
-      <span class="acao-name">${a.name}</span>
-      <span class="acao-price">${curr} ${fmtNum(a.price)}</span>
-      <span class="acao-chg ${cc(a.change)}">${prefix}${fmtNum(a.change)}%</span>
+      <span class="acao-ticker">${esc(a.ticker||a.symbol||'')}</span>
+      <span class="acao-name">${esc(a.name||a.shortName||'')}</span>
+      <span class="acao-price">${curr} ${fmtN(price)}</span>
+      <span class="acao-chg ${cc(chg)}">${prefix}${fmtN(chg)}%</span>
     </div>`;
   }).join('');
 }
 
-async function loadBolsa(cfg) {
+async function loadIBOV() {
+  const tickers = [
+    {symbol:'PETR4', name:'Petrobras'},
+    {symbol:'VALE3', name:'Vale'},
+    {symbol:'ITUB4', name:'Itaú'},
+    {symbol:'BBDC4', name:'Bradesco'},
+    {symbol:'ABEV3', name:'Ambev'},
+  ];
   try {
-    const idx = await yFinance(cfg.indexSymbol);
-    document.getElementById(cfg.valId).textContent    = fmtNum(idx.price, 0);
-    const chgEl = document.getElementById(cfg.chgId);
-    chgEl.textContent  = cs(idx.change);
-    chgEl.className    = 'bolsa-change '+cc(idx.change);
-    document.getElementById(cfg.prevId).textContent   = 'Anterior: '+fmtNum(idx.prev,0);
+    // Índice via Yahoo (com fallback)
+    fetchYahoo('^BVSP').then(idx => {
+      document.getElementById('val-ibov').textContent = fmtN(idx.price, 0);
+      const el = document.getElementById('chg-ibov');
+      el.textContent = cs(idx.change); el.className = 'bolsa-change '+cc(idx.change);
+      document.getElementById('prev-ibov').textContent = 'Anterior: '+fmtN(idx.prev, 0);
+    }).catch(() => {});
 
-    const results = await Promise.allSettled(
-      cfg.stocks.map(s => yFinance(s.symbol).then(d => ({...s,...d})))
-    );
-    renderAcoes(cfg.acoesId, results.filter(r=>r.status==='fulfilled').map(r=>r.value));
+    // Ações via brapi.dev (confiável)
+    const results = await fetchBrapi(tickers);
+    const acoes = results.map(r => ({
+      ticker: r.symbol.replace('.SA',''),
+      name:   r.shortName || r.longName || r.symbol,
+      price:  r.regularMarketPrice,
+      change: r.regularMarketChangePercent,
+      currency: 'BRL'
+    }));
+    renderAcoes('acoes-ibov', acoes);
+  } catch(e) {
+    document.getElementById('acoes-ibov').innerHTML='<div class="ind-error">Erro ao carregar dados</div>';
+  }
+}
+
+async function loadYahooIndex(cfg) {
+  try {
+    const idx = await fetchYahoo(cfg.indexSymbol);
+    document.getElementById(cfg.valId).textContent = fmtN(idx.price, 0);
+    const el = document.getElementById(cfg.chgId);
+    el.textContent = cs(idx.change); el.className = 'bolsa-change '+cc(idx.change);
+    document.getElementById(cfg.prevId).textContent = 'Anterior: '+fmtN(idx.prev, 0);
   } catch(e) {
     document.getElementById(cfg.valId).textContent = '—';
-    document.getElementById(cfg.acoesId).innerHTML = '<div class="ind-error">Erro ao carregar dados</div>';
+  }
+
+  const results = await Promise.allSettled(
+    cfg.stocks.map(s => fetchYahoo(s.symbol).then(d => ({ticker:s.ticker, name:s.name, price:d.price, change:d.change, currency:d.currency})))
+  );
+  const acoes = results.filter(r=>r.status==='fulfilled').map(r=>r.value);
+  if (acoes.length) {
+    renderAcoes(cfg.acoesId, acoes);
+  } else {
+    document.getElementById(cfg.acoesId).innerHTML='<div class="ind-error">Dados indisponíveis no momento</div>';
   }
 }
 
 async function fetchBolsas() {
-  const configs = [
-    {
-      indexSymbol: '^BVSP', valId:'val-ibov', chgId:'chg-ibov', prevId:'prev-ibov', acoesId:'acoes-ibov',
-      stocks:[
-        {ticker:'PETR4',name:'Petrobras', symbol:'PETR4.SA'},
-        {ticker:'VALE3',name:'Vale',      symbol:'VALE3.SA'},
-        {ticker:'ITUB4',name:'Itaú',      symbol:'ITUB4.SA'},
-        {ticker:'BBDC4',name:'Bradesco',  symbol:'BBDC4.SA'},
-        {ticker:'ABEV3',name:'Ambev',     symbol:'ABEV3.SA'},
-      ]
-    },
-    {
-      indexSymbol: '^GSPC', valId:'val-sp500', chgId:'chg-sp500', prevId:'prev-sp500', acoesId:'acoes-sp500',
+  await Promise.allSettled([
+    loadIBOV(),
+    loadYahooIndex({
+      indexSymbol:'^GSPC', valId:'val-sp500', chgId:'chg-sp500', prevId:'prev-sp500', acoesId:'acoes-sp500',
       stocks:[
         {ticker:'AAPL', name:'Apple',     symbol:'AAPL'},
         {ticker:'MSFT', name:'Microsoft', symbol:'MSFT'},
@@ -599,46 +546,61 @@ async function fetchBolsas() {
         {ticker:'AMZN', name:'Amazon',    symbol:'AMZN'},
         {ticker:'GOOGL',name:'Alphabet',  symbol:'GOOGL'},
       ]
-    },
-    {
-      indexSymbol: '^STOXX50E', valId:'val-eurostoxx', chgId:'chg-eurostoxx', prevId:'prev-eurostoxx', acoesId:'acoes-eurostoxx',
+    }),
+    loadYahooIndex({
+      indexSymbol:'^STOXX50E', valId:'val-eurostoxx', chgId:'chg-eurostoxx', prevId:'prev-eurostoxx', acoesId:'acoes-eurostoxx',
       stocks:[
-        {ticker:'ASML',name:'ASML',     symbol:'ASML'},
-        {ticker:'SAP', name:'SAP',      symbol:'SAP'},
-        {ticker:'SIE', name:'Siemens',  symbol:'SIE.DE'},
-        {ticker:'MC',  name:'LVMH',     symbol:'MC.PA'},
-        {ticker:'SAN', name:'Santander',symbol:'SAN'},
+        {ticker:'ASML', name:'ASML',      symbol:'ASML'},
+        {ticker:'SAP',  name:'SAP',       symbol:'SAP'},
+        {ticker:'SIE',  name:'Siemens',   symbol:'SIE.DE'},
+        {ticker:'MC',   name:'LVMH',      symbol:'MC.PA'},
+        {ticker:'SAN',  name:'Santander', symbol:'SAN'},
       ]
-    },
-  ];
-  await Promise.allSettled(configs.map(loadBolsa));
+    }),
+  ]);
 }
 
 // ─────────────────────────────────────────
-// FILTRO + RENDER NOTÍCIAS
+// NOTÍCIAS — RENDER COM PAINEL EXPANDIDO
 // ─────────────────────────────────────────
 function applyFilter(btn, val) {
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  activeFilter = val;
-  renderNews();
+  btn.classList.add('active'); activeFilter = val; renderNews();
 }
 
+function toggleExpand(id) {
+  const panel = document.getElementById('exp-'+id);
+  const btn   = document.getElementById('btn-'+id);
+  if (!panel || !btn) return;
+  const open = panel.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.querySelector('.btn-label').textContent = open ? 'Fechar' : 'Ler notícia completa';
+}
+
+function chevronDown() {
+  return `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+}
 function linkIcon() {
-  return `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+  return `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
 }
 
-function newsLink(url) {
-  if (!url || url === 'N/A' || !url.startsWith('http')) return '';
-  // Detecta se é apenas homepage (sem path além de /)
-  let domain = '';
-  try {
-    const u = new URL(url);
-    domain = u.hostname.replace('www.', '');
-  } catch(e) {}
-  return `<a class="news-link" href="${esc(url)}" target="_blank" rel="noopener">
-    Ler notícia completa ${linkIcon()}
-  </a>`;
+function buildExpanded(n, id) {
+  const body = n.corpo || n.resumo || '';
+  const hasUrl = n.url && n.url.startsWith('http');
+  const srcLink = hasUrl
+    ? `<a class="expanded-source-link" href="${esc(n.url)}" target="_blank" rel="noopener">Abrir fonte original ${linkIcon()}</a>`
+    : '';
+  return `<div class="news-expanded" id="exp-${id}">
+    <div class="expanded-body">${esc(body)}</div>
+    ${srcLink}
+  </div>`;
+}
+
+function buildExpandBtn(id) {
+  return `<button class="expand-btn" id="btn-${id}" onclick="toggleExpand('${id}')">
+    <span class="btn-label">Ler notícia completa</span>
+    ${chevronDown()}
+  </button>`;
 }
 
 function renderNews() {
@@ -653,11 +615,12 @@ function renderNews() {
   }
 
   const hero = filtered[0];
-  const grid = filtered.slice(1,3);
+  const grid = filtered.slice(1, 3);
   const rest = filtered.slice(3);
   let html = '';
 
   // HERO
+  const hid = 'n0';
   html += `<div class="news-hero anim">
     <div class="eyebrow">
       <span class="fonte-tag">${esc(hero.fonte)}</span>
@@ -666,13 +629,15 @@ function renderNews() {
     </div>
     <h2 class="hero-title">${esc(hero.titulo)}</h2>
     <p class="hero-summary">${esc(hero.resumo)}</p>
-    ${newsLink(hero.url)}
+    ${buildExpandBtn(hid)}
+    ${buildExpanded(hero, hid)}
   </div>`;
 
   // GRID 2 col
   if (grid.length) {
     html += '<div class="grid-2">';
     grid.forEach((n,i) => {
+      const id = 'n'+(i+1);
       const imp = Math.round(Math.min(100,(n.importancia||5)*10));
       html += `<div class="grid-item" style="animation-delay:${i*0.1}s">
         <div class="eyebrow">
@@ -685,7 +650,8 @@ function renderNews() {
           <div class="imp-bar"><div class="imp-fill" style="width:${imp}%"></div></div>
           <span class="imp-label">${n.importancia||'—'}/10</span>
         </div>
-        ${newsLink(n.url)}
+        ${buildExpandBtn(id)}
+        ${buildExpanded(n, id)}
       </div>`;
     });
     html += '</div>';
@@ -695,6 +661,7 @@ function renderNews() {
   if (rest.length) {
     html += `<div class="section-divider"><div class="divider-label">Mais notícias</div><div class="divider-line"></div></div>`;
     rest.forEach((n,i) => {
+      const id = 'n'+(i+3);
       html += `<div class="single-item" style="animation-delay:${0.05+i*0.06}s">
         <div class="item-num">${String(i+4).padStart(2,'0')}</div>
         <div>
@@ -704,7 +671,8 @@ function renderNews() {
           </div>
           <div class="single-title">${esc(n.titulo)}</div>
           <div class="single-summary">${esc(n.resumo)}</div>
-          ${newsLink(n.url)}
+          ${buildExpandBtn(id)}
+          ${buildExpanded(n, id)}
         </div>
       </div>`;
     });
@@ -718,15 +686,9 @@ function renderNews() {
 // ─────────────────────────────────────────
 async function init() {
   setDate();
-
   setProgress(10,'Carregando indicadores…'); setStep(1,'active');
 
-  // Indicadores em paralelo (não bloqueiam notícias)
-  const marketP = Promise.allSettled([
-    fetchCambio(),
-    fetchBolsas(),
-    fetchPIB().then(data => renderPIB(data))
-  ]);
+  const marketP = Promise.allSettled([fetchCambio(), fetchIndicadores(), fetchBolsas()]);
 
   setProgress(40,'Buscando notícias…'); setStep(1,'done'); setStep(2,'active');
 
@@ -737,9 +699,7 @@ async function init() {
   } catch(e) {}
 
   setProgress(80,'Compondo edição…'); setStep(2,'done'); setStep(3,'active');
-
   await marketP;
-
   setProgress(100,'Pronto.'); setStep(3,'done');
 
   if (data) {
@@ -753,7 +713,6 @@ async function init() {
     document.getElementById('error-strip').style.display = 'block';
     document.getElementById('error-text').textContent = 'Não foi possível carregar as notícias. Recarregue a página.';
   }
-
   renderNews();
 
   setTimeout(() => {
