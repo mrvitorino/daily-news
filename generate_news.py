@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Panorama Brasil
-Usa response_mime_type=application/json para garantir JSON puro do Gemini.
-Etapa 1: lista de noticias (JSON enxuto)
-Etapa 2: corpo individual de cada noticia
+Estrategia em 2 passos por noticia:
+  Passo A: busca com google_search (texto livre)
+  Passo B: formata em JSON sem ferramenta (response_mime_type=json funciona aqui)
 """
 
 import json
 import os
-import re
 import sys
 import time
 import traceback
@@ -46,50 +45,54 @@ def get_edition_label(hour):
     elif hour < 14: return "Edicao do Meio-Dia (12h)"
     else:           return "Edicao Vespertina (17h)"
 
-def safe_parse(text):
-    """
-    Tenta parsear JSON de forma robusta:
-    1. Direto
-    2. Removendo fences de markdown
-    3. Extraindo primeiro objeto { } encontrado
-    4. Reparando aspas simples trocadas por duplas
-    """
-    attempts = [
-        text.strip(),
-        re.sub(r"```(?:json)?|```", "", text).strip(),
-    ]
-    # Tenta extrair entre { e }
-    m = re.search(r'\{.*\}', text, re.DOTALL)
-    if m:
-        attempts.append(m.group(0))
 
-    for candidate in attempts:
-        try:
-            return json.loads(candidate)
-        except json.JSONDecodeError:
-            pass
+# ─────────────────────────────────────────
+# PASSO A — busca livre com google_search
+# Retorna texto bruto com as noticias encontradas
+# ─────────────────────────────────────────
+def search_noticias(client, today_str):
+    print("[..] Passo A: buscando noticias com Google Search...")
 
-    # Ultima tentativa: corrigir aspas dentro de strings
-    # (Gemini as vezes usa " dentro de valores sem escapar)
-    try:
-        # Substitui quebras de linha dentro de strings JSON por \n
-        fixed = re.sub(r'(?<=: ")(.*?)(?="(?:\s*[,}\]]))',
-                       lambda m: m.group(0).replace('\n', '\\n').replace('"', '\\"'),
-                       text, flags=re.DOTALL)
-        m2 = re.search(r'\{.*\}', fixed, re.DOTALL)
-        if m2:
-            return json.loads(m2.group(0))
-    except Exception:
-        pass
+    prompt = f"""Hoje e {today_str}. Voce e um pesquisador jornalistico.
 
-    raise RuntimeError(f"Nao foi possivel parsear JSON. Preview: {text[:300]}")
+Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 48 horas.
+
+Priorize: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum.
+Complemente com: G1, UOL, Estadao, Valor Economico, CNN Brasil.
+
+Para cada noticia encontrada, escreva em texto simples:
+NOTICIA [numero]
+Titulo: [titulo completo]
+Fonte: [nome do veiculo]
+Categoria: [Politica / Economia / Internacional]
+Resumo: [2-3 frases descrevendo o fato e sua relevancia]
+Corpo: [3-4 paragrafos detalhados com contexto, fatos, declaracoes e impacto]
+URL: [URL completa do artigo se disponivel, ou deixe em branco]
+Importancia: [numero de 1 a 10]
+---
+
+Liste exatamente {NUM_NEWS} noticias."""
+
+    resp = client.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.1,
+            max_output_tokens=8192,
+        )
+    )
+    raw = resp.text
+    print(f"[OK] Texto bruto: {len(raw)} chars")
+    return raw
 
 
 # ─────────────────────────────────────────
-# ETAPA 1 — lista de noticias
+# PASSO B — formata texto em JSON
+# Sem google_search → response_mime_type funciona
 # ─────────────────────────────────────────
-def fetch_noticias(client, today_str):
-    print("[..] Etapa 1: buscando lista de noticias...")
+def format_to_json(client, raw_text, today_str):
+    print("[..] Passo B: formatando em JSON estruturado...")
 
     schema = {
         "type": "object",
@@ -100,103 +103,57 @@ def fetch_noticias(client, today_str):
                 "items": {
                     "type": "object",
                     "properties": {
-                        "id":        {"type": "integer"},
-                        "titulo":    {"type": "string"},
-                        "fonte":     {"type": "string"},
-                        "categoria": {"type": "string"},
-                        "resumo":    {"type": "string"},
+                        "titulo":      {"type": "string"},
+                        "fonte":       {"type": "string"},
+                        "categoria":   {"type": "string"},
+                        "resumo":      {"type": "string"},
+                        "corpo":       {"type": "string"},
+                        "url":         {"type": "string"},
                         "importancia": {"type": "integer"}
                     },
-                    "required": ["id","titulo","fonte","categoria","resumo","importancia"]
+                    "required": ["titulo","fonte","categoria","resumo","corpo","url","importancia"]
                 }
             }
         },
         "required": ["resumo_editorial","noticias"]
     }
 
-    prompt = f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
+    prompt = f"""Converta o texto abaixo para JSON estruturado.
 
-Use a ferramenta de busca para encontrar as {NUM_NEWS} noticias mais importantes sobre POLITICA e ECONOMIA no Brasil publicadas hoje ou nas ultimas 48 horas.
+Regras importantes:
+- resumo_editorial: 2-3 frases resumindo o panorama politico-economico do dia
+- noticias: array com exatamente {NUM_NEWS} objetos
+- corpo: texto completo dos paragrafos, separados por " | " (espaco pipe espaco)
+- url: URL do artigo se disponivel, caso contrario string vazia ""
+- importancia: inteiro de 1 a 10
+- NAO invente informacoes que nao estejam no texto abaixo
 
-Priorize: Folha de S.Paulo, Agencia Brasil, ICL Noticias, Intercept Brasil, Revista Forum.
-Complemente com: G1, UOL, Estadao, Valor Economico, CNN Brasil.
-
-Retorne um objeto JSON com:
-- resumo_editorial: 2-3 frases sobre o panorama politico-economico do dia
-- noticias: array com exatamente {NUM_NEWS} objetos, cada um com id (1 a {NUM_NEWS}), titulo, fonte, categoria (Politica/Economia/Internacional), resumo (2-3 frases), importancia (1-10)"""
+TEXTO:
+{raw_text}"""
 
     resp = client.models.generate_content(
         model=MODEL,
         contents=prompt,
         config=types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.1,
-            max_output_tokens=4096,
+            temperature=0.0,
+            max_output_tokens=8192,
             response_mime_type="application/json",
             response_schema=schema,
         )
     )
 
-    raw = resp.text
-    print(f"[OK] Resposta etapa 1: {len(raw)} chars")
-    data = safe_parse(raw)
+    data = json.loads(resp.text)
+    print(f"[OK] JSON parseado: {len(data.get('noticias',[]))} noticias")
 
-    noticias = data.get("noticias", [])
-    print(f"[OK] {len(noticias)} noticias parseadas.")
-    if not noticias:
-        raise RuntimeError("Nenhuma noticia retornada.")
-    return data
-
-
-# ─────────────────────────────────────────
-# ETAPA 2 — corpo individual
-# ─────────────────────────────────────────
-def fetch_corpo(client, noticia, today_str):
-    titulo = noticia.get("titulo", "")
-    fonte  = noticia.get("fonte", "")
-    print(f"   [..] Corpo: {titulo[:55]}...")
-
-    schema = {
-        "type": "object",
-        "properties": {
-            "corpo": {"type": "string"},
-            "url":   {"type": "string"}
-        },
-        "required": ["corpo", "url"]
-    }
-
-    prompt = f"""Hoje e {today_str}. Busque esta noticia:
-
-Titulo: {titulo}
-Fonte preferencial: {fonte}
-
-Retorne:
-- corpo: texto jornalistico completo em 3-4 paragrafos descrevendo contexto, fatos, declaracoes e impacto. Separe paragrafos com barra vertical (|) em vez de quebra de linha.
-- url: URL direta e completa do artigo original (comecando com https://). Se nao encontrar, retorne string vazia."""
-
-    try:
-        resp = client.models.generate_content(
-            model=MODEL,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                tools=[types.Tool(google_search=types.GoogleSearch())],
-                temperature=0.1,
-                max_output_tokens=2048,
-                response_mime_type="application/json",
-                response_schema=schema,
-            )
-        )
-        result = safe_parse(resp.text)
-        # Converte separador | de volta para \n\n
-        corpo = result.get("corpo", "").replace(" | ", "\n\n").replace("|", "\n\n")
-        url   = result.get("url", "")
+    # Converte separador " | " em quebras de paragrafo reais
+    for n in data.get("noticias", []):
+        if n.get("corpo"):
+            n["corpo"] = n["corpo"].replace(" | ", "\n\n")
         # Valida URL
-        if not url.startswith("http"):
-            url = ""
-        return corpo, url
-    except Exception as e:
-        print(f"   [WARN] Falha no corpo ({e.__class__.__name__}): {e}")
-        return noticia.get("resumo", ""), ""
+        if not n.get("url", "").startswith("http"):
+            n["url"] = ""
+
+    return data
 
 
 # ─────────────────────────────────────────
@@ -213,20 +170,21 @@ def fetch_news():
     today_str = format_date_pt(now_br)
     print(f"[OK] Data: {today_str} | Edicao: {get_edition_label(now_br.hour)}")
 
-    data = fetch_noticias(client, today_str)
+    # Passo A: busca com google_search
+    raw_text = search_noticias(client, today_str)
 
-    print(f"\n[..] Etapa 2: buscando corpo das {len(data['noticias'])} noticias...")
-    for i, noticia in enumerate(data["noticias"]):
-        corpo, url = fetch_corpo(client, noticia, today_str)
-        noticia["corpo"] = corpo
-        noticia["url"]   = url
-        if i < len(data["noticias"]) - 1:
-            time.sleep(3)
+    # Pequena pausa entre chamadas
+    time.sleep(3)
+
+    # Passo B: formata sem google_search (JSON puro garantido)
+    data = format_to_json(client, raw_text, today_str)
+
+    if not data.get("noticias"):
+        raise RuntimeError("Nenhuma noticia no JSON final.")
 
     data["generated_at"]  = now_br.strftime("%Y-%m-%dT%H:%M:%S")
     data["edition_label"] = get_edition_label(now_br.hour)
     data["date_display"]  = today_str.upper()
-    print(f"\n[OK] Concluido — {len(data['noticias'])} noticias com corpo.")
     return data
 
 
@@ -241,7 +199,8 @@ def main():
             data = fetch_news()
             with open(OUTPUT, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-            print(f"[OK] Salvo em {OUTPUT}")
+            print(f"\n[OK] Salvo em {OUTPUT}")
+            print("=" * 52)
             return
         except Exception as e:
             print(f"\n[ERRO] {e}", file=sys.stderr)
