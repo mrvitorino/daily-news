@@ -1,88 +1,98 @@
 {
-  "resumo_editorial": "Os últimos dois dias no Brasil foram marcados por importantes desenvolvimentos econômicos, com o crescimento do PIB no primeiro trimestre de 2026 e a projeção de retorno do país ao posto de 10ª maior economia global. No cenário político, a tensão se elevou com a reação do governo à classificação de facções criminosas pelos EUA e a polêmica indicação de Lula para o STF, enquanto o Congresso lida com cortes orçamentários e o esvaziamento em ano eleitoral.",
+  "resumo_editorial": "A economia brasileira demonstrou um crescimento robusto de 1,1% no primeiro trimestre de 2026, impulsionando a expectativa de que o país retome a posição de 10ª maior economia global. Apesar do otimismo, há alertas sobre pressões futuras devido a juros elevados, desaceleração global e incertezas eleitorais. No cenário político-econômico, destacam-se a preocupação com a possível classificação de facções brasileiras como terroristas pelos EUA e a reabilitação do papel do Estado na política industrial pelo Banco Mundial.",
   "noticias": [
     {
-      "titulo": "Economia Brasileira Cresce 1,1% no 1º Trimestre de 2026, Impulsionada por Agropecuária e Consumo",
-      "fonte": "Folha de S.Paulo",
+      "titulo": "PIB cresce e Brasil deve retomar posição de 10ª maior economia do mundo",
+      "fonte": "CNN Brasil",
       "categoria": "Economia",
-      "resumo": "O Produto Interno Bruto (PIB) do Brasil cresceu 1,1% no primeiro trimestre de 2026 em comparação com o trimestre anterior, superando as expectativas do mercado. O resultado foi impulsionado principalmente pelo bom desempenho da agropecuária e pelo aumento do consumo das famílias, indicando uma recuperação econômica.",
-      "url": "https://www.folha.uol.com.br/economia/2026/05/pib-ibge-economia-cresce-11-no-1o-trimestre-de-2026.shtml",
+      "resumo": "Projeções do Fundo Monetário Internacional (FMI), compiladas pela Austin Rating, indicam que o Brasil deve reassumir a 10ª posição entre as maiores economias globais em 2026, impulsionado por um crescimento do PIB de 1,1% no primeiro trimestre deste ano. O país superou as expectativas do mercado e deve ultrapassar o Canadá no ranking mundial.",
+      "corpo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, superando as projeções iniciais do mercado. Este desempenho robusto, divulgado pelo Instituto Brasileiro de Geografia e Estatística (IBGE), reforça a expectativa de que o Brasil retorne ao grupo das dez maiores economias do mundo já no próximo ano. Segundo o FMI e a Austin Rating, o país deve ultrapassar o Canadá, que atualmente ocupa a 10ª posição.\n\nA valorização do real frente ao dólar, observada desde o final de 2025, também contribui para elevar o valor do PIB brasileiro quando medido em moeda americana, influenciando diretamente a posição do país no ranking global. Especialistas, no entanto, ressaltam que, embora o avanço no ranking seja positivo, indicadores como o PIB per capita são mais adequados para avaliar a riqueza e o padrão de vida da população.",
+      "url": "https://www.cnnbrasil.com.br/economia/pib-cresce-e-brasil-deve-retomar-posicao-de-10a-maior-economia-do-mundo/",
       "importancia": 10
     },
     {
-      "titulo": "Brasil Deve Retomar Posto de 10ª Maior Economia do Mundo em 2026, Aponta FMI",
-      "fonte": "Agência Brasil",
+      "titulo": "PIB cresce 1,1% no primeiro trimestre e reforça projeção de expansão da economia em 2026",
+      "fonte": "Portal Gov.br",
       "categoria": "Economia",
-      "resumo": "Projeções do Fundo Monetário Internacional (FMI), compiladas pela Austin Ratings, indicam que o Brasil deve retornar ao grupo das dez maiores economias do mundo em 2026, superando o Canadá. A expectativa é reforçada pelo crescimento do PIB no primeiro trimestre, marcando uma melhora na posição econômica global do país.",
-      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/05/brasil-deve-retomar-posto-de-10a-maior-economia-do-mundo-em-2026",
+      "resumo": "O Produto Interno Bruto (PIB) brasileiro cresceu 1,1% no primeiro trimestre de 2026, em linha com as projeções da Secretaria de Política Econômica (SPE) do Ministério da Fazenda. O resultado é impulsionado pelo fortalecimento da demanda doméstica, recuperação dos investimentos e resiliência do mercado de trabalho.",
+      "corpo": "Os dados divulgados pelo Instituto Brasileiro de Geografia e Estatística (IBGE) nesta sexta-feira (29/5) confirmam a expansão da atividade econômica no Brasil. O crescimento de 1,1% do PIB no primeiro trimestre de 2026, em comparação com o trimestre anterior, é um indicativo positivo para o cenário econômico do país.\n\nO Ministro da Fazenda, Dario Durigan, destacou que os resultados refletem os efeitos da política econômica adotada pelo governo, que tem gerado estabilidade. O consumo das famílias avançou 1,0%, impulsionado pela expansão da renda e geração de empregos formais. A Formação Bruta de Capital Fixo (FBCF), que mede os investimentos, teve alta de 3,5%, sinalizando a ampliação da capacidade produtiva.",
+      "url": "https://www.gov.br/fazenda/pt-br/central-de-conteudo/noticias/2026/maio/pib-cresce-1-1-no-primeiro-trimestre-e-reforca-projecao-de-expansao-da-economia-em-2026",
       "importancia": 9
     },
     {
-      "titulo": "Governo Federal Bloqueia R$ 22,1 Bilhões no Orçamento de 2026, Afetando Emendas Parlamentares e Ministérios",
-      "fonte": "Agência Brasil",
+      "titulo": "Dólar, juros e eleições colocam economia brasileira sob pressão em 2026, aponta Rabobank",
+      "fonte": "Portal do Agronegócio (citando Rabobank)",
       "categoria": "Economia",
-      "resumo": "O governo federal detalhou um bloqueio adicional de R$ 22,1 bilhões no Orçamento de 2026, com impacto significativo sobre as emendas parlamentares (quase R$ 5 bilhões) e ministérios como Defesa, Cidades e Educação. A medida visa garantir o cumprimento da meta fiscal e o equilíbrio das contas públicas.",
-      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/05/governo-bloqueia-quase-r-5-bi-em-emendas-para-cumprir-meta-fiscal",
-      "importancia": 9
-    },
-    {
-      "titulo": "Lula Anuncia que Indicará Novamente Jorge Messias para Vaga no STF Após Rejeição Anterior",
-      "fonte": "Agência Brasil",
-      "categoria": "Política",
-      "resumo": "O presidente Luiz Inácio Lula da Silva declarou que indicará novamente o advogado Jorge Messias para uma vaga de ministro no Supremo Tribunal Federal (STF), apesar da rejeição anterior pelo Senado. Lula criticou a decisão do Senado como 'política' e defendeu a qualificação de Messias.",
-      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026/05/lula-diz-que-vai-indicar-novamente-messias-ao-stf",
-      "importancia": 9
-    },
-    {
-      "titulo": "Governo Brasileiro Reage a Classificação de PCC e CV como Terroristas pelos EUA, Alertando para Impactos no PIX",
-      "fonte": "VEJA",
-      "categoria": "Política",
-      "resumo": "O governo brasileiro criticou a decisão dos Estados Unidos de classificar o PCC e o Comando Vermelho como organizações terroristas, alertando para possíveis impactos negativos na economia brasileira e no sistema de pagamentos PIX. O Planalto acusou 'falsos patriotas' de incentivarem a interferência estrangeira.",
-      "url": "https://veja.abril.com.br/politica/lula-deve-telefonar-para-trump-apos-eua-classificarem-pcc-e-cv-como-terroristas/",
-      "importancia": 10
-    },
-    {
-      "titulo": "Mercado Financeiro Eleva Previsão de Inflação para 5,04% em 2026, Aponta Boletim Focus",
-      "fonte": "Diário Digital",
-      "categoria": "Economia",
-      "resumo": "A previsão do mercado financeiro para o Índice Nacional de Preços ao Consumidor Amplo (IPCA), o índice oficial de inflação, foi elevada para 5,04% em 2026, segundo o Boletim Focus do Banco Central. A alta, a décima primeira consecutiva, estoura o intervalo da meta e reflete preocupações com a pressão de preços.",
-      "url": "https://www.diariodigital.com.br/economia/mercado-eleva-previsao-da-inflacao-para-504-este-ano-no-brasil/182602/",
+      "resumo": "Um relatório do Rabobank aponta que a economia brasileira enfrentará pressões em 2026 devido a juros elevados, desaceleração global e incertezas políticas relacionadas às eleições. A instituição projeta um crescimento moderado do PIB brasileiro de 1,8% para o ano.",
+      "corpo": "O Rabobank avalia que o crescimento econômico do Brasil em 2026 será moderado, influenciado por fatores como a manutenção de juros elevados e a desaceleração da economia global. As incertezas políticas, especialmente em um ano eleitoral, também são apontadas como elementos que devem impactar o câmbio, a inflação e o crescimento do país.\n\nO relatório destaca a queda do IBC-Br em março, um indicador que serve como prévia do PIB, que recuou 0,67% na comparação mensal, um resultado pior do que o esperado pelo mercado. Apesar disso, no acumulado do primeiro trimestre de 2026, a atividade econômica ainda registrou avanço de 1,3%.",
+      "url": "https://www.portaldoconsumidor.com.br/noticias/dolar-juros-e-eleicoes-colocam-economia-brasileira-sob-pressao-em-2026-aponta-rabobank/",
       "importancia": 8
     },
     {
-      "titulo": "CNI Vê Avanço da Desindustrialização do Brasil em 2026 e Alerta para Impactos",
-      "fonte": "Revista Oeste",
-      "categoria": "Economia",
-      "resumo": "A Confederação Nacional da Indústria (CNI) expressou preocupação com o avanço da desindustrialização no Brasil em 2026. A entidade aponta que o setor enfrenta desafios como maior carga tributária, redução de incentivos fiscais e discussões sobre a jornada de trabalho, impactando a competitividade da indústria nacional.",
-      "url": "https://revistaoeste.com/economia/cni-ve-avanco-da-desindustrializacao-do-brasil-em-2026/",
+      "titulo": "Durigan vê risco econômico em decisão dos EUA sobre facções",
+      "fonte": "Vero Notícias",
+      "categoria": "Economia / Política",
+      "resumo": "O ministro da Fazenda, Dario Durigan, expressou preocupação com a possível classificação do PCC e do Comando Vermelho como organizações terroristas pelos Estados Unidos, alertando para impactos negativos na economia brasileira e no sistema financeiro nacional.",
+      "corpo": "Dario Durigan, ministro da Fazenda, afirmou que a decisão dos Estados Unidos de classificar facções criminosas brasileiras como organizações terroristas pode gerar riscos econômicos significativos para o Brasil. Em entrevista, Durigan classificou a medida como um \"ataque eleitoral\" e indicou que o governo brasileiro atuará para proteger empresas, investidores e famílias de possíveis efeitos adversos.\n\nA preocupação reside nos desdobramentos que tal classificação poderia ter, como restrições financeiras e comerciais, além de uma percepção de risco elevada para o país no cenário internacional. O governo busca mitigar esses impactos e garantir a estabilidade econômica e financeira diante de uma decisão externa com potencial de repercussão interna.",
+      "url": "",
       "importancia": 7
     },
     {
-      "titulo": "PSD Discute Lançar Kassab como Vice de Caiado para Frear Aliança com Zema nas Eleições de 2026",
-      "fonte": "Folha de S.Paulo",
-      "categoria": "Política",
-      "resumo": "O Partido Social Democrático (PSD) está em discussões para lançar Gilberto Kassab como vice na chapa de Ronaldo Caiado (União Brasil) para as eleições presidenciais de 2026. A movimentação visa frear uma possível aliança entre Caiado e Romeu Zema (Novo), indicando as complexas articulações políticas para o próximo pleito.",
-      "url": "https://www1.folha.uol.com.br/poder/2026/05/psd-discute-lancar-kassab-como-vice-de-caiado-para-frear-alianca-com-zema.shtml",
+      "titulo": "Na Unicamp, Banco Mundial defende reabilitação do papel do Estado na política industrial",
+      "fonte": "Jornal da Unicamp",
+      "categoria": "Economia / Política",
+      "resumo": "O Banco Mundial, instituição que historicamente defendeu a liberalização econômica, apresentou na Unicamp um relatório que reabilita o papel do Estado na política industrial, em um contexto de desaceleração econômica global e avanço do protecionismo.",
+      "corpo": "Em uma mudança significativa de posicionamento, o Banco Mundial, por meio de seu relatório “Industrial Policy for Development: Approaches in the 21st Century”, defende agora um maior protagonismo do Estado na política industrial. Essa nova abordagem foi discutida em um seminário no Instituto de Economia da Unicamp, que tradicionalmente mantém uma visão crítica ao Consenso de Washington.\n\nMarcos Chiliatto, diretor executivo do Banco Mundial no Brasil, destacou que essa revisão representa uma quebra com o modelo predominante desde os anos 1990. A discussão é relevante para o Brasil, que busca estratégias de desenvolvimento em meio a um cenário de disputas tecnológicas globais e a necessidade de fortalecer sua indústria.",
+      "url": "https://www.unicamp.br/unicamp/noticias/2026/05/29/na-unicamp-banco-mundial-defende-reabilitacao-do-papel-do-estado-na-politica-industrial",
+      "importancia": 7
+    },
+    {
+      "titulo": "Economia brasileira acelera no primeiro tri com estímulos de Lula antes da eleição",
+      "fonte": "Bloomberg Línea",
+      "categoria": "Economia / Política",
+      "resumo": "A economia brasileira acelerou no primeiro trimestre de 2026, com um crescimento do PIB de 1,1%, impulsionada por estímulos do governo Lula em um período pré-eleitoral. O resultado superou a estimativa mediana dos analistas.",
+      "corpo": "O Produto Interno Bruto (PIB) do Brasil registrou um avanço de 1,1% nos três primeiros meses de 2026, um desempenho que superou a expectativa de 1,0% dos analistas consultados pela Bloomberg. Este crescimento é atribuído, em parte, aos estímulos econômicos implementados pelo governo do presidente Lula, em um contexto de preparação para as eleições.\n\nA aceleração econômica no primeiro trimestre, com um crescimento de 1,8% em relação ao mesmo período do ano anterior, sugere uma tentativa de fortalecer a economia e o ambiente político antes do pleito. A combinação de políticas governamentais e o cenário eleitoral adicionam uma camada de complexidade à análise do desempenho econômico.",
+      "url": "",
       "importancia": 8
     },
     {
-      "titulo": "Comissão de Mortos e Desaparecidos Aprova Relatório e Conclui que JK Foi Assassinado pela Ditadura",
-      "fonte": "Folha de S.Paulo",
-      "categoria": "Política",
-      "resumo": "A Comissão Especial sobre Mortos e Desaparecidos aprovou um relatório que conclui que o ex-presidente Juscelino Kubitschek foi assassinado pela ditadura militar. A decisão pode levar à modificação da certidão de óbito de JK, representando uma importante revisão histórica com implicações políticas.",
-      "url": "https://www1.folha.uol.com.br/politica/2026/05/comissao-de-mortos-e-desaparecidos-aprova-relatorio-e-conclui-que-jk-foi-assassinado-pela-ditadura.shtml",
-      "importancia": 8
+      "titulo": "Banco Central encerra liquidação de administradora após decretação de falência",
+      "fonte": "Vero Notícias",
+      "categoria": "Economia",
+      "resumo": "O Banco Central encerrou a liquidação extrajudicial da Administradora de Consórcio Nacional Valor, após a Justiça do Rio de Janeiro decretar a falência da instituição. A liquidação havia sido determinada em 2023 devido a insolvência e irregularidades.",
+      "corpo": "O Banco Central do Brasil anunciou o encerramento da liquidação extrajudicial da Administradora de Consórcio Nacional Valor. A medida foi tomada após a Justiça do Rio de Janeiro ter decretado a falência da empresa, que estava sob intervenção do BC desde 2023.\n\nA liquidação extrajudicial havia sido imposta devido à insolvência patrimonial da administradora e a graves irregularidades identificadas em suas operações. A decisão do Banco Central visa a proteger os interesses dos consorciados e a manter a estabilidade do sistema financeiro nacional.",
+      "url": "",
+      "importancia": 6
     },
     {
-      "titulo": "Congresso Nacional Esvaziado e Pautas Relevantes Atrasadas Devido a Eleições de 2026",
-      "fonte": "Anajustra",
-      "categoria": "Política",
-      "resumo": "O Congresso Nacional enfrenta um esvaziamento de suas atividades e o atraso na votação de pautas relevantes, um fenômeno comum em anos eleitorais. Deputados e senadores direcionam suas atenções para as campanhas nos estados, dificultando a manutenção do quórum e o debate aprofundado de matérias de interesse nacional.",
-      "url": "https://www.anajustra.org.br/noticia/congresso-esvaziado-e-prioridades-cada-vez-mais-distantes-da-populacao/",
+      "titulo": "Aneel mantém bandeira amarela e conta de luz seguirá mais cara em junho",
+      "fonte": "Vero Notícias",
+      "categoria": "Economia",
+      "resumo": "A Agência Nacional de Energia Elétrica (Aneel) decidiu manter a bandeira tarifária amarela para o mês de junho, o que significa que a conta de luz dos consumidores brasileiros continuará mais cara.",
+      "corpo": "A Aneel anunciou que a bandeira tarifária amarela será mantida para o mês de junho, impactando diretamente o custo da energia elétrica para os consumidores. Essa decisão implica um acréscimo nas contas de luz, refletindo as condições de geração de energia no país.\n\nA bandeira amarela é acionada quando as condições de geração de energia são menos favoráveis, exigindo o uso de termelétricas, que têm custo de operação mais elevado. A manutenção dessa bandeira indica que o cenário hídrico ou outras condições de oferta de energia ainda demandam cautela e custos adicionais.",
+      "url": "",
+      "importancia": 6
+    },
+    {
+      "titulo": "Banco Central perde servidores enquanto ativos supervisionados triplicam",
+      "fonte": "Vero Notícias",
+      "categoria": "Economia / Política",
+      "resumo": "O Banco Central do Brasil enfrenta um desafio de gestão, com a perda de servidores em um período em que os ativos sob sua supervisão triplicaram. Essa situação levanta preocupações sobre a capacidade de fiscalização e regulação do sistema financeiro.",
+      "corpo": "Um levantamento recente aponta que o Banco Central do Brasil tem registrado uma diminuição em seu quadro de servidores, enquanto a quantidade de ativos sob sua supervisão cresceu exponencialmente, chegando a triplicar. Essa disparidade gera um alerta sobre a capacidade da autarquia de cumprir plenamente suas funções de fiscalização e regulação do sistema financeiro nacional.\n\nA sobrecarga de trabalho e a possível defasagem no número de funcionários podem comprometer a eficiência da supervisão, aumentando os riscos para a estabilidade financeira. A questão da recomposição do quadro de pessoal do Banco Central torna-se um tema relevante para a política econômica e a governança do setor financeiro.",
+      "url": "",
+      "importancia": 6
+    },
+    {
+      "titulo": "Brasil está entre economias que mais cresceram no 1º trimestre; veja lista",
+      "fonte": "Giro 67",
+      "categoria": "Economia",
+      "resumo": "O Brasil registrou um dos melhores desempenhos de crescimento do PIB no primeiro trimestre de 2026 entre 45 países analisados, com uma expansão de 1,1%. O país ficou em sexto lugar no ranking de crescimento, superando potências como Estados Unidos e Alemanha.",
+      "corpo": "O crescimento de 1,1% do Produto Interno Bruto (PIB) brasileiro no primeiro trimestre de 2026 colocou o país em destaque no cenário econômico global. Segundo levantamento da Austin Rating, o Brasil teve o sexto melhor desempenho entre 45 das principais economias do mundo que já divulgaram seus resultados.\n\nEsse resultado positivo posiciona o Brasil à frente de economias desenvolvidas como Estados Unidos, Alemanha, Reino Unido e Itália no quesito crescimento trimestral. O desempenho foi impulsionado principalmente pelo setor de serviços e pela retomada dos investimentos, conforme indicado por análises econômicas.",
+      "url": "https://giro67.com.br/economia/brasil-esta-entre-economias-que-mais-cresceram-no-1o-trimestre-veja-lista/",
       "importancia": 7
     }
   ],
-  "generated_at": "2026-05-30T14:17:52",
+  "generated_at": "2026-05-30T15:14:30",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
