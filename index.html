@@ -3,633 +3,543 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PANORAMA — Política &amp; Economia Brasil</title>
+<title>Panorama Brasil — Política & Economia</title>
 <meta name="description" content="Boletim diário de política e economia brasileira. Atualizado 3 vezes ao dia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream:   #f7f4ee;
-    --cream2:  #ede9df;
-    --cream3:  #e4dfd3;
-    --ink:     #1c1917;
-    --ink2:    #3d3935;
-    --ink3:    #5c5854;
-    --rust:    #9b3a1a;
-    --rust2:   #c04a22;
-    --gold:    #b8972a;
-    --border:  #d6d1c7;
-    --muted:   #7a7570;
-    --rule:    #c8c2b8;
+    --bg:        #0d0d0f;
+    --bg2:       #131316;
+    --bg3:       #1a1a1f;
+    --bg4:       #212128;
+    --border:    #2a2a35;
+    --border2:   #353545;
+    --text:      #e8e8f0;
+    --text2:     #9999b0;
+    --text3:     #5a5a70;
+    --accent:    #4f8ef7;
+    --accent2:   #2d5fd4;
+    --green:     #3ecf6e;
+    --red:       #f45c5c;
+    --gold:      #e8b84b;
+    --purple:    #9b6dff;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Spectral', Georgia, serif;
-    background: var(--cream);
-    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.5;
+  /* ── LOADING ── */
+  #loading-screen {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 200;
+    transition: opacity 0.8s ease;
   }
+  #loading-screen.fade-out { opacity: 0; pointer-events: none; }
+
+  .ls-logo {
+    font-size: 28px; font-weight: 600;
+    letter-spacing: 0.04em; color: var(--text);
+    margin-bottom: 4px;
+  }
+  .ls-logo span { color: var(--accent); }
+  .ls-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .ls-track {
+    width: 200px; height: 1px;
+    background: var(--bg4); margin-bottom: 14px; overflow: hidden; position: relative;
+  }
+  .ls-fill {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: var(--accent); width: 0%; transition: width 0.4s ease;
+  }
+  .ls-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 0.1em; min-height: 18px; text-align: center;
+  }
+  .ls-steps {
+    margin-top: 36px; width: 280px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .ls-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text3);
+    padding: 7px 0; border-bottom: 1px solid var(--bg4);
+    display: flex; align-items: center; gap: 10px;
+    transition: color 0.3s;
+  }
+  .ls-step.done   { color: var(--green); }
+  .ls-step.active { color: var(--text); }
+  .ls-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--bg4); flex-shrink: 0; transition: background 0.3s;
+  }
+  .ls-step.done .ls-dot   { background: var(--green); }
+  .ls-step.active .ls-dot { background: var(--accent); }
 
   /* ── HEADER ── */
   .site-header {
     border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--cream);
+    position: sticky; top: 0;
+    background: rgba(13,13,15,0.92);
+    backdrop-filter: blur(12px);
     z-index: 50;
   }
-
   .header-top {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     padding: 10px 40px;
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 8px;
+    flex-wrap: wrap; gap: 8px;
   }
-
+  .header-logo {
+    font-size: 17px; font-weight: 600;
+    color: var(--text); letter-spacing: 0.01em;
+  }
+  .header-logo span { color: var(--accent); }
+  .header-right {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
   .header-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-size: 10px; color: var(--text3);
+    letter-spacing: 0.12em; text-transform: uppercase;
   }
-
-  .header-badges {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .badge {
+  .edition-pill {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 2px;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 10px; border: 1px solid var(--accent2);
+    color: var(--accent); border-radius: 100px;
   }
 
-  .edition-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border: 1px solid var(--rust);
-    color: var(--rust);
-    border-radius: 2px;
-  }
-
-  .masthead-wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .masthead-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 88px);
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--ink);
-    text-align: center;
-    padding: 20px 0 6px;
-    line-height: 1;
-  }
-
-  .masthead-rule {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 0 14px;
-  }
-
-  .rule-line { flex: 1; height: 1px; background: var(--rule); }
-
-  .rule-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-    text-align: center;
-  }
-
-  /* ── FILTER NAV ── */
-  .filter-nav {
-    background: var(--cream2);
+  /* ── INDICADORES ── */
+  .indicators-section {
+    background: var(--bg2);
     border-bottom: 1px solid var(--border);
   }
-
-  .filter-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    gap: 0;
-    align-items: center;
+  .indicators-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 20px 40px;
+  }
+  .indicators-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 16px;
   }
 
+  /* Câmbio + PIB */
+  .macro-row {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .macro-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 18px;
+    flex: 1; min-width: 140px;
+  }
+  .macro-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .macro-value {
+    font-size: 20px; font-weight: 600; color: var(--text);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .macro-sub {
+    font-size: 11px; color: var(--text3); margin-top: 3px;
+  }
+  .macro-change {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500; margin-top: 4px;
+  }
+  .up   { color: var(--green); }
+  .down { color: var(--red); }
+  .neu  { color: var(--text3); }
+
+  /* Bolsas */
+  .bolsas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 768px) { .bolsas-grid { grid-template-columns: 1fr; } }
+
+  .bolsa-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+  }
+  .bolsa-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 12px;
+  }
+  .bolsa-name {
+    font-weight: 600; font-size: 14px; color: var(--text);
+  }
+  .bolsa-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text3);
+  }
+  .bolsa-value {
+    font-size: 22px; font-weight: 600;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 2px;
+  }
+  .bolsa-change {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500; margin-bottom: 14px;
+  }
+  .acoes-list { display: flex; flex-direction: column; gap: 6px; }
+  .acao-row {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 5px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+  }
+  .acao-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; color: var(--text2);
+    font-size: 11px;
+  }
+  .acao-name { color: var(--text3); font-size: 11px; flex: 1; padding: 0 8px; }
+  .acao-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text);
+  }
+  .acao-change {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 500;
+    min-width: 50px; text-align: right;
+  }
+
+  /* PIB trimestres */
+  .pib-bars { display: flex; gap: 6px; align-items: flex-end; margin-top: 10px; height: 44px; }
+  .pib-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .pib-bar {
+    width: 100%; border-radius: 3px 3px 0 0;
+    min-height: 4px; transition: height 0.6s ease;
+  }
+  .pib-bar.pos { background: var(--green); }
+  .pib-bar.neg { background: var(--red); align-self: flex-start; border-radius: 0 0 3px 3px; }
+  .pib-q {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text3); text-align: center;
+  }
+  .pib-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; text-align: center;
+  }
+
+  .ind-loading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text3);
+    padding: 8px 0; text-align: center;
+  }
+
+  /* ── FILTROS ── */
+  .filter-nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 40px;
+    display: flex; gap: 0; align-items: center;
+  }
   .filter-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 10px 16px;
-    border: none;
-    background: none;
-    color: var(--muted);
-    cursor: pointer;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 10px 16px; border: none; background: none;
+    color: var(--text3); cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: all 0.15s;
-    white-space: nowrap;
   }
+  .filter-btn:hover { color: var(--text2); }
+  .filter-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  .filter-btn:hover { color: var(--ink2); }
-  .filter-btn.active { color: var(--ink); border-bottom-color: var(--rust); }
-
-  /* ── MAIN LAYOUT ── */
-  .main-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-  }
-
-  /* ── EDITORIAL STRIP ── */
+  /* ── EDITORIAL ── */
   .editorial {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 22px 36px;
-    margin: 0 -40px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
     display: none;
   }
-
   .editorial-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
+    max-width: 1200px; margin: 0 auto;
+    padding: 18px 40px;
+    display: flex; gap: 20px; align-items: flex-start;
   }
-
   .editorial-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 4px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); white-space: nowrap; flex-shrink: 0; padding-top: 2px;
   }
-
   .editorial-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.6;
-    color: #e8e4dc;
+    font-size: 14px; font-weight: 300;
+    line-height: 1.7; color: var(--text2);
   }
 
-  /* ── NEWS LAYOUT ── */
-  .news-section {
-    padding-top: 32px;
+  /* ── NOTÍCIAS ── */
+  .main-content {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 40px 80px;
   }
 
   /* Hero */
   .news-hero {
-    padding-bottom: 28px;
-    border-bottom: 2px solid var(--ink);
-    margin-bottom: 0;
-    cursor: default;
+    padding: 32px 0 28px;
+    border-bottom: 1px solid var(--border2);
   }
-
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
+  .eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px; flex-wrap: wrap;
   }
-
   .fonte-tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent);
   }
-
   .cat-tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-left: 1px solid var(--border);
-    padding-left: 10px;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); border-left: 1px solid var(--border2); padding-left: 10px;
   }
-
   .imp-tag {
     margin-left: auto;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 0.08em;
+    font-size: 9px; color: var(--gold);
   }
-
   .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 4vw, 46px);
-    font-weight: 700;
-    line-height: 1.12;
-    color: var(--ink);
-    margin-bottom: 14px;
-    letter-spacing: -0.02em;
+    font-size: clamp(22px, 3vw, 34px); font-weight: 600;
+    line-height: 1.2; color: var(--text);
+    margin-bottom: 12px; letter-spacing: -0.02em;
   }
-
   .hero-summary {
-    font-family: 'Spectral', serif;
-    font-size: 16px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.8;
-    color: var(--ink2);
-    max-width: 720px;
+    font-size: 15px; font-weight: 300;
+    line-height: 1.75; color: var(--text2);
+    max-width: 680px;
   }
 
-  /* Two-column grid */
+  /* Grid 2 col */
   .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid; grid-template-columns: 1fr 1fr;
     border-bottom: 1px solid var(--border);
   }
-
   @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
 
   .grid-item {
     padding: 24px 0;
-    cursor: default;
+    animation: fadeUp 0.5s ease both;
   }
-
-  .grid-item:nth-child(odd) {
-    padding-right: 28px;
-    border-right: 1px solid var(--border);
-  }
-
+  .grid-item:nth-child(odd)  { padding-right: 28px; border-right: 1px solid var(--border); }
   .grid-item:nth-child(even) { padding-left: 28px; }
-
-  .grid-item:nth-child(odd):last-child {
-    border-right: none;
-  }
+  .grid-item:nth-child(odd):last-child { border-right: none; }
 
   .item-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2.2vw, 24px);
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 9px;
+    font-size: clamp(15px, 2vw, 19px); font-weight: 600;
+    line-height: 1.3; color: var(--text); margin-bottom: 8px;
   }
-
   .item-summary {
-    font-family: 'Spectral', serif;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink3);
+    font-size: 13px; font-weight: 300;
+    line-height: 1.7; color: var(--text3);
   }
-
   .imp-bar-wrap {
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    margin-top: 12px; display: flex; align-items: center; gap: 8px;
   }
-
   .imp-bar {
-    height: 2px;
-    flex: 1;
-    background: var(--cream3);
-    border-radius: 1px;
-    overflow: hidden;
+    height: 2px; flex: 1; background: var(--bg4); border-radius: 1px; overflow: hidden;
   }
-
   .imp-fill {
-    height: 100%;
-    border-radius: 1px;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--rust) 100%);
+    height: 100%; border-radius: 1px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
   }
-
   .imp-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    white-space: nowrap;
+    font-size: 9px; color: var(--text3); white-space: nowrap;
   }
 
-  /* Single-column list items */
-  .single-list {}
-
-  .single-item {
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 0 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    cursor: default;
-  }
-
-  .single-item:last-child { border-bottom: none; }
-
-  .item-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    font-weight: 300;
-    color: var(--border);
-    line-height: 1;
-    padding-top: 3px;
-    text-align: right;
-  }
-
-  .single-body {}
-
-  .single-eyebrow {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
-  }
-
-  .single-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(16px, 2vw, 20px);
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--ink);
-    margin-bottom: 5px;
-  }
-
-  .single-summary {
-    font-family: 'Spectral', serif;
-    font-size: 13px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--ink3);
-  }
-
-  /* ── DIVIDER LABEL ── */
+  /* Singles */
   .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 20px 0 0;
+    display: flex; align-items: center; gap: 14px; padding: 20px 0 0;
     border-top: 1px solid var(--border);
   }
-
   .divider-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text3); white-space: nowrap;
   }
-
   .divider-line { flex: 1; height: 1px; background: var(--border); }
 
-  /* ── LOADING STATE ── */
-  #loading-screen {
-    position: fixed;
-    inset: 0;
-    background: var(--ink);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 200;
-    transition: opacity 0.9s ease, transform 0.9s ease;
+  .single-item {
+    display: grid; grid-template-columns: 48px 1fr;
+    gap: 0 16px; padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
   }
-
-  #loading-screen.fade-out {
-    opacity: 0;
-    transform: scale(1.02);
-    pointer-events: none;
-  }
-
-  .ls-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--cream);
-    letter-spacing: 0.12em;
-    margin-bottom: 4px;
-  }
-
-  .ls-sub {
+  .single-item:last-child { border-bottom: none; }
+  .item-num {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #555;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 56px;
+    font-size: 28px; font-weight: 300;
+    color: var(--bg4); line-height: 1; padding-top: 2px; text-align: right;
   }
-
-  .ls-progress-track {
-    width: 200px;
-    height: 1px;
-    background: #2a2a28;
-    margin-bottom: 16px;
-    overflow: hidden;
-    position: relative;
+  .single-title {
+    font-size: clamp(14px, 1.8vw, 17px); font-weight: 600;
+    line-height: 1.3; color: var(--text); margin-bottom: 4px;
   }
-
-  .ls-progress-fill {
-    position: absolute;
-    left: 0; top: 0; height: 100%;
-    background: var(--cream);
-    width: 0%;
-    transition: width 0.5s ease;
+  .single-summary {
+    font-size: 12px; font-weight: 300;
+    line-height: 1.7; color: var(--text3);
   }
-
-  .ls-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #555;
-    letter-spacing: 0.1em;
-    min-height: 18px;
-    text-align: center;
-  }
-
-  .ls-steps {
-    margin-top: 40px;
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .ls-step {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: #333;
-    padding: 6px 0;
-    border-bottom: 1px solid #222;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.3s;
-  }
-
-  .ls-step.done { color: #6a8f6a; }
-  .ls-step.active { color: #e8e4dc; }
-
-  .ls-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: #333;
-    flex-shrink: 0;
-    transition: background 0.3s;
-  }
-
-  .ls-step.done .ls-dot { background: #6a8f6a; }
-  .ls-step.active .ls-dot { background: #e8e4dc; }
 
   /* ── FOOTER ── */
   .site-footer {
-    border-top: 2px solid var(--ink);
-    background: var(--cream2);
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
   }
-
   .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
+    max-width: 1200px; margin: 0 auto;
+    padding: 18px 40px;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 10px;
   }
-
   .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--ink);
+    font-size: 14px; font-weight: 600; color: var(--text2);
   }
-
+  .footer-brand span { color: var(--accent); }
   .footer-meta {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    line-height: 1.8;
-    text-align: right;
+    font-size: 9px; color: var(--text3);
+    letter-spacing: 0.08em; text-align: right; line-height: 1.8;
   }
 
-  /* ── ERROR ── */
+  /* ── ERRO ── */
   .error-strip {
-    background: #fdf2f0;
-    border-left: 3px solid var(--rust);
-    padding: 20px 28px;
-    margin: 32px 0;
-    display: none;
+    background: rgba(244,92,92,0.08); border-left: 3px solid var(--red);
+    padding: 16px 20px; margin: 24px 0; display: none;
+    border-radius: 0 6px 6px 0;
   }
+  .error-strip p { font-size: 13px; color: var(--red); line-height: 1.6; }
 
-  .error-strip p {
-    font-family: 'Spectral', serif;
-    font-size: 15px;
-    color: var(--rust);
-    line-height: 1.6;
-  }
-
-  /* ── ANIMATIONS ── */
+  /* ── ANIM ── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: none; }
   }
-
-  .anim { animation: fadeUp 0.55s ease both; }
+  .anim { animation: fadeUp 0.5s ease both; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .header-top, .masthead-wrap, .main-content, .filter-inner { padding-left: 20px; padding-right: 20px; }
-    .editorial { margin: 0 -20px; padding: 18px 20px; }
-    .editorial-inner { flex-direction: column; gap: 6px; }
-    .grid-2 { grid-template-columns: 1fr; }
-    .grid-item:nth-child(odd) { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .header-top, .indicators-inner, .filter-inner, .main-content,
+    .editorial-inner, .footer-inner { padding-left: 20px; padding-right: 20px; }
+    .editorial-inner { flex-direction: column; gap: 4px; }
+    .grid-item:nth-child(odd)  { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); }
     .grid-item:nth-child(even) { padding-left: 0; }
     .single-item { grid-template-columns: 36px 1fr; }
-    .item-num { font-size: 26px; }
   }
 </style>
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div id="loading-screen">
-  <div class="ls-logo">PANORAMA</div>
-  <div class="ls-sub">Brasil · Política &amp; Economia</div>
-  <div class="ls-progress-track"><div class="ls-progress-fill" id="ls-progress"></div></div>
+  <div class="ls-logo">Panorama <span>Brasil</span></div>
+  <div class="ls-sub">Política &amp; Economia · Atualizado 3×/dia</div>
+  <div class="ls-track"><div class="ls-fill" id="ls-progress"></div></div>
   <div class="ls-status" id="ls-status">Iniciando…</div>
   <div class="ls-steps">
-    <div class="ls-step active" id="lss1"><div class="ls-dot"></div>Conectando às fontes</div>
-    <div class="ls-step" id="lss2"><div class="ls-dot"></div>Filtrando por relevância</div>
-    <div class="ls-step" id="lss3"><div class="ls-dot"></div>Consolidando as histórias</div>
-    <div class="ls-step" id="lss4"><div class="ls-dot"></div>Compondo a edição</div>
+    <div class="ls-step active" id="lss1"><div class="ls-dot"></div>Carregando indicadores de mercado</div>
+    <div class="ls-step" id="lss2"><div class="ls-dot"></div>Buscando notícias do dia</div>
+    <div class="ls-step" id="lss3"><div class="ls-dot"></div>Compondo a edição</div>
   </div>
 </div>
 
-<!-- SITE HEADER -->
+<!-- HEADER -->
 <header class="site-header">
   <div class="header-top">
-    <div class="header-date" id="header-date">—</div>
-    <div class="header-badges">
-      <span class="badge">Política</span>
-      <span class="badge">Economia</span>
-      <span class="badge">Brasil</span>
-      <span class="edition-badge" id="edition-badge">Carregando…</span>
-    </div>
-  </div>
-  <div class="masthead-wrap">
-    <h1 class="masthead-title">PANORAMA</h1>
-    <div class="masthead-rule">
-      <div class="rule-line"></div>
-      <div class="rule-text">ICL Notícias · Intercept Brasil · Revista Fórum · Folha de S.Paulo · Agência Brasil</div>
-      <div class="rule-line"></div>
+    <div class="header-logo">Panorama <span>Brasil</span></div>
+    <div class="header-right">
+      <div class="header-date" id="header-date">—</div>
+      <div class="edition-pill" id="edition-badge">—</div>
     </div>
   </div>
 </header>
 
-<!-- FILTER NAV -->
+<!-- INDICADORES -->
+<section class="indicators-section" id="indicators-section">
+  <div class="indicators-inner">
+    <div class="indicators-title">Indicadores de mercado</div>
+
+    <!-- Câmbio + PIB -->
+    <div class="macro-row" id="macro-row">
+      <div class="macro-card" id="card-usdbrl">
+        <div class="macro-label">USD / BRL</div>
+        <div class="macro-value" id="val-usdbrl">—</div>
+        <div class="macro-change neu" id="chg-usdbrl">carregando…</div>
+      </div>
+      <div class="macro-card" id="card-eurbrl">
+        <div class="macro-label">EUR / BRL</div>
+        <div class="macro-value" id="val-eurbrl">—</div>
+        <div class="macro-change neu" id="chg-eurbrl">carregando…</div>
+      </div>
+      <div class="macro-card" style="flex:2; min-width:220px;">
+        <div class="macro-label">PIB Brasil — crescimento trimestral (%)</div>
+        <div id="pib-container"><div class="ind-loading">carregando…</div></div>
+      </div>
+    </div>
+
+    <!-- Bolsas -->
+    <div class="bolsas-grid" id="bolsas-grid">
+      <div class="bolsa-card" id="card-ibov">
+        <div class="bolsa-header">
+          <div><div class="bolsa-name">Bovespa</div><div class="bolsa-index">IBOVESPA · B3</div></div>
+          <div class="bolsa-change neu" id="chg-ibov">—</div>
+        </div>
+        <div class="bolsa-value" id="val-ibov">—</div>
+        <div class="bolsa-change neu" id="sub-ibov" style="margin-bottom:14px;font-size:10px;">carregando…</div>
+        <div class="acoes-list" id="acoes-ibov"><div class="ind-loading">carregando ações…</div></div>
+      </div>
+      <div class="bolsa-card" id="card-sp500">
+        <div class="bolsa-header">
+          <div><div class="bolsa-name">S&amp;P 500</div><div class="bolsa-index">SPX · NYSE / NASDAQ</div></div>
+          <div class="bolsa-change neu" id="chg-sp500">—</div>
+        </div>
+        <div class="bolsa-value" id="val-sp500">—</div>
+        <div class="bolsa-change neu" id="sub-sp500" style="margin-bottom:14px;font-size:10px;">carregando…</div>
+        <div class="acoes-list" id="acoes-sp500"><div class="ind-loading">carregando ações…</div></div>
+      </div>
+      <div class="bolsa-card" id="card-eurostoxx">
+        <div class="bolsa-header">
+          <div><div class="bolsa-name">Euro Stoxx 50</div><div class="bolsa-index">SX5E · Euronext</div></div>
+          <div class="bolsa-change neu" id="chg-eurostoxx">—</div>
+        </div>
+        <div class="bolsa-value" id="val-eurostoxx">—</div>
+        <div class="bolsa-change neu" id="sub-eurostoxx" style="margin-bottom:14px;font-size:10px;">carregando…</div>
+        <div class="acoes-list" id="acoes-eurostoxx"><div class="ind-loading">carregando ações…</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTROS -->
 <nav class="filter-nav">
   <div class="filter-inner">
     <button class="filter-btn active" onclick="applyFilter(this,'todos')">Todos</button>
@@ -647,58 +557,236 @@
   </div>
 </div>
 
-<!-- MAIN -->
+<!-- NOTÍCIAS -->
 <main class="main-content">
   <div class="error-strip" id="error-strip"><p id="error-text"></p></div>
-  <div class="news-section" id="news-section"></div>
+  <div id="news-section"></div>
 </main>
 
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-brand">PANORAMA</div>
+    <div class="footer-brand">Panorama <span>Brasil</span></div>
     <div class="footer-meta" id="footer-meta">—</div>
   </div>
 </footer>
 
 <script>
-// ─────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────
-let allNews    = [];
+// ─────────────────────────────────────────
+// ESTADO
+// ─────────────────────────────────────────
+let allNews = [];
 let activeFilter = 'todos';
 
-// ─────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────
+// UTILITÁRIOS
+// ─────────────────────────────────────────
+function esc(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtNum(n, dec=2) {
+  return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+
+function changeClass(v) {
+  return v > 0 ? 'up' : v < 0 ? 'down' : 'neu';
+}
+
+function changeStr(v, prefix='') {
+  const s = v > 0 ? `▲ +${fmtNum(v)}%` : v < 0 ? `▼ ${fmtNum(v)}%` : `— ${fmtNum(v)}%`;
+  return s;
+}
+
 function setProgress(pct, status) {
   document.getElementById('ls-progress').style.width = pct + '%';
-  document.getElementById('ls-status').textContent   = status;
+  document.getElementById('ls-status').textContent = status;
 }
 
 function setStep(n, state) {
-  const el = document.getElementById('lss' + n);
-  if (el) { el.className = 'ls-step ' + state; }
+  const el = document.getElementById('lss'+n);
+  if (el) el.className = 'ls-step ' + state;
 }
 
 function setDate() {
   const now  = new Date();
-  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  const opts = {weekday:'long',day:'numeric',month:'long',year:'numeric'};
   document.getElementById('header-date').textContent =
     now.toLocaleDateString('pt-BR', opts).toUpperCase();
-
   const h = now.getHours();
-  const edition = h < 10 ? 'Edição Matutina' : h < 14 ? 'Edição do Meio-Dia' : 'Edição Vespertina';
-  document.getElementById('edition-badge').textContent = edition;
-
+  const ed = h<10 ? 'Edição Matutina' : h<14 ? 'Edição Meio-Dia' : 'Edição Vespertina';
+  document.getElementById('edition-badge').textContent = ed;
   document.getElementById('footer-meta').innerHTML =
-    'Última atualização: ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) + '<br>' +
-    'Fontes: ICL · Intercept · Fórum · Folha · Ag. Brasil';
+    'Atualizado às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) +
+    '<br>Fontes: Folha · Agência Brasil · ICL · Intercept · Fórum · G1 · Valor';
 }
 
-// ─────────────────────────────────────────────
-// FILTER
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────
+// INDICADORES — via APIs públicas gratuitas
+// ─────────────────────────────────────────
+
+// Câmbio via AwesomeAPI (BR, gratuita, sem key)
+async function fetchCambio() {
+  try {
+    const r = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL');
+    const d = await r.json();
+
+    const usd = d.USDBRL;
+    const eur = d.EURBRL;
+
+    const uv = parseFloat(usd.bid);
+    const uc = parseFloat(usd.pctChange);
+    document.getElementById('val-usdbrl').textContent = 'R$ ' + fmtNum(uv);
+    const uchg = document.getElementById('chg-usdbrl');
+    uchg.textContent = changeStr(uc);
+    uchg.className = 'macro-change ' + changeClass(uc);
+
+    const ev = parseFloat(eur.bid);
+    const ec = parseFloat(eur.pctChange);
+    document.getElementById('val-eurbrl').textContent = 'R$ ' + fmtNum(ev);
+    const echg = document.getElementById('chg-eurbrl');
+    echg.textContent = changeStr(ec);
+    echg.className = 'macro-change ' + changeClass(ec);
+  } catch(e) {
+    document.getElementById('val-usdbrl').textContent = '—';
+    document.getElementById('val-eurbrl').textContent = '—';
+  }
+}
+
+// PIB — dados fixos dos últimos 4 trimestres (IBGE, atualizados manualmente no script)
+// O generate_news.py pode sobrescrever news-data.json com campo pib_data
+function renderPIB(quarters) {
+  const def = [
+    {q:'T1/24', v:2.5}, {q:'T2/24', v:1.4},
+    {q:'T3/24', v:0.9}, {q:'T4/24', v:2.1}
+  ];
+  const data = quarters || def;
+  const max = Math.max(...data.map(d => Math.abs(d.v)));
+
+  let html = '<div class="pib-bars">';
+  data.forEach(d => {
+    const pct = Math.round((Math.abs(d.v) / max) * 40);
+    const cls = d.v >= 0 ? 'pos' : 'neg';
+    const color = d.v >= 0 ? 'var(--green)' : 'var(--red)';
+    html += `<div class="pib-bar-wrap">
+      <div class="pib-val ${cls === 'pos' ? 'up' : 'down'}" style="font-family:'JetBrains Mono',monospace;font-size:9px;">${d.v>0?'+':''}${d.v}%</div>
+      <div class="pib-bar ${cls}" style="height:${pct}px;"></div>
+      <div class="pib-q">${d.q}</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('pib-container').innerHTML = html;
+}
+
+// Bolsas via Yahoo Finance (proxy via allorigins para evitar CORS)
+async function fetchYahoo(symbol) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+  const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+  const r = await fetch(proxy);
+  const d = await r.json();
+  const meta = d.chart.result[0].meta;
+  return {
+    price: meta.regularMarketPrice,
+    prev:  meta.chartPreviousClose,
+    change: ((meta.regularMarketPrice - meta.chartPreviousClose) / meta.chartPreviousClose) * 100
+  };
+}
+
+async function fetchStock(symbol) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+  const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+  const r = await fetch(proxy);
+  const d = await r.json();
+  const meta = d.chart.result[0].meta;
+  const chg = ((meta.regularMarketPrice - meta.chartPreviousClose) / meta.chartPreviousClose) * 100;
+  return { price: meta.regularMarketPrice, change: chg, currency: meta.currency };
+}
+
+function renderAcoes(containerId, acoes) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  let html = '';
+  acoes.forEach(a => {
+    const cls = changeClass(a.change);
+    const prefix = a.change > 0 ? '+' : '';
+    html += `<div class="acao-row">
+      <span class="acao-ticker">${a.ticker}</span>
+      <span class="acao-name">${a.name}</span>
+      <span class="acao-price">${a.currency==='BRL'?'R$':'$'} ${fmtNum(a.price)}</span>
+      <span class="acao-change ${cls}">${prefix}${fmtNum(a.change)}%</span>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+async function fetchBolsas() {
+  // ── IBOVESPA
+  const ibovStocks = [
+    {ticker:'PETR4', name:'Petrobras', symbol:'PETR4.SA'},
+    {ticker:'VALE3', name:'Vale',      symbol:'VALE3.SA'},
+    {ticker:'ITUB4', name:'Itaú',      symbol:'ITUB4.SA'},
+    {ticker:'BBDC4', name:'Bradesco',  symbol:'BBDC4.SA'},
+    {ticker:'ABEV3', name:'Ambev',     symbol:'ABEV3.SA'},
+  ];
+
+  // ── S&P 500
+  const spStocks = [
+    {ticker:'AAPL',  name:'Apple',     symbol:'AAPL'},
+    {ticker:'MSFT',  name:'Microsoft', symbol:'MSFT'},
+    {ticker:'NVDA',  name:'NVIDIA',    symbol:'NVDA'},
+    {ticker:'AMZN',  name:'Amazon',    symbol:'AMZN'},
+    {ticker:'GOOGL', name:'Alphabet',  symbol:'GOOGL'},
+  ];
+
+  // ── Euro Stoxx 50
+  const euStocks = [
+    {ticker:'ASML',  name:'ASML',      symbol:'ASML'},
+    {ticker:'SAP',   name:'SAP',       symbol:'SAP'},
+    {ticker:'SIE',   name:'Siemens',   symbol:'SIE.DE'},
+    {ticker:'MC',    name:'LVMH',      symbol:'MC.PA'},
+    {ticker:'SAN',   name:'Santander', symbol:'SAN'},
+  ];
+
+  async function loadBolsa(indexSymbol, valId, chgId, subId, acoesId, stocks, fmtPrice) {
+    try {
+      const idx = await fetchYahoo(indexSymbol);
+      const cls = changeClass(idx.change);
+      document.getElementById(valId).textContent = fmtPrice(idx.price);
+      const chgEl = document.getElementById(chgId);
+      chgEl.textContent = (idx.change>0?'▲ +':'▼ ') + fmtNum(idx.change) + '%';
+      chgEl.className = 'bolsa-change ' + cls;
+      document.getElementById(subId).textContent =
+        'Anterior: ' + fmtPrice(idx.prev);
+
+      const results = await Promise.allSettled(
+        stocks.map(s => fetchStock(s.symbol).then(d => ({...s, ...d})))
+      );
+      const acoes = results
+        .filter(r => r.status === 'fulfilled')
+        .map(r => r.value);
+      renderAcoes(acoesId, acoes);
+    } catch(e) {
+      document.getElementById(valId).textContent = '—';
+      document.getElementById(acoesId).innerHTML =
+        '<div class="ind-loading" style="color:var(--red)">Erro ao carregar</div>';
+    }
+  }
+
+  await Promise.allSettled([
+    loadBolsa('^BVSP',    'val-ibov',      'chg-ibov',      'sub-ibov',
+              'acoes-ibov',      ibovStocks, p => fmtNum(p,0)),
+    loadBolsa('^GSPC',    'val-sp500',     'chg-sp500',     'sub-sp500',
+              'acoes-sp500',     spStocks,  p => fmtNum(p,0)),
+    loadBolsa('^STOXX50E','val-eurostoxx', 'chg-eurostoxx', 'sub-eurostoxx',
+              'acoes-eurostoxx', euStocks,  p => fmtNum(p,0)),
+  ]);
+}
+
+// ─────────────────────────────────────────
+// FILTRO + RENDER NOTÍCIAS
+// ─────────────────────────────────────────
 function applyFilter(btn, val) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -706,9 +794,6 @@ function applyFilter(btn, val) {
   renderNews();
 }
 
-// ─────────────────────────────────────────────
-// RENDER
-// ─────────────────────────────────────────────
 function renderNews() {
   const section = document.getElementById('news-section');
   const filtered = activeFilter === 'todos'
@@ -716,21 +801,21 @@ function renderNews() {
     : allNews.filter(n => n.categoria && n.categoria.toLowerCase().includes(activeFilter));
 
   if (!filtered.length) {
-    section.innerHTML = '<p style="padding:40px 0;font-family:Spectral,serif;font-size:15px;color:var(--muted);">Nenhuma notícia nessa categoria.</p>';
+    section.innerHTML = '<p style="padding:40px 0;font-size:14px;color:var(--text3);">Nenhuma notícia nessa categoria.</p>';
     return;
   }
 
   const hero = filtered[0];
   const grid = filtered.slice(1, 3);
   const rest  = filtered.slice(3);
-
   let html = '';
 
   // HERO
-  html += `<div class="news-hero anim" style="animation-delay:0.1s">
-    <div class="hero-eyebrow">
-      <span class="fonte-tag">${esc(hero.fonte||'')}</span>
-      <span class="cat-tag">${esc(hero.categoria||'')}</span>
+  const hImp = Math.round(Math.min(100,(hero.importancia||5)*10));
+  html += `<div class="news-hero anim">
+    <div class="eyebrow">
+      <span class="fonte-tag">${esc(hero.fonte)}</span>
+      <span class="cat-tag">${esc(hero.categoria)}</span>
       <span class="imp-tag">Relevância ${hero.importancia||'—'}/10</span>
     </div>
     <h2 class="hero-title">${esc(hero.titulo)}</h2>
@@ -740,15 +825,15 @@ function renderNews() {
   // GRID 2 col
   if (grid.length) {
     html += '<div class="grid-2">';
-    grid.forEach((n, i) => {
-      const imp = Math.round(Math.min(100, (n.importancia||5) * 10));
-      html += `<div class="grid-item anim" style="animation-delay:${0.2 + i*0.1}s">
-        <div class="hero-eyebrow">
-          <span class="fonte-tag">${esc(n.fonte||'')}</span>
-          <span class="cat-tag">${esc(n.categoria||'')}</span>
+    grid.forEach((n,i) => {
+      const imp = Math.round(Math.min(100,(n.importancia||5)*10));
+      html += `<div class="grid-item" style="animation-delay:${i*0.1}s">
+        <div class="eyebrow">
+          <span class="fonte-tag">${esc(n.fonte)}</span>
+          <span class="cat-tag">${esc(n.categoria)}</span>
         </div>
-        <h3 class="item-title">${esc(n.titulo)}</h3>
-        <p class="item-summary">${esc(n.resumo)}</p>
+        <div class="item-title">${esc(n.titulo)}</div>
+        <div class="item-summary">${esc(n.resumo)}</div>
         <div class="imp-bar-wrap">
           <div class="imp-bar"><div class="imp-fill" style="width:${imp}%"></div></div>
           <span class="imp-label">${n.importancia||'—'}/10</span>
@@ -758,154 +843,75 @@ function renderNews() {
     html += '</div>';
   }
 
-  // REST
+  // SINGLES
   if (rest.length) {
-    html += `<div class="section-divider" style="margin-top:0">
-      <div class="divider-label">Mais notícias</div>
-      <div class="divider-line"></div>
-    </div>
-    <div class="single-list">`;
-    rest.forEach((n, i) => {
-      html += `<div class="single-item anim" style="animation-delay:${0.3+i*0.07}s">
+    html += `<div class="section-divider"><div class="divider-label">Mais notícias</div><div class="divider-line"></div></div>`;
+    rest.forEach((n,i) => {
+      html += `<div class="single-item" style="animation-delay:${0.1+i*0.07}s">
         <div class="item-num">${String(i+4).padStart(2,'0')}</div>
-        <div class="single-body">
-          <div class="single-eyebrow">
-            <span class="fonte-tag">${esc(n.fonte||'')}</span>
-            <span class="cat-tag">${esc(n.categoria||'')}</span>
+        <div>
+          <div class="eyebrow" style="margin-bottom:5px;">
+            <span class="fonte-tag">${esc(n.fonte)}</span>
+            <span class="cat-tag">${esc(n.categoria)}</span>
           </div>
           <div class="single-title">${esc(n.titulo)}</div>
           <div class="single-summary">${esc(n.resumo)}</div>
         </div>
       </div>`;
     });
-    html += '</div>';
   }
 
   section.innerHTML = html;
 }
 
-function esc(str) {
-  return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
-
-// ─────────────────────────────────────────────
-// FETCH NEWS via Anthropic API
-// ─────────────────────────────────────────────
-async function fetchNews() {
-  const today = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-  const prompt = `Hoje é ${today}. Você é um editor jornalístico especializado em política e economia brasileira.
-
-Use sua ferramenta de busca web para encontrar as 10 notícias mais importantes e recentes sobre POLÍTICA e ECONOMIA no Brasil publicadas HOJE ou nas últimas 24 horas.
-
-Busque especificamente nestas fontes: ICL Notícias (iclnoticias.com.br), Intercept Brasil (theintercept.com/brasil), Revista Fórum (revistaforum.com.br), Folha de São Paulo (folha.uol.com.br), Agência Brasil (agenciabrasil.ebc.com.br).
-
-Faça buscas variadas como: "política Brasil hoje", "governo Lula congresso hoje", "economia Brasil hoje", "mercado financeiro Brasil hoje", combinando com os nomes das fontes.
-
-Retorne APENAS JSON válido sem texto antes ou depois, sem markdown, sem blocos de código:
-
-{"resumo_editorial":"2-3 frases sobre o panorama político-econômico do dia.","noticias":[{"titulo":"Título direto e informativo","fonte":"Nome da fonte","categoria":"Política ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que é relevante.","importancia":8}]}
-
-Retorne exatamente 10 notícias. importancia é número inteiro de 1 a 10.`;
-
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-
-  if (!resp.ok) throw new Error('HTTP ' + resp.status);
-  const data = await resp.json();
-  if (data.error) throw new Error(data.error.message);
-
-  let jsonText = '';
-  for (const b of data.content) {
-    if (b.type === 'text') { jsonText = b.text; break; }
-  }
-
-  jsonText = jsonText.replace(/```json|```/g, '').trim();
-  const s = jsonText.indexOf('{');
-  const e = jsonText.lastIndexOf('}');
-  if (s !== -1 && e !== -1) jsonText = jsonText.slice(s, e + 1);
-
-  return JSON.parse(jsonText);
-}
-
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────
 // INIT
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────
 async function init() {
   setDate();
 
-  // Check if pre-generated content exists (for static GitHub Pages build)
-  let data = null;
+  setProgress(10, 'Carregando indicadores…'); setStep(1,'active');
 
+  // Carregar indicadores em paralelo (não bloqueia notícias)
+  const marketPromise = Promise.allSettled([fetchCambio(), fetchBolsas()]);
+  renderPIB(); // renderiza com dados default, será sobrescrito se news-data tiver pib_data
+
+  setProgress(35, 'Buscando notícias…'); setStep(1,'done'); setStep(2,'active');
+
+  // Carregar notícias do JSON estático
+  let data = null;
   try {
-    const staticResp = await fetch('./news-data.json?v=' + Date.now());
-    if (staticResp.ok) {
-      data = await staticResp.json();
-    }
+    const r = await fetch('./news-data.json?v=' + Date.now());
+    if (r.ok) data = await r.json();
   } catch(e) {}
 
+  setProgress(80, 'Compondo edição…'); setStep(2,'done'); setStep(3,'active');
+
+  await marketPromise; // aguarda mercado terminar
+
+  setProgress(100, 'Pronto.');
+  setStep(3,'done');
+
   if (data) {
-    // Use pre-generated static data
-    setProgress(100, 'Edição pronta.');
     allNews = data.noticias || [];
-    showContent(data.resumo_editorial || '');
-    return;
-  }
-
-  // Fallback: fetch live via API
-  try {
-    setProgress(15, 'Conectando às fontes…'); setStep(1,'active');
-    await new Promise(r => setTimeout(r, 400));
-
-    setProgress(40, 'Analisando relevância…'); setStep(1,'done'); setStep(2,'active');
-    data = await fetchNews();
-
-    setProgress(75, 'Consolidando histórias…'); setStep(2,'done'); setStep(3,'active');
-    await new Promise(r => setTimeout(r, 300));
-
-    setProgress(95, 'Compondo a edição…'); setStep(3,'done'); setStep(4,'active');
-    await new Promise(r => setTimeout(r, 300));
-
-    setProgress(100, 'Edição pronta.');
-    setStep(4,'done');
-
-    allNews = data.noticias || [];
-    showContent(data.resumo_editorial || '');
-
-  } catch(err) {
-    setProgress(100, 'Erro ao carregar.');
-    document.getElementById('loading-screen').classList.add('fade-out');
-    setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 900);
-    const strip = document.getElementById('error-strip');
-    strip.style.display = 'block';
+    if (data.pib_data) renderPIB(data.pib_data);
+    const ed = data.resumo_editorial || '';
+    if (ed) {
+      document.getElementById('editorial-text').textContent = ed;
+      document.getElementById('editorial').style.display = 'block';
+    }
+  } else {
+    document.getElementById('error-strip').style.display = 'block';
     document.getElementById('error-text').textContent =
-      'Não foi possível carregar as notícias: ' + err.message +
-      '. Recarregue a página para tentar novamente.';
+      'Não foi possível carregar as notícias. Recarregue a página.';
   }
-}
 
-function showContent(editorial) {
-  if (editorial) {
-    document.getElementById('editorial-text').textContent = editorial;
-    document.getElementById('editorial').style.display = 'block';
-  }
   renderNews();
+
   setTimeout(() => {
     document.getElementById('loading-screen').classList.add('fade-out');
     setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 900);
-  }, 500);
+  }, 400);
 }
 
 window.addEventListener('DOMContentLoaded', init);
