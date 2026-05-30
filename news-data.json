@@ -1,71 +1,98 @@
 {
-  "resumo_editorial": "O cenário político brasileiro é",
+  "resumo_editorial": "O Brasil navega",
   "noticias": [
     {
-      "titulo": "Lula diz que vai indicar novamente Messias ao STF",
-      "fonte": "Agência Brasil",
-      "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHy0vxjXlLcSUlSC4tUS7DMpRLVBjF8oOsKwCGjObos6-HlD3lqoiVmB54NI5qq0Z4OYuUzFjl28tar44hFqk9kk_lHiMIp7AKhuJTsc12CFnE-XFzXkfga3Lmtt_oiofbUy4xPHph-CX1aOILBo8EdIopuLLVAVPlfCaMEwvH7_vB7nDYW4FF_wu-_-iWHsmTnJzPAQHQKe4bl517bttwV5PLbp7CjOaH9C1e9xnG7UliwKCfqNk4AqFo5qiWmY8BxhZgXmJPJvChIsukGBUAFxZmxXuPY=",
-      "importancia": 9,
-      "resumo": "O presidente Luiz Inácio Lula da Silva anunciou sua intenção de indicar novamente o nome de Messias para uma vaga no",
-      "corpo": "O presidente Luiz Inácio Lula da Silva anunciou sua intenção de indicar novamente o nome de Messias para uma vaga no"
-    },
-    {
-      "titulo": "Conselho de Comunicação Social debate desinformação nas eleições",
-      "fonte": "Agência Câmara Notícias",
-      "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHZY-pOP_suCop_i62Bba4CQmLg5wAafKr02SfFIhFpMEWffGCASWbJD_gXHQ7qRleYZ1ISQ22dsGvZYgX3M00Y7bdn4POSVKPvk_-ECFiov_1OxXUOP3ZUvGcedWlxmjEW-ZdKbrpKuguxpqi1QaQKq4liVANZvAapcS0xOH5bWtsHH1lRH2lrlJRfBPnc_LmbxCbOdJ0sDeoo0bl0DQL0VXebP8MN",
-      "importancia": 8,
-      "resumo": "O Conselho de Comunicação Social (CCS) realizou um debate crucial sobre a desinformação no contexto eleitoral",
-      "corpo": "O Conselho de Comunicação Social (CCS) realizou um debate crucial sobre a desinformação no contexto eleitoral"
-    },
-    {
-      "titulo": "STF e bancada feminina do Congresso discutem ações de proteção a mulheres e crianças",
-      "fonte": "Portal STF",
-      "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGQu4yKka9enkwdz6hcL6a1a7F2EuD--F8KqGoCEcnrnEwSFFHEyLQa60G15wKfLZryvIvJSW6Xo6U02cWz96e_kk0dTo9Lppq0CXCNjsL2Yz9JWoA=",
-      "importancia": 8,
-      "resumo": "O Supremo Tribunal Federal (STF) e a bancada feminina do Congresso Nacional se reuniram para debater e articular ações",
-      "corpo": "O Supremo Tribunal Federal (STF) e a bancada feminina do Congresso Nacional se reuniram para debater e articular ações"
-    },
-    {
-      "titulo": "Governo detalha bloqueio no Orçamento; ministérios da Defesa, Cidades e Educação lideram cortes",
+      "titulo": "Como resposta a medida americana, governo brasileiro deve reforçar discurso de temor de intervenção",
       "fonte": "G1",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEH0uCcQubk0rquxqdZ1H2a4BeA4JK7gd2pNnt-XP0aGzMVfvn2hVlYSG7YOsJnInuWLTQvq1GaJw6I6Lf_mFbMMvj_bV_WD73rj-gdWkqm2FLii_2XeGSYPIwzT1EcAxi2Xrf9ijLwDT3aL7iyaIyU_Qh8Aef4Q732_mjQnXqsJnvaYWhtW0hgKPrzxXP_-StCUoRKum90JAI2nhUvPIzawXjcctWlEOD2oK9ngdzAl1KyXm5xbdxpmoqSWSTNdo4zu9zFPO6EZwgQTfg6CXRmSir6t8u4bWSesRM=",
-      "importancia": 8,
-      "resumo": "O governo federal detalhou o bloqueio orçamentário, com os ministérios da Defesa, Cidades e",
-      "corpo": "O governo federal detalhou o bloqueio orçamentário, com os ministérios da Defesa, Cidades e"
-    },
-    {
-      "titulo": "Decisão dos EUA sobre facções tenta limitar soberania do Brasil",
-      "fonte": "Agência Brasil",
-      "categoria": "Internacional",
-      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/decisao-dos-eua-sobre-faccoes-tenta-limitar-soberania-do-brasil",
-      "importancia": 8,
-      "resumo": "Uma recente decisão do governo dos Estados Unidos, relacionada a facções, foi interpretada pelo Brasil como uma tentativa de limitar sua",
-      "corpo": "Uma recente decisão do governo dos Estados Unidos, relacionada a facções, foi interpretada pelo Brasil como uma tentativa de limitar sua"
-    },
-    {
-      "titulo": "Fiocruz Brasília e Ministério da Saúde lançam curso inédito para qualificar o cuidado em crises de saúde mental no SUS",
-      "fonte": "Fiocruz Brasília",
       "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEODre2_mCUP2PXeferRRYPZoIen4zuH2mU4-qPAG8ax9KeRA7ycDz7tc_yESh4zWmX5MYOig_IFeSgVF5H2S5EHcVMWj8BblnrQbdKyOFrwd6ornIPUGGKfeWzNkYuDYtup9dERf5qJs_LFOGy_JLArsTUHOIF6I0a_1vq6jHX_JcISW8zL2yKz0-3ivX9bo-Jngw2rVBCPkRGWzR72mFr6aKp67vl482NRjD6SgZs3SMj8Om6MCbH0EbN8VrEwnCVFlpvcho5hrrsYWBacb2asJl3jGBYnZuBog==",
-      "importancia": 7,
-      "resumo": "Fiocruz Brasília e o Ministério da Saúde lançaram um curso inédito focado na qualificação do cuidado em",
-      "corpo": "Fiocruz Brasília e o Ministério da Saúde lançaram um curso inédito focado na qualificação do cuidado em"
+      "url": "",
+      "importancia": 9,
+      "resumo": "O governo brasileiro planeja intensificar seu discurso de temor de intervenção, uma medida que surge como resposta direta a recentes ações",
+      "corpo": "O governo brasileiro planeja intensificar seu discurso de temor de intervenção, uma medida que surge como resposta direta a recentes ações"
     },
     {
-      "titulo": "Brasil e Suriname fortalecem parceria estratégica com cooperação para o desenvolvimento em saúde, Amazônia e proteção social",
-      "fonte": "Agência Brasil",
+      "titulo": "Brasil deve voltar a ser 10ª maior economia após resultado do PIB",
+      "fonte": "TN Sul",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEavCBWfwtrXcRK81ozZ7188st1Hz3RwYm4Xgh6gGSbkWVC9Lku8cHaU_LLU0w108O0BZ1OrLVQLCOGPqRYjykViarYmpn-6lyeiwey0OdiOWIxB5gLJYla3IDAiCj3nXCwCbZzpyyxjY8b6WWuaxNyIo7Z1WKs3FoaWKMRuEZKejGhhmKSG_8JxRJ4NbuW8FQKksKBq4dFVjow",
+      "importancia": 9,
+      "resumo": "O Brasil está projetado para reassumir a posição de 10ª maior economia global, um marco impulsionado",
+      "corpo": "O Brasil está projetado para reassumir a posição de 10ª maior economia global, um marco impulsionado"
+    },
+    {
+      "titulo": "Governo amplia bloqueio para R$ 23,678 bilhões e mantém medidas para atendimento das regras fiscais",
+      "fonte": "Ministério do Planejamento e Orçamento - Portal Gov.br",
+      "categoria": "Economia",
+      "url": "https://www.gov.br/mpo/pt-br/ultimas-noticias/2026/05/governo-amplia-bloqueio-para-r-23-678-bilhoes-e-mantem-medidas-para-atendimento-das-regras-fiscais",
+      "importancia": 9,
+      "resumo": "O governo federal ampliou o bloqueio orçamentário para R$ 23,678 bilhões,",
+      "corpo": "O governo federal ampliou o bloqueio orçamentário para R$ 23,678 bilhões,"
+    },
+    {
+      "titulo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "",
+      "importancia": 8,
+      "resumo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição",
+      "corpo": "Fachin diz que CNJ vai aplicar decisão do STF e acabar com aposentadoria compulsória como punição"
+    },
+    {
+      "titulo": "Brasil tem menor desemprego da série histórica para o trimestre encerrado em abril",
+      "fonte": "Amapá Digital",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGMqCthSF5fNgl9uVyROK1Fv8RUi8O53QBQXi35u67EjiZVACpun91bFTmK3ddzrmZ5up84FNOASJN2GXZzildLn8A80lJTXNFtD-eGY954w_lAWc7MeQT5IDky7zWjtnJgGO9f7OMExtOqTFyOElJhar6uTf9VNYnXRhty29N1IvYxKn5Pd-fNa1pHJWkVfgcsw6X0VvuCVYum6vmdcmtRXhp8I9NtnePN4d5Tyk4NBBQZWQeCRqoPeGEOFZLwB1xKDwtc10jHRrFtf9w=",
+      "importancia": 8,
+      "resumo": "O Brasil registrou a menor taxa de desemprego de sua série histórica para o trimestre encerrado em abril, um marco",
+      "corpo": "O Brasil registrou a menor taxa de desemprego de sua série histórica para o trimestre encerrado em abril, um marco"
+    },
+    {
+      "titulo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos",
+      "fonte": "Ministério da Saúde - Portal Gov.br",
+      "categoria": "Politica",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/noticias/2026/maio/ministerio-da-saude-reforca-cuidado-em-saude-mental-com-habilitacao-de-cerca-de-800-novos-servicos-em-tres-anos",
+      "importancia": 8,
+      "resumo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos",
+      "corpo": "Ministério da Saúde reforça cuidado em saúde mental com habilitação de cerca de 800 novos serviços em três anos"
+    },
+    {
+      "titulo": "Governo brasileiro doa 21 toneladas de alimentos à Bolívia em meio a crise no país vizinho",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Internacional",
-      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/brasil-e-suriname-fortalecem-parceria-estrategica-com-cooperacao-para-o-desenvolvimento-em-saude-amazonia-e-protecao-social",
+      "url": "https://www1.folha.uol.com.br/mundo/2026/05/bolivia-governo-brasileiro-doa-21-toneladas-de-alimentos.shtml",
+      "importancia": 8,
+      "resumo": "O governo brasileiro anunciou a doação de 21 toneladas de alimentos à Bolívia, um gesto de solidariedade",
+      "corpo": "O governo brasileiro anunciou a doação de 21 toneladas de alimentos à Bolívia, um gesto de solidariedade"
+    },
+    {
+      "titulo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "",
       "importancia": 7,
-      "resumo": "Brasil e Suriname estão aprofundando sua parceria estratégica, focando em cooperação para o desenvolvimento nas áreas",
-      "corpo": "Brasil e Suriname estão aprofundando sua parceria estratégica, focando em cooperação para o desenvolvimento nas áreas"
+      "resumo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei",
+      "corpo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei"
+    },
+    {
+      "titulo": "INFLAÇÃO/BRASIL- GASOLINA, DIESEL E GÁS FICAM MAIS CAROS EM 2026 COM O AUMENTO DO ICMS.",
+      "fonte": "Folha do Cacau",
+      "categoria": "Economia",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGT4hmjaNB2BLbRPGhD-DydSLw05yd8mhozm420Dzn3pg98yYT6cgLZevuPaZJD4Amc5VLSPsIm-VHQJVT-0j1INueqFevvPwJlBWVN1KjKtaC_PT-JzyZxN5GbPsdrC5D4SYyopOfGtzeJUN7RYpce_O2GEmY-cpK3PtBvN6wMxu1Gxv2FCZ58IIdVor_pT6S6nVdTVWvcXfbSMK7vr-z2LTO86L9G9xrCW2czqu3Gu4VB6YdjTE287DLqPK8Nj7jQvSM8",
+      "importancia": 7,
+      "resumo": "A partir de 2026, consumidores brasileiros enfrentarão um aumento nos preços da gasolina, diesel e",
+      "corpo": "A partir de 2026, consumidores brasileiros enfrentarão um aumento nos preços da gasolina, diesel e"
+    },
+    {
+      "titulo": "Brasil e Suriname vão negociar acordo para ampliar comércio",
+      "fonte": "Agência Brasil",
+      "categoria": "Economia",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/brasil-e-suriname-vao-negociar-acordo-para-ampliar-comercio",
+      "importancia": 7,
+      "resumo": "Brasil e Suriname anunciaram o início de negociações para um acordo que visa ampliar significativamente o comércio bilateral. A",
+      "corpo": "Brasil e Suriname anunciaram o início de negociações para um acordo que visa ampliar significativamente o comércio bilateral. A"
     }
   ],
-  "generated_at": "2026-05-30T17:09:06",
+  "generated_at": "2026-05-30T17:53:42",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
