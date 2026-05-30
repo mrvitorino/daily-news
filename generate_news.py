@@ -163,61 +163,89 @@ def buscar_entretenimento(client, today_str):
 # ── GERAR CORPO ──────────────────────────────────────────────────────────────
 def gerar_corpo(client, noticia):
     """
-    Gera resumo (2 frases) e corpo (3 paragrafos) em texto simples.
-    Sem marcadores — paragrafos separados por linha em branco.
+    Gera resumo + corpo. Pede 3 paragrafos numerados explicitamente.
+    Divide por sentencas se o modelo nao inserir quebras de linha.
     """
     titulo = noticia["titulo"]
     fonte  = noticia["fonte"]
     cat    = noticia["categoria"]
 
     prompt = (
-        "Voce e um jornalista brasileiro. Escreva um artigo jornalistico sobre:\n\n"
-        f"Titulo: {titulo}\nFonte: {fonte}\nCategoria: {cat}\n\n"
-        "Escreva exatamente 4 blocos de texto separados por linha em branco:\n\n"
-        "Bloco 1: Duas frases de resumo descrevendo o fato e sua importancia.\n\n"
-        "Bloco 2: Paragrafo de contexto e antecedentes. Minimo 60 palavras.\n\n"
-        "Bloco 3: Paragrafo com fatos detalhados, dados e declaracoes. Minimo 60 palavras.\n\n"
-        "Bloco 4: Paragrafo sobre impacto e proximos passos. Minimo 60 palavras.\n\n"
-        "REGRAS: escreva APENAS os 4 blocos, sem cabecalhos nem marcadores. "
-        "Use aspas simples. Portugues brasileiro formal. Minimo 250 palavras no total."
+        f"Titulo da noticia: {titulo}\n"
+        f"Fonte: {fonte} | Categoria: {cat}\n\n"
+        "Escreva um texto jornalistico completo em portugues brasileiro sobre esta noticia.\n\n"
+        "PARAGRAFO 1 - RESUMO:\n"
+        "Escreva 2 frases descrevendo o fato principal e sua importancia. (minimo 40 palavras)\n\n"
+        "PARAGRAFO 2 - CONTEXTO:\n"
+        "Escreva um paragrafo sobre o contexto, antecedentes e o cenario atual. (minimo 80 palavras)\n\n"
+        "PARAGRAFO 3 - DETALHES:\n"
+        "Escreva um paragrafo com fatos, dados, numeros e declaracoes de envolvidos. (minimo 80 palavras)\n\n"
+        "PARAGRAFO 4 - IMPACTO:\n"
+        "Escreva um paragrafo sobre o impacto, consequencias e proximos passos. (minimo 80 palavras)\n\n"
+        "Use aspas simples se precisar de aspas. Total minimo: 300 palavras."
     )
 
     try:
-        txt = gtext(client, prompt, max_tokens=2048, temp=0.4)
+        txt = gtext(client, prompt, max_tokens=2048, temp=0.35)
 
-        # Limpa possiveis cabecalhos do modelo (ex: "Bloco 1:", "[Resumo]" etc)
-        txt = re.sub(r'(?m)^\s*(Bloco\s*\d+|Paragrafo\s*\d+|\[.*?\])\s*:?\s*$', '', txt)
+        # Estrategia 1: extrai por cabecalhos "PARAGRAFO N"
+        partes = re.split(r'(?i)par[aá]grafo\s*\d+\s*[-–—:]?\s*(?:[A-Z\s]+:)?\n?', txt)
+        partes = [p.strip() for p in partes if len(p.strip()) > 30]
 
-        # Divide em blocos por linha em branco
+        if len(partes) >= 4:
+            resumo = partes[0]
+            corpo  = "\n\n".join(partes[1:4])
+            return _limpa_resumo(resumo), corpo.strip()
+
+        if len(partes) == 3:
+            resumo = partes[0]
+            corpo  = "\n\n".join(partes[1:])
+            return _limpa_resumo(resumo), corpo.strip()
+
+        # Estrategia 2: divide por linha em branco
         blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 30]
-
-        if len(blocos) >= 4:
+        if len(blocos) >= 3:
             resumo = blocos[0]
             corpo  = "\n\n".join(blocos[1:4])
-        elif len(blocos) == 3:
-            resumo = blocos[0]
-            corpo  = "\n\n".join(blocos[1:])
-        elif len(blocos) == 2:
-            resumo = blocos[0]
-            corpo  = blocos[1]
-        elif len(blocos) == 1:
-            palavras = blocos[0].split()
-            mid = max(2, len(palavras) // 4)
-            resumo = " ".join(palavras[:mid])
-            corpo  = " ".join(palavras[mid:])
-        else:
-            return titulo, titulo
+            return _limpa_resumo(resumo), corpo.strip()
 
-        # Resumo: no maximo 2 frases
-        frases_r = re.split(r'(?<=[.!?])\s+', resumo.strip())
-        if len(frases_r) > 2:
-            resumo = " ".join(frases_r[:2])
+        # Estrategia 3: divide por sentencas em grupos de 3
+        sentencas = re.split(r'(?<=[.!?])\s+', txt.strip())
+        sentencas = [s.strip() for s in sentencas if len(s.strip()) > 20]
+        if len(sentencas) >= 6:
+            n = max(2, len(sentencas) // 4)
+            s0 = " ".join(sentencas[:n])
+            s1 = " ".join(sentencas[n:2*n])
+            s2 = " ".join(sentencas[2*n:3*n])
+            s3 = " ".join(sentencas[3*n:])
+            resumo = s0
+            corpo  = "\n\n".join(s for s in [s1, s2, s3] if s)
+            return _limpa_resumo(resumo), corpo.strip()
 
-        return resumo.strip(), corpo.strip()
+        # Estrategia 4: divide o texto bruto em 4 partes iguais
+        palavras = txt.split()
+        if len(palavras) >= 40:
+            q = len(palavras) // 4
+            partes4 = [
+                " ".join(palavras[:q]),
+                " ".join(palavras[q:2*q]),
+                " ".join(palavras[2*q:3*q]),
+                " ".join(palavras[3*q:]),
+            ]
+            return _limpa_resumo(partes4[0]), "\n\n".join(partes4[1:])
+
+        # Fallback absoluto
+        return titulo, txt.strip() or titulo
 
     except Exception as e:
         print(f"      [WARN] corpo: {e}")
         return titulo, titulo
+
+
+def _limpa_resumo(texto):
+    """Garante que o resumo seja no maximo 2 frases."""
+    frases = re.split(r'(?<=[.!?])\s+', texto.strip())
+    return " ".join(frases[:2]).strip()
 
 def buscar_url(client, noticia):
     """Busca a URL real do artigo quando nao veio na etapa anterior."""
@@ -245,17 +273,21 @@ Se nao encontrar, responda apenas: NAO_ENCONTRADO"""
 
 # ── EDITORIAL ────────────────────────────────────────────────────────────────
 def gerar_editorial(client, noticias, today_str):
-    pol_eco = [n["titulo"] for n in noticias if n["categoria"] in ["Politica","Economia"]][:5]
+    pol_eco = [n["titulo"] for n in noticias if n["categoria"] in ["Politica","Economia"]][:6]
     titulos = "\n".join(f"- {t}" for t in pol_eco)
-    prompt = f"""Com base nestas noticias brasileiras de hoje ({today_str}):
-{titulos}
-
-Escreva um resumo editorial de 2 frases sobre o panorama politico-economico.
-Apenas as frases. Use aspas simples. Sem titulo."""
+    prompt = (
+        f"Hoje e {today_str}. Com base nestas noticias brasileiras:\n{titulos}\n\n"
+        "Escreva um RESUMO EDITORIAL completo com exatamente 3 frases sobre o panorama "
+        "politico-economico do dia no Brasil. "
+        "Escreva as 3 frases diretamente, sem titulo, sem aspas duplas, em portugues brasileiro."
+    )
     try:
-        return gtext(client, prompt, max_tokens=150, temp=0.2).strip()
+        txt = gtext(client, prompt, max_tokens=300, temp=0.2).strip()
+        # Remove possiveis prefixos do modelo
+        txt = re.sub(r'^(resumo editorial[:\s]*|editorial[:\s]*)', '', txt, flags=re.IGNORECASE).strip()
+        return txt
     except Exception:
-        return "O cenario brasileiro segue movimentado com destaque para as agendas politica e economica."
+        return "O cenario politico e economico brasileiro segue movimentado. Diversas pautas relevantes dominam a agenda nacional nesta edicao." 
 
 # ── ORQUESTRADOR ─────────────────────────────────────────────────────────────
 def fetch_news():
