@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PANORAMA — Política &amp; Economia Brasil</title>
+<meta name="description" content="Boletim diário de política e economia brasileira. Atualizado 3 vezes ao dia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:   #f7f4ee;
+    --cream2:  #ede9df;
+    --cream3:  #e4dfd3;
+    --ink:     #1c1917;
+    --ink2:    #3d3935;
+    --ink3:    #5c5854;
+    --rust:    #9b3a1a;
+    --rust2:   #c04a22;
+    --gold:    #b8972a;
+    --border:  #d6d1c7;
+    --muted:   #7a7570;
+    --rule:    #c8c2b8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Spectral', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 50;
+  }
+
+  .header-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .header-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .edition-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--rust);
+    color: var(--rust);
+    border-radius: 2px;
+  }
+
+  .masthead-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .masthead-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-align: center;
+    padding: 20px 0 6px;
+    line-height: 1;
+  }
+
+  .masthead-rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0 14px;
+  }
+
+  .rule-line { flex: 1; height: 1px; background: var(--rule); }
+
+  .rule-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* ── FILTER NAV ── */
+  .filter-nav {
+    background: var(--cream2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { color: var(--ink2); }
+  .filter-btn.active { color: var(--ink); border-bottom-color: var(--rust); }
+
+  /* ── MAIN LAYOUT ── */
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* ── EDITORIAL STRIP ── */
+  .editorial {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px 36px;
+    margin: 0 -40px;
+    display: none;
+  }
+
+  .editorial-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .editorial-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .editorial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: #e8e4dc;
+  }
+
+  /* ── NEWS LAYOUT ── */
+  .news-section {
+    padding-top: 32px;
+  }
+
+  /* Hero */
+  .news-hero {
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 0;
+    cursor: default;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fonte-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+
+  .cat-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-left: 1px solid var(--border);
+    padding-left: 10px;
+  }
+
+  .imp-tag {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-summary {
+    font-family: 'Spectral', serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--ink2);
+    max-width: 720px;
+  }
+
+  /* Two-column grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .grid-item {
+    padding: 24px 0;
+    cursor: default;
+  }
+
+  .grid-item:nth-child(odd) {
+    padding-right: 28px;
+    border-right: 1px solid var(--border);
+  }
+
+  .grid-item:nth-child(even) { padding-left: 28px; }
+
+  .grid-item:nth-child(odd):last-child {
+    border-right: none;
+  }
+
+  .item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 9px;
+  }
+
+  .item-summary {
+    font-family: 'Spectral', serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--ink3);
+  }
+
+  .imp-bar-wrap {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .imp-bar {
+    height: 2px;
+    flex: 1;
+    background: var(--cream3);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .imp-fill {
+    height: 100%;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--rust) 100%);
+  }
+
+  .imp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* Single-column list items */
+  .single-list {}
+
+  .single-item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+  }
+
+  .single-item:last-child { border-bottom: none; }
+
+  .item-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    padding-top: 3px;
+    text-align: right;
+  }
+
+  .single-body {}
+
+  .single-eyebrow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
+
+  .single-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .single-summary {
+    font-family: 'Spectral', serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink3);
+  }
+
+  /* ── DIVIDER LABEL ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .divider-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── LOADING STATE ── */
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  #loading-screen.fade-out {
+    opacity: 0;
+    transform: scale(1.02);
+    pointer-events: none;
+  }
+
+  .ls-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+
+  .ls-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+  }
+
+  .ls-progress-track {
+    width: 200px;
+    height: 1px;
+    background: #2a2a28;
+    margin-bottom: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ls-progress-fill {
+    position: absolute;
+    left: 0; top: 0; height: 100%;
+    background: var(--cream);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .ls-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 0.1em;
+    min-height: 18px;
+    text-align: center;
+  }
+
+  .ls-steps {
+    margin-top: 40px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ls-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #333;
+    padding: 6px 0;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+  }
+
+  .ls-step.done { color: #6a8f6a; }
+  .ls-step.active { color: #e8e4dc; }
+
+  .ls-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #333;
+    flex-shrink: 0;
+    transition: background 0.3s;
+  }
+
+  .ls-step.done .ls-dot { background: #6a8f6a; }
+  .ls-step.active .ls-dot { background: #e8e4dc; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    border-top: 2px solid var(--ink);
+    background: var(--cream2);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* ── ERROR ── */
+  .error-strip {
+    background: #fdf2f0;
+    border-left: 3px solid var(--rust);
+    padding: 20px 28px;
+    margin: 32px 0;
+    display: none;
+  }
+
+  .error-strip p {
+    font-family: 'Spectral', serif;
+    font-size: 15px;
+    color: var(--rust);
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .anim { animation: fadeUp 0.55s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header-top, .masthead-wrap, .main-content, .filter-inner { padding-left: 20px; padding-right: 20px; }
+    .editorial { margin: 0 -20px; padding: 18px 20px; }
+    .editorial-inner { flex-direction: column; gap: 6px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-item:nth-child(odd) { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .grid-item:nth-child(even) { padding-left: 0; }
+    .single-item { grid-template-columns: 36px 1fr; }
+    .item-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="ls-logo">PANORAMA</div>
+  <div class="ls-sub">Brasil · Política &amp; Economia</div>
+  <div class="ls-progress-track"><div class="ls-progress-fill" id="ls-progress"></div></div>
+  <div class="ls-status" id="ls-status">Iniciando…</div>
+  <div class="ls-steps">
+    <div class="ls-step active" id="lss1"><div class="ls-dot"></div>Conectando às fontes</div>
+    <div class="ls-step" id="lss2"><div class="ls-dot"></div>Filtrando por relevância</div>
+    <div class="ls-step" id="lss3"><div class="ls-dot"></div>Consolidando as histórias</div>
+    <div class="ls-step" id="lss4"><div class="ls-dot"></div>Compondo a edição</div>
+  </div>
+</div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="header-date" id="header-date">—</div>
+    <div class="header-badges">
+      <span class="badge">Política</span>
+      <span class="badge">Economia</span>
+      <span class="badge">Brasil</span>
+      <span class="edition-badge" id="edition-badge">Carregando…</span>
+    </div>
+  </div>
+  <div class="masthead-wrap">
+    <h1 class="masthead-title">PANORAMA</h1>
+    <div class="masthead-rule">
+      <div class="rule-line"></div>
+      <div class="rule-text">ICL Notícias · Intercept Brasil · Revista Fórum · Folha de S.Paulo · Agência Brasil</div>
+      <div class="rule-line"></div>
+    </div>
+  </div>
+</header>
+
+<!-- FILTER NAV -->
+<nav class="filter-nav">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="applyFilter(this,'todos')">Todos</button>
+    <button class="filter-btn" onclick="applyFilter(this,'política')">Política</button>
+    <button class="filter-btn" onclick="applyFilter(this,'economia')">Economia</button>
+    <button class="filter-btn" onclick="applyFilter(this,'internacional')">Internacional</button>
+  </div>
+</nav>
+
+<!-- EDITORIAL -->
+<div class="editorial" id="editorial">
+  <div class="editorial-inner">
+    <div class="editorial-label">Panorama do dia</div>
+    <div class="editorial-text" id="editorial-text"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main-content">
+  <div class="error-strip" id="error-strip"><p id="error-text"></p></div>
+  <div class="news-section" id="news-section"></div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">PANORAMA</div>
+    <div class="footer-meta" id="footer-meta">—</div>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let allNews    = [];
+let activeFilter = 'todos';
+
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+function setProgress(pct, status) {
+  document.getElementById('ls-progress').style.width = pct + '%';
+  document.getElementById('ls-status').textContent   = status;
+}
+
+function setStep(n, state) {
+  const el = document.getElementById('lss' + n);
+  if (el) { el.className = 'ls-step ' + state; }
+}
+
+function setDate() {
+  const now  = new Date();
+  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  document.getElementById('header-date').textContent =
+    now.toLocaleDateString('pt-BR', opts).toUpperCase();
+
+  const h = now.getHours();
+  const edition = h < 10 ? 'Edição Matutina' : h < 14 ? 'Edição do Meio-Dia' : 'Edição Vespertina';
+  document.getElementById('edition-badge').textContent = edition;
+
+  document.getElementById('footer-meta').innerHTML =
+    'Última atualização: ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) + '<br>' +
+    'Fontes: ICL · Intercept · Fórum · Folha · Ag. Brasil';
+}
+
+// ─────────────────────────────────────────────
+// FILTER
+// ─────────────────────────────────────────────
+function applyFilter(btn, val) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = val;
+  renderNews();
+}
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+function renderNews() {
+  const section = document.getElementById('news-section');
+  const filtered = activeFilter === 'todos'
+    ? allNews
+    : allNews.filter(n => n.categoria && n.categoria.toLowerCase().includes(activeFilter));
+
+  if (!filtered.length) {
+    section.innerHTML = '<p style="padding:40px 0;font-family:Spectral,serif;font-size:15px;color:var(--muted);">Nenhuma notícia nessa categoria.</p>';
+    return;
+  }
+
+  const hero = filtered[0];
+  const grid = filtered.slice(1, 3);
+  const rest  = filtered.slice(3);
+
+  let html = '';
+
+  // HERO
+  html += `<div class="news-hero anim" style="animation-delay:0.1s">
+    <div class="hero-eyebrow">
+      <span class="fonte-tag">${esc(hero.fonte||'')}</span>
+      <span class="cat-tag">${esc(hero.categoria||'')}</span>
+      <span class="imp-tag">Relevância ${hero.importancia||'—'}/10</span>
+    </div>
+    <h2 class="hero-title">${esc(hero.titulo)}</h2>
+    <p class="hero-summary">${esc(hero.resumo)}</p>
+  </div>`;
+
+  // GRID 2 col
+  if (grid.length) {
+    html += '<div class="grid-2">';
+    grid.forEach((n, i) => {
+      const imp = Math.round(Math.min(100, (n.importancia||5) * 10));
+      html += `<div class="grid-item anim" style="animation-delay:${0.2 + i*0.1}s">
+        <div class="hero-eyebrow">
+          <span class="fonte-tag">${esc(n.fonte||'')}</span>
+          <span class="cat-tag">${esc(n.categoria||'')}</span>
+        </div>
+        <h3 class="item-title">${esc(n.titulo)}</h3>
+        <p class="item-summary">${esc(n.resumo)}</p>
+        <div class="imp-bar-wrap">
+          <div class="imp-bar"><div class="imp-fill" style="width:${imp}%"></div></div>
+          <span class="imp-label">${n.importancia||'—'}/10</span>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  // REST
+  if (rest.length) {
+    html += `<div class="section-divider" style="margin-top:0">
+      <div class="divider-label">Mais notícias</div>
+      <div class="divider-line"></div>
+    </div>
+    <div class="single-list">`;
+    rest.forEach((n, i) => {
+      html += `<div class="single-item anim" style="animation-delay:${0.3+i*0.07}s">
+        <div class="item-num">${String(i+4).padStart(2,'0')}</div>
+        <div class="single-body">
+          <div class="single-eyebrow">
+            <span class="fonte-tag">${esc(n.fonte||'')}</span>
+            <span class="cat-tag">${esc(n.categoria||'')}</span>
+          </div>
+          <div class="single-title">${esc(n.titulo)}</div>
+          <div class="single-summary">${esc(n.resumo)}</div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  section.innerHTML = html;
+}
+
+function esc(str) {
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// ─────────────────────────────────────────────
+// FETCH NEWS via Anthropic API
+// ─────────────────────────────────────────────
+async function fetchNews() {
+  const today = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  const prompt = `Hoje é ${today}. Você é um editor jornalístico especializado em política e economia brasileira.
+
+Use sua ferramenta de busca web para encontrar as 10 notícias mais importantes e recentes sobre POLÍTICA e ECONOMIA no Brasil publicadas HOJE ou nas últimas 24 horas.
+
+Busque especificamente nestas fontes: ICL Notícias (iclnoticias.com.br), Intercept Brasil (theintercept.com/brasil), Revista Fórum (revistaforum.com.br), Folha de São Paulo (folha.uol.com.br), Agência Brasil (agenciabrasil.ebc.com.br).
+
+Faça buscas variadas como: "política Brasil hoje", "governo Lula congresso hoje", "economia Brasil hoje", "mercado financeiro Brasil hoje", combinando com os nomes das fontes.
+
+Retorne APENAS JSON válido sem texto antes ou depois, sem markdown, sem blocos de código:
+
+{"resumo_editorial":"2-3 frases sobre o panorama político-econômico do dia.","noticias":[{"titulo":"Título direto e informativo","fonte":"Nome da fonte","categoria":"Política ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que é relevante.","importancia":8}]}
+
+Retorne exatamente 10 notícias. importancia é número inteiro de 1 a 10.`;
+
+  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
+  if (data.error) throw new Error(data.error.message);
+
+  let jsonText = '';
+  for (const b of data.content) {
+    if (b.type === 'text') { jsonText = b.text; break; }
+  }
+
+  jsonText = jsonText.replace(/```json|```/g, '').trim();
+  const s = jsonText.indexOf('{');
+  const e = jsonText.lastIndexOf('}');
+  if (s !== -1 && e !== -1) jsonText = jsonText.slice(s, e + 1);
+
+  return JSON.parse(jsonText);
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+async function init() {
+  setDate();
+
+  // Check if pre-generated content exists (for static GitHub Pages build)
+  let data = null;
+
+  try {
+    const staticResp = await fetch('./news-data.json?v=' + Date.now());
+    if (staticResp.ok) {
+      data = await staticResp.json();
+    }
+  } catch(e) {}
+
+  if (data) {
+    // Use pre-generated static data
+    setProgress(100, 'Edição pronta.');
+    allNews = data.noticias || [];
+    showContent(data.resumo_editorial || '');
+    return;
+  }
+
+  // Fallback: fetch live via API
+  try {
+    setProgress(15, 'Conectando às fontes…'); setStep(1,'active');
+    await new Promise(r => setTimeout(r, 400));
+
+    setProgress(40, 'Analisando relevância…'); setStep(1,'done'); setStep(2,'active');
+    data = await fetchNews();
+
+    setProgress(75, 'Consolidando histórias…'); setStep(2,'done'); setStep(3,'active');
+    await new Promise(r => setTimeout(r, 300));
+
+    setProgress(95, 'Compondo a edição…'); setStep(3,'done'); setStep(4,'active');
+    await new Promise(r => setTimeout(r, 300));
+
+    setProgress(100, 'Edição pronta.');
+    setStep(4,'done');
+
+    allNews = data.noticias || [];
+    showContent(data.resumo_editorial || '');
+
+  } catch(err) {
+    setProgress(100, 'Erro ao carregar.');
+    document.getElementById('loading-screen').classList.add('fade-out');
+    setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 900);
+    const strip = document.getElementById('error-strip');
+    strip.style.display = 'block';
+    document.getElementById('error-text').textContent =
+      'Não foi possível carregar as notícias: ' + err.message +
+      '. Recarregue a página para tentar novamente.';
+  }
+}
+
+function showContent(editorial) {
+  if (editorial) {
+    document.getElementById('editorial-text').textContent = editorial;
+    document.getElementById('editorial').style.display = 'block';
+  }
+  renderNews();
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('fade-out');
+    setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 900);
+  }, 500);
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
