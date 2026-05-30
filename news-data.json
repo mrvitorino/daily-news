@@ -1,35 +1,71 @@
 {
-  "resumo_editorial": "A economia brasileira demonstra resiliência com",
+  "resumo_editorial": "O cenário político brasileiro é",
   "noticias": [
     {
-      "titulo": "PIB/IBGE: economia cresce 1,1% no 1º trimestre de 2026",
-      "fonte": "Folha de S.Paulo",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8VvFtdDRIUuqvQfiLYafe3D4EoLIiEFkf9W5TdHiHeuJcjSoL2WReSeUt7ky0YEz1AER4_z5qj9tZ-1Eb23KmX8cwMm3fldiUcBqP1nonC4APk6eLSzEDbLx0dLbDe8kKw9pBNslpwaQvbcdsx4fcOUJcbjK2B6AyoTGCFdqKe7Xce4vzsISa4MUHQyVI4VdqySBrzh0=",
-      "importancia": 9,
-      "resumo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme",
-      "corpo": "A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme"
-    },
-    {
-      "titulo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda",
-      "fonte": "UOL Economia",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHb1kz3IDD01x7mXSb5DcLyBC1oY8YstDanMAc2aPLghPURYO7-Pm0Fq5W814Jvj2ATtN5m2ShjNi_2FiNnQcw1WpC4ZGVxq6wJmUpjVnRtCojT05nmEVd6HHVazCgjQXcVNpgP3wQ3bu1hQlCTW0AyHgWnmAOaaWz7cOEaQhgNVLWoz6Yp5mI7cP4SwL6sUSJ9dFKi_ert8WsTtln83pDAKA==",
-      "importancia": 8,
-      "resumo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda",
-      "corpo": "Dólar cai a R$ 5,03, e Bolsa recua com taxa de desemprego em queda"
-    },
-    {
-      "titulo": "Acordo Mercosul-Canadá avança em décima rodada de negociações",
+      "titulo": "Lula diz que vai indicar novamente Messias ao STF",
       "fonte": "Agência Brasil",
+      "categoria": "Politica",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHy0vxjXlLcSUlSC4tUS7DMpRLVBjF8oOsKwCGjObos6-HlD3lqoiVmB54NI5qq0Z4OYuUzFjl28tar44hFqk9kk_lHiMIp7AKhuJTsc12CFnE-XFzXkfga3Lmtt_oiofbUy4xPHph-CX1aOILBo8EdIopuLLVAVPlfCaMEwvH7_vB7nDYW4FF_wu-_-iWHsmTnJzPAQHQKe4bl517bttwV5PLbp7CjOaH9C1e9xnG7UliwKCfqNk4AqFo5qiWmY8BxhZgXmJPJvChIsukGBUAFxZmxXuPY=",
+      "importancia": 9,
+      "resumo": "O presidente Luiz Inácio Lula da Silva anunciou sua intenção de indicar novamente o nome de Messias para uma vaga no",
+      "corpo": "O presidente Luiz Inácio Lula da Silva anunciou sua intenção de indicar novamente o nome de Messias para uma vaga no"
+    },
+    {
+      "titulo": "Conselho de Comunicação Social debate desinformação nas eleições",
+      "fonte": "Agência Câmara Notícias",
+      "categoria": "Politica",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHZY-pOP_suCop_i62Bba4CQmLg5wAafKr02SfFIhFpMEWffGCASWbJD_gXHQ7qRleYZ1ISQ22dsGvZYgX3M00Y7bdn4POSVKPvk_-ECFiov_1OxXUOP3ZUvGcedWlxmjEW-ZdKbrpKuguxpqi1QaQKq4liVANZvAapcS0xOH5bWtsHH1lRH2lrlJRfBPnc_LmbxCbOdJ0sDeoo0bl0DQL0VXebP8MN",
+      "importancia": 8,
+      "resumo": "O Conselho de Comunicação Social (CCS) realizou um debate crucial sobre a desinformação no contexto eleitoral",
+      "corpo": "O Conselho de Comunicação Social (CCS) realizou um debate crucial sobre a desinformação no contexto eleitoral"
+    },
+    {
+      "titulo": "STF e bancada feminina do Congresso discutem ações de proteção a mulheres e crianças",
+      "fonte": "Portal STF",
+      "categoria": "Politica",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGQu4yKka9enkwdz6hcL6a1a7F2EuD--F8KqGoCEcnrnEwSFFHEyLQa60G15wKfLZryvIvJSW6Xo6U02cWz96e_kk0dTo9Lppq0CXCNjsL2Yz9JWoA=",
+      "importancia": 8,
+      "resumo": "O Supremo Tribunal Federal (STF) e a bancada feminina do Congresso Nacional se reuniram para debater e articular ações",
+      "corpo": "O Supremo Tribunal Federal (STF) e a bancada feminina do Congresso Nacional se reuniram para debater e articular ações"
+    },
+    {
+      "titulo": "Governo detalha bloqueio no Orçamento; ministérios da Defesa, Cidades e Educação lideram cortes",
+      "fonte": "G1",
       "categoria": "Economia",
-      "url": "",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEH0uCcQubk0rquxqdZ1H2a4BeA4JK7gd2pNnt-XP0aGzMVfvn2hVlYSG7YOsJnInuWLTQvq1GaJw6I6Lf_mFbMMvj_bV_WD73rj-gdWkqm2FLii_2XeGSYPIwzT1EcAxi2Xrf9ijLwDT3aL7iyaIyU_Qh8Aef4Q732_mjQnXqsJnvaYWhtW0hgKPrzxXP_-StCUoRKum90JAI2nhUvPIzawXjcctWlEOD2oK9ngdzAl1KyXm5xbdxpmoqSWSTNdo4zu9zFPO6EZwgQTfg6CXRmSir6t8u4bWSesRM=",
+      "importancia": 8,
+      "resumo": "O governo federal detalhou o bloqueio orçamentário, com os ministérios da Defesa, Cidades e",
+      "corpo": "O governo federal detalhou o bloqueio orçamentário, com os ministérios da Defesa, Cidades e"
+    },
+    {
+      "titulo": "Decisão dos EUA sobre facções tenta limitar soberania do Brasil",
+      "fonte": "Agência Brasil",
+      "categoria": "Internacional",
+      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/decisao-dos-eua-sobre-faccoes-tenta-limitar-soberania-do-brasil",
+      "importancia": 8,
+      "resumo": "Uma recente decisão do governo dos Estados Unidos, relacionada a facções, foi interpretada pelo Brasil como uma tentativa de limitar sua",
+      "corpo": "Uma recente decisão do governo dos Estados Unidos, relacionada a facções, foi interpretada pelo Brasil como uma tentativa de limitar sua"
+    },
+    {
+      "titulo": "Fiocruz Brasília e Ministério da Saúde lançam curso inédito para qualificar o cuidado em crises de saúde mental no SUS",
+      "fonte": "Fiocruz Brasília",
+      "categoria": "Politica",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEODre2_mCUP2PXeferRRYPZoIen4zuH2mU4-qPAG8ax9KeRA7ycDz7tc_yESh4zWmX5MYOig_IFeSgVF5H2S5EHcVMWj8BblnrQbdKyOFrwd6ornIPUGGKfeWzNkYuDYtup9dERf5qJs_LFOGy_JLArsTUHOIF6I0a_1vq6jHX_JcISW8zL2yKz0-3ivX9bo-Jngw2rVBCPkRGWzR72mFr6aKp67vl482NRjD6SgZs3SMj8Om6MCbH0EbN8VrEwnCVFlpvcho5hrrsYWBacb2asJl3jGBYnZuBog==",
       "importancia": 7,
-      "resumo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá progrediram significativamente",
-      "corpo": "As negociações para um acordo de livre comércio entre o Mercosul e o Canadá progrediram significativamente"
+      "resumo": "Fiocruz Brasília e o Ministério da Saúde lançaram um curso inédito focado na qualificação do cuidado em",
+      "corpo": "Fiocruz Brasília e o Ministério da Saúde lançaram um curso inédito focado na qualificação do cuidado em"
+    },
+    {
+      "titulo": "Brasil e Suriname fortalecem parceria estratégica com cooperação para o desenvolvimento em saúde, Amazônia e proteção social",
+      "fonte": "Agência Brasil",
+      "categoria": "Internacional",
+      "url": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/brasil-e-suriname-fortalecem-parceria-estrategica-com-cooperacao-para-o-desenvolvimento-em-saude-amazonia-e-protecao-social",
+      "importancia": 7,
+      "resumo": "Brasil e Suriname estão aprofundando sua parceria estratégica, focando em cooperação para o desenvolvimento nas áreas",
+      "corpo": "Brasil e Suriname estão aprofundando sua parceria estratégica, focando em cooperação para o desenvolvimento nas áreas"
     }
   ],
-  "generated_at": "2026-05-30T16:51:47",
+  "generated_at": "2026-05-30T17:09:06",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
