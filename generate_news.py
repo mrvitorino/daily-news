@@ -75,9 +75,9 @@ INSTRUCOES DE BUSCA:
 FORMATO DE RESPOSTA:
 Retorne SOMENTE o JSON abaixo, sem texto antes ou depois, sem markdown, sem blocos de codigo:
 
-{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","importancia":8}}]}}
+{{"resumo_editorial":"2-3 frases resumindo o panorama politico-economico dos ultimos 2 dias no Brasil.","noticias":[{{"titulo":"titulo claro e direto da noticia","fonte":"nome do veiculo de imprensa","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases explicando o que aconteceu e por que e relevante.","url":"https://url-completa-da-noticia.com.br","importancia":8}}]}}
 
-OBRIGATORIO: retorne exatamente {NUM_NEWS} noticias. O campo importancia e um inteiro de 1 a 10."""
+OBRIGATORIO: retorne exatamente {NUM_NEWS} noticias. O campo importancia e inteiro de 1 a 10. O campo url deve ser a URL real e completa da noticia encontrada na busca (comecando com https://). Se nao encontrar a URL exata, use a URL da homepage da fonte."""
 
     response = client.models.generate_content(
         model=MODEL,
