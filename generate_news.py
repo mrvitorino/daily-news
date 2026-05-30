@@ -1,69 +1,91 @@
 #!/usr/bin/env python3
 """
 generate_news.py
-Chama a API da Anthropic com web_search para buscar notícias
-e grava news-data.json que a página HTML consome.
+Chama a API da Anthropic com web_search para buscar noticias
+e grava news-data.json que a pagina HTML consome.
 """
 
 import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
+from datetime import datetime
+
+try:
+    from zoneinfo import ZoneInfo
+    BRASILIA = ZoneInfo("America/Sao_Paulo")
+except Exception:
+    # Fallback: UTC-3
+    from datetime import timezone, timedelta
+    BRASILIA = timezone(timedelta(hours=-3))
 
 import anthropic
 
-# ── Config ──────────────────────────────────────────────────
-BRASILIA = ZoneInfo("America/Sao_Paulo")
 NUM_NEWS = 10
 OUTPUT   = "news-data.json"
 MODEL    = "claude-sonnet-4-20250514"
 
+WEEKDAYS_PT = {
+    "Monday": "segunda-feira", "Tuesday": "terca-feira",
+    "Wednesday": "quarta-feira", "Thursday": "quinta-feira",
+    "Friday": "sexta-feira", "Saturday": "sabado", "Sunday": "domingo"
+}
 
-def get_edition_label(hour: int) -> str:
+MONTHS_PT = {
+    1:"janeiro",2:"fevereiro",3:"marco",4:"abril",5:"maio",6:"junho",
+    7:"julho",8:"agosto",9:"setembro",10:"outubro",11:"novembro",12:"dezembro"
+}
+
+def format_date_pt(dt):
+    wd = WEEKDAYS_PT.get(dt.strftime("%A"), dt.strftime("%A"))
+    mo = MONTHS_PT.get(dt.month, str(dt.month))
+    return f"{wd}, {dt.day} de {mo} de {dt.year}"
+
+def get_edition_label(hour):
     if hour < 10:
-        return "Edição Matutina (08h)"
+        return "Edicao Matutina (08h)"
     elif hour < 14:
-        return "Edição do Meio-Dia (12h)"
+        return "Edicao do Meio-Dia (12h)"
     else:
-        return "Edição Vespertina (17h)"
+        return "Edicao Vespertina (17h)"
 
+def build_prompt(today_str, num):
+    return f"""Hoje e {today_str}. Voce e um editor jornalistico especializado em politica e economia brasileira.
 
-def build_prompt(today_str: str, num: int) -> str:
-    return f"""Hoje é {today_str}. Você é um editor jornalístico especializado em política e economia brasileira.
-
-Use sua ferramenta de busca web para encontrar as {num} notícias mais importantes e recentes sobre POLÍTICA e ECONOMIA no Brasil publicadas HOJE ou nas últimas 24 horas.
+Use sua ferramenta de busca web para encontrar as {num} noticias mais importantes e recentes sobre POLITICA e ECONOMIA no Brasil publicadas HOJE ou nas ultimas 24 horas.
 
 Busque especificamente nestas fontes:
-- ICL Notícias: iclnoticias.com.br
+- ICL Noticias: iclnoticias.com.br
 - Intercept Brasil: theintercept.com/brasil
-- Revista Fórum: revistaforum.com.br
-- Folha de São Paulo: folha.uol.com.br
-- Agência Brasil: agenciabrasil.ebc.com.br
+- Revista Forum: revistaforum.com.br
+- Folha de Sao Paulo: folha.uol.com.br
+- Agencia Brasil: agenciabrasil.ebc.com.br
 
-Faça pelo menos 4 buscas diferentes cobrindo essas fontes. Exemplos de queries:
-- "política Brasil hoje {today_str}"
+Faca pelo menos 4 buscas diferentes. Exemplos de queries:
+- "politica Brasil hoje {today_str}"
 - "governo Lula congresso hoje"
 - "economia mercado Brasil hoje"
-- "site:iclnoticias.com.br hoje política"
+- "site:iclnoticias.com.br politica hoje"
 - "site:revistaforum.com.br hoje"
 
-Retorne APENAS JSON válido, sem texto antes ou depois, sem markdown, sem blocos de código:
+Retorne APENAS JSON valido, sem texto antes ou depois, sem markdown, sem blocos de codigo:
 
-{{"resumo_editorial":"2-3 frases sobre o panorama político-econômico do dia.","noticias":[{{"titulo":"Título direto","fonte":"Nome da fonte","categoria":"Política ou Economia ou Internacional","resumo":"2-3 frases sobre o fato e sua relevância.","importancia":8}}]}}
+{{"resumo_editorial":"2-3 frases sobre o panorama politico-economico do dia.","noticias":[{{"titulo":"Titulo direto","fonte":"Nome da fonte","categoria":"Politica ou Economia ou Internacional","resumo":"2-3 frases sobre o fato e sua relevancia.","importancia":8}}]}}
 
-Retorne exatamente {num} notícias. importancia é inteiro de 1 a 10."""
+Retorne exatamente {num} noticias. importancia e inteiro de 1 a 10."""
 
+def fetch_news():
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        raise ValueError("ANTHROPIC_API_KEY nao definida. Adicione o secret no repositorio GitHub.")
 
-def fetch_news() -> dict:
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
+    client = anthropic.Anthropic(api_key=api_key)
     now_br    = datetime.now(BRASILIA)
-    today_str = now_br.strftime("%A, %d de %B de %Y")
+    today_str = format_date_pt(now_br)
     prompt    = build_prompt(today_str, NUM_NEWS)
 
-    print(f"[{now_br.isoformat()}] Buscando notícias…")
+    print(f"[{now_br.strftime('%Y-%m-%d %H:%M')} BRT] Buscando noticias...")
+    print(f"Data: {today_str}")
 
     resp = client.messages.create(
         model=MODEL,
@@ -72,7 +94,6 @@ def fetch_news() -> dict:
         messages=[{"role": "user", "content": prompt}],
     )
 
-    # Extrair bloco de texto
     json_text = ""
     for block in resp.content:
         if block.type == "text":
@@ -80,9 +101,8 @@ def fetch_news() -> dict:
             break
 
     if not json_text:
-        raise ValueError("API não retornou bloco de texto.")
+        raise ValueError("API nao retornou bloco de texto.")
 
-    # Limpar possíveis fences
     json_text = json_text.replace("```json", "").replace("```", "").strip()
     start = json_text.find("{")
     end   = json_text.rfind("}")
@@ -90,15 +110,12 @@ def fetch_news() -> dict:
         json_text = json_text[start:end + 1]
 
     data = json.loads(json_text)
-
-    # Adicionar metadados
-    data["generated_at"]  = now_br.isoformat()
+    data["generated_at"]  = now_br.strftime("%Y-%m-%dT%H:%M:%S")
     data["edition_label"] = get_edition_label(now_br.hour)
-    data["date_display"]  = now_br.strftime("%A, %d de %B de %Y").upper()
+    data["date_display"]  = today_str.upper()
 
-    print(f"OK — {len(data.get('noticias', []))} notícias coletadas.")
+    print(f"OK - {len(data.get('noticias', []))} noticias coletadas.")
     return data
-
 
 def main():
     retries = 3
@@ -115,7 +132,6 @@ def main():
                 time.sleep(10)
             else:
                 sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
