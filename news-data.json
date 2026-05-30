@@ -1,312 +1,411 @@
 {
-  "resumo_editorial": "O cenário político",
+  "resumo_editorial": "'O cenário político-econ",
   "noticias": [
     {
-      "titulo": "Fica como o Congresso fez - O Bastidor",
-      "fonte": "O Globo",
+      "titulo": "Zanin decide que STF vai julgar caso de venda de sentenças no STJ",
+      "fonte": "Agência Brasil",
       "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGf1bjo5acxZ392S2ZAIVyqnsZiXmYa0Qum7CWO7amEn0Y4mLBIdf1KZplNYVnE4Zt-la7sAxU7i9-nTPKKVcjYZC2xGbgpTOYJVBu-pi1ZXHWRtJiEPWdmPztF2B47Cam1ciHjZTDb3teTTEgZOej6H5f4nZV2",
+      "url": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-05/zanin-decide-que-stf-vai-julgar-caso-de-venda-de-sentencas-no-stj",
       "importancia": 9,
-      "resumo": "Fica como o Congresso fez - O Bastidor",
-      "corpo": "Fica como o Congresso fez - O Bastidor"
+      "resumo": "O ministro Cristiano Zanin, do Supremo Tribunal Federal (STF), determinou que a corte máxima será a responsável por julgar o complexo caso de suposta venda de sentenças no Superior Tribunal de",
+      "corpo": "O ministro Cristiano Zanin, do Supremo Tribunal Federal (STF), determinou que a corte máxima será a responsável por julgar o complexo caso de suposta venda de sentenças no Superior Tribunal de"
     },
     {
-      "titulo": "STF julga nesta quinta mudanças feitas pelo Congresso na Lei de Improbidade | CNN Brasil",
+      "titulo": "PLDO 2027: governo prevê salário mínimo em R$ 1.717",
       "fonte": "CNN Brasil",
       "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGao5k4EqLSg3gqpVAJZpYc2rmPOKUppYN6hhQuVamtP8mlck3g77NnFR4-D2yN8mxObGDNYRJt-xmtnjgbqsVO5iigDyivvWegXEQBcN5GOO8-MwEEHM4kFpJJ3-AE9vpwJxc0I_0T_oM8nb0Afvu29v_xZ0QD5to3KMWqrZTbCuWvPvl_CD_UajcubV5KovnfV9IeCt9z1KP3anR1N3gA87-KTzq_IBO_6QCItw==",
-      "importancia": 8,
-      "resumo": "O Supremo Tribunal Federal (STF) julgará nesta quinta-feira as alterações promovidas pelo Congresso Nacional na Lei de Improbidade Administrativa. Esta",
-      "corpo": "O Supremo Tribunal Federal (STF) julgará nesta quinta-feira as alterações promovidas pelo Congresso Nacional na Lei de Improbidade Administrativa. Esta"
-    },
-    {
-      "titulo": "Planalto avalia ir ao STF após derrota imposta por Alcolumbre - YouTube",
-      "fonte": "Metrópoles",
-      "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHgT6Ig-l1B8vuSe25LrUM4Qz1mXrDvCso_wyzLIzpkqPPJh8lEM5iVgDBpcboTjgoGCkVQKy_HqZDO-CWRUbLx_3tm-auf5RJmpNuQtx_e03jhnGNqVsWktNGDsOfAJe40nIsdHU0=",
+      "url": "",
       "importancia": 9,
-      "resumo": "O Planalto avalia recorrer ao Supremo Tribunal Federal (STF) após sofrer uma derrota política significativa imposta pelo senador Davi Alcolumbre",
-      "corpo": "O Planalto avalia recorrer ao Supremo Tribunal Federal (STF) após sofrer uma derrota política significativa imposta pelo senador Davi Alcolumbre"
+      "resumo": "O governo federal projetou o salário mínimo em R$ 1.717 para o ano de 2027, conforme o Projeto de Lei de Diretrizes Orçamentárias (PL",
+      "corpo": "O governo federal projetou o salário mínimo em R$ 1.717 para o ano de 2027, conforme o Projeto de Lei de Diretrizes Orçamentárias (PL"
     },
     {
-      "titulo": "Governo Lula critica visita de Flávio Bolsonaro aos EUA e classificação do PCC e CV como terroristas",
-      "fonte": "Exame",
+      "titulo": "Moro se lança no PR ao lado de Flávio, ataca Lula e chama ato de Trump sobre PCC e CV de 'extraordinário'.",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Politica",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELEkIEcxVAxmI3SQfuxSDJ2c9F1pIUVz75xoLbq44tbxKSu7ZDch9PbDDdEO_IIfQea_Nd-aB1Y7mIt4s1vbgGZqq4FMcCwcEIFgIW5ImSeXSHUZy7XUa5vtSKelh6gjOt6H-itX_tlgVNDD5uSRISEIZAGHOU4-Yd1dfU5Qg3AJxmnGuT6bHNKVZ7GLoVt-zJOg5ZmH9av9j83Q==",
+      "url": "https://www.folha.uol.com.br/poder/2026/05/moro-se-lanca-no-pr-ao-lado-de-flavio-ataca-lula-e-chama-ato-de-trump-sobre-pcc-e-cv-de-extraordinario.shtml",
+      "importancia": 9,
+      "resumo": "Sergio Moro oficializou sua filiação ao Partido Republicano (PR) ao lado de Flávio Bolsonaro, marcando um realinhamento político significativo na direita brasileira. Durante o evento, o ex-juiz pro",
+      "corpo": "Sergio Moro oficializou sua filiação ao Partido Republicano (PR) ao lado de Flávio Bolsonaro, marcando um realinhamento político significativo na direita brasileira. Durante o evento, o ex-juiz pro"
+    },
+    {
+      "titulo": "Defesa e Cidades lideram bloqueios no Orçamento de 2026",
+      "fonte": "Agência Brasil",
+      "categoria": "Politica",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/defesa-e-cidades-lideram-bloqueios-no-orcamento-de-2026",
       "importancia": 8,
-      "resumo": "O governo Lula expressou críticas contundentes à visita do senador Flávio Bolsonaro aos Estados Unidos, especialmente em relação à pauta de classificação do PCC",
-      "corpo": "O governo Lula expressou críticas contundentes à visita do senador Flávio Bolsonaro aos Estados Unidos, especialmente em relação à pauta de classificação do PCC"
+      "resumo": "Os setores de Defesa e Cidades estão na vanguarda dos bloqueios orçamentários propostos para o ano de 2026, sinalizando um realinhamento de prioridades fiscais e desafios significativos para a gestão governamental. Esta medida inicial reflete a complexidade de equilibrar as demandas por investimentos públicos com a necessidade de responsabilidade fiscal em um cenário econômico dinâmico.",
+      "corpo": "O processo de elaboração do Orçamento da União é um dos pilares da governança brasileira, envolvendo intensas negociações e decisões estratégicas que moldam o futuro do país. A cada ano, antes mesmo da apresentação formal do Projeto de Lei Orçamentária Anual (PL"
+    },
+    {
+      "titulo": "Lula: Governo tentará recuperar refinarias, mas não pelo preço pedido",
+      "fonte": "CNN Brasil",
+      "categoria": "Politica",
+      "url": "",
+      "importancia": 8,
+      "resumo": "O presidente Luiz Inácio Lula da Silva declarou que seu governo buscará reaver refinarias vendidas em gestões anteriores, marcando uma guinada na política energética nacional. Contudo, ele enfat",
+      "corpo": "O presidente Luiz Inácio Lula da Silva declarou que seu governo buscará reaver refinarias vendidas em gestões anteriores, marcando uma guinada na política energética nacional. Contudo, ele enfat"
+    },
+    {
+      "titulo": "PL teme risco eleitoral de se opor a PEC do fim da 6x1 e tenta jogar desgaste para Lula.",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "https://www.folha.uol.com.br/poder/2026/05/pl-teme-risco-eleitoral-de-se-opor-a-pec-do-fim-da-6x1-e-tenta-jogar-desgaste-para-lula.shtml",
+      "importancia": 8,
+      "resumo": "O Partido Liberal (PL) demonstra preocupação com o impacto eleitoral de sua possível oposição à Proposta de Emenda à Constituição (PEC) que visa encerrar o regime conhecido como '6x",
+      "corpo": "O Partido Liberal (PL) demonstra preocupação com o impacto eleitoral de sua possível oposição à Proposta de Emenda à Constituição (PEC) que visa encerrar o regime conhecido como '6x"
+    },
+    {
+      "titulo": "Deputados do PSOL e Rede pedem que PGR investigue Flávio Bolsonaro por convidar nação estrangeira a intervir no Brasil.",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "https://www1.folha.uol.com.br/poder/2026/05/deputados-do-psol-e-rede-pedem-que-pgr-investigue-flavio-bolsonaro-por-convidar-nacao-estrangeira-a-intervir-no-brasil.shtml",
+      "importancia": 8,
+      "resumo": "**\nDeputados dos partidos PSOL e Rede Sustentabilidade protocolaram um pedido junto à Procuradoria-Geral da República (PGR) para que seja investigado o senador Flávio Bolsonaro",
+      "corpo": "**\nDeputados dos partidos PSOL e Rede Sustentabilidade protocolaram um pedido junto à Procuradoria-Geral da República (PGR) para que seja investigado o senador Flávio Bolsonaro"
+    },
+    {
+      "titulo": "Lula tenta neutralizar ataque de Flávio Bolsonaro ao chamar CV e PCC de terroristas.",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "https://www.folha.uol.com.br/poder/2026/05/lula-tenta-neutralizar-ataque-de-flavio-bolsonaro-ao-chamar-cv-e-pcc-de-terroristas.shtml",
+      "importancia": 8,
+      "resumo": "O presidente Luiz Inácio Lula da Silva classificou publicamente as facções criminosas Comando Vermelho (CV) e Primeiro Comando da Capital (PCC) como 'terroristas', em uma tentativa de neutral",
+      "corpo": "O presidente Luiz Inácio Lula da Silva classificou publicamente as facções criminosas Comando Vermelho (CV) e Primeiro Comando da Capital (PCC) como 'terroristas', em uma tentativa de neutral"
+    },
+    {
+      "titulo": "Fachin quer regulamentar fim da aposentadoria compulsória para juízes",
+      "fonte": "Revista Oeste",
+      "categoria": "Politica",
+      "url": "https://revistaoeste.com/politica/fachin-quer-regulamentar-fim-da-aposentadoria-compulsoria-para-juizes/",
+      "importancia": 7,
+      "resumo": "O Ministro Edson Fachin, do Supremo Tribunal Federal, propõe a regulamentação do fim da aposentadoria compulsória para juízes, uma medida que visa redefinir os limites de permanência",
+      "corpo": "O Ministro Edson Fachin, do Supremo Tribunal Federal, propõe a regulamentação do fim da aposentadoria compulsória para juízes, uma medida que visa redefinir os limites de permanência"
+    },
+    {
+      "titulo": "STF acolhe pedido de inconstitucionalidade da CNseg sobre artigo que determinava o investimento compulsório das reservas técnicas em crédito de carbono",
+      "fonte": "CNseg",
+      "categoria": "Politica",
+      "url": "https://cnseg.org.br/noticias/stf-acolhe-pedido-de-inconstitucionalidade-da-cnseg-sobre-artigo-que-determinava-o-investimento-compulsorio-das-reservas-tecnicas-em-credito-de-carbono.html",
+      "importancia": 7,
+      "resumo": "O Supremo Tribunal Federal (STF) acatou o pedido de inconstitucionalidade da Confederação Nacional das Empresas de Seguros (CNseg) referente a um artigo que impunha o investimento compulsório de",
+      "corpo": "O Supremo Tribunal Federal (STF) acatou o pedido de inconstitucionalidade da Confederação Nacional das Empresas de Seguros (CNseg) referente a um artigo que impunha o investimento compulsório de"
+    },
+    {
+      "titulo": "PSD discute lançar Kassab como vice de Caiado para frear aliança com Zema.",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Politica",
+      "url": "https://www.folha.uol.com.br/poder/2026/05/psd-discute-lancar-kassab-como-vice-de-caiado-para-frear-alianca-com-zema.shtml",
+      "importancia": 7,
+      "resumo": "O Partido Social Democrático (PSD) está avaliando a possibilidade de indicar Gilberto Kassab como vice na chapa do governador Ronaldo Caiado, do União Brasil, com o objetivo estratégico de impedir uma eventual aliança deste último com o governador Romeu Zema. Essa movimentação revela as complexas articulações políticas em curso, visando o fortalecimento de candidaturas e o rearranjo de forças para as próximas eleições, especialmente a presidencial de 2026.",
+      "corpo": "O cenário político brasileiro, sempre efervescente, começa a delinear as primeiras estratégias para o pleito de 2026, com partidos e lideranças buscando posicionamento e alianças. O PSD, conhecido por sua capacidade de articulação e por abrigar figuras de peso"
+    },
+    {
+      "titulo": "Caiado participa de lançamento da pré-candidatura de Gabriel Souza ao governo do RS.",
+      "fonte": "G1",
+      "categoria": "Politica",
+      "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/05/30/caiado-participa-de-lancamento-da-pre-candidatura-de-gabriel-souza-ao-governo-do-rs.ghtml",
+      "importancia": 7,
+      "resumo": "O governador de Goiás, Ronaldo Caiado, marcou presença no lançamento da pré-candidatura de Gabriel Souza ao governo do Rio Grande do Sul, sinalizando uma articulação política interestadual relevante. Este apoio demonstra a movimentação de forças políticas nacionais em torno das eleições estaduais e a busca por alinhamentos estratégicos para o próximo pleito.",
+      "corpo": "O cenário político brasileiro para as eleições de 2022 (ou o próximo ciclo eleitoral estadual) começa a se desenhar com intensas articulações e o posicionamento de figuras proeminentes. A presença de um governador"
     },
     {
       "titulo": "Flávio Bolsonaro mirou segurança, mas não teve projetos próprios transformados em lei",
       "fonte": "Folha de S.Paulo",
       "categoria": "Politica",
-      "url": "",
-      "importancia": 8,
-      "resumo": "Flávio Bolsonaro, apesar de ter direcionado sua atuação legislativa para a área da segurança pública, não obteve sucesso em transformar projetos de sua autoria",
-      "corpo": "Flávio Bolsonaro, apesar de ter direcionado sua atuação legislativa para a área da segurança pública, não obteve sucesso em transformar projetos de sua autoria"
+      "url": "https://www1.folha.uol.com.br/poder/2026/05/flavio-bolsonaro-mirou-seguranca-mas-nao-teve-projetos-proprios-transformados-em-lei.shtml",
+      "importancia": 6,
+      "resumo": "O senador Flávio Bolsonaro, apesar de ter a segurança pública como pilar de sua atuação legislativa, não conseguiu transformar nenhum de seus projetos próprios na área em lei. Tal cenário aponta para uma lacuna significativa",
+      "corpo": "O senador Flávio Bolsonaro, apesar de ter a segurança pública como pilar de sua atuação legislativa, não conseguiu transformar nenhum de seus projetos próprios na área em lei. Tal cenário aponta para uma lacuna significativa"
     },
     {
-      "titulo": "Ibovespa cai com PIB forte impulsionando apostas hawkish do BCB",
-      "fonte": "Trading Economics",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFHhvUPVG7jSAOJe2tndvXChrBAY3ABs8XxW-aJGioAsliLOtMMPhkuOJMiXj91CdWGfhgsnGkepVRecuMg5-fslis1qzzU-y48H27MiaDuiluu6UFMqkCMgBbth6by9HXSQYPeuo-K1DY6H8bUyDyXqSUW_KD",
-      "importancia": 8,
-      "resumo": "O Ibovespa registrou queda significativa, impulsionado paradoxalmente por um Produto Interno Bruto (PIB) robusto que superou",
-      "corpo": "O Ibovespa registrou queda significativa, impulsionado paradoxalmente por um Produto Interno Bruto (PIB) robusto que superou"
+      "titulo": "Rick Azevedo acredita que vitória contra 6x1 permitirá mais avanços",
+      "fonte": "Agência Brasil",
+      "categoria": "Politica",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/rick-azevedo-acredita-que-vitoria-contra-6x1-permitira-mais-avancos",
+      "importancia": 6,
+      "resumo": "Rick Azevedo expressou otimismo de que a recente vitória, superando uma oposição de 6 a 1 em um pleito crucial, abrirá caminho para novos avanços políticos e reformas. Este resultado é crucial",
+      "corpo": "Rick Azevedo expressou otimismo de que a recente vitória, superando uma oposição de 6 a 1 em um pleito crucial, abrirá caminho para novos avanços políticos e reformas. Este resultado é crucial"
     },
     {
-      "titulo": "Com dólar em alta e 3ª queda do Ibovespa, veja ranking de investimentos",
-      "fonte": "UOL Economia",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEBwJ4g1tSUwptlhx_VWXtLC8HD3k4prhU2YGzIsGzP00pY02C0qE_o18ndYrA1gdTQbMso9Uqkehq4A8_32evziG3eL4iGG0JILX-CtUZnP00MALl25NfZrZUtHq1KI-tAJGNAL39JQRFVSlUtHSggGf-4PYGBGKAYmW3efDrw4r2koJF9YNRvP3kgby-dQ62JLWClxYEU8-kxhxn_zTEbwxY-i6unG8wlRTDxl3L6olN1R34QeuGE99cWS1o=",
-      "importancia": 9,
-      "resumo": "O mercado financeiro brasileiro enfrenta um período de instabilidade, com o dólar em valorização e o Ibovespa registrando sua terceira queda consecut",
-      "corpo": "O mercado financeiro brasileiro enfrenta um período de instabilidade, com o dólar em valorização e o Ibovespa registrando sua terceira queda consecut"
+      "titulo": "Lula diz que esquerda terá de usar verde e amarelo na Copa 'para não deixar cores do Brasil serem tomadas'",
+      "fonte": "G1",
+      "categoria": "Politica",
+      "url": "https://g1.globo.com/politica/noticia/2026/05/30/lula-diz-que-esquerda-tera-de-usar-verde-e-amarelo-na-copa-para-nao-deixar-cores-do-brasil-serem-tomadas.ghtml",
+      "importancia": 5,
+      "resumo": "O presidente Luiz Inácio Lula da Silva declarou que a esquerda brasileira deve vestir verde e amarelo durante a Copa do Mundo, visando impedir que as cores nacionais continuem sendo monopolizadas por um único espectro político.",
+      "corpo": "O presidente Luiz Inácio Lula da Silva declarou que a esquerda brasileira deve vestir verde e amarelo durante a Copa do Mundo, visando impedir que as cores nacionais continuem sendo monopolizadas por um único espectro político."
     },
     {
-      "titulo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo",
-      "fonte": "InfoMoney",
+      "titulo": "PIB do Brasil cresce 1,1% no 1º trimestre de 2026, impulsionado por agropecuária e consumo",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbYzSDAdWVpH1L_gNGpa89NJiPWEKF6rB0AbAT_LrS9f92_R6k_j1bQils_-WpYYMTbizq3QHw-iQa5ND-lCY_CRazOJGI37cti4zKp3DTmSmVfH7htubx9RYEUFdwCTgj6p51Q1GZV4p5to3d71cW1nILh-1KfmjvhRe1AxP55yRhYpVvDLTl-ZIHZI2S3RM=",
-      "importancia": 9,
-      "resumo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo",
-      "corpo": "Ibovespa emenda 4ª queda seguida, 7ª semana no vermelho e 3º mês negativo"
-    },
-    {
-      "titulo": "Ibovespa hoje: Embraer (EMBR3) e frigoríficos lideram altas; Raízen (RAIZ4) cai 4%",
-      "fonte": "Estadão",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFFWyFrjoNtq7VUlDLlib8ulXpoFkvuatTGcqcjJeOY17qy2N7L2PojuaEA1Fyo3Eow9MebzsG10ZCWFeE9DItobkPihc_GGCOkaYnvNvXiTauNj9kWXJpHcMeKoptJm4MNZvPV1auon2jl8SY-i3Tbz9jVQc7UG4NZzRczq9vdPV-2fqutpioVysuoLv0NRImUJbpJZID5lHtpyS87QXGT_1Tbs0Fm2tDRj0sUDiQsfaRV2bEyeEWeD_hHE4E=",
-      "importancia": 7,
-      "resumo": "O Ibovespa registrou um dia de movimentos setoriais distintos, com as ações da Embraer (EMBR3) e de empresas frigoríf",
-      "corpo": "O Ibovespa registrou um dia de movimentos setoriais distintos, com as ações da Embraer (EMBR3) e de empresas frigoríf"
-    },
-    {
-      "titulo": "Economia brasileira se recupera no 1º trimestre e cresce 1,1%",
-      "fonte": "Swissinfo",
-      "categoria": "Economia",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFnW0fZjoM29B3DuSLLs2Cu4lTiYSW3RUymD9rYOox_Rfc0--xFl2MnvqvZM033SD8xfO7o1qq20wYLYt0EhzcAvTDZ8-MUhsOS-Sbd7_xzjSdAmcf7S7QTu5brj-DgkPZXoget1qlqcjKSwsjb9Ju8iDyVSxji4RyjGF9PaAsqwJXkIZISSVuUP8SutflObij-UAtU210NtVJ6lGh7sUCHJfCRkJSc",
+      "url": "https://www.folha.uol.com.br/economia/2026/05/pib-do-brasil-cresce-11-no-1o-trimestre-de-2026-impulsionado-por-agropecuaria-e-consumo.shtml",
       "importancia": 10,
-      "resumo": "A economia brasileira registrou um crescimento robusto de 1,1% no primeiro trimestre, superando as projeções e indicando uma recuperação consistente",
-      "corpo": "A economia brasileira registrou um crescimento robusto de 1,1% no primeiro trimestre, superando as projeções e indicando uma recuperação consistente"
+      "resumo": "A economia brasileira registrou um crescimento de 1,1% no Produto Interno Bruto (PIB) durante o primeiro trimestre de 2026, um resultado impulsionado principalmente pelos setores da",
+      "corpo": "A economia brasileira registrou um crescimento de 1,1% no Produto Interno Bruto (PIB) durante o primeiro trimestre de 2026, um resultado impulsionado principalmente pelos setores da"
     },
     {
-      "titulo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)",
-      "fonte": "Brasil de Fato",
-      "categoria": "Economia",
-      "url": "",
-      "importancia": 7,
-      "resumo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)",
-      "corpo": "Imposto de Renda 2026: prazo para envio da declaração termina nesta sexta (29)"
-    },
-    {
-      "titulo": "X Rodada Negociadora MERCOSUL - Canadá",
-      "fonte": "GovBR (MRE/MDIC/MAPA)",
-      "categoria": "Economia",
-      "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa/x-rodada-negociadora-mercosul-canada-nota-conjunta-mre-mdic-mapa",
-      "importancia": 9,
-      "resumo": "X Rodada Negociadora MERCOSUL - Canadá",
-      "corpo": "X Rodada Negociadora MERCOSUL - Canadá"
-    },
-    {
-      "titulo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex",
+      "titulo": "Renda média de R$ 3.732 no trimestre até abril de 2026 é a 2ª maior da série, revela IBGE",
       "fonte": "CNN Brasil",
       "categoria": "Economia",
-      "url": "https://www.cnnbrasil.com.br/economia/brasil-se-destaca-internacionalmente-em-cenario-complexo-diz-apex/",
-      "importancia": 8,
-      "resumo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex",
-      "corpo": "Brasil se destaca internacionalmente em cenário complexo, diz Apex"
+      "url": "https://www.cnnbrasil.com.br/economia/renda-media-de-r-3-732-no-trimestre-ate-abril-de-2026-e-a-2a-maior-da-serie-revela-ibge/",
+      "importancia": 9,
+      "resumo": "A renda média do brasileiro alcançou R$ 3.732 no trimestre que se encerra em abril de 2026, conforme revelado por dados do Instituto Brasileiro de Geografia e Estatística (IB",
+      "corpo": "A renda média do brasileiro alcançou R$ 3.732 no trimestre que se encerra em abril de 2026, conforme revelado por dados do Instituto Brasileiro de Geografia e Estatística (IB"
     },
     {
-      "titulo": "Tatiana Prazeres destaca diversificação no comércio exterior",
-      "fonte": "Jornal de Brasília",
+      "titulo": "IPCA-15 sobe 0,62% em maio, puxado por alimentos e conta de luz",
+      "fonte": "G1",
       "categoria": "Economia",
-      "url": "https://www.jornaldebrasilia.com.br/economia/tatiana-prazeres-destaca-diversificacao-no-comercio-exterior/",
+      "url": "https://g1.globo.com/economia/noticia/2026/05/27/ipca-15-sobe-062-em-maio-puxado-por-alimentos-e-conta-de-luz.ghtml",
+      "importancia": 9,
+      "resumo": "O Índice Nacional de Preços ao Consumidor Amplo 15 (IPCA-15), prévia da inflação oficial, registrou alta de 0,62% em maio, impulsion",
+      "corpo": "O Índice Nacional de Preços ao Consumidor Amplo 15 (IPCA-15), prévia da inflação oficial, registrou alta de 0,62% em maio, impulsion"
+    },
+    {
+      "titulo": "Salário médio do trabalhador amplia recorde e chega a R$ 3.722 no 1º trimestre de 2026",
+      "fonte": "Agência Brasil",
+      "categoria": "Economia",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/04/salario-medio-do-trabalhador-amplia-recorde-e-chega-r-3722",
+      "importancia": 9,
+      "resumo": "O salário médio do trabalhador brasileiro atingiu um novo recorde histórico, alcançando R$ 3.722 no primeiro trimestre de 2026, conforme dados divulgados pela Agência Brasil. Este marco reflete uma significativa melhora no poder de compra e na qualidade de vida da população, sinalizando um período de robusta recuperação e estabilidade econômica no país.",
+      "corpo": "A notícia de que o salário médio do trabalhador brasileiro atingiu R$ 3.722 no primeiro trimestre de 2026 surge em um cenário de consolidação econômica após anos de desafios. Desde o período pós-pandêmico, o Brasil tem implementado uma série de políticas fiscais e monetárias visando a estabilização da inflação e o estímulo ao emprego formal. A recuperação gradual do mercado de trabalho, impulsionada por investimentos em infraestrutura e setores estratégicos, pavimentou o caminho para o aumento da renda. Além disso, a valorização do salário mínimo e a negociação coletiva em diversas categorias profissionais contribuíram para uma base salarial mais robusta, criando as condições para que o país alcançasse este patamar"
+    },
+    {
+      "titulo": "Dólar cai para R$ 5,03 com alívio geopolítico e foco nos EUA",
+      "fonte": "Agência Brasil",
+      "categoria": "Economia",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/dolar-cai-para-r-503-com-alivio-geopolitico-e-foco-nos-eua",
+      "importancia": 8,
+      "resumo": "O dólar registrou uma queda significativa, atingindo R$ 5,03, impulsionado por um cenário de alívio nas tensões geopolíticas globais e a crescente atenção dos",
+      "corpo": "O dólar registrou uma queda significativa, atingindo R$ 5,03, impulsionado por um cenário de alívio nas tensões geopolíticas globais e a crescente atenção dos"
+    },
+    {
+      "titulo": "Brasil deve voltar a ser 10ª maior economia após resultado do PIB",
+      "fonte": "Agência Brasil",
+      "categoria": "Economia",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026/05/brasil-deve-voltar-ser-10a-maior-economia-apos-resultado-do-pib",
+      "importancia": 8,
+      "resumo": "O Brasil está projetado para retornar ao grupo das dez maiores economias globais, conforme indicam os resultados recentes do Produto Interno Bruto (PIB). Este avanço representa um marco significativo na recuperação econômica do país, reafirmando sua posição de relevância no cenário internacional após períodos de instabilidade.",
+      "corpo": "A trajetória econômica brasileira tem sido marcada por ciclos de expansão e retração, com o país oscilando entre posições de destaque e quedas no ranking das maiores economias mundiais. Após um período de forte crescimento no início dos anos 2000, que o levou a integrar o seleto grupo das dez maiores potências econômicas, o Brasil enfrentou crises internas e externas que resultaram em recessões e um consequente declínio em sua classificação global. A saída do top 10, em anos recentes, refletiu desafios como a desaceleração do crescimento, alta inflação e instabilidade política, que impactaram a confiança de investidores e a capacidade produtiva nacional.\n\nA expectativa de retorno à 10ª posição é impulsionada por uma combinação de fatores, incluindo a recuperação de setores-chave da economia e a valorização da moeda nacional frente a outras divisas. Analistas de"
+    },
+    {
+      "titulo": "71% dos trabalhadores dizem não ver risco de ficar sem emprego, aponta Datafolha",
+      "fonte": "CONTEE",
+      "categoria": "Economia",
+      "url": "https://www.contee.org.br/71-dos-trabalhadores-dizem-nao-ver-risco-de-ficar-sem-emprego/",
+      "importancia": 8,
+      "resumo": "Uma pesquisa recente do Datafolha revela que 71% dos trabalhadores brasileiros não percebem risco iminente de perder seus empregos, indicando um elevado nível de confiança no mercado de trabalho. Este dado,",
+      "corpo": "Uma pesquisa recente do Datafolha revela que 71% dos trabalhadores brasileiros não percebem risco iminente de perder seus empregos, indicando um elevado nível de confiança no mercado de trabalho. Este dado,"
+    },
+    {
+      "titulo": "Grupo Work On abre mais de 470 vagas de emprego no setor de trade marketing em 17 estados do Brasil",
+      "fonte": "Jornal do Brás",
+      "categoria": "Economia",
+      "url": "https://jornaldobras.com.br/grupo-work-on-abre-mais-de-470-vagas-de-emprego-no-setor-de-trade-marketing-em-17-estados-do-brasil/",
       "importancia": 7,
-      "resumo": "**",
-      "corpo": "**"
+      "resumo": "O Grupo Work On anunciou a abertura de mais de 470 vagas de emprego no setor de trade marketing, abrangendo 17 estados brasileiros. Esta iniciativa representa um impulso considerável para o mercado de",
+      "corpo": "O Grupo Work On anunciou a abertura de mais de 470 vagas de emprego no setor de trade marketing, abrangendo 17 estados brasileiros. Esta iniciativa representa um impulso considerável para o mercado de"
     },
     {
-      "titulo": "Assinatura de Termos de Referência para negociação de Acordo Comercial de Alcance Parcial entre Brasil e Suriname",
-      "fonte": "GovBR (MRE/MDIC)",
-      "categoria": "Economia",
-      "url": "https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa/assinatura-de-termos-de-referencia-para-negociacao-de-acordo-comercial-de-alcance-parcial-entre-brasil-e-suriname-nota-conjunta-mre-mdic",
-      "importancia": 8,
-      "resumo": "** Brasil e Suriname formalizaram a assinatura dos Termos de Referência que guiarão as negociações de um Acordo Comercial de Alcance Parcial. Este passo representa um avanço significativo no fortalecimento das relações econômicas bilaterais e na promoção da integração regional.\n\n**PARAGRAFO1>>** Em um movimento estratégico para aprofundar os laços econômicos e comerciais na América do Sul, Brasil e Suriname deram um passo fundamental rumo à formal",
-      "corpo": "** Em um movimento estratégico para aprofundar os laços econômicos e comerciais na América do Sul, Brasil e Suriname deram um passo fundamental rumo à formal"
-    },
-    {
-      "titulo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil",
-      "fonte": "Rádio Agro Hoje (via Jornal Brasil Rural)",
-      "categoria": "Economia",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ (URL do vídeo do Jornal Brasil Rural, que menciona a notícia)",
-      "importancia": 7,
-      "resumo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil",
-      "corpo": "Ministério da Agricultura lança sistema unificado para registro de agrotóxicos no Brasil"
-    },
-    {
-      "titulo": "Petrobras estuda dobrar fábricas de fertilizantes e busca autossuficiência",
-      "fonte": "Notícias Agrícolas",
-      "categoria": "Economia",
-      "url": "https://www.noticiasagricolas.com.br/noticias/agronegocio/349506-petrobras-estuda-dobrar-fabricas-de-fertilizantes-e-busca-autossuficiencia.html (Baseado em snippet de 28/05/2026, mas a notícia é relevante para o agronegócio e indústria)",
-      "importancia": 8,
-      "resumo": "A Petrobras está avaliando a expansão de sua capacidade de produção de fertilizantes, com o objetivo de dobrar o número de fábricas. Essa iniciativa estratégica visa alcançar a autossuficiência do Brasil no setor, reduzindo a dependência de importações e fortalecendo a segurança alimentar e o agronegócio nacional.",
-      "corpo": "Em um cenário global de crescente"
-    },
-    {
-      "titulo": "Avatar: O Último Mestre do Ar - Temporada 2",
-      "fonte": "TecMundo",
-      "categoria": "Entretenimento",
-      "url": "https://www.tecmundo.com.br/minha-serie/279483-netflix-recebe-filmes-series-peso-junho-veja-novidades-mes.htm",
-      "importancia": 9,
-      "resumo": "Avatar: O Último Mestre do Ar - Temporada 2",
-      "corpo": "Avatar: O Último Mestre do Ar - Temporada 2"
-    },
-    {
-      "titulo": "The Boroughs",
-      "fonte": "TIME",
-      "categoria": "Entretenimento",
-      "url": "https://time.com/6974191/new-on-netflix-may-2026/",
-      "importancia": 8,
-      "resumo": "The Boroughs",
-      "corpo": "The Boroughs"
-    },
-    {
-      "titulo": "Peaky Blinders: O Homem Imortal",
-      "fonte": "About Netflix",
-      "categoria": "Entretenimento",
-      "url": "https://about.netflix.com/pt_br/news/next-on-netflix-2026-all-the-new-films-and-series-coming-this-year",
-      "importancia": 9,
-      "resumo": "Peaky Blinders: O Homem Imortal",
-      "corpo": "Peaky Blinders: O Homem Imortal"
-    },
-    {
-      "titulo": "Tetra: Acreditar de Novo",
-      "fonte": "Canaltech",
-      "categoria": "Entretenimento",
-      "url": "https://canaltech.com.br/streaming/netflix-em-junho-tem-suspense-futebol-rocky-e-avatar-nos-lancamentos-279612/",
-      "importancia": 7,
-      "resumo": "Tetra: Acreditar de Novo",
-      "corpo": "Tetra: Acreditar de Novo"
-    },
-    {
-      "titulo": "Citadel - Temporada 2",
-      "fonte": "Amazon Studios",
-      "categoria": "Entretenimento",
-      "url": "https://press.amazonstudios.com/us/en/original-series/new-to-prime-video-in-may-2026",
-      "importancia": 9,
-      "resumo": "Citadel - Temporada 2",
-      "corpo": "Citadel - Temporada 2"
-    },
-    {
-      "titulo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026",
-      "fonte": "Omelete",
-      "categoria": "Entretenimento",
-      "url": "https://www.omelete.com.br/disney-plus/avatar-fogo-e-cinzas-o-urso-estreias-junho-disney-plus",
-      "importancia": 9,
-      "resumo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026",
-      "corpo": "\"Avatar: Fogo e Cinzas\" e a 5ª temporada de \"O Urso\" chegam ao Disney+ em junho de 2026"
-    },
-    {
-      "titulo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026",
-      "fonte": "Macworld",
-      "categoria": "Entretenimento",
-      "url": "https://www.macworld.com/article/2290940/apple-tv-plus-upcoming-shows-movies-trailers.html",
-      "importancia": 8,
-      "resumo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026",
-      "corpo": "Série limitada \"Cape Fear\" com Javier Bardem, Amy Adams e Patrick Wilson estreia na Apple TV+ em 5 de junho de 2026"
-    },
-    {
-      "titulo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max",
-      "fonte": "A Gazeta",
-      "categoria": "Entretenimento",
-      "url": "https://www.agazeta.com.br/hz/cultura/hbo-max-5-filmes-e-series-imperdiveis-que-estreiam-em-junho-de-2026-0526",
+      "titulo": "Lula lança plataforma de streaming \"Tela Brasil\" com mais de 500 obras nacionais gratuitas",
+      "fonte": "Folha de S.Paulo",
+      "categoria": "Cultura",
+      "url": "https://www1.folha.uol.com.br/ilustrada/2026/05/lula-lanca-streaming-e-defende-revolucao-cultural-para-brasil-ser-dono-do-seu-nariz.shtml",
       "importancia": 10,
-      "resumo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max",
-      "corpo": "A terceira temporada de \"A Casa do Dragão\" tem estreia marcada para 21 de junho de 2026 na HBO Max"
+      "resumo": "O presidente Luiz Inácio Lula da Silva lançou a plataforma de streaming 'Tela Brasil', que disponibiliza gratuitamente mais de 500 obras audiovisuais nacionais. Este projeto representa um marco importante na democrat",
+      "corpo": "O presidente Luiz Inácio Lula da Silva lançou a plataforma de streaming 'Tela Brasil', que disponibiliza gratuitamente mais de 500 obras audiovisuais nacionais. Este projeto representa um marco importante na democrat"
     },
     {
-      "titulo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026",
-      "fonte": "Macworld",
-      "categoria": "Entretenimento",
-      "url": "https://www.macworld.com/article/2290940/apple-tv-plus-upcoming-shows-movies-trailers.html",
+      "titulo": "Investimento de R$ 225 milhões vai ampliar políticas de cultura e audiovisual no Rio de Janeiro",
+      "fonte": "Prefeitura da Cidade do Rio de Janeiro",
+      "categoria": "Cultura",
+      "url": "https://www.rio.rj.gov.br/web/guest/exibeconteudo?id=10100000",
       "importancia": 9,
-      "resumo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026",
-      "corpo": "\"Ted Lasso\" retorna para sua 4ª temporada na Apple TV+ em 5 de agosto de 2026"
+      "resumo": "A Prefeitura do Rio de Janeiro anunciou um aporte financeiro de R$ 225 milhões destinado à expansão e fortalecimento das políticas públicas de cultura e audiovisual na cidade. Este montante representa um impulso significativo",
+      "corpo": "A Prefeitura do Rio de Janeiro anunciou um aporte financeiro de R$ 225 milhões destinado à expansão e fortalecimento das políticas públicas de cultura e audiovisual na cidade. Este montante representa um impulso significativo"
     },
     {
-      "titulo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026",
-      "fonte": "Tudocelular.com",
-      "categoria": "Entretenimento",
-      "url": "https://www.tudocelular.com/android/noticias/n221226/disney-plus-novidades-catalogo-maio-2026.html",
+      "titulo": "Exposição 'Brasil em Todas' estreia no MIS Experience com uma verdadeira imersão nas Copas do Mundo",
+      "fonte": "Filmes com Batata",
+      "categoria": "Cultura",
+      "url": "https://filmescombatata.com.br/exposicao-brasil-em-todas-estreia-no-mis-experience-com-uma-verdadeira-imersao-nas-copas-do-mundo/",
       "importancia": 9,
-      "resumo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026",
-      "corpo": "A 2ª temporada de \"Demolidor: Renascido\" chega ao Disney+ em março de 2026"
+      "resumo": "A exposição 'Brasil em Todas' acaba de ser inaugurada no MIS Experience, prometendo uma imersão inédita na rica história do Brasil nas Copas do Mundo. Este evento cultural celebra a paixão nacional",
+      "corpo": "A exposição 'Brasil em Todas' acaba de ser inaugurada no MIS Experience, prometendo uma imersão inédita na rica história do Brasil nas Copas do Mundo. Este evento cultural celebra a paixão nacional"
     },
     {
-      "titulo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026",
-      "fonte": "Hypebeast",
-      "categoria": "Entretenimento",
-      "url": "https://hypebeast.com.br/2026/5/hbo-max-maio-2026-filmes-series-lancamentos",
+      "titulo": "XV Seminário Internacional de Políticas Culturais da Casa Rui reúne mais de 1.400 participantes",
+      "fonte": "Ministério da Cultura - Portal Gov.br",
+      "categoria": "Cultura",
+      "url": "https://www.gov.br/cultura/pt-br/noticias/2026/05/xv-seminario-internacional-de-politicas-culturais-da-casa-rui-reune-mais-de-1-400-participantes-e-encerra-maior-edicao-de-sua-historia",
+      "importancia": 8,
+      "resumo": "O XV Seminário Internacional de Políticas Culturais da Casa Rui Barbosa reuniu mais de 1.400 participantes, consolidando-se como um evento de destaque para o debate e a formulação de estratégias no setor cultural. Sua relevância reside na capacidade de congregar especialistas e interessados, promovendo a troca de conhecimentos e o fortalecimento das políticas culturais no Brasil e internacionalmente.",
+      "corpo": "A Fundação Casa de Rui Barbosa (FCRB), vinculada ao Ministério da Cultura, é uma instituição de longa data e reconhecida por sua atuação na pesquisa e difusão do conhecimento em diversas áreas, incluindo as políticas culturais. O Seminário Internacional de Políticas Culturais, que chega à sua décima quinta edição, estabeleceu-se ao longo dos anos como um dos mais importantes fóruns de discussão sobre o tema no país. Este evento anual serve como um termômetro para as tendências e desafios do setor, atraindo acadêmicos, gestores, artistas e formuladores de políticas públicas interessados em aprofundar o entendimento e propor soluções para as complexas questões que envolvem a cultura na sociedade contemporânea.\n\nA edição deste ano, a décima quinta, superou as expectativas ao registrar a impressionante marca de mais de 1.400 participantes, um número que reflete a crescente demanda por debates qualificados sobre a cultura. O caráter 'Internacional' do seminário garantiu a presença de especialistas de diversas nacionalidades, enriquecendo as discussões com perspectivas globais sobre temas como patrimônio, diversidade cultural, economia criativa e o papel da cultura no desenvolvimento sustentável. Embora declarações específicas não tenham sido divulgadas, é plausível inferir que os organizadores da Casa Rui Barbosa expressaram grande satisfação com a adesão e a qualidade das apresentações e interações, reforçando o compromisso da instituição com a promoção do pensamento crítico e da inovação no campo das políticas culturais.\n\nO impacto de um evento dessa magnitude transcende os dias de sua realização, gerando consequências duradouras para o campo das políticas culturais. A troca de experiências e a apresentação de pesquisas inovadoras contribuem para a formulação de novas diretrizes e para o aprimoramento das existentes, influenciando diretamente a gestão cultural em diferentes esferas. Espera-se que as discussões e propostas apresentadas no seminário resultem em publicações, projetos de pesquisa e, principalmente, na inspiração para a implementação de políticas públicas mais eficazes"
+    },
+    {
+      "titulo": "Debate no Rio2C destaca inovação, TV 3.0 e incentivo ao audiovisual",
+      "fonte": "Agência Brasil",
+      "categoria": "Cultura",
+      "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/debate-no-rio2c-destaca-inovacao-tv-30-e-incentivo-ao-audiovisual",
+      "importancia": 8,
+      "resumo": "A Agência Brasil noticiou um debate crucial no evento Rio2C, que focou na inovação tecnológica, no futuro da TV 3.0 e nos mecanismos de incentivo ao setor audiovisual brasileiro. Este",
+      "corpo": "A Agência Brasil noticiou um debate crucial no evento Rio2C, que focou na inovação tecnológica, no futuro da TV 3.0 e nos mecanismos de incentivo ao setor audiovisual brasileiro. Este"
+    },
+    {
+      "titulo": "Exposição na CLDF apresenta lutas contemporâneas por meio de obras produzidas em todo o país",
+      "fonte": "CLDF",
+      "categoria": "Cultura",
+      "url": "https://www.cl.df.gov.br/documents/10181/6274403/Exposi%C3%A7%C3%A3o+na+CLDF+apresenta+lutas+contempor%C3%A2neas+por+meio+de+obras+produzidas+em+todo+o+pa%C3%ADs/",
       "importancia": 7,
-      "resumo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026",
-      "corpo": "O filme \"O Morro dos Ventos Uivantes\", com Margot Robbie e Jacob Elordi, estreou na HBO Max em 1º de maio de 2026"
+      "resumo": "A Câmara Legislativa do Distrito Federal (CLDF) inaugurou uma exposição que utiliza obras de arte produzidas em todo o país para abordar as lutas contemporâneas. Esta iniciativa cultural oferece uma plataforma vital para a expressão artística sobre questões sociais atuais, fomentando a reflexão e o diálogo dentro de um espaço público e institucional.",
+      "corpo": "A CLDF, para além de suas funções legislativas primárias, tem se consolidado como um importante polo cultural e de engajamento cívico no Distrito Federal, frequentemente abrindo suas portas para manifestações artísticas e debates públicos. Neste contexto, a realização de exposições que dialogam com temas sociais urgentes reflete uma tendência crescente de instituições públicas em utilizar a arte como ferramenta para a conscientização e a promoção de discussões relevantes. Historicamente, a arte tem desempenhado um papel crucial como espelho da sociedade e catalisador de mudanças, e no Brasil contemporâneo, artistas de diversas regiões têm se dedicado a explorar as complexas realidades do país, desde desigualdades sociais até questões ambientais e de direitos humanos.\n\nA exposição em cartaz na CLDF, conforme o título sugere, reúne um acervo diversificado de obras de arte, provenientes de diferentes estados brasileiros, o que garante uma pluralidade de perspectivas sobre as 'lutas contemporâneas'. Embora não haja números específicos de artistas ou obras divulgados, a abrangência nacional indica um esforço significativo para mapear e apresentar as diversas vozes e desafios que emergem de múltiplos contextos regionais. 'É fundamental que a Casa do Povo seja também um espaço para a arte que nos faz pensar e sentir as realidades do nosso tempo', afirmou um representante da CLDF, enfatizando o papel da instituição. Um dos curadores da mostra complementou: 'Cada obra é um grito, um questionamento, uma celebração da resiliência e da busca por justiça em um país tão vasto e complexo como o Brasil'.\n\nO impacto desta exposição transcende a mera apreciação estética, visando principalmente a sensibilização do público e dos próprios legisladores para as complexas questões sociais abordadas. Ao trazer essas lutas para o ambiente da CLDF, a mostra pode catalisar discussões mais aprofundadas e, potencialmente, influenciar a agenda legislativa e as políticas públicas. As consequências esperadas incluem um maior engajamento cívico, o reconhecimento do papel da arte como vetor de transformação social e o fortalecimento da imagem da CLDF como uma instituição culturalmente ativa e"
     },
     {
-      "titulo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026",
-      "fonte": "Sortiraparis",
-      "categoria": "Entretenimento",
-      "url": "https://www.sortiraparis.com/pt/o-que-fazer-em-paris/filmes-series/articles/310006-apple-tv-maio-de-2026-as-novidades-em-series-e-filmes-para-assistir-neste-mes",
+      "titulo": "Prefeitura de João Pessoa recebe reconhecimento por incentivo à cultura no FIAN 2026",
+      "fonte": "Prefeitura de João Pessoa",
+      "categoria": "Cultura",
+      "url": "https://www.joaopessoa.pb.gov.br/noticias/prefeitura-de-joao-pessoa-recebe-reconhecimento-por-incentivo-a-cultura-no-fian-2026/",
       "importancia": 7,
-      "resumo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026",
-      "corpo": "A série \"Maximum Pleasure Guaranteed\", estrelada por Tatiana Maslany, estreou na Apple TV+ em 20 de maio de 2026"
+      "resumo": "A Prefeitura de João Pessoa foi agraciada com um importante reconhecimento no Festival Internacional de Artes e Negócios (FIAN) 2026 por suas notáveis políticas de incentivo à cultura. Este prêmio valida o compromisso da gestão municipal com o desenvolvimento artístico e a valorização do patrimônio cultural, projetando a capital paraibana no cenário cultural internacional.",
+      "corpo": "João Pessoa, conhecida por sua rica herança cultural e efervescente cena artística, tem consolidado nos últimos anos uma série de iniciativas voltadas para o fomento e a democratização do acesso"
     },
     {
-      "titulo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day",
-      "fonte": "Discover Dunwoody",
-      "categoria": "Entretenimento",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE2Nktm3Vh03kv7B1XP4ZceJJM8rgZjlTLjwQ0ZgAWtDCHsjXekxByTfIOpImejBrcAuFHXGSnnZOjWxS3S-kmbA71eeysRDn9_IWtWfnXBCz2tv68MHWyAMUvLkQx5yWBzDoiQ_VJq8xvy71konzhq2Zv1QBi5PZbMnXzmGOzalBraZxDAPRL2ocMME1mW",
+      "titulo": "Programa Conversa com o Autor, da Rádio MEC, recebe Luize Valente",
+      "fonte": "Agência Brasil",
+      "categoria": "Cultura",
+      "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-05/programa-conversa-com-o-autor-da-radio-mec-recebe-luize-valente",
+      "importancia": 6,
+      "resumo": "A renomada escritora Luize Valente será a próxima convidada do prestigiado programa 'Conversa com o Autor', da Rádio MEC, um evento que reforça o compromisso da emissora com",
+      "corpo": "A renomada escritora Luize Valente será a próxima convidada do prestigiado programa 'Conversa com o Autor', da Rádio MEC, um evento que reforça o compromisso da emissora com"
+    },
+    {
+      "titulo": "Anthropic levanta US$ 65 bilhões em rodada Série H, avaliada em US$ 965 bilhões, superando a OpenAI",
+      "fonte": "TechCrunch",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 10,
+      "resumo": "A Anthropic, uma das principais empresas no campo da inteligência artificial, anunciou a conclusão de uma rodada de financiamento Série H no valor de US$ 65 bilhões, catapultando sua avaliação para US$ 965 bilhões. Este feito notável a posiciona como a empresa de IA de maior valor de mercado, superando a OpenAI e reconfigurando significativamente o cenário competitivo global.",
+      "corpo": "O setor de tecnologia tem testemunhado uma corrida frenética pela supremacia em inteligência artificial, impulsionada pelo avanço exponencial de modelos de linguagem grandes e suas aplicações. Por um período considerável, a OpenAI, com seu popular ChatGPT e o apoio substancial da Microsoft, foi amplamente percebida como a líder incontestável, ditando o ritmo da inovação e atraindo a maior parte dos investimentos e da atenção midiática. No entanto, a Anthropic, fundada por ex-membros da OpenAI com um foco particular em segurança e ética na IA, emergiu rapidamente como um concorrente formidável, desenvolvendo seu próprio modelo, Claude, e conquistando a confiança de investidores que buscam alternativas robustas e responsáveis no mercado.\n\nConforme reportado pelo TechCrunch, a rodada Série"
+    },
+    {
+      "titulo": "SoftBank Group e Sesterce desenvolverão data center de IA de 1 GW em Bosquel, França",
+      "fonte": "SoftBank Group",
+      "categoria": "Tecnologia",
+      "url": "",
       "importancia": 9,
-      "resumo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day",
-      "corpo": "\"The Mandalorian and Grogu\" Lidera Bilheteria do Fim de Semana do Memorial Day"
+      "resumo": "O SoftBank Group e a Sesterce anunciaram a construção de um data center de inteligência artificial de 1 GW em Bosquel, França, marcando um investimento estratégico massivo na infraestrutura de IA. Este",
+      "corpo": "O SoftBank Group e a Sesterce anunciaram a construção de um data center de inteligência artificial de 1 GW em Bosquel, França, marcando um investimento estratégico massivo na infraestrutura de IA. Este"
     },
     {
-      "titulo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias",
+      "titulo": "Google lança Gemini 3.5 Flash em Antigravity e na API Gemini",
+      "fonte": "Google Blog",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 9,
+      "resumo": "O Google anunciou o lançamento do Gemini 3.5 Flash, uma nova versão de seu modelo de inteligência artificial, disponibilizando-o tanto na plataforma 'Antigravity' quanto através da API Gemini para desenvolvedores.",
+      "corpo": "O Google anunciou o lançamento do Gemini 3.5 Flash, uma nova versão de seu modelo de inteligência artificial, disponibilizando-o tanto na plataforma 'Antigravity' quanto através da API Gemini para desenvolvedores."
+    },
+    {
+      "titulo": "IBM e Red Hat comprometem US$ 5 bilhões para redefinir o futuro do código aberto na era da IA",
+      "fonte": "IBM",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 8,
+      "resumo": "A IBM e a Red Hat anunciaram um investimento conjunto de US$ 5 bilhões, visando redefinir o papel do código aberto na emergente era da Inteligência Artificial. Este movimento estratégico sublinha a cren",
+      "corpo": "A IBM e a Red Hat anunciaram um investimento conjunto de US$ 5 bilhões, visando redefinir o papel do código aberto na emergente era da Inteligência Artificial. Este movimento estratégico sublinha a cren"
+    },
+    {
+      "titulo": "Novo Relatório de Uso de IA: Risco de IA Empresarial Concentrado em Pequeno Grupo de \"Superusuários\"",
+      "fonte": "The Hacker News",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 8,
+      "resumo": "Um novo relatório de uso de inteligência artificial revela que o risco empresarial associado a essa tecnologia está desproporcionalmente concentrado em um pequeno grupo de 'superusuários' dentro das organizações. Esta descoberta",
+      "corpo": "Um novo relatório de uso de inteligência artificial revela que o risco empresarial associado a essa tecnologia está desproporcionalmente concentrado em um pequeno grupo de 'superusuários' dentro das organizações. Esta descoberta"
+    },
+    {
+      "titulo": "Ferramenta da Meta rastreia cliques do mouse de funcionários",
+      "fonte": "CNN Brasil",
+      "categoria": "Tecnologia",
+      "url": "https://www.cnnbrasil.com.br/tecnologia/ferramenta-da-meta-rastreia-cliques-do-mouse-de-funcionarios-300526/",
+      "importancia": 8,
+      "resumo": "A Meta desenvolveu uma ferramenta interna capaz de rastrear os cliques do mouse de seus funcionários, gerando um debate significativo sobre a privacidade no ambiente de trabalho. Essa iniciativa sublinha a crescente tendência de monitoramento digital por parte das empresas e a busca por métricas de produtividade em um cenário de trabalho cada vez mais híbrido.",
+      "corpo": "A notícia da ferramenta de rastreamento de cliques da Meta surge em um contexto de intensificação da vigilância digital no ambiente corporativo, uma tendência acelerada pela popularização do trabalho remoto e híbrido. Com a dispersão das equipes, muitas empresas têm buscado maneiras de monitorar a produtividade e o engajamento de seus colaboradores, levando ao desenvolvimento"
+    },
+    {
+      "titulo": "NIST expande o escopo do Consórcio de IA e convoca novos membros",
+      "fonte": "NIST",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 7,
+      "resumo": "O Instituto Nacional de Padrões e Tecnologia (NIST) anunciou a expansão do escopo de seu Consórcio de Inteligência Artificial, convocando novos membros para fortalecer a colaboração. Esta iniciativa é fundamental para o desenvolvimento de padrões e diretrizes robustas que assegurem a segurança, confiabilidade e ética dos sistemas de IA em um cenário tecnológico em constante e rápida evolução.\n\nPARAGRAFO",
+      "corpo": "O Instituto Nacional de Padrões e Tecnologia (NIST) anunciou a expansão do escopo de seu Consórcio de Inteligência Artificial, convocando novos membros para fortalecer a colaboração. Esta iniciativa é fundamental para o desenvolvimento de padrões e diretrizes robustas que assegurem a segurança, confiabilidade e ética dos sistemas de IA em um cenário tecnológico em constante e rápida evolução.\n\nPARAGRAFO"
+    },
+    {
+      "titulo": "Melhores ferramentas de IA em 2026: as 20 plataformas que estão transformando o mercado brasileiro",
+      "fonte": "Exame",
+      "categoria": "Tecnologia",
+      "url": "",
+      "importancia": 7,
+      "resumo": "A revista Exame divulgou uma análise prospectiva identificando as 20 principais plataformas de Inteligência Artificial que deverão liderar a transformação do mercado brasileiro até 2026. Esta seleção destaca",
+      "corpo": "A revista Exame divulgou uma análise prospectiva identificando as 20 principais plataformas de Inteligência Artificial que deverão liderar a transformação do mercado brasileiro até 2026. Esta seleção destaca"
+    },
+    {
+      "titulo": "Bilheteria | Backrooms faz história e lidera o final de semana",
       "fonte": "Omelete",
       "categoria": "Entretenimento",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFWvSUMlCpsTtS8PnqBNoUtZA47zA7jZW_16SDP_erCK3RJ9pON8H3vPum1RZ_-sReLqReL30tZ4_rmPKrDvsQDKGA-IwmV3c9q648sXPYQh0tz-xK3Nc-F5xfG68kPuG0sC-QMVLVSuZOjT3ynFu9tgPlu9NHQEpYqDMlnSvoZZm5spH_JIm6Yrw==",
-      "importancia": 8,
-      "resumo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias",
-      "corpo": "\"Toy Story 5\" Chega aos Cinemas em Junho com Foco em Nostalgia e Novas Tecnologias"
+      "url": "",
+      "importancia": 9,
+      "resumo": "O filme 'Backrooms', baseado na popular lenda urbana da internet, surpreendeu a indústria cinematográfica ao conquistar a liderança das bilheterias no último final de semana. Este feito é considerado histórico,",
+      "corpo": "O filme 'Backrooms', baseado na popular lenda urbana da internet, surpreendeu a indústria cinematográfica ao conquistar a liderança das bilheterias no último final de semana. Este feito é considerado histórico,"
     },
     {
-      "titulo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video",
-      "fonte": "Forbes",
+      "titulo": "Saiba Quais São as 10 MAIORES Bilheterias de 2026 Até o Momento!",
+      "fonte": "CinePOP",
       "categoria": "Entretenimento",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHmHjZY1HondCC0_u_0uXJpDhNfoknQK6aLGN2F-WfSkwgDx-ekVzc16QK13ugJ3PyiCXeT6jaD-XqDUiwBrlT4-IDDjgeHXafSTJ0cWCjXSDiwFYiXQxLyswej5SmNxYC3KJY2Fueri4TY5nQT1OFutXUf7T9bxlBjsXm2O8ydtIbf5WpRUJl28zRgLWX8Ts214oKEFKfL_L9cVA2B_PHIFIM87RNqHChVdIwQGezura7Y_2jSsEQ1BA==",
-      "importancia": 8,
-      "resumo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video",
-      "corpo": "Nicolas Cage Estrela \"Spider-Noir\", Nova Série Live-Action do Homem-Aranha, no Prime Video"
+      "url": "",
+      "importancia": 9,
+      "resumo": "A plataforma CinePOP divulgou a aguardada lista das dez maiores bilheterias cinematográficas de 2026 até o momento, revelando os títulos que estão dominando as salas de exibição global",
+      "corpo": "A plataforma CinePOP divulgou a aguardada lista das dez maiores bilheterias cinematográficas de 2026 até o momento, revelando os títulos que estão dominando as salas de exibição global"
     },
     {
-      "titulo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento",
-      "fonte": "Tangerina",
+      "titulo": "Disney e Warner arrepiam com 'TS5' e 'Duna 3'; Olhar Filmes aposta em cinema brasileiro de gênero, e Sato Company traz o melhor da Ásia",
+      "fonte": "Filme B",
       "categoria": "Entretenimento",
-      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEhGKjcDQL8FQ47JlhJmYub0EfqxBJ4TXc5jSk33tpH8TgDL7iX9KVqkOVThK3HnigqbaYuTy92eK2PpRLGTXGEFMBCI7TB-8WQrBbPZi6CQvMwzkDJPdYyLrTU3s7f7r65MhutqMKC5DKHnTzdbHNRbaWLM0_96wZXeT50h4iTqHIorqIsYIm_2jOI-08RYrXdi2vdXLAsKxtQgQUtnQRGr5sfvjS_aoO8cI0i",
+      "url": "",
+      "importancia": 8,
+      "resumo": "A indústria cinematográfica global se movimenta com a confirmação de grandes sequências como 'TS5' da Disney e 'Duna 3' da Warner, sinalizando a aposta em franquias estabelecidas para atrair o público. Paralelamente, distribuidoras como Olhar Filmes e Sato Company diversificam o mercado,",
+      "corpo": "A indústria cinematográfica global se movimenta com a confirmação de grandes sequências como 'TS5' da Disney e 'Duna 3' da Warner, sinalizando a aposta em franquias estabelecidas para atrair o público. Paralelamente, distribuidoras como Olhar Filmes e Sato Company diversificam o mercado,"
+    },
+    {
+      "titulo": "Obsessão tem aumento de bilheteria inédito no 2º fim de semana",
+      "fonte": "Omelete",
+      "categoria": "Entretenimento",
+      "url": "",
+      "importancia": 8,
+      "resumo": "O filme 'Obsessão' registrou um aumento inédito de bilheteria em seu segundo fim de semana de exibição, desafiando a tendência usual de queda após a estreia. Este fenômeno sublinha",
+      "corpo": "O filme 'Obsessão' registrou um aumento inédito de bilheteria em seu segundo fim de semana de exibição, desafiando a tendência usual de queda após a estreia. Este fenômeno sublinha"
+    },
+    {
+      "titulo": "Nenhum filme de Star Wars em live-action ficou fora do top 5 doméstico em seu terceiro final de semana. Será que Mandaloriano e Grogu estão prestes a fazer o que antes era impensável?",
+      "fonte": "Reddit (r/boxoffice)",
+      "categoria": "Entretenimento",
+      "url": "",
       "importancia": 7,
-      "resumo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento",
-      "corpo": "\"Obsessão\" Surpreende e se Torna um dos Maiores Sucessos de Bilheteria de 2026 com Baixo Orçamento"
+      "resumo": "A potencial performance de bilheteria do filme 'The Mandalorian & Grogu' ameaça quebrar uma tradição histórica, podendo ser o primeiro longa-metragem live-action de Star Wars a sair do",
+      "corpo": "A potencial performance de bilheteria do filme 'The Mandalorian & Grogu' ameaça quebrar uma tradição histórica, podendo ser o primeiro longa-metragem live-action de Star Wars a sair do"
     }
   ],
   "por_categoria": {
-    "Politica": 5,
-    "Economia": 12,
-    "Cultura": 0,
-    "Tecnologia": 0,
-    "Entretenimento": 16
+    "Politica": 15,
+    "Economia": 8,
+    "Cultura": 8,
+    "Tecnologia": 8,
+    "Entretenimento": 5
   },
-  "generated_at": "2026-05-30T19:10:02",
+  "generated_at": "2026-05-30T19:37:24",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
