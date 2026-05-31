@@ -196,19 +196,24 @@ def p3_corpo(client, noticia):
     cat    = noticia["categoria"]
 
     prompt = (
-        f"Escreva um artigo jornalistico em portugues brasileiro sobre:\n"
-        f"Titulo: {titulo}\nFonte: {fonte} | Categoria: {cat}\n\n"
-        "Escreva exatamente 4 paragrafos numerados:\n\n"
-        "1) Duas frases de resumo: o que aconteceu e por que e importante.\n\n"
-        "2) Contexto e antecedentes. Minimo 3 frases completas.\n\n"
-        "3) Fatos, dados e declaracoes. Minimo 3 frases completas.\n\n"
-        "4) Impacto e proximos passos. Minimo 3 frases completas.\n\n"
-        "Sem markdown, sem asteriscos, sem negrito. Texto puro. "
-        "Cada paragrafo deve terminar com ponto final."
+        f"Escreva um artigo jornalistico completo em portugues brasileiro.\n\n"
+        f"Noticia: {titulo}\n"
+        f"Fonte: {fonte} | Categoria: {cat}\n\n"
+        "O artigo tem 4 paragrafos numerados. IMPORTANTE: nao repita o titulo no texto.\n\n"
+        "1) RESUMO: escreva 2 frases proprias descrevendo o fato e sua importancia. "
+        "NAO copie o titulo. Minimo 30 palavras.\n\n"
+        "2) CONTEXTO: antecedentes e cenario atual. Minimo 4 frases. Minimo 60 palavras.\n\n"
+        "3) DETALHES: fatos especificos, dados numericos e declaracoes. Minimo 4 frases. Minimo 60 palavras.\n\n"
+        "4) IMPACTO: consequencias e proximos passos esperados. Minimo 4 frases. Minimo 60 palavras.\n\n"
+        "Regras: sem markdown, sem asteriscos, sem negrito. Texto puro. "
+        "Cada paragrafo termina com ponto final. Total minimo: 300 palavras."
     )
 
     try:
-        txt = _strip_md(gtext(client, prompt, max_tokens=1000, temp=0.35))
+        txt = _strip_md(gtext(client, prompt, max_tokens=2000, temp=0.35))
+
+        # Remove prefixos como "RESUMO:", "CONTEXTO:", "Titulo:" do texto
+        txt = re.sub(r'(?m)^\s*(RESUMO|CONTEXTO|DETALHES|IMPACTO|Titulo)\s*:\s*', '', txt)
 
         # Estrategia 1: divide por "1)" "2)" "3)" "4)" no inicio
         partes = re.split(r'(?m)^\s*[1-4]\)\s*', txt)
