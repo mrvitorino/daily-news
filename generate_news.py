@@ -13,7 +13,7 @@ Arquitetura 3 passos por categoria (zero JSON intermediario com texto livre):
 Custo: gratuito (Gemini free tier — 1500 req/dia com billing)
 """
 
-import json, os, re, sys, time, traceback
+import json, os, re, sys, time, traceback, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 
 try:
@@ -74,6 +74,18 @@ def gjson(client, prompt, schema, max_tokens=3000):
             response_schema=schema))
     return json.loads(resp.text)
 
+def _validate_url(url):
+    """Retorna url se acessível (2xx/3xx), senão string vazia."""
+    if not url or not url.startswith("http"):
+        return ""
+    try:
+        req = urllib.request.Request(url, method="HEAD",
+              headers={"User-Agent": "Mozilla/5.0 (compatible; NewsBot/1.0)"})
+        with urllib.request.urlopen(req, timeout=5) as r:
+            return url if r.status < 400 else ""
+    except Exception:
+        return ""
+
 def gtext(client, prompt, max_tokens=1000, temp=0.3):
     resp = client.models.generate_content(
         model=MODEL, contents=prompt,
@@ -116,6 +128,8 @@ def _parse_blocos(txt, categoria):
         url = ex("URL")
         if not url.startswith("http") or "vertexaisearch" in url or "grounding-api" in url:
             url = ""
+        else:
+            url = _validate_url(url)
         try: imp = min(10, max(1, int(re.search(r'\d+', ex("IMPORTANCIA")).group())))
         except: imp = 5
         noticias.append({
@@ -208,7 +222,10 @@ def p2_meta(client, noticias_raw, categoria):
             t = n.get("titulo","").strip()
             if not t or len(t) < 8: continue
             url = n.get("url","")
-            if not url.startswith("http"): url = ""
+            if not url.startswith("http"):
+                url = ""
+            else:
+                url = _validate_url(url)
             out.append({
                 "titulo":      t,
                 "fonte":       n.get("fonte","Redacao").strip() or "Redacao",
@@ -242,13 +259,13 @@ def p3_corpo(client, noticia):
     )
 
     try:
-        txt = _strip_md(gtext(client, prompt, max_tokens=2000, temp=0.35))
+        txt = _strip_md(gtext(client, prompt, max_tokens=3000, temp=0.35))
 
-        # Remove prefixos como "RESUMO:", "CONTEXTO:", "Titulo:" do texto
+        # Remove prefixos como "RESUMO:", "CONTEXTO:", "Titulo:" e numeração "1." "1)" do texto
         txt = re.sub(r'(?m)^\s*(RESUMO|CONTEXTO|DETALHES|IMPACTO|Titulo)\s*:\s*', '', txt)
 
-        # Estrategia 1: divide por "1)" "2)" "3)" "4)" no inicio
-        partes = re.split(r'(?m)^\s*[1-4]\)\s*', txt)
+        # Estrategia 1: divide por "1)" ou "1." no início da linha
+        partes = re.split(r'(?m)^\s*[1-4][.)]\s*', txt)
         partes = [p.strip() for p in partes if len(p.strip()) > 40]
         if len(partes) >= 4:
             return _limpa2(partes[0]), "\n\n".join(partes[1:4])
@@ -299,7 +316,7 @@ def gerar_editorial(client, noticias, today_str):
         "Texto puro, sem markdown, sem aspas duplas, em portugues formal."
     )
     try:
-        return _strip_md(gtext(client, prompt, 250, 0.2).strip())
+        return _strip_md(gtext(client, prompt, 500, 0.2).strip())
     except Exception:
         return "O cenario politico e economico brasileiro segue movimentado."
 
