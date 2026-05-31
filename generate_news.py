@@ -239,12 +239,16 @@ def p2_meta(client, noticias_raw, categoria):
 
     try:
         result = gjson(client, prompt, schema, 2000)
-        # Adiciona categoria e filtra invalidos
+        # Mapa de urls originais (p1) por titulo normalizado — fallback se p2 devolver vazio
+        raw_urls = {n["titulo"].strip().lower(): n.get("url","") for n in noticias_raw}
+
         out = []
         for n in result:
             t = n.get("titulo","").strip()
             if not t or len(t) < 8: continue
             url = _clean_url(n.get("url",""))
+            if not url:
+                url = _clean_url(raw_urls.get(t.lower(), ""))
             out.append({
                 "titulo":      t,
                 "fonte":       n.get("fonte","Redacao").strip() or "Redacao",
@@ -263,18 +267,42 @@ def p3_corpo(client, noticia):
     fonte  = noticia["fonte"]
     cat    = noticia["categoria"]
 
+    is_intl = (cat == "Internacional")
+
+    if is_intl:
+        lang_instr = (
+            "Write the article in the same language as the original news source "
+            "(English for English-language sources, Spanish for Spanish-language sources). "
+            "Do NOT translate to Portuguese."
+        )
+    else:
+        lang_instr = (
+            "OBRIGATORIO: escreva EXCLUSIVAMENTE em portugues do Brasil. "
+            "Nao use espanhol, ingles nem qualquer outro idioma. "
+            "Se a fonte for em outro idioma, traduza tudo para o portugues brasileiro."
+        )
+
     prompt = (
-        f"Escreva um artigo jornalistico completo em portugues brasileiro.\n\n"
-        f"Noticia: {titulo}\n"
-        f"Fonte: {fonte} | Categoria: {cat}\n\n"
-        "O artigo tem 4 paragrafos numerados. IMPORTANTE: nao repita o titulo no texto.\n\n"
-        "1) RESUMO: escreva 2 frases proprias descrevendo o fato e sua importancia. "
-        "NAO copie o titulo. Minimo 30 palavras.\n\n"
-        "2) CONTEXTO: antecedentes e cenario atual. Minimo 4 frases. Minimo 60 palavras.\n\n"
-        "3) DETALHES: fatos especificos, dados numericos e declaracoes. Minimo 4 frases. Minimo 60 palavras.\n\n"
-        "4) IMPACTO: consequencias e proximos passos esperados. Minimo 4 frases. Minimo 60 palavras.\n\n"
-        "Regras: sem markdown, sem asteriscos, sem negrito. Texto puro. "
-        "Cada paragrafo termina com ponto final. Total minimo: 300 palavras."
+        f"{'Write a complete journalistic article.' if is_intl else 'Escreva um artigo jornalistico completo.'}\n\n"
+        f"{'News' if is_intl else 'Noticia'}: {titulo}\n"
+        f"{'Source' if is_intl else 'Fonte'}: {fonte} | {'Category' if is_intl else 'Categoria'}: {cat}\n\n"
+        f"{lang_instr}\n\n"
+        f"{'The article has 4 numbered paragraphs. Do NOT repeat the headline.' if is_intl else 'O artigo tem 4 paragrafos numerados. IMPORTANTE: nao repita o titulo no texto.'}\n\n"
+        + (
+            "1) SUMMARY: 2 sentences describing the fact and its importance. Min 30 words.\n\n"
+            "2) CONTEXT: background and current situation. Min 4 sentences. Min 60 words.\n\n"
+            "3) DETAILS: specific facts, data and statements. Min 4 sentences. Min 60 words.\n\n"
+            "4) IMPACT: consequences and expected next steps. Min 4 sentences. Min 60 words.\n\n"
+            "Rules: no markdown, no asterisks, no bold. Plain text. Each paragraph ends with a period. Min total: 300 words."
+            if is_intl else
+            "1) RESUMO: escreva 2 frases proprias descrevendo o fato e sua importancia. "
+            "NAO copie o titulo. Minimo 30 palavras.\n\n"
+            "2) CONTEXTO: antecedentes e cenario atual. Minimo 4 frases. Minimo 60 palavras.\n\n"
+            "3) DETALHES: fatos especificos, dados numericos e declaracoes. Minimo 4 frases. Minimo 60 palavras.\n\n"
+            "4) IMPACTO: consequencias e proximos passos esperados. Minimo 4 frases. Minimo 60 palavras.\n\n"
+            "Regras: sem markdown, sem asteriscos, sem negrito. Texto puro. "
+            "Cada paragrafo termina com ponto final. Total minimo: 300 palavras."
+        )
     )
 
     try:
@@ -359,7 +387,20 @@ CATEGORIAS = [
 
     ("Entretenimento",
      "lancamentos de filmes e series em streaming em 2026: busque separadamente Netflix novidades maio junho 2026, Amazon Prime Video lancamentos 2026, HBO Max Max lancamentos 2026, Apple TV Plus estreias 2026, Disney Plus novidades 2026. Inclua tambem filmes em cartaz no cinema, criticas recentes e noticias de entretenimento"),
+
+    ("Internacional",
+     "top international news from the last 48 hours: geopolitics, wars, diplomacy, global economy, climate, science, technology, society. "
+     "Search in English AND Spanish. Use sources such as The New York Times, The Guardian, BBC News, Reuters, AP News, "
+     "El Pais, El Mundo, La Nacion, Clarin, DW, France 24, Al Jazeera English, The Washington Post, Bloomberg, Financial Times, "
+     "Le Monde (in French is ok), Der Spiegel, Politico Europe. "
+     "Mix English-language and Spanish-language sources. Return the title and source in the ORIGINAL language of the article."),
 ]
+
+# Numero de noticias por categoria (Internacional tem limite diferente)
+NEWS_PER_CAT_MAP = {
+    "Politica": 8, "Economia": 8, "Cultura": 8,
+    "Tecnologia": 8, "Entretenimento": 8, "Internacional": 10,
+}
 
 # ── ORQUESTRADOR ──────────────────────────────────────────────────────────────
 def fetch_news():
@@ -380,7 +421,8 @@ def fetch_news():
         print(f"\n--- {categoria} ---")
         try:
             # P1: busca
-            raw = p1_buscar(client, categoria, instrucoes, NEWS_PER_CAT, today_str)
+            n_cat = NEWS_PER_CAT_MAP.get(categoria, NEWS_PER_CAT)
+            raw = p1_buscar(client, categoria, instrucoes, n_cat, today_str)
             print(f"   P1 blocos: {len(raw)}")
             time.sleep(3)
 

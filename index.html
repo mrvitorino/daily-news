@@ -30,6 +30,7 @@
   --cat-cul: #e8b84b;
   --cat-tec: #a78bfa;
   --cat-ent: #f472b6;
+  --cat-int: #22d3ee;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -102,6 +103,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .cat-btn[data-cat="Cultura"] .dot{background:var(--cat-cul)}
 .cat-btn[data-cat="Tecnologia"] .dot{background:var(--cat-tec)}
 .cat-btn[data-cat="Entretenimento"] .dot{background:var(--cat-ent)}
+.cat-btn[data-cat="Internacional"] .dot{background:var(--cat-int)}
 .cat-count{font-size:9px;background:var(--bg4);padding:1px 5px;border-radius:10px;color:var(--text3)}
 
 /* EDITORIAL */
@@ -121,6 +123,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .cat-tag-Cultura{background:rgba(232,184,75,.12);color:var(--cat-cul)}
 .cat-tag-Tecnologia{background:rgba(167,139,250,.12);color:var(--cat-tec)}
 .cat-tag-Entretenimento{background:rgba(244,114,182,.12);color:var(--cat-ent)}
+.cat-tag-Internacional{background:rgba(34,211,238,.12);color:var(--cat-int)}
 .imp-tag{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold)}
 .hero-title{font-size:clamp(18px,2.8vw,30px);font-weight:600;line-height:1.2;color:var(--text);margin-bottom:9px;letter-spacing:-.02em}
 .hero-summary{font-size:14px;font-weight:400;line-height:1.75;color:var(--text2);max-width:680px;margin-bottom:12px}
@@ -187,7 +190,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <div id="loading-screen">
   <div class="ls-logo">Boletim Geral de <span>Notícias</span></div>
-  <div class="ls-sub">Política · Economia · Cultura · Tecnologia · Entretenimento</div>
+  <div class="ls-sub">Política · Economia · Cultura · Tecnologia · Entretenimento · Internacional</div>
   <div class="ls-track"><div class="ls-fill" id="ls-progress"></div></div>
   <div class="ls-status" id="ls-status">Iniciando…</div>
   <div class="ls-steps">
@@ -265,6 +268,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
     <button class="cat-btn" data-cat="Cultura" onclick="applyFilter(this,'Cultura')"><span class="dot"></span>Cultura <span class="cat-count" id="cnt-Cultura">0</span></button>
     <button class="cat-btn" data-cat="Tecnologia" onclick="applyFilter(this,'Tecnologia')"><span class="dot"></span>Tecnologia <span class="cat-count" id="cnt-Tecnologia">0</span></button>
     <button class="cat-btn" data-cat="Entretenimento" onclick="applyFilter(this,'Entretenimento')"><span class="dot"></span>Entretenimento <span class="cat-count" id="cnt-Entretenimento">0</span></button>
+    <button class="cat-btn" data-cat="Internacional" onclick="applyFilter(this,'Internacional')"><span class="dot"></span>Internacional <span class="cat-count" id="cnt-Internacional">0</span></button>
   </div>
 </nav>
 
@@ -321,7 +325,7 @@ function setDate(){
 }
 
 function updateCounts(news){
-  const cats=['Politica','Economia','Cultura','Tecnologia','Entretenimento'];
+  const cats=['Politica','Economia','Cultura','Tecnologia','Entretenimento','Internacional'];
   let total=0;
   cats.forEach(c=>{
     const n=news.filter(x=>x.categoria===c).length;
@@ -422,7 +426,7 @@ async function fetchBolsas(){
 // ── NOTÍCIAS ─────────────────────────────
 
 function catClass(c){
-  const map={Politica:'Politica',Economia:'Economia',Cultura:'Cultura',Tecnologia:'Tecnologia',Entretenimento:'Entretenimento'};
+  const map={Politica:'Politica',Economia:'Economia',Cultura:'Cultura',Tecnologia:'Tecnologia',Entretenimento:'Entretenimento',Internacional:'Internacional'};
   return map[c]||'Politica';
 }
 
