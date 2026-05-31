@@ -23,7 +23,7 @@ import anthropic
 
 OUTPUT   = "news-data.json"
 MODEL    = "claude-sonnet-4-6"
-MAX_NEWS = 20   # por categoria
+MAX_NEWS = 10  # por categoria (rate limit tier 1)
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
@@ -97,12 +97,22 @@ Substitua os exemplos pelos dados reais. Retorne exatamente {max_n} noticias.
 Se nao encontrar {max_n} noticias, retorne quantas encontrar (minimo 3).
 NUNCA invente noticias. NUNCA retorne campos com valor "N/A"."""
 
-    resp = client.messages.create(
-        model=MODEL,
-        max_tokens=8000,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        messages=[{"role": "user", "content": prompt}]
-    )
+    # Retry com backoff exponencial para rate limit
+    for tentativa in range(3):
+        try:
+            resp = client.messages.create(
+                model=MODEL,
+                max_tokens=4000,
+                tools=[{"type": "web_search_20250305", "name": "web_search"}],
+                messages=[{"role": "user", "content": prompt}]
+            )
+            break
+        except anthropic.RateLimitError:
+            espera = 65 * (tentativa + 1)
+            print(f"   [429] Rate limit — aguardando {espera}s...", file=sys.stderr)
+            time.sleep(espera)
+            if tentativa == 2:
+                raise
 
     # Extrai o texto da resposta (blocos type=text apos tool_use)
     texto = ""
@@ -252,7 +262,7 @@ def fetch_news():
             todas.extend(noticias)
             por_categoria[categoria] = len(noticias)
             resumos_cat[categoria]   = resumo_cat
-            time.sleep(3)  # pausa entre categorias
+            time.sleep(65)  # aguarda janela de rate limit (30k tokens/min tier 1)
         except Exception as e:
             print(f"   [ERRO] {categoria}: {e}", file=sys.stderr)
             traceback.print_exc()
