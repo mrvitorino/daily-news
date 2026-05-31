@@ -1,348 +1,141 @@
 {
-  "resumo_editorial": "A política brasileira é marcada pela tensão em torno da nova ind",
+  "resumo_editorial": "O cenário econômico brasileiro apresenta um crescimento inicial robust",
   "noticias": [
     {
-      "titulo": "Lula diz que vai indicar novamente Messias ao STF",
-      "fonte": "Agência Brasil",
+      "titulo": "Governo Lula busca consenso no Congresso para pautas econômicas prioritárias",
+      "fonte": "Folha de S.Paulo",
       "categoria": "Politica",
-      "url": "",
-      "importancia": 10,
-      "resumo": "**Lula Anuncia Nova Indicação de Messias ao STF, Gerando Expectativa e Debate**",
-      "corpo": "O presidente Luiz Inácio Lula da Silva surpreendeu o cenário político brasileiro ao anunciar sua intenção de indicar novamente o nome de Messias para uma vaga no Supremo Tribunal Federal (STF). A decisão, que marca uma repetição de uma tentativa anterior, é vista como um movimento estratégico e potencialmente controverso, com a capacidade de reconfigurar o equilíbrio ideológico e jurídico da mais alta corte do país, provocando intenso debate e escrutínio público.\n\nA indicação surge em um momento de particular sensibilidade nas relações entre os Poderes Executivo e Judiciário, com o STF frequentemente no centro de discussões sobre temas cruciais para a nação. A escolha de Messias, cujo nome já havia sido ventilado ou proposto em outra ocasião sem sucesso, adiciona uma camada de complexidade e curiosidade ao processo. O histórico recente de indicações presidenciais ao STF tem sido marcado por intensa polarização e pela busca por perfis que se alinhem, ou ao menos não se oponham veementemente, à visão do governo, tornando cada nova nomeação um termômetro da temperatura política nacional.\n\nEm declaração oficial, o presidente Lula afirmou que ‘Messias possui um notável saber jurídico e uma reputação ilibada, qualidades essenciais para um ministro do Supremo’. Ele complementou, referindo-se à tentativa anterior: ‘Sua indicação prévia, embora não tenha se concretizado, demonstrou seu preparo e sua capacidade de contribuir significativamente com a justiça brasileira. Acredito que agora é o momento certo para que sua experiência seja aproveitada na corte’. Embora dados específicos sobre a votação anterior ou os motivos da não concretização não tenham sido detalhados, a reiteração da escolha por parte do presidente sublinha uma convicção pessoal na aptidão do candidato."
-    },
-    {
-      "titulo": "STF valida mudança na Lei de Improbidade que exige dolo para punir prática ilegal",
-      "fonte": "Estadão",
-      "categoria": "Politica",
-      "url": "",
-      "importancia": 9,
-      "resumo": "**STF valida mudança na Lei de Improbidade que exige dolo para punir prática ilegal**",
-      "corpo": "O Supremo Tribunal Federal (STF) validou uma alteração crucial na Lei de Improbidade Administrativa, estabelecendo que a punição por atos ilegais exige a comprovação de dolo, ou seja, a intenção deliberada de cometer a irregularidade. Essa decisão representa uma mudança significativa na responsabilização de agentes públicos, com potencial para redefinir o cenário jurídico e impactar inúmeros processos em curso e futuros.\n\nA Lei de Improbidade Administrativa (Lei nº 8.429/1992) foi criada com o objetivo de coibir atos de má-fé na gestão pública, mas sua interpretação ao longo dos anos gerou debates, especialmente sobre a necessidade de dolo ou culpa para a caracterização de certos atos. Em 2021, o Congresso Nacional aprovou a Lei nº 14.230, que promoveu profundas alterações na legislação original, sendo a mais polêmica a exigência de dolo específico para a maioria dos atos de improbidade. Antes, a jurisprudência do Superior Tribunal de Justiça (STJ) admitia a punição por culpa em algumas modalidades, como a que causa prejuízo ao erário. A validação pelo STF era aguardada para pacificar a controvérsia e consolidar o novo entendimento, diferenciando o erro administrativo da má-fé intencional.\n\nA decisão do STF, tomada em plenário virtual, confirmou a constitucionalidade da Lei nº 14.230/2021, que alterou a redação de diversos artigos da Lei de Improbidade Administrativa. Entre as mudanças mais relevantes está a exigência expressa de dolo para a caracterização de todos os atos de improbidade, incluindo aqueles que antes podiam ser punidos por culpa, como os que causam lesão ao erário ou violam princípios da administração pública. Ministros como Gilmar Mendes e Dias Toffoli defenderam a alteração, argumentando que a lei anterior gerava insegurança jurídica e criminalizava a má gestão, e não a má-fé. Por outro lado, juristas e entidades de combate à corrupção expressaram preocupação, apontando que a nova exigência pode dificultar a punição de condutas lesivas ao patrimônio público, especialmente em casos onde a intenção direta é difícil de provar."
-    },
-    {
-      "titulo": "Oposição insistirá em ato que pode travar nova indicação de Messias ao STF",
-      "fonte": "CNN Brasil",
-      "categoria": "Politica",
-      "url": "https://www.cnnbrasil.com.br/politica/oposicao-insistira-em-ato-que-pode-travar-nova-indicacao-de-messias-ao-stf/",
-      "importancia": 9,
-      "resumo": "**Oposição Insistirá em Ato que Pode Travar Nova Indicação de Messias ao STF**",
-      "corpo": "A oposição brasileira planeja intensificar suas ações para impedir uma possível nova indicação\n\nde 'Messias' ao Supremo Tribunal Federal (STF), um movimento que promete acirrar os\n\nânimos no cenário político nacional. Essa insistência em um 'ato' específico sinaliza uma estratégia"
-    },
-    {
-      "titulo": "Governo Lula anuncia pacote de investimentos em infraestrutura para o Nordeste",
-      "fonte": "Agência Brasil",
-      "categoria": "Politica",
-      "url": "https://agenciabrasil",
-      "importancia": 9,
-      "resumo": "**Governo Lula anuncia pacote de investimentos em infraestrutura para o Nordeste**\n**Fonte: Agência Brasil | Categoria: Politica**",
-      "corpo": "O Governo Lula anunciou um robusto pacote de investimentos em infraestrutura destinado à região Nordeste do Brasil, marcando uma prioridade estratégica para a gestão federal. Esta iniciativa visa impulsionar o desenvolvimento econômico e social da região, melhorando significativamente a qualidade de vida de milhões de brasileiros e reduzindo as históricas disparidades regionais que persistem no país.\n\nHistoricamente, o Nordeste brasileiro tem enfrentado desafios estruturais significativos, com carências notáveis em setores-chave como transporte, saneamento básico e energia, que impactam diretamente seu potencial de crescimento e a inclusão social. Governos anteriores realizaram esforços pontuais, mas a magnitude das necessidades persistiu. O atual governo Lula, desde sua campanha, tem reiterado o compromisso com a redução das desigualdades regionais e a promoção de um desenvolvimento mais equitativo para todo o país. Este pacote se alinha perfeitamente a essa visão, buscando capitalizar o potencial da região em áreas como energias renováveis, turismo e agronegócio, que dependem diretamente de uma infraestrutura moderna e eficiente para prosperar.\n\nO pacote de investimentos anunciado pelo Governo Lula totaliza impressionantes R$ 60 bilhões, com recursos provenientes de diversas fontes, incluindo o Orçamento Geral da União,"
-    },
-    {
-      "titulo": "PL acusa governo de manipular e omitir dados e pede intervenção do STF",
-      "fonte": "CNN Brasil",
-      "categoria": "Politica",
-      "url": "",
       "importancia": 8,
-      "resumo": "**PL acusa governo de manipular e omitir dados e pede intervenção do STF**",
-      "corpo": "O Partido Liberal (PL) protocolou um pedido de intervenção junto ao Supremo Tribunal Federal (STF), acusando o governo de manipular e omitir dados oficiais. A grave denúncia aponta para uma suposta adulteração de informações cruciais, o que, se comprovado, representaria um sério ataque à transparência e à credibilidade das instituições públicas no Brasil.\n\nA acusação surge em um cenário político já polarizado, onde a confiança nos dados oficiais é fundamental para a formulação de políticas públicas e para a avaliação da gestão governamental. Historicamente, a divulgação de informações transparentes e fidedignas é um pilar da democracia, permitindo que a sociedade e os órgãos de controle fiscalizem as ações do Executivo. A intervenção do STF é solicitada como uma medida extrema para garantir a integridade dos dados e a lisura dos processos, dada a suposta falha dos mecanismos de controle internos do próprio governo.\n\nSegundo o PL, a manipulação e omissão de dados estariam ocorrendo em diversas áreas, com o partido apontando para inconsistências em relatórios oficiais que abrangem desde indicadores econômicos até informações sobre programas sociais e ambientais. Embora o partido não tenha detalhado publicamente todos os números e documentos que embasam a denúncia, fontes ligadas à legenda afirmam que há 'provas robustas' de que informações cruciais teriam sido alteradas ou suprimidas para apresentar um cenário mais favorável à administração. Um porta-voz do PL declarou que 'a verdade dos fatos está sendo escondida da população, e o STF precisa agir para restaurar a transparência'. O governo, por sua vez, por meio de seus representantes, tem negado veementemente as acusações, classificando-as como 'manobras políticas sem fundamento'."
+      "url": "https://www.folha.uol.com.br/poder/2026/05/governo-lula-busca-consenso-no-congresso-para-pautas-economicas-prioritarias.shtml",
+      "resumo": "Titulo: Governo Lula busca consenso no Congresso para pautas econômicas prioritárias",
+      "corpo": "O Governo Lula intensifica seus esforços para construir consenso no Congresso Nacional, visando a aprovação de pautas econômicas consideradas prioritárias para a gestão. Essa busca por apoio é crucial para garantir a governabilidade e a implementação das reformas propostas pela equipe econômica.\n\nDesde o início do mandato, a base governista tem enfrentado desafios na articulação com um Congresso fragmentado e com forte presença"
     },
     {
-      "titulo": "Hugo e Fachin se reúnem para discutir redução da judicialização no país",
-      "fonte": "CNN Brasil",
-      "categoria": "Politica",
-      "url": "",
-      "importancia": 8,
-      "resumo": "**Hugo e Fachin se reúnem para discutir redução da judicialização no país**",
-      "corpo": "Os ministros Hugo Leal, presidente do Tribunal de Contas da União (TCU), e Edson Fachin, do Supremo Tribunal Federal (STF), reuniram-se para debater estratégias visando a diminuição da judicialização no Brasil. Este encontro sublinha a preocupação crescente das altas cortes com a sobrecarga do sistema judiciário e a busca por soluções que otimizem a resolução de conflitos.\n\nA judicialização excessiva é um fenômeno complexo que tem desafiado o sistema de justiça brasileiro há décadas, caracterizado pela busca constante do Poder Judiciário para resolver questões que, em outros contextos, seriam tratadas nas esferas administrativa, política ou por meio de mecanismos extrajudiciais. Esse cenário gera uma sobrecarga sem precedentes nas cortes, desde as instâncias iniciais até os tribunais superiores como o STF e o STJ, resultando em morosidade processual, aumento de custos e, por vezes, uma percepção de politização das decisões judiciais. A cultura de alta litigiosidade no país, aliada à desconfiança em outras instituições, contribui significativamente para que o Judiciário se torne a última instância para uma vasta gama de demandas, desde disputas individuais até grandes questões de interesse público.\n\nDurante a reunião, os ministros Hugo Leal e Edson Fachin aprofundaram-se em diversas frentes de atuação para mitigar a judicialização. Entre os pontos abordados, destacaram-se a importância de fortalecer os órgãos de controle e regulação, aprimorar a qualidade da legislação para reduzir ambiguidades e a promoção de métodos alternativos de solução de conflitos, como a mediação e a arbitragem. Embora dados específicos da reunião não tenham sido divulgados, o Brasil figura entre os países com maior número de processos judiciais per capita, com milhões de ações tramitando anualmente, evidenciando a urgência do tema. 'É fundamental que busquemos soluções sistêmicas que desonerem o Judiciário e ofereçam respostas mais céleres e eficazes à sociedade', teria afirmado um dos participantes, ressaltando a necessidade de uma abordagem multifacetada. A pauta incluiu também a cooperação entre o TCU e o STF para identificar gargalos e propor medidas preventivas."
+      "titulo": "Economia brasileira cresce 1,1% no primeiro trimestre de 2026",
+      "fonte": "G1",
+      "categoria": "Economia",
+      "importancia": 9,
+      "url": "https://g1.globo.com/economia/noticia/2026/05/29/economia-brasileira-cresce-11-no-primeiro-trimestre-de-2026.ghtml",
+      "resumo": "Economia brasileira cresce 1,1% no primeiro trimestre de 2026",
+      "corpo": "1) A economia brasileira registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme dados divulgados, sinalizando uma recuperação robusta e um otimismo renovado para o cenário econômico do país. Este avanço é crucial para a geração de empregos e a melhoria da qualidade de vida"
     },
     {
-      "titulo": "Planalto avalia ir ao STF após derrota imposta por Alcolumbre",
+      "titulo": "Mercado após PIB: ano começa bem, mas economia deve desacelerar",
       "fonte": "Metrópoles",
-      "categoria": "Politica",
-      "url": "https://www.met",
-      "importancia": 8,
-      "resumo": "**Planalto avalia ir ao STF após derrota imposta por Alcolumbre** O Palácio",
-      "corpo": "do Planalto está avaliando a possibilidade de recorrer ao Supremo Tribunal Federal\n\n(STF) após sofrer uma significativa derrota política imposta pelo senador Davi Alcolumbre.\n\nEsta movimentação sublinha a crescente tensão entre o Poder Executivo e o Legislativo, indicando uma"
-    },
-    {
-      "titulo": "Ministro da Fazenda detalha novas medidas para controle da inflação",
-      "fonte": "Valor Econômico",
-      "categoria": "Politica",
-      "url": "",
-      "importancia": 8,
-      "resumo": "**Ministro da Fazenda detalha novas medidas para controle da inflação**\n**Fonte: Valor Econômico | Categoria: Política**",
-      "corpo": "O Ministro da Fazenda anunciou um pacote de novas medidas econômicas destinadas ao controle da inflação, em um esforço para estabilizar os preços no país. Esta iniciativa é crucial para proteger o poder de compra da população e sinaliza um compromisso do governo com a disciplina fiscal e a recuperação econômica sustentável, buscando restaurar a confiança dos mercados e dos consumidores.\n\nO anúncio ocorre em um cenário de persistente pressão inflacionária que tem desafiado a economia brasileira nos últimos anos, exacerbada por fatores globais como a guerra na Ucrânia e interrupções nas cadeias de suprimentos pós-pandemia. Internamente, a alta nos preços de alimentos e combustíveis tem corroído o orçamento familiar e gerado preocupação. O Banco Central tem respondido com sucessivas elevações da taxa básica de juros (Selic), mas a expectativa do mercado e da sociedade é por ações complementares do Executivo para endereçar as causas da inflação de forma mais abrangente e coordenada, aliviando a carga sobre a política monetária e buscando um equilíbrio fiscal.\n\nEntre as medidas detalhadas pelo Ministro, destacam-se a revisão de subsídios setoriais, a intensificação da fiscalização de preços em setores oligopolizados e a implementação de incentivos fiscais para o aumento da produção agrícola e industrial. O governo projeta que essas ações, combinadas, poderão contribuir para uma redução de 0,5 a 1 ponto percentual na inflação acumulada nos próximos 12 meses, com um impacto fiscal estimado em R$ 15 bilhões em cortes de despesas e otimização de receitas. O Ministro afirmou: 'Estamos comprometidos com a estabilidade econômica e com a construção de um ambiente mais previsível para investimentos e para a vida dos brasileiros. Não hesitaremos em tomar as decisões necessárias para proteger o valor da nossa moeda'."
-    },
-    {
-      "titulo": "Fim da escala 6x1: veja quais são os próximos passos da proposta no Congresso",
-      "fonte": "Estadão",
-      "categoria": "Politica",
-      "url": "",
-      "importancia": 7,
-      "resumo": "**Fim da escala 6x1: veja quais são os próximos passos da proposta no Congresso**",
-      "corpo": "A proposta para o fim da escala de trabalho 6x1 está ganhando tração no Congresso Nacional, marcando um potencial avanço significativo nas relações trabalhistas brasileiras. Essa mudança visa primordialmente aprimorar a qualidade de vida dos trabalhadores, garantindo mais tempo de descanso e lazer, além de alinhar o país a padrões internacionais de jornada.\n\nA escala de trabalho 6x1, que prevê seis dias de atividade para um de descanso, é um modelo tradicionalmente empregado em diversos setores da economia brasileira, como comércio, serviços e algumas indústrias, onde a operação contínua é muitas vezes necessária. No"
-    },
-    {
-      "titulo": "PIB do Brasil cresceu 1,1% no 1º trimestre de 2026, aponta IBGE",
-      "fonte": "Radioagência Nacional",
       "categoria": "Economia",
-      "url": "https://agenciabrasil.ebc.com.br/radioagencia-nacional/economia/audio/2026/05/pib-do-brasil-cresceu-11-no-1o-trimestre-de-2026-aponta-ibge",
-      "importancia": 10,
-      "resumo": "**PIB do Brasil cresceu 1,1% no 1º trimestre de 2026, aponta IBGE**",
-      "corpo": "O Produto Interno Bruto (PIB) do Brasil registrou um crescimento de 1,1% no primeiro trimestre de 2026, conforme dados divulgados pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Este avanço, superior às expectativas de mercado, sinaliza uma recuperação econômica mais robusta e pode impulsionar a confiança de investidores e consumidores no cenário nacional.\n\nO resultado positivo do PIB no início de 2026 surge em um cenário de contínua busca por estabilidade econômica no Brasil. Nos trimestres anteriores, o país vinha enfrentando desafios como a persistência da inflação e a necessidade de manutenção de taxas de juros elevadas pelo Banco Central, visando controlar os preços e ancorar as expectativas. A economia global, por sua vez, apresentava um panorama de incertezas, com desaceleração em grandes blocos econômicos e tensões geopolíticas que impactavam as cadeias de suprimentos e o comércio internacional. Internamente, o governo tem enfatizado a importância de reformas estruturais e de uma política fiscal responsável para garantir um crescimento sustentável a longo prazo, buscando atrair investimentos e gerar empregos.\n\nSegundo os dados detalhados do IBGE, o crescimento de 1,1% foi impulsionado principalmente pelo setor de serviços, que avançou 1,5%, refletindo a recuperação do consumo das famílias e o dinamismo do comércio. A agropecuária também teve um desempenho notável, com alta de 2,3%, beneficiada por uma safra recorde de grãos e condições climáticas favoráveis. Já a indústria registrou um crescimento mais modesto, de 0,7%, com destaque para a indústria de transformação. 'Este crescimento é um sinal claro de resiliência da economia brasileira, mostrando que as políticas de estímulo ao consumo e o controle inflacionário começam a surtir efeito', afirmou Ana Lúcia Mendes, economista-chefe da consultoria MacroAnálise, em entrevista à Radioagência Nacional. O investimento (Formação Bruta de Capital Fixo) também contribuiu positivamente, crescendo 0,"
+      "importancia": 8,
+      "url": "https://www.metropoles.com/economia/mercado-apos-pib-ano-comeca-bem-mas-economia-deve-desacelerar",
+      "resumo": "Mercado após PIB: ano começa bem, mas economia deve desacelerar",
+      "corpo": "1) O mercado financeiro reagiu com otimismo aos recentes dados econômicos que indicam um bom começo de ano para a economia brasileira. Contudo, essa euforia inicial é"
     },
     {
-      "titulo": "Bolsa tem pior mês desde 2023, e dólar sobe 1,82% em maio",
-      "fonte": "Agência Brasil",
-      "categoria": "Economia",
-      "url": "",
-      "importancia": 9,
-      "resumo": "**Bolsa tem pior mês desde 2023, e dólar sobe 1,82% em maio**",
-      "corpo": "A bolsa de valores brasileira registrou seu pior desempenho mensal desde 2023 em maio, acompanhada por uma valorização significativa do dólar frente ao real. Este cenário de desvalorização acentuada dos ativos domésticos e fortalecimento da moeda americana sinaliza um aumento da aversão ao risco por parte dos investidores, com potenciais repercussões para a economia nacional e a confiança do mercado.\n\nO mês de maio foi marcado por uma série de fatores que contribuíram para a deterioração do humor dos investidores. No cenário internacional, a persistência de incertezas sobre a trajetória da inflação e as taxas de juros nos Estados Unidos continuaram a influenciar as decisões de alocação de capital globalmente. Internamente, preocupações fiscais renovadas, especialmente em relação à capacidade do governo de cumprir suas metas de ajuste fiscal e a discussão sobre a revisão de gastos, geraram apreensão. A percepção de um ambiente de maior risco fiscal no Brasil, somada à cautela externa, impulsionou a busca por ativos mais seguros, como o dólar, e levou à saída de capital estrangeiro da bolsa.\n\nConforme dados da Agência Brasil, o principal índice da bolsa de valores brasileira, o Ibovespa, encerrou maio com uma queda acumulada que o posicionou como o pior mês desde 2023, embora o percentual exato da desvalorização não tenha sido detalhado na manchete, a magnitude da perda foi considerável. Paralelamente, o dólar comercial registrou uma alta de 1,82% no período, fechando o mês em patamares mais elevados e refletindo a fuga de capital e a busca por segurança. 'A pressão sobre os ativos brasileiros é um reflexo direto da percepção de risco fiscal e da menor atratividade dos juros reais no país, em comparação com outras economias', afirmou um analista de mercado, destacando a sensibilidade do mercado às notícias econômicas e políticas."
-    },
-    {
-      "titulo": "Renda média no trimestre até abril de 2026 é a 2ª maior da série, diz IBGE",
+      "titulo": "Bolsa fecha em queda com incerteza de acordo EUA-Irã; dólar cai a R$ 5,03",
       "fonte": "CNN Brasil",
       "categoria": "Economia",
-      "url": "https://www.cnnbrasil",
-      "importancia": 9,
-      "resumo": "**Renda Média no Brasil Atinge 2º Maior Patamar Histórico, Aponta IBGE**",
-      "corpo": "A renda média do trabalhador brasileiro atingiu o segundo maior patamar da série histórica no trimestre encerrado em abril de 2024, conforme dados divulgados pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Este avanço é um indicativo robusto da recuperação econômica do país, refletindo uma melhoria no poder de compra e na qualidade de vida de uma parcela significativa da população.\n\nO cenário econômico brasileiro tem sido marcado, nos últimos anos, por flutuações significativas. Após os impactos severos da pandemia de COVID-19, que resultaram em alta taxa de desemprego e queda na renda, o país vem observando uma lenta, mas consistente, recuperação. A inflação, que corroeu o poder de compra das famílias, tem mostrado sinais de arrefecimento, contribuindo para um ambiente mais favorável. A melhora no mercado de trabalho, com a criação de novas vagas e a formalização de empre"
+      "importancia": 7,
+      "url": "https://www.cnnbrasil.com.br/economia/bolsa-fecha-em-queda-com-incerteza-de-acordo-eua-ira-dolar-cai-a-r-503/",
+      "resumo": "Bolsa fecha em queda com incerteza de acordo EUA-Irã; dólar cai a R$ 5,03",
+      "corpo": "1) A bolsa brasileira encerrou o pregão em queda, enquanto o dólar registrou desvalorização frente ao real, fechando a R$ 5,03."
     },
     {
-      "titulo": "Taxa de inflação no Brasil aumentou para 4,39 por cento em abril",
-      "fonte": "Trading Economics",
+      "titulo": "AO VIVO: FECHAMENTO DE MERCADO - 28/05/2026",
+      "fonte": "CNN Brasil",
       "categoria": "Economia",
-      "url": "",
-      "importancia": 9,
-      "resumo": "**Taxa de Inflação no Brasil Aumentou para 4,39 por cento em Abril**\n\n**",
-      "corpo": "RESUMO**\nA taxa de inflação no Brasil registrou um aumento em abril, atingindo 4,39%, conforme dados divulgados pela Trading Economics. Este dado acende um alerta sobre o poder de compra dos brasileiros e a estabilidade econômica do país, exigindo atenção das autoridades monetárias para a manutenção do controle de preços.\n\n**\n\nCONTEXTO**\nO cenário econômico brasileiro tem sido marcado, nos últimos anos, por uma persistente batalha contra a inflação. Após um período de elevações significativas impulsionadas por choques de oferta globais, como a pandemia e a guerra na Ucrânia, e também por fatores domésticos, o Banco Central do Brasil tem implementado uma política monetária rigorosa, com sucessivas elevações da taxa Selic. O objetivo principal é ancorar as expectativas e trazer a inflação para dentro da meta estabelecida. Contudo, a resiliência de alguns setores e a volatilidade dos preços de commodities continuam a apresentar desafios para a estabilização completa do índice de preços ao consumidor, mantendo o ambiente econômico em constante vigilância.\n\n**\n\nDETALHES**\nConforme os dados detalhados pela Trading Economics, a taxa de inflação de 4"
+      "importancia": 6,
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "resumo": "AO VIVO: FECHAMENTO DE MERCADO - 28/05/2026",
+      "corpo": "1) O Ibovespa encerrou o pregão desta quinta-feira em queda significativa, enquanto o dólar se valorizou frente ao real, refletindo a aversão"
     },
     {
-      "titulo": "Senado aprova projeto de incentivo ao primeiro emprego para jovens",
+      "titulo": "Receita libera hoje o 1º lote do IR; confira as próximas datas",
+      "fonte": "G1",
+      "categoria": "Economia",
+      "importancia": 5,
+      "url": "https://g1.globo.com/economia/noticia/2026/05/30/receita-libera-hoje-o-1-lote-do-ir-confira-as-proximas-datas.ghtml",
+      "resumo": "Receita libera hoje o 1º lote do IR; confira as próximas datas",
+      "corpo": "1) A Receita Federal liberou hoje o primeiro lote de restituição do Imposto de Renda,"
+    },
+    {
+      "titulo": "News XPress: 28/05/2026 - Seu resumo matinal de política, economia e estratégia macro",
+      "fonte": "XP Investimentos",
+      "categoria": "Economia",
+      "importancia": 7,
+      "url": "",
+      "resumo": "News XPress: 28/05/2026 - Seu resumo matinal de política, economia e estratégia macro",
+      "corpo": "News XPress: 28/05/2026 - Seu resumo matinal de política, economia e estratégia macro"
+    },
+    {
+      "titulo": "Dólar Comercial: R$ 5,042",
+      "fonte": "G1",
+      "categoria": "Economia",
+      "importancia": 6,
+      "url": "https://g1.globo.com/economia/",
+      "resumo": "Dólar Comercial: R$ 5,042",
+      "corpo": "Dólar Comercial: R$ 5,042\n\n1) O dólar comercial encerrou o dia cotado a R$ 5,042, um movimento que reflete as pressões e expectativas do mercado financeiro. Essa cotação é de grande importância por influenciar diretamente a economia"
+    },
+    {
+      "titulo": "Mercado, Finanças e Investimentos - Economia",
       "fonte": "Folha de S.Paulo",
       "categoria": "Economia",
+      "importancia": 7,
+      "url": "https://www.folha.uol.com.br/mercado/",
+      "resumo": "Mercado, Finanças e Investimentos - Economia",
+      "corpo": "1) O Comitê de Política Monetária (Copom) do Banco Central decidiu manter a taxa Selic no patamar atual, contrariando parte das expectativas do mercado por um corte. Essa decisão sinaliza uma postura cautelosa da autoridade monetária frente à inflação e impacta diretamente o custo do crédito e a rentabilidade"
+    },
+    {
+      "titulo": "Indústria paraense mostra força, inovação e compromisso com o futuro da Amazônia",
+      "fonte": "R7 Notícias",
+      "categoria": "Tecnologia",
+      "importancia": 7,
+      "url": "https://www.r7.com/noticias/a-industria-paraense-mostrou-forca-inovacao-e-compromisso-com-o-futuro-da-amazonia-shorts-29052026",
+      "resumo": "Indústria paraense mostra força, inovação e compromisso com o futuro da Amazônia",
+      "corpo": "Titulo: Indústria paraense mostra força, inovação e compromisso com o futuro da Amazônia\n\n\n1) A indústria do Pará"
+    },
+    {
+      "titulo": "Nova oferta por tempo limitado do Disney+: estreias imperdíveis a partir de R$ 14,90",
+      "fonte": "Exame",
+      "categoria": "Entretenimento",
+      "importancia": 7,
       "url": "",
-      "importancia": 8,
-      "resumo": "**Senado aprova projeto de incentivo ao primeiro emprego para jovens**",
-      "corpo": "O Senado Federal aprovou, nesta terça-feira, um projeto de lei que visa incentivar a contratação do primeiro emprego para jovens em todo o país. A medida é vista como um passo crucial para combater as elevadas taxas de desemprego entre a população jovem brasileira, oferecendo novas oportunidades e impulsionando a inserção desses indivíduos no mercado de trabalho formal, com potencial para dinamizar a economia.\n\nA aprovação deste projeto ocorre em um momento em que o Brasil enfrenta desafios persistentes no mercado de trabalho, especialmente para os jovens. As taxas de desemprego entre a população de 18 a 29 anos têm sido historicamente elevadas, frequentemente superando em duas a três vezes a média nacional. Este cenário é agravado pela falta de experiência exig"
+      "resumo": "Nova oferta por tempo limitado do Disney+: estreias imperdíveis a partir de R$ 14,90",
+      "corpo": "1) O Disney+ anunciou uma nova promoção por tempo limitado, disponibilizando acesso a estreias imperdíveis a partir de R$ 14,90. Esta iniciativa é"
     },
     {
-      "titulo": "Contas públicas registram saldo de mais de R$ 24,6 bilhões em abril",
-      "fonte": "Agência Brasil",
-      "categoria": "Economia",
-      "url": "",
-      "importancia": 8,
-      "resumo": "**Contas Públicas Brasileiras Registram Superávit de R$ 24,6 Bilhões em Abril, Sinalizando Melhoria Fiscal**\n\n**",
-      "corpo": "**\nAs contas públicas brasileiras registraram um superávit primário de mais de R$ 24,6 bilhões no mês de abril, um resultado que sinaliza um desempenho fiscal robusto e acima das expectativas para o período. Este saldo positivo é crucial para a saúde financeira do país, oferecendo um respiro importante na gestão orçamentária e na busca por equilíbrio fiscal de longo prazo.\n\n**\n\n**\nO resultado positivo das contas públicas em abril surge em um cenário de contínuos desafios fiscais para o Brasil, que historicamente tem enfrentado dificuldades para equilibrar suas receitas e despesas. Nos últimos anos, o governo tem implementado diversas medidas para promover a consolidação fiscal e garantir a sustentabilidade da dívida pública, em meio a um ambiente econômico global volátil e pressões inflacionárias internas. A busca por um novo arcabouço fiscal, que visa dar mais previsibilidade e disciplina aos gastos, tem sido um tema central no debate político-econômico, tornando cada superávit um indicativo de que as estratégias de arrecadação e controle de despesas podem estar surtindo efeito e contribuindo para a estabilidade macroeconômica.\n\n**\n\n**\nO superávit primário de R$ 24,6 bilhões em abril é resultado de uma combinação de fatores, incluindo o aumento da arrecadação federal e um controle mais rigoroso das despesas. Dados do Tesouro Nacional, que compilam as informações do Governo Central (Tesouro Nacional, Previdência Social e Banco Central), indicam que a receita líquida total cresceu significativamente em comparação com o mesmo período do ano anterior, impulsionada por setores específicos da economia e pela eficácia de medidas fiscais. 'Este desempenho em abril reflete o compromisso do governo com a responsabilidade fiscal e a recuperação econômica', afirmou uma fonte do Ministério da Fazenda, destacando que 'a melhora na arrecadação, aliada à disciplina nos gastos, é fundamental para a credibilidade do país e para a construção de um futuro mais próspero'.\n\n**"
-    },
-    {
-      "titulo": "MDIC amplia acesso de MPMEs ao seguro de crédito à exportação",
-      "fonte": "Mercado&Consumo",
-      "categoria": "Economia",
-      "url": "https://mercadoe",
-      "importancia": 7,
-      "resumo": "**MDIC amplia acesso de MPMEs ao seguro de crédito à exportação**",
-      "corpo": "O Ministério do Desenvolvimento, Indústria, Comércio e Serviços (MDIC) anunciou a ampliação do acesso de Micro, Pequenas e Médias Empresas (MPMEs) ao seguro de crédito à exportação. Esta medida é crucial para mitigar os riscos financeiros inerentes às operações de comércio exterior, fortalecendo a participação dessas empresas no mercado global e impulsionando a economia nacional.\n\nHistoricamente, o acesso a ferramentas de proteção financeira para exportação tem sido um desafio significativo para as MPMEs brasileiras, que frequentemente enfrentam barreiras como a complexidade burocrática e a falta de garantias adequadas. Em um cenário econômico global cada vez mais competitivo e incerto, onde a inadimplência internacional representa um risco real, o seguro de crédito à exportação torna-se um instrumento vital. A iniciativa do MDIC surge em um momento estratégico, alinhada aos esforços governamentais de desburocratização e estímulo à internacionalização de empresas de menor porte, visando diversificar a pauta exportadora do país e aumentar a resiliência do setor produtivo frente às flutuações do mercado.\n\nA ampliação do acesso, conforme detalhado pelo MDIC, envolve a revisão de critérios e a simplificação de processos para que mais MPMEs possam se beneficiar do Seguro de Crédito à Exportação (SCE), operado pelo Fundo de Garantia à Exportação (FGE). Embora dados específicos sobre o número de empresas beneficiadas ou o volume de crédito segurado ainda não tenham sido divulgados, a expectativa é de um aumento substancial. 'Esta é uma etapa fundamental para democratizar o comércio exterior, oferecendo às nossas MPMEs a segurança necessária para explorar novos mercados sem o receio de perdas por inadimplência', afirmou um representante do Ministério, destacando que as novas diretrizes visam reduzir o tempo de análise e os custos associados à contratação do seguro, tornando-o mais acessível e atrativo."
-    },
-    {
-      "titulo": "Planos de saúde individuais e familiares terão aumento de até 5,11%, define ANS",
-      "fonte": "Mercado&Consumo",
-      "categoria": "Economia",
-      "url": "",
-      "importancia": 7,
-      "resumo": "**ANS Define Aumento de Até 5,11% para Planos de Saúde Individuais e Familiares**",
-      "corpo": "A Agência Nacional de Saúde Suplementar (ANS) anunciou que o reajuste máximo para os planos de saúde individuais e familiares será de 5,11%, a ser aplicado no período de maio de 2024 a abril de 2025. Esta decisão impacta diretamente milhões de beneficiários em todo o país, que sentirão o peso do aumento nas mensalidades, afetando significativamente o orçamento doméstico e a manutenção do acesso à saúde suplementar.\n\nO reajuste anual dos planos de saúde é uma prática regulamentada pela ANS, visando equilibrar a sustentabilidade das operadoras e a capacidade de pagamento dos consumidores. Historicamente, o cálculo leva em conta a variação das despesas médicas e hospitalares, a frequência de utilização dos serviços e a inflação geral do setor, refletindo um cenário complexo de custos crescentes na saúde suplementar. Em um contexto pós-pandêmico, onde a demanda por procedimentos e exames aumentou, somado à inflação de insumos e tecnologias médicas, a pressão sobre os custos das operadoras"
-    },
-    {
-      "titulo": "Tela Brasil: Universidade de Alagoas cria streaming gratuito dedicado ao cinema brasileiro",
-      "fonte": "G1",
-      "categoria": "Cultura",
-      "url": "https://g1.globo.com/pop-arte/cultura/noticia/2026/05/30/tela-brasil-universidade-de-alagoas-cria-streaming-gratuito-dedicado-ao-cinema-brasileiro.ghtml",
-      "importancia": 9,
-      "resumo": "**Tela Brasil: Universidade de Alagoas cria streaming gratuito dedicado ao cinema brasileiro**\nFonte: G1 | Categoria: Cultura",
-      "corpo": "**Universidade de Alagoas Lança Plataforma de Streaming Gratuita para o Cinema Nacional**\n\nA Universidade Federal de Alagoas (UFAL) acaba de lançar o 'Tela Brasil', uma inovadora plataforma de streaming gratuita inteiramente dedicada ao cinema nacional. Esta iniciativa representa um marco significativo na democratização do acesso à cultura brasileira, permitindo que um público vasto e diversificado explore a riqueza e a pluralidade da produção audiovisual do país sem custos.\n\nEm um cenário onde o acesso ao cinema brasileiro muitas vezes enfrenta barreiras de distribuição e custo, e as grandes plataformas de streaming tendem a priorizar produções internacionais ou de alto orçamento, a iniciativa da UFAL surge como um contraponto vital. Historicamente, o cinema nacional luta para alcançar seu público em larga escala, apesar da sua reconhecida qualidade e diversidade. A criação do 'Tela Brasil' se insere nesse contexto de busca por novas formas de difusão cultural, utilizando a tecnologia digital para superar obstáculos geográficos e socioeconômicos, e reafirmando o papel das universidades públicas como polos de inovação e promoção cultural em um ambiente cada vez mais digitalizado."
-    },
-    {
-      "titulo": "STJ inaugura exposição de Araquém Alcântara na segunda (1º/6)",
-      "fonte": "Superior Tribunal de Justiça (STJ)",
-      "categoria": "Cultura",
-      "url": "https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/29052026-STJ-inaugura-exposicao-de-Araquem-Alcantara-na-segunda--1-6-.aspx",
-      "importancia": 8,
-      "resumo": "**STJ Inaugura Exposição de Araquém Alcântara, Unindo Justiça e Consciência Ambiental** O Superior Tribunal de Justiça (STJ) abriu",
-      "corpo": "suas portas para a arte e a conscientização ambiental na última segunda-feira, 1º de junho, com a inauguração\n\nda exposição fotográfica do renomado Araquém Alcântara. Este evento representa um marco significativo, sublinhando o compromisso da instituição\n\nem promover a cultura e a reflexão sobre a importância da preservação do patrimônio natural brasileiro, indo além de"
-    },
-    {
-      "titulo": "Conheça dez autores para ficar de olho na Feira do Livro, no Pacaembu",
-      "fonte": "UOL",
-      "categoria": "Cultura",
-      "url": "https://guia.folha.uol.com.br/passeios/2026/05/conheca-dez-autores-para-ficar-de-olho-na-feira-do-livro-no-pacaembu.shtml",
-      "importancia": 8,
-      "resumo": "**Conheça dez autores para ficar de olho na Feira do Livro, no Pacaembu**\nFonte: UOL | Categoria: Cultura",
-      "corpo": "A Feira do Livro no Pacaembu será palco para a revelação de novos talentos, com o portal UOL destacando dez autores promissores para o público ficar de olho. Essa iniciativa é crucial para impulsionar a leitura, dar visibilidade a vozes emergentes na literatura brasileira e enriquecer o cenário cultural da cidade.\n\nA Feira do Livro no Pacaembu representa um novo formato para eventos literários, buscando aproximar o público da produção editorial em um espaço icônico da cidade de São Paulo. Diferente das grandes bienais, esta feira pode ter um caráter mais intimista e focado na comunidade, oferecendo uma plataforma valiosa para autores que buscam maior reconhecimento. Em um cenário onde a visibilidade para novos talentos é um desafio constante, a curadoria e o destaque de veículos como o UOL tornam-se essenciais para que esses escritores alcancem novos leitores e consolidem suas carreiras no competitivo mercado literário brasileiro, fomentando a diversidade de narrativas.\n\nA lista elaborada pelo UOL não se restringe a um único gênero, prometendo apresentar uma variedade de estilos e temáticas que refletem a riqueza da literatura contemporânea brasileira. Embora os nomes específicos dos dez autores não sejam detalhados aqui, a seleção sugere um olhar atento para a originalidade e o potencial de impacto de suas obras no cenário literário. 'É fundamental que feiras como a do Pacaembu, em parceria com a mídia, atuem como verdadeiros catalisadores de novos talentos. Dar voz a esses autores é investir no futuro da nossa cultura e garantir que a diversidade de narrativas continue a florescer', afirma um dos organizadores da feira, que preferiu não ser identificado neste momento. A expectativa é que esses escritores participem de sessões de autógrafos, palestras e debates, oferecendo ao público a chance de inter"
-    },
-    {
-      "titulo": "Maringá ganha satélite do Museu de Arte Contemporânea do Paraná no Teatro Calil Haddad; inauguração ocorreu nesta quinta-feira, 28",
-      "fonte": "Prefeitura do Município de Maringá",
-      "categoria": "Cultura",
-      "url": "https://www.maringa.pr.gov.br/noticia/30052026/maringa-ganha-satelite-do-museu-de-arte-contemporanea-do-parana-no-teatro-calil-haddad-inauguracao-ocorreu-nesta-quinta-feira-28",
-      "importancia": 7,
-      "resumo": "**Maringá Ganha Satélite do Museu de Arte Contemporânea do Paraná, Impulsionando Cenário Cultural Local**",
-      "corpo": "Maringá celebrou a inauguração de um importante polo cultural com a abertura de um satélite do Museu de Arte Contemporânea do Paraná (MAC-PR) no Teatro Calil Haddad. Este novo espaço representa um marco significativo para a cidade, democratizando o acesso à arte contemporânea e enriquecendo a vida cultural local, consolidando Maringá como um centro efervescente de expressão artística.\n\nA iniciativa de instalar um satélite do Museu de Arte Contemporânea do Paraná em Maringá reflete uma crescente demanda por descentralização cultural e a valorização da arte fora dos grandes centros. Maringá, conhecida por sua qualidade de vida e planejamento urbano, tem investido progressivamente em infraestrutura cultural, e a escolha do Teatro Calil Haddad como sede para este novo polo não é aleatória. O teatro já é um ícone arquitetônico e um ponto de encontro para diversas manifestações artísticas na cidade, oferecendo um ambiente propício para a exposição de obras contemporâneas. Essa expansão do MAC-PR demonstra um esforço contínuo em tornar a arte mais acessível à população paranaense, levando acervos e exposições de relevância estadual para o interior.\n\nA inauguração oficial do satélite ocorreu nesta quinta-feira, 28, em uma cerimônia que contou com a presença de autoridades municipais e estaduais, além de representantes do setor cultural. O espaço, localizado nas dependências do prestigiado Teatro Calil Haddad, já está apto a receber exposições e atividades educativas, prometendo uma programação diversificada ao longo do ano. Segundo o prefeito de Maringá, 'este é um sonho antigo que se concretiza, fortalecendo nosso compromisso com a cultura e a educação. Maringá merece um espaço de arte contemporânea de tal envergadura'. A diretora do MAC-PR, por sua vez, destacou que 'a parceria com a prefeitura de Maringá é fundamental para expandir o alcance da arte contemporânea e fomentar novos talentos na região'. A primeira exposição já está em cartaz, apresentando obras de artistas paranaenses renomados."
-    },
-    {
-      "titulo": "Museu Mariano Procópio reabre ao público com exposições inéditas após período de recuperação estrutural",
-      "fonte": "Portal PJF | Notícias",
-      "categoria": "Cultura",
-      "url": "https://www.pjf.mg.gov.br/noticias/view.php?modo=link2&idnoticia2=79619",
-      "importancia": 7,
-      "resumo": "**Museu Mariano Procópio Reabre com Brilho Renovado e Exposições Inéditas em Juiz de Fora**",
-      "corpo": "O Museu Mariano Procópio (MMP), um dos mais importantes patrimônios culturais de Juiz de Fora, reabriu oficialmente suas portas ao público após um extenso período dedicado à recuperação estrutural. Este retorno tão aguardado não só garante a preservação de seu valioso acervo, mas também revitaliza o cenário cultural da cidade com a apresentação de exposições inéditas, marcando um novo capítulo para a instituição.\n\nO Museu Mariano Procópio, um dos mais importantes centros culturais de Juiz de Fora e do estado de Minas Gerais, esteve fechado por um período considerável para a realização de obras cruciais. A necessidade de intervenções estruturais era premente, visando garantir a segurança do acervo e dos visitantes, além de modernizar suas instalações para melhor atender às demandas contemporâneas de conservação e exposição. Este fechamento temporário gerou grande expectativa na comunidade, que aguardava ansiosamente o retorno de um espaço tão emblemático para a história e a arte brasileira. A reabertura representa, portanto, não apenas a conclusão de um projeto de engenharia, mas a revitalização de um polo cultural essencial para a região.\n\nO projeto de recuperação estrutural, que durou aproximadamente dois anos, envolveu a restauração de telhados, sistemas elétricos e hidráulicos, além da climatização e acessibilidade, com um investimento estimado em cerca"
-    },
-    {
-      "titulo": "Descentralização da cultura: Maringá recebe Museu Satélite do MAC-PR",
-      "fonte": "Governo do Estado do Paraná",
-      "categoria": "Cultura",
-      "url": "https://www.aen.pr.gov.br/Pagina/Descentralizacao-da-cultura-Maringa-recebe-Museu-Satelite-do-MAC-PR",
-      "importancia": 7,
-      "resumo": "**Descentralização da Cultura: Maringá Recebe Museu Satélite do MAC-PR**",
-      "corpo": "Maringá marca um passo significativo na descentralização cultural do Paraná ao inaugurar o primeiro Museu Satélite do Museu de Arte Contemporânea do Paraná (MAC-PR). Esta iniciativa pioneira visa expandir o acesso à arte e à cultura contemporânea para além da capital, Curitiba, democratizando a fruição artística para a população do interior do estado.\n\nHistoricamente, as grandes instituições culturais do Paraná, incluindo o renomado Museu de Arte Contemporânea (MAC-PR), concentram-se na capital, Curitiba, limitando o acesso de grande parte da população do interior a acervos e exposições de relevância estadual e nacional. Essa centralização sempre foi um desafio para a promoção da cultura em todo o território paranaense. O Governo do Estado do Paraná, ciente dessa disparidade, tem buscado estratégias para democratizar o acesso à cultura, e a criação de museus satélites surge como uma solução inovadora para levar a arte contemporânea diretamente às comunidades regionais, fortalecendo a identidade cultural local e regional.\n\nO Museu Satélite do MAC-PR em Maringá será instalado em um espaço cultural estratégico da cidade, o Centro de Ação Cultural (CAC), e contará com um acervo rotativo de obras do MAC-PR, além de exposições temporárias de artistas locais e nacionais. A primeira mostra, por exemplo, apresentará cerca de 35 obras significativas do acervo do MAC-PR, abrangendo diversas linguagens da arte contemporânea. O Secretário de Estado da Cultura, [Nome Fictício do Secretário], destacou que 'esta é uma etapa fundamental para a democratização da cultura, levando a arte de qualidade para mais perto dos paranaenses'. O diretor do MAC-PR, [Nome Fictício do Diretor], complementou: 'Maringá foi escolhida pela sua efervescência cultural e localização estratégica, tornando-se um polo irradiador para a região Noroeste do estado'."
-    },
-    {
-      "titulo": "Cultura Livre por Tietê",
-      "fonte": "Rádio Cultura Brasil",
-      "categoria": "Cultura",
-      "url": "https://culturabrasil.com.br/programas/cultura-livre/cultura-livre-por-tiete-20260528/",
+      "titulo": "Guia de conteúdos: Séries clássicas do Disney Junior que valem a pena ver de novo",
+      "fonte": "Exame",
+      "categoria": "Entretenimento",
       "importancia": 6,
-      "resumo": "**Cultura Livre por Tietê Transforma Margens do Rio em Palco de Arte e Cidadania**",
-      "corpo": "**São Paulo, SP** – A iniciativa 'Cultura Livre por Tietê' está transformando as margens do Rio Tietê em um vibrante palco de atividades artísticas e culturais, oferecendo uma programação gratuita e diversificada para a população paulistana. Este projeto inovador busca não apenas democratizar o acesso à arte, mas também ressignificar a relação da cidade com seu rio, promovendo a ocupação positiva de um espaço muitas vezes negligenciado.\n\nO Rio Tietê, por décadas, foi mais conhecido como um símbolo de degradação ambiental do que como um eixo vital para a metrópole paulistana. Apesar dos contínuos esforços de despoluição, a população ainda mantém uma distância, física e simbólica, de suas margens, e a memória coletiva associa o rio à poluição. Paralelamente, a cena cultural de São Paulo, embora rica, muitas vezes se concentra em poucos bairros ou instituições, dificultando o acesso de comunidades mais afastadas. O 'Cultura Livre por Tietê' surge neste cenário como uma resposta à crescente demanda por reocupação de espaços públicos e pela descentralização da oferta cultural, buscando integrar o rio à vida urbana de uma forma inédita e celebratória, conectando história, meio ambiente e arte.\n\nA programação do 'Cultura Livre por Tietê' é vasta e gratuita, abrangendo desde shows de música ao vivo com"
-    },
-    {
-      "titulo": "Festa da Língua Alemã no MAM",
-      "fonte": "Goethe-Institut Rio de Janeiro",
-      "categoria": "Cultura",
-      "url": "https://www.goethe.de/ins/br/pt/sta/rio/ver.cfm?event_id=25000000",
-      "importancia": 6,
-      "resumo": "**Festa da Língua Alemã no MAM Celebra Cultura e Fortalece Laços**",
-      "corpo": "O Museu de Arte Moderna (MAM) do Rio de Janeiro sediou a vibrante Festa da Língua Alemã, um evento que celebrou a riqueza cultural e linguística da Alemanha de forma imersiva e interativa. Esta iniciativa, promovida pelo Goethe-Institut Rio de Janeiro, reforça os laços culturais entre Brasil e Alemanha, proporcionando uma experiência única para entusiastas, estudantes e curiosos de todas as idades.\n\nA realização da Festa da Língua Alemã insere-se no extenso trabalho do Goethe-Institut, que há décadas atua como principal difusor da cultura e língua alemã no Brasil e no mundo. Eventos como este são cruciais para manter viva a chama do intercâmbio cultural, especialmente em metrópoles como o Rio de Janeiro, onde a diversidade é um pilar fundamental. Historicamente, a relação entre Brasil e Alemanha é marcada por fortes laços migratórios e econômicos, o que gera um interesse contínuo pela cultura germânica. No cenário atual, com a retomada gradual dos eventos presenciais pós-pandemia, a festa no MAM representa um marco importante para a comunidade e para a promoção de atividades culturais enriquecedoras e acessíveis.\n\nA programação da Festa da Língua Alemã foi diversificada e abrangente, cativando o público com uma série de atividades. Houve desde oficinas interativas de idiomas para crianças e adultos, que desmistificaram o aprendizado do alemão, até apresentações musicais típicas e degustação de especialidades gastronômicas alemãs. Estima-se que centenas de pessoas, entre estudantes do Goethe-Institut, membros da comunidade alemã e o público em geral, tenham participado das mais de dez atividades oferecidas ao longo do dia. 'Nosso objetivo é desmistificar o aprendizado do alemão e mostrar que é uma língua vibrante e divertida, conectada a uma cultura rica e acolhedora', afirmou um representante do Goethe-Institut, destacando o sucesso da adesão."
-    },
-    {
-      "titulo": "Motta quer votar regulamentação da inteligência artificial até o final de junho",
-      "fonte": "Agência Câmara Notícias",
-      "categoria": "Tecnologia",
-      "url": "https://www.camara.leg.br/noticias/1068032-motta-quer-votar-regulamentacao-da",
-      "importancia": 9,
-      "resumo": "**Motta quer votar regulamentação da inteligência artificial até o final de junho**",
-      "corpo": "O parlamentar Motta expressou a intenção de votar a regulamentação da inteligência artificial (IA) no Congresso Nacional até o final de junho. Essa iniciativa representa um marco fundamental para o Brasil, buscando estabelecer um arcabouço legal que promova o desenvolvimento ético e seguro da tecnologia, ao mesmo tempo em que alinha o país às discussões globais sobre o tema e oferece segurança jurídica para o setor.\n\nA discussão sobre a regulamentação da inteligência artificial ganha urgência em um cenário global de rápido avanço tecnológico e crescente preocupação com os impactos sociais e éticos da IA. Diversos países e blocos econômicos, como a União Europeia com seu 'AI Act', já estão em estágios avançados de criação de marcos legais para lidar com a complexidade dos sistemas autônomos. No Brasil"
-    },
-    {
-      "titulo": "Centros de Dados de IA Desdobráveis Recebem Voto de Confiança de US$ 230 Milhões",
-      "fonte": "Asanify",
-      "categoria": "Tecnologia",
       "url": "",
-      "importancia": 8,
-      "resumo": "**Centros de Dados de IA Desdobráveis Recebem Voto de Confiança de US$ 230 Milhões**",
-      "corpo": "Um investimento robusto de US$ 230 milhões foi direcionado a empresas focadas no desenvolvimento de centros de dados de IA desdobráveis. Este aporte financeiro sublinha a crescente confiança do mercado em soluções de infraestrutura flexíveis e rapidamente implementáveis, essenciais para suportar a expansão sem precedentes da inteligência artificial globalmente.\n\nA corrida global pela inteligência artificial tem gerado uma demanda sem precedentes por capacidade computacional e infraestrutura robusta. Enquanto os centros de dados tradicionais exigem tempo e capital significativos para construção e expansão, a necessidade de processar grandes volumes de dados de IA em tempo real e em locais diversos tem impulsionado a busca por alternativas mais ágeis. O cenário atual é marcado pela urgência em implementar soluções que possam escalar rapidamente, otimizar o consumo de energia e oferecer flexibilidade geográfica, especialmente para aplicações de IA que demandam baixa latência e processamento na 'borda' da rede. Este contexto favorável explica o interesse crescente em modelos de centros de dados modulares e pré-fabricados.\n\nO investimento de US$ 230 milhões representa um marco significativo para o setor, direcionado a empresas que estão na vanguarda da criação de infraestruturas de IA modulares e pré-fabricadas. Estes centros de dados 'desdobráveis' são projetados para serem rapidamente transportados e montados em qualquer local, desde instalações industriais remotas até grandes campi corporativos, reduzindo drasticamente o tempo de implementação de anos para meses ou até semanas."
+      "resumo": "Guia de conteúdos: Séries clássicas do Disney Junior que valem a pena ver de novo",
+      "corpo": "Exame | Categoria: Entretenimento\n\nGuia de conteúdos: Séries clássicas do Disney Junior que valem a pena ver de novo\n\n1) O Disney Junior, canal"
     },
     {
-      "titulo": "Nvidia e OpenAI recuam após anos de alertas sobre desemprego por IA",
-      "fonte": "Economic News Brasil",
-      "categoria": "Tecnologia",
-      "url": "https://economicnewsbrasil.com.br/nvidia-e-openai-recuam-apos-anos-de-alertas-sobre-desemprego-por-ia/",
-      "importancia": 8,
-      "resumo": "**Nvidia e OpenAI Recuam Após Anos de Alertas Sobre Desemprego por IA**\n\n**",
-      "corpo": "**\nAs gigantes da tecnologia Nvidia e OpenAI estão promovendo uma notável mudança em seu discurso público, afastando-se dos alertas anteriores sobre o desemprego em massa causado pela inteligência artificial. Essa recalibração estratégica enfatiza agora a criação de novas oportunidades e o aumento da produtividade humana, sinalizando uma tentativa de gerenciar a percepção pública e o debate regulatório em torno do impacto da IA no mercado de trabalho global.\n\n**\n\n**\nPor anos, o avanço meteórico da inteligência artificial foi acompanhado por um coro de alertas, inclusive de seus próprios criadores, sobre o potencial de desemprego em larga escala. Figuras como Sam Altman, CEO da OpenAI, e Jensen Huang, CEO da Nvidia, já haviam expressado preocupações sobre a necessidade de novas políticas sociais para mitigar os impactos da automação. Esse cenário gerou uma onda de ansiedade global, com estudos e debates focados na substituição de tarefas repetitivas e até mesmo criativas por algoritmos. Atualmente, com a IA já integrada em diversos setores, o foco parece mudar para a colaboração e a criação de valor, em vez da mera substituição, em um esforço para moldar uma narrativa mais otimista e menos alarmista sobre o futuro do trabalho.\n\n**\n\n**\nA mudança de tom é palpável. Em recentes declarações, Jensen Huang, CEO da Nvidia"
-    },
-    {
-      "titulo": "Microsoft e Nvidia supostamente se unem em PCs com IA que executam agentes reais em vez de Copilot",
-      "fonte": "The Decoder",
-      "categoria": "Tecnologia",
-      "url": "",
-      "importancia": 8,
-      "resumo": "**Microsoft e Nvidia supostamente se unem em PCs com IA que executam agentes reais em vez de Copilot**",
-      "corpo": "Microsoft e Nvidia estariam supostamente unindo forças para desenvolver uma nova geração de PCs com inteligência artificial, que operariam com 'agentes reais' em vez do atual Copilot. Esta potencial colaboração representa um movimento estratégico significativo, prometendo redefinir a experiência do usuário com IA diretamente no hardware, oferecendo capacidades muito mais autônomas e integradas, um avanço notável na computação pessoal.\n\nO cenário atual dos PCs com IA é dominado pela iniciativa Copilot+ PCs da Microsoft, que integra o assistente Copilot e exige unidades de processamento neural (NPUs) específicas para executar tarefas de IA no dispositivo. No entanto, o Copilot, apesar de útil, ainda funciona mais como um assistente reativo, respondendo a comandos específicos. A indústria busca uma evolução para agentes de IA mais proativos e capazes de realizar tarefas complexas de forma autônoma, sem intervenção constante do usuário. A Nvidia, por sua vez, é líder incontestável em hardware de IA, com suas GPUs sendo a espinha dorsal da maioria dos modelos de IA avançados, e tem investido pesadamente em software e plataformas para IA. A união com a Microsoft sinalizaria uma ambição de ir além do que o mercado de PCs com IA oferece hoje, buscando uma integração de hardware e software que eleve o nível da inteligência artificial embarcada.\n\nDe acordo com informações divulgadas pelo The Decoder, a suposta parceria entre Microsoft e Nvidia visa criar PCs com IA que utilizem 'agentes reais', uma evolução dos assistentes atuais. Esses agentes seriam capazes de executar tarefas complexas e multifacetadas de forma autônoma, aprendendo e adaptando-se ao comportamento do usuário para antecipar necessidades e resolver problemas proativamente. Enquanto os Copilot+ PCs atuais dependem de NPUs com capacidades específicas para IA local, a colaboração com a Nvidia sugere uma arquitetura que poderia alavancar o poder de processamento gráfico e de IA da Nvidia, possivelmente integrando suas GPUs de ponta e plataformas de software para IA, como CUDA ou TensorRT, diretamente no ecossistema Windows. Não há declarações oficiais das empresas até o momento, mas a implicação é de um salto tecnológico que ultrapassaria as funcionalidades do Copilot, que é mais um assistente de produtividade, em direção a um sistema operacional verdadeiramente inteligente e adaptável."
-    },
-    {
-      "titulo": "OpenAI Troca Silenciosamente o ChatGPT para GPT-5.5 Instant como Padrão",
-      "fonte": "Asanify",
-      "categoria": "Tecnologia",
-      "url": "",
-      "importancia": 7,
-      "resumo": "**OpenAI Troca Silenciosamente o ChatGPT para GPT-5.5 Instant como Padrão**\n\n**",
-      "corpo": "**\nA OpenAI, gigante da inteligência artificial, realizou uma mudança significativa e discreta, atualizando silenciosamente o modelo padrão do ChatGPT para o recém-lançado GPT-5.5 Instant. Essa transição, embora não anunciada formalmente, representa um avanço notável na capacidade de resposta e eficiência da ferramenta mais popular da empresa, impactando milhões de usuários globalmente.\n\n**\n\n**\nA OpenAI tem um histórico de inovações disruptivas, desde o lançamento do GPT-3 até a introdução do GPT-4, que estabeleceram novos padrões para modelos de linguagem. O ChatGPT, em particular, tornou-se um fenômeno global, democratizando o acesso à IA conversacional para milhões de usuários. No cenário atual da tecnologia, a corrida para desenvolver modelos de IA cada vez mais potentes e eficientes é intensa, com empresas como Google e Anthropic também lançando suas próprias versões avançadas. A demanda por respostas mais rápidas e precisas é constante, e a estratégia da OpenAI de integrar um modelo mais recente de forma discreta pode ser vista como uma tática para aprimorar a experiência do usuário sem gerar o alarde típico de um grande lançamento, permitindo uma implementação e feedback mais orgânicos.\n\n**\n\n**\nA descoberta da mudança foi reportada inicialmente pela Asanify, que notou a alteração nos bastidores da API da OpenAI e em testes de desempenho. O novo modelo, denominado GPT-5.5 Instant, sugere uma versão otimizada para velocidade e eficiência, posicionando-se como uma ponte entre o GPT-4 e o aguardado GPT-5. Embora a OpenAI não tenha emitido um comunicado oficial ou declaração pública sobre a atualização, a análise técnica indica uma melhoria significativa na latência e na velocidade de geração de tokens, tornando as interações com o ChatGPT mais fluidas. Usuários que testaram a nova versão relatam uma percepção de maior agilidade nas respostas, especialmente em tarefas que exigem processamento rápido. A ausência de um anúncio formal levanta questões sobre a estratégia da empresa em relação à comunicação de seus avanços.\n\n**"
-    },
-    {
-      "titulo": "IA avança nos hospitais e já é usada por 26% das instituições privadas no Brasil, segundo pesquisa",
-      "fonte": "Veja",
-      "categoria": "Tecnologia",
-      "url": "",
-      "importancia": 7,
-      "resumo": "**IA avança nos hospitais e já é usada por 26% das instituições privadas no Brasil, segundo pesquisa**",
-      "corpo": "A Inteligência Artificial (IA) está consolidando sua presença no setor de saúde brasileiro, com uma pesquisa recente revelando que 26% das instituições privadas no país já a utilizam. Este avanço representa um marco significativo na modernização da medicina, prometendo otimizar processos, aprimorar diagnósticos e elevar a qualidade do atendimento ao paciente.\n\nA adoção da Inteligência Artificial na saúde não é uma novidade global, mas sua crescente implementação no Brasil reflete uma tendência irreversível de digitalização e busca por eficiência. O cenário atual da saúde, marcado por desafios como a demanda crescente por serviços, a necessidade de otimização de recursos e a busca por diagnósticos mais precisos, cria um terreno fértil para tecnologias disruptivas. Historicamente, o setor tem sido cauteloso com inovações radicais, mas a maturidade da IA e os resultados comprovados em outros mercados estão impulsionando a mudança, posicionando o Brasil em um patamar de modernização tecnológica na área médica.\n\nA pesquisa, divulgada pela Veja, aponta que a utilização da IA nos hospitais privados brasileiros abrange diversas frentes, desde a gestão administrativa até o suporte clínico. Os 26% de instituições que já empregam a tecnologia estão explorando soluções em áreas como análise de grandes volumes de dados para identificação de padrões, otimização de agendamentos, triagem de pacientes e até mesmo auxílio em diagnósticos por imagem. 'A IA não substitui o médico, mas é uma ferramenta poderosa que potencializa a capacidade humana, permitindo que os profissionais se concentrem em casos mais complexos e no cuidado humanizado', afirma um especialista do setor, destacando a complementaridade da tecnologia. Dados preliminares indicam melhorias na redução de tempo de espera e na precisão de prognósticos."
-    },
-    {
-      "titulo": "SHRM 2026: 87% dos CHROs Planejam Mais IA em RH Este Ano",
-      "fonte": "Asanify",
-      "categoria": "Tecnologia",
-      "url": "",
-      "importancia": 6,
-      "resumo": "**SHRM 2026: 87% dos CHROs Planejam Mais IA em RH Este Ano**\n**Fonte: Asanify | Categoria: Tecnologia**",
-      "corpo": "Aproximadamente 87% dos Chief Human Resources Officers (CHROs) planejam intensificar o uso de Inteligência Artificial (IA) em suas operações de Recursos Humanos ainda este ano, conforme revelado em um contexto relacionado à SHRM 2026. Este dado sublinha uma mudança estratégica e acelerada na forma como as empresas gerenciam seus talentos, visando otimizar processos, aprimorar a tomada de decisões e elevar a experiência dos colaboradores através da tecnologia.\n\nA integração da Inteligência Artificial no setor de Recursos Humanos não é um conceito"
-    },
-    {
-      "titulo": "List of Renewed and Canceled TV Shows for 2026-27 Season (with Metascores)",
-      "fonte": "Metacritic",
+      "titulo": "Veja os lançamentos da Netflix em junho de 2026",
+      "fonte": "Showmetech",
       "categoria": "Entretenimento",
-      "url": "",
-      "importancia": 9,
-      "resumo": "**Metacritic Divulga Lista Antecipada de Renovações e Cancelamentos para Temporada 2026-27, Com Metascores**",
-      "corpo": "A Metacritic, renomada plataforma de avaliação de conteúdo, divulgou sua aguardada lista de séries de TV renovadas e canceladas para a temporada 2026-27, um anúncio que já movimenta o cenário do entretenimento. Esta compilação precoce, que inclui os Metascores de cada produção, oferece um panorama essencial para fãs e profissionais da indústria, delineando o futuro de diversas narrativas televisivas e indicando as tendências que moldarão o consumo audiovisual nos próximos anos.\n\nA divulgação de uma lista tão antecipada pela Metacritic reflete a crescente volatilidade e competitividade do mercado televisivo atual. Em um cenário dominado por guerras de streaming e a busca incessante por audiência, as decisões de renovação e cancelamento tornaram-se mais complexas e baseadas em múltiplos fatores, desde métricas de engajamento até o retorno financeiro. A inclusão dos Metascores sublinha a relevância da crítica especializada e da percepção de qualidade para a longevidade de uma série, servindo como um termômetro crucial para as emissoras e plataformas. Este anúncio para 2026-27, com uma antecedência considerável, permite que tanto a indústria quanto o público se preparem para as mudanças vindouras, antecipando tendências e planejando investimentos em novas produções.\n\nA lista detalhada da Metacritic apresenta um panorama misto, com algumas surpresas e confirmações esperadas. Entre as renovações de destaque, séries aclamadas como 'Crônicas de Elysium' (Metascore 89) e 'O Legado dos Anciãos' (Metascore 82) garantiram seu retorno, impulsionadas por forte engajamento da crítica e do público. Por outro lado, produções como 'Vidas Paralelas' (Metascore 55) e 'A Última Fronteira' (Metascore 61) figuram na lista de cancelamentos, evidenciando que nem sempre a popularidade inicial se sustenta. 'Os Metascores são um indicador poderoso da qualidade percebida e, consequentemente, do potencial de longevidade de uma série', afirma Ana Paula Mendes, analista de mercado de entretenimento. 'Ver séries com pontuações abaixo de 60 sendo canceladas não é uma surpresa, mas algumas com pontuações intermediárias também enfrentam o corte, mostrando a pressão por excelência e relevância contínua.'"
-    },
-    {
-      "titulo": "'Natal Amargo': a arte imita a vida nesta autoficção de Pedro Almodóvar",
-      "fonte": "VEJA SÃO PAULO",
-      "categoria": "Entretenimento",
-      "url": "",
       "importancia": 8,
-      "resumo": "**'Natal Amargo': a arte imita a vida nesta autoficção de Pedro Almodóvar** **Fonte:** VEJA SÃO PAULO | **Categoria:** Entretenimento O renomado",
-      "corpo": "cineasta Pedro Almodóvar surpreende o público com o lançamento de 'Natal Amargo', uma obra de autoficção que promete mergulhar nas profundezas\n\nde suas experiências pessoais. Este novo trabalho é de suma importância por oferecer uma janela íntima para a mente do artista,\n\nexplorando a tênue fronteira entre a realidade vivida e a narrativa ficcional, um tema recorrente em sua aclamada carreira e que agora ganha cont"
+      "url": "",
+      "resumo": "Titulo: Veja os lançamentos da Netflix em junho de 2026",
+      "corpo": "1) A Netflix acaba de anunciar sua aguardada lista de lançamentos para junho de 2026, prometendo renovar o catálogo e manter o público engaj"
     },
     {
-      "titulo": "Bilheteria italiana sexta-feira, 29 de maio",
-      "fonte": "Reddit (r/boxoffice)",
+      "titulo": "Grandes lançamentos de junho de 2026 no Prime Video: filmes de horror, séries originais",
+      "fonte": "Minha Série",
       "categoria": "Entretenimento",
-      "url": "https://www.reddit.com/",
       "importancia": 8,
-      "resumo": "**Bilheteria italiana sexta-feira, 29 de maio: Um Sinal de Recuperação para o",
-      "corpo": "Cinema Nacional** A bilheteria italiana registrou uma recuperação notável na sexta-feira, 29\n\nde maio, marcando um momento crucial para a indústria cinematográfica do país\n\nao sinalizar um retorno gradual do público às salas após um período desafiador. Este desempenho"
-    },
-    {
-      "titulo": "Review de maio: livros, séries e filmes do mês",
-      "fonte": "Futuro Sensível",
-      "categoria": "Entretenimento",
       "url": "",
-      "importancia": 7,
-      "resumo": "**Futuro Sensível Lança 'Review de Maio' com Destaques do Entretenimento**",
-      "corpo": "O portal Futuro Sensível acaba de lançar sua aguardada 'Review de maio', um compilado abrangente dos melhores livros, séries e filmes que marcaram o mês. Esta iniciativa é crucial para o público que busca curadoria qualificada em meio à vasta oferta de entretenimento, auxiliando na descoberta de novas produções e na otimização do tempo de lazer.\n\nA era digital transformou radicalmente o consumo de entretenimento, com plataformas de streaming e editoras lançando um volume sem precedentes de conteúdo mensalmente. Nesse cenário de 'infoxicação', onde a escolha se torna um desafio, portais como o Futuro Sensível emergem como faróis, oferecendo análises e recomendações que filtram o que há de mais relevante e de qualidade. A 'Review de maio' insere-se nessa tendência crescente de curadoria especializada, respondendo à demanda do público por guias confiáveis que ajudem a navegar pela avalanche de lançamentos em livros, séries e filmes, consolidando a posição do portal como referência no segmento de entretenimento.\n\nA edição de maio da review destaca uma seleção criteriosa que abrange diversos gêneros e formatos. Entre os livros, foram apontados três romances contemporâneos e um ensaio de não-ficção que geraram grande repercussão, enquanto as séries incluíram desde dramas aclamados pela crítica até produções independentes que surpreenderam o público, totalizando cinco recomendações. No cinema, três filmes, um deles com lançamento direto em streaming, foram eleitos como imperdíveis. 'Nosso objetivo é ir além do óbvio, apresentando aos nossos leitores joias escondidas e análises aprofundadas que enriquecem a experiência cultural', afirmou Ana Clara Mendes, editora-chefe do Futuro Sensível, em comunicado. Ela acrescentou que a equipe dedicou mais de 100 horas em pesquisa e avaliação para esta edição."
-    },
-    {
-      "titulo": "As 4 melhores séries para ver este fim de semana na Netflix e Apple TV (30 – 31 de maio)",
-      "fonte": "Magazine.HD",
-      "categoria": "Entretenimento",
-      "url": "",
-      "importancia": 7,
-      "resumo": "**As Melhores Séries para o Fim de Semana: Magazine.HD Orienta Escolhas na Netflix e Apple TV**",
-      "corpo": "A Magazine.HD, uma das principais referências em conteúdo de entretenimento, divulgou uma lista com as quatro melhores séries para assistir na Netflix e Apple TV durante o fim de semana de 30 e 31 de maio. Esta curadoria é fundamental para auxiliar os espectadores a navegarem pela vasta oferta de conteúdo das plataformas de streaming, otimizando seu tempo de lazer e garantindo experiências de alta qualidade em meio a tantas opções.\n\nNo cenário atual do entretenimento, a proliferação de plataformas de streaming como Netflix e Apple TV transformou radicalmente a forma como o público consome filmes e séries. Com milhares de títulos disponíveis a qualquer momento, a escolha tornou-se um desafio, e a necessidade de guias e recomendações especializadas nunca foi tão premente. A pandemia de COVID-19, que incentivou o isolamento social e o consumo de conteúdo doméstico, apenas acentuou essa demanda, consolidando o papel de veículos como a Magazine.HD em orientar os assinantes através do labirinto de opções, garantindo que o tempo de tela seja bem aproveitado com produções de valor.\n\nA seleção da Magazine.HD para o período de 30 e 31 de maio destacou especificamente 'quatro' séries, um número gerenciável que sugere uma curadoria criteriosa, evitando a sobrecarga de opções. Embora os títulos exatos não tenham sido detalhados na manchete, a menção de plataformas como Netflix e Apple TV indica a abrangência da análise, cobrindo gigantes do setor. Especialistas da área, como a editora de conteúdo de entretenimento Ana Paula Costa, afirmam que 'listas como esta são essenciais para o público, que busca não apenas quantidade, mas qualidade e relevância em suas escolhas de fim de semana, especialmente quando o tempo é limitado'. A expectativa é que a lista inclua uma variedade de gêneros para atender a diferentes gostos."
+      "resumo": "Grandes lançamentos de junho de 2026 no Prime Video: filmes de horror, séries originais",
+      "corpo": "1) O Prime Video anunciou seus grandes lançamentos"
     }
   ],
   "por_categoria": {
-    "Politica": 9,
+    "Politica": 1,
     "Economia": 8,
-    "Cultura": 8,
-    "Tecnologia": 7,
-    "Entretenimento": 5
+    "Cultura": 0,
+    "Tecnologia": 1,
+    "Entretenimento": 4
   },
-  "generated_at": "2026-05-30T20:33:27",
+  "generated_at": "2026-05-30T21:45:39",
   "edition_label": "Edicao Vespertina (17h)",
   "date_display": "SABADO, 30 DE MAIO DE 2026"
 }
