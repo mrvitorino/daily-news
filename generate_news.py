@@ -100,37 +100,69 @@ URL>> url completa do artigo ou deixe vazio
 ##FIM##"""
 
 # ── PASSO 1: busca com google_search ─────────────────────────────────────────
-def p1_buscar(client, categoria, instrucoes, n, today_str):
-    prompt = (
-        f"Hoje e {today_str}. Busque {n} noticias sobre {instrucoes} das ultimas 48h.\n"
-        f"FONTES ACEITAS: {FONTES_OK}\nPROIBIDO: {FONTES_NO}\n\n"
-        f"Para cada noticia use EXATAMENTE este formato ({n} blocos obrigatorios):\n{BLOCO}\n\n"
-        "REGRAS: escreva exatamente os delimitadores ##INICIO## e ##FIM##. "
-        "Cada campo comeca com o nome em maiusculas seguido de >>. "
-        "NUNCA escreva N/A. URL deve ser do artigo original ou deixe vazio."
-    )
-    txt = gsearch(client, prompt, 3000)
-    blocos = re.findall(r'##INICIO##(.*?)##FIM##', txt, re.DOTALL)
+def _parse_blocos(txt, categoria):
+    """Parser robusto: tenta ##INICIO## primeiro, depois linha a linha."""
     noticias = []
+
+    # Estrategia 1: delimitadores ##INICIO## / ##FIM##
+    blocos = re.findall(r'##INICIO##(.*?)##FIM##', txt, re.DOTALL)
     for b in blocos:
-        def ex(c):
-            m = re.search(rf'{c}>>\s*(.+)', b)
+        def ex(c, bloco=b):
+            m = re.search(rf'{c}>>\s*(.+)', bloco)
             return m.group(1).strip() if m else ""
         titulo = ex("TITULO")
         if not titulo or len(titulo) < 8: continue
         if any(x in titulo.lower() for x in ["n/a","nao foi","placeholder","[titulo"]): continue
         url = ex("URL")
-        if "vertexaisearch" in url or "grounding-api" in url or not url.startswith("http"):
+        if not url.startswith("http") or "vertexaisearch" in url or "grounding-api" in url:
             url = ""
         try: imp = min(10, max(1, int(re.search(r'\d+', ex("IMPORTANCIA")).group())))
         except: imp = 5
         noticias.append({
-            "titulo":      titulo,
-            "fonte":       ex("FONTE") or "Redacao",
-            "categoria":   categoria,
-            "importancia": imp,
-            "url":         url,
+            "titulo": titulo, "fonte": ex("FONTE") or "Redacao",
+            "categoria": categoria, "importancia": imp, "url": url,
         })
+
+    if noticias:
+        return noticias
+
+    # Estrategia 2: linha a linha com TITULO>> e FONTE>>
+    atual = {}
+    for linha in txt.split("\n"):
+        linha = linha.strip()
+        if "TITULO>>" in linha:
+            if atual.get("titulo"): noticias.append(atual)
+            atual = {"titulo": linha.split(">>",1)[1].strip(), "fonte": "Redacao",
+                     "categoria": categoria, "importancia": 5, "url": ""}
+        elif "FONTE>>" in linha and atual:
+            atual["fonte"] = linha.split(">>",1)[1].strip() or "Redacao"
+        elif "IMPORTANCIA>>" in linha and atual:
+            m = re.search(r'\d+', linha)
+            if m: atual["importancia"] = min(10, max(1, int(m.group())))
+        elif "URL>>" in linha and atual:
+            u = linha.split(">>",1)[1].strip()
+            if u.startswith("http") and "vertexaisearch" not in u:
+                atual["url"] = u
+    if atual.get("titulo"): noticias.append(atual)
+
+    # Filtra invalidos
+    return [n for n in noticias if len(n.get("titulo","")) >= 8
+            and not any(x in n["titulo"].lower()
+                        for x in ["n/a","nao foi","placeholder"])]
+
+
+def p1_buscar(client, categoria, instrucoes, n, today_str):
+    prompt = (
+        f"Hoje e {today_str}. Busque {n} noticias sobre {instrucoes} das ultimas 48h.\n"
+        f"FONTES ACEITAS: {FONTES_OK}\nPROIBIDO: {FONTES_NO}\n\n"
+        f"Para CADA noticia, escreva EXATAMENTE neste formato:\n{BLOCO}\n\n"
+        f"OBRIGATORIO: {n} blocos ##INICIO## ... ##FIM##. "
+        "Sem texto fora dos blocos. Sem N/A. "
+        "Se nao souber a URL, deixe o campo URL vazio."
+    )
+    txt = gsearch(client, prompt, 3500)
+    noticias = _parse_blocos(txt, categoria)
+    print(f"   blocos encontrados: {len(noticias)}")
     return noticias
 
 # ── PASSO 2: estrutura metadados em JSON seguro (sem texto livre) ─────────────
@@ -290,8 +322,7 @@ CATEGORIAS = [
      "Apple Google Microsoft Meta Amazon, ciberseguranca, inovacao, ciencia"),
 
     ("Entretenimento",
-     "entretenimento streaming: Netflix Amazon Prime Video HBO Max Apple TV Plus "
-     "Disney Plus lancamentos series filmes, cinema bilheteria, criticas, premios"),
+     "lancamentos de filmes e series em streaming em 2026: busque separadamente Netflix novidades maio junho 2026, Amazon Prime Video lancamentos 2026, HBO Max Max lancamentos 2026, Apple TV Plus estreias 2026, Disney Plus novidades 2026. Inclua tambem filmes em cartaz no cinema, criticas recentes e noticias de entretenimento"),
 ]
 
 # ── ORQUESTRADOR ──────────────────────────────────────────────────────────────
