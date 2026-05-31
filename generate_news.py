@@ -1,25 +1,19 @@
 #!/usr/bin/env python3
 """
 generate_news.py — Boletim Geral de Noticias
-Arquitetura otimizada para custo:
+API: Google Gemini 2.5 Flash (gratuito com billing ativo)
 
-Passo 1 (Sonnet + web_search): UMA chamada busca TODAS as categorias de uma vez
-         → retorna lista JSON com titulo/fonte/categoria/url/importancia
-         → ~5-8 buscas web = $0.05
+Arquitetura 3 passos por categoria (zero JSON intermediario com texto livre):
+  Passo 1 (google_search): busca → texto estruturado com blocos ##INICIO##
+  Passo 2 (response_mime_type=json, SEM search): extrai so campos seguros
+           (titulo curto, fonte, url, importancia — nunca corrompem JSON)
+  Passo 3 (sem ferramentas, sem JSON): escreve corpo em paragrafos numerados
+           parse por sentencas completas, nunca trunca no meio
 
-Passo 2 (Haiku, sem busca): escreve resumo+corpo para cada noticia individualmente
-         → muito mais barato ($0.80 input / $4.00 output por 1M tokens)
-
-Custo estimado: ~$0.23/execucao, ~$14/mes (2x por dia)
-vs anterior:    ~$1.72/execucao (5 chamadas Sonnet+search = 25 buscas)
+Custo: gratuito (Gemini free tier — 1500 req/dia com billing)
 """
 
-import json
-import os
-import re
-import sys
-import time
-import traceback
+import json, os, re, sys, time, traceback
 from datetime import datetime, timezone, timedelta
 
 try:
@@ -28,12 +22,12 @@ try:
 except Exception:
     BRASILIA = timezone(timedelta(hours=-3))
 
-import anthropic
+from google import genai
+from google.genai import types
 
-OUTPUT        = "news-data.json"
-MODEL_SEARCH  = "claude-sonnet-4-6"    # Sonnet: busca web (1 chamada)
-MODEL_WRITER  = "claude-haiku-3-5"     # Haiku: escreve corpos (barato)
-NEWS_PER_CAT  = 8                       # noticias por categoria
+OUTPUT       = "news-data.json"
+MODEL        = "gemini-2.5-flash"
+NEWS_PER_CAT = 8
 
 WEEKDAYS_PT = {
     "Monday":"segunda-feira","Tuesday":"terca-feira","Wednesday":"quarta-feira",
@@ -58,121 +52,145 @@ def _strip_md(txt):
     txt = re.sub(r'#{1,6}\s+', '', txt)
     txt = re.sub(r'`([^`]+)`', r'\1', txt)
     txt = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', txt)
-    txt = re.sub(r'(?i)\*{0,2}fonte\s*:\s*[^|\n*]+(\|[^\n*]+)?\*{0,2}', '', txt)
+    txt = re.sub(r'(?i)fonte\s*:\s*[^|\n]+(\|[^\n]+)?', '', txt)
     return txt.strip()
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PASSO 1 — UMA chamada Sonnet+search para TODAS as categorias
-# ─────────────────────────────────────────────────────────────────────────────
-def buscar_todas(client, today_str):
-    print("[..] Passo 1: buscando noticias de todas as categorias (Sonnet + web_search)...")
+def gsearch(client, prompt, max_tokens=4000):
+    resp = client.models.generate_content(
+        model=MODEL, contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.1, max_output_tokens=max_tokens))
+    return resp.text or ""
 
-    n = NEWS_PER_CAT
+def gjson(client, prompt, schema, max_tokens=3000):
+    """Chamada sem ferramentas — aceita response_mime_type=json."""
+    resp = client.models.generate_content(
+        model=MODEL, contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0.0,
+            max_output_tokens=max_tokens,
+            response_mime_type="application/json",
+            response_schema=schema))
+    return json.loads(resp.text)
 
-    prompt = f"""Hoje e {today_str}. Voce e um editor de um boletim de noticias abrangente.
+def gtext(client, prompt, max_tokens=1000, temp=0.3):
+    resp = client.models.generate_content(
+        model=MODEL, contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=temp, max_output_tokens=max_tokens))
+    return resp.text or ""
 
-Use a ferramenta de busca para encontrar as noticias mais relevantes das ultimas 48h
-nas 5 categorias abaixo. Faca buscas especificas para cada categoria.
+# ── CONSTANTES ────────────────────────────────────────────────────────────────
+FONTES_OK = (
+    "Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao, Valor Economico, "
+    "ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato, Carta Capital, "
+    "CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal, Bloomberg Linea, "
+    "Agencia Publica, IstoE, Exame, InfoMoney, Opera Mundi, Band News, Correio Braziliense, "
+    "R7 Noticias, The Verge, Wired, TechCrunch, Ars Technica, Canaltech, TecMundo, "
+    "Variety, Hollywood Reporter, Screen Rant, Rolling Stone Brasil"
+)
+FONTES_NO = "Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista"
 
-CATEGORIAS E QUANTIDADE:
-- Politica ({n}): politica brasileira, Congresso, STF, governo Lula, eleicoes 2026
-- Economia ({n}): economia brasileira, mercado, inflacao, juros, emprego, agronegocio
-- Cultura ({n}): musica, arte, literatura, teatro, cinema, festivais no Brasil
-- Tecnologia ({n}): IA, startups, big tech, inovacao, ciberseguranca no Brasil e mundo
-- Entretenimento ({n}): Netflix, Amazon, HBO Max, Apple TV+, Disney+, filmes em cartaz
+BLOCO = """##INICIO##
+TITULO>> titulo da noticia aqui
+FONTE>> nome do veiculo
+IMPORTANCIA>> numero de 1 a 10
+URL>> url completa do artigo ou deixe vazio
+##FIM##"""
 
-FONTES ACEITAS: Agencia Brasil, Folha de S.Paulo, G1, UOL, O Globo, Estadao,
-Valor Economico, ICL Noticias, Intercept Brasil, Revista Forum, Brasil de Fato,
-Carta Capital, CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal,
-Bloomberg Linea, Agencia Publica, IstoE, Exame, InfoMoney, The Verge, Wired,
-TechCrunch, Canaltech, TecMundo, Variety, Hollywood Reporter, Screen Rant.
-PROIBIDO: Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista.
-
-Retorne SOMENTE este JSON, sem texto adicional:
-{{
-  "noticias": [
-    {{
-      "titulo": "titulo da noticia",
-      "fonte": "nome do veiculo",
-      "categoria": "Politica|Economia|Cultura|Tecnologia|Entretenimento",
-      "importancia": 8,
-      "url": "https://url-do-artigo-ou-string-vazia"
-    }}
-  ]
-}}
-
-Retorne exatamente {n*5} noticias ({n} por categoria).
-Imputancia e inteiro de 1 a 10. URL deve ser do artigo original ou string vazia."""
-
-    for tentativa in range(3):
-        try:
-            resp = client.messages.create(
-                model=MODEL_SEARCH,
-                max_tokens=4000,
-                tools=[{"type": "web_search_20250305", "name": "web_search"}],
-                messages=[{"role": "user", "content": prompt}]
-            )
-            break
-        except anthropic.RateLimitError as e:
-            espera = 70 * (tentativa + 1)
-            print(f"   [429] Rate limit — aguardando {espera}s...", file=sys.stderr)
-            time.sleep(espera)
-            if tentativa == 2:
-                raise
-
-    # Extrai texto da resposta
-    texto = "".join(b.text for b in resp.content if b.type == "text")
-    print(f"   Resposta: {len(texto)} chars")
-
-    # Parse JSON
-    texto = re.sub(r'^```(?:json)?\s*', '', texto.strip(), flags=re.MULTILINE)
-    texto = re.sub(r'\s*```\s*$', '', texto, flags=re.MULTILINE)
-    s = texto.find('{')
-    e = texto.rfind('}')
-    if s == -1 or e == -1:
-        raise RuntimeError("JSON nao encontrado na resposta de busca")
-
-    data = json.loads(texto[s:e+1])
-    noticias_raw = data.get("noticias", [])
-
-    # Valida e normaliza
+# ── PASSO 1: busca com google_search ─────────────────────────────────────────
+def p1_buscar(client, categoria, instrucoes, n, today_str):
+    prompt = (
+        f"Hoje e {today_str}. Busque {n} noticias sobre {instrucoes} das ultimas 48h.\n"
+        f"FONTES ACEITAS: {FONTES_OK}\nPROIBIDO: {FONTES_NO}\n\n"
+        f"Para cada noticia use EXATAMENTE este formato ({n} blocos obrigatorios):\n{BLOCO}\n\n"
+        "REGRAS: escreva exatamente os delimitadores ##INICIO## e ##FIM##. "
+        "Cada campo comeca com o nome em maiusculas seguido de >>. "
+        "NUNCA escreva N/A. URL deve ser do artigo original ou deixe vazio."
+    )
+    txt = gsearch(client, prompt, 3000)
+    blocos = re.findall(r'##INICIO##(.*?)##FIM##', txt, re.DOTALL)
     noticias = []
-    for n in noticias_raw:
-        titulo = n.get("titulo", "").strip()
-        if not titulo or len(titulo) < 8:
-            continue
-        if any(x in titulo.lower() for x in ["n/a", "nao foi", "exemplo", "[titulo"]):
-            continue
-        cat = n.get("categoria", "")
-        if cat not in ["Politica", "Economia", "Cultura", "Tecnologia", "Entretenimento"]:
-            continue
-        url = n.get("url", "")
-        if not isinstance(url, str) or "vertexaisearch" in url or not url.startswith("http"):
+    for b in blocos:
+        def ex(c):
+            m = re.search(rf'{c}>>\s*(.+)', b)
+            return m.group(1).strip() if m else ""
+        titulo = ex("TITULO")
+        if not titulo or len(titulo) < 8: continue
+        if any(x in titulo.lower() for x in ["n/a","nao foi","placeholder","[titulo"]): continue
+        url = ex("URL")
+        if "vertexaisearch" in url or "grounding-api" in url or not url.startswith("http"):
             url = ""
-        try:
-            imp = min(10, max(1, int(n.get("importancia", 5))))
-        except Exception:
-            imp = 5
+        try: imp = min(10, max(1, int(re.search(r'\d+', ex("IMPORTANCIA")).group())))
+        except: imp = 5
         noticias.append({
             "titulo":      titulo,
-            "fonte":       n.get("fonte", "Redacao").strip() or "Redacao",
-            "categoria":   cat,
+            "fonte":       ex("FONTE") or "Redacao",
+            "categoria":   categoria,
             "importancia": imp,
             "url":         url,
         })
-
-    # Conta por categoria
-    contagem = {}
-    for n in noticias:
-        contagem[n["categoria"]] = contagem.get(n["categoria"], 0) + 1
-    print(f"   Noticias validas: {len(noticias)} — {contagem}")
     return noticias
 
+# ── PASSO 2: estrutura metadados em JSON seguro (sem texto livre) ─────────────
+def p2_meta(client, noticias_raw, categoria):
+    """
+    Recebe lista de noticias (so titulo/fonte/url/importancia) e devolve
+    JSON limpo usando response_mime_type.
+    Sem corpo, sem resumo — campos que nunca corrompem JSON.
+    """
+    if not noticias_raw:
+        return []
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PASSO 2 — Haiku escreve resumo+corpo (sem busca, muito barato)
-# ─────────────────────────────────────────────────────────────────────────────
-def escrever_corpo(client, noticia):
+    schema = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "titulo":      {"type": "string"},
+                "fonte":       {"type": "string"},
+                "importancia": {"type": "integer"},
+                "url":         {"type": "string"},
+            },
+            "required": ["titulo", "fonte", "importancia", "url"]
+        }
+    }
+
+    lista_txt = "\n".join(
+        f"{i+1}. Titulo: {n['titulo']} | Fonte: {n['fonte']} | "
+        f"Importancia: {n['importancia']} | URL: {n['url']}"
+        for i, n in enumerate(noticias_raw)
+    )
+    prompt = (
+        f"Converta esta lista de noticias de {categoria} para JSON.\n"
+        f"Para cada item: titulo (maximo 15 palavras), fonte, importancia (1-10), url.\n"
+        f"Se url nao for https://, coloque string vazia.\n\n{lista_txt}"
+    )
+
+    try:
+        result = gjson(client, prompt, schema, 2000)
+        # Adiciona categoria e filtra invalidos
+        out = []
+        for n in result:
+            t = n.get("titulo","").strip()
+            if not t or len(t) < 8: continue
+            url = n.get("url","")
+            if not url.startswith("http"): url = ""
+            out.append({
+                "titulo":      t,
+                "fonte":       n.get("fonte","Redacao").strip() or "Redacao",
+                "categoria":   categoria,
+                "importancia": min(10, max(1, int(n.get("importancia",5)))),
+                "url":         url,
+            })
+        return out
+    except Exception as e:
+        print(f"   [WARN] p2_meta falhou ({e}) — usando dados brutos")
+        return noticias_raw
+
+# ── PASSO 3: corpo em texto puro, parse por sentencas completas ───────────────
+def p3_corpo(client, noticia):
     titulo = noticia["titulo"]
     fonte  = noticia["fonte"]
     cat    = noticia["categoria"]
@@ -180,148 +198,180 @@ def escrever_corpo(client, noticia):
     prompt = (
         f"Escreva um artigo jornalistico em portugues brasileiro sobre:\n"
         f"Titulo: {titulo}\nFonte: {fonte} | Categoria: {cat}\n\n"
-        "Escreva 4 paragrafos numerados separados por linha em branco:\n\n"
-        "1) Duas frases de resumo: quem, o que aconteceu, por que e importante.\n\n"
-        "2) Contexto e antecedentes historicos. Minimo 3 frases.\n\n"
-        "3) Fatos detalhados, dados e declaracoes dos envolvidos. Minimo 3 frases.\n\n"
-        "4) Impacto, consequencias e proximos passos. Minimo 3 frases.\n\n"
-        "Sem markdown, sem asteriscos, sem negrito. Texto puro."
+        "Escreva exatamente 4 paragrafos numerados:\n\n"
+        "1) Duas frases de resumo: o que aconteceu e por que e importante.\n\n"
+        "2) Contexto e antecedentes. Minimo 3 frases completas.\n\n"
+        "3) Fatos, dados e declaracoes. Minimo 3 frases completas.\n\n"
+        "4) Impacto e proximos passos. Minimo 3 frases completas.\n\n"
+        "Sem markdown, sem asteriscos, sem negrito. Texto puro. "
+        "Cada paragrafo deve terminar com ponto final."
     )
 
     try:
-        resp = client.messages.create(
-            model=MODEL_WRITER,
-            max_tokens=800,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        txt = _strip_md(resp.content[0].text or "")
+        txt = _strip_md(gtext(client, prompt, max_tokens=1000, temp=0.35))
 
-        # Divide por numeracao "1)" "2)" "3)" "4)"
+        # Estrategia 1: divide por "1)" "2)" "3)" "4)" no inicio
         partes = re.split(r'(?m)^\s*[1-4]\)\s*', txt)
-        partes = [p.strip() for p in partes if len(p.strip()) > 30]
-
+        partes = [p.strip() for p in partes if len(p.strip()) > 40]
         if len(partes) >= 4:
-            resumo = partes[0]
-            corpo  = "\n\n".join(partes[1:4])
-        elif len(partes) >= 2:
-            resumo = partes[0]
-            corpo  = "\n\n".join(partes[1:])
-        else:
-            # Divide por linha em branco
-            blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 30]
-            if len(blocos) >= 2:
-                resumo = blocos[0]
-                corpo  = "\n\n".join(blocos[1:4])
-            else:
-                return titulo, txt or titulo
+            return _limpa2(partes[0]), "\n\n".join(partes[1:4])
+        if len(partes) == 3:
+            return _limpa2(partes[0]), "\n\n".join(partes[1:])
 
-        # Limita resumo a 2 frases
-        frases = re.split(r'(?<=[.!?])\s+', resumo.strip())
-        resumo = " ".join(frases[:2])
-        return resumo.strip(), corpo.strip()
+        # Estrategia 2: linha em branco
+        blocos = [b.strip() for b in re.split(r'\n{2,}', txt) if len(b.strip()) > 40]
+        if len(blocos) >= 3:
+            return _limpa2(blocos[0]), "\n\n".join(blocos[1:4])
+        if len(blocos) == 2:
+            return _limpa2(blocos[0]), blocos[1]
+
+        # Estrategia 3: sentencas completas em 4 grupos (nunca corta no meio)
+        sentencas = [s.strip() for s in re.split(r'(?<=[.!?])\s+', txt) if len(s.strip()) > 15]
+        total = len(sentencas)
+        if total >= 8:
+            q = total // 4
+            g = [
+                " ".join(sentencas[:q]),
+                " ".join(sentencas[q:2*q]),
+                " ".join(sentencas[2*q:3*q]),
+                " ".join(sentencas[3*q:]),   # ultimo grupo pega o restante todo
+            ]
+            return _limpa2(g[0]), "\n\n".join(x for x in g[1:] if x)
+
+        # Fallback: texto inteiro como corpo
+        return titulo, txt or titulo
 
     except Exception as e:
         print(f"      [WARN] corpo: {e}")
         return titulo, titulo
 
+def _limpa2(texto):
+    """Resumo: max 2 frases."""
+    frases = re.split(r'(?<=[.!?])\s+', texto.strip())
+    return " ".join(frases[:2]).strip()
 
-# ─────────────────────────────────────────────────────────────────────────────
-# PASSO 3 — Editorial (Haiku, barato)
-# ─────────────────────────────────────────────────────────────────────────────
+# ── EDITORIAL ─────────────────────────────────────────────────────────────────
 def gerar_editorial(client, noticias, today_str):
     titulos = "\n".join(
         f"- {n['titulo']}" for n in noticias
-        if n["categoria"] in ["Politica", "Economia"]
+        if n["categoria"] in ["Politica","Economia"]
     )[:600]
-
     prompt = (
         f"Noticias do dia ({today_str}):\n{titulos}\n\n"
-        "Escreva um resumo editorial de 3 frases sobre o panorama do dia no Brasil. "
-        "Texto puro, sem markdown, sem aspas duplas, portugues formal."
+        "Escreva um resumo editorial de 3 frases completas sobre o panorama do dia no Brasil. "
+        "Texto puro, sem markdown, sem aspas duplas, em portugues formal."
     )
     try:
-        resp = client.messages.create(
-            model=MODEL_WRITER,
-            max_tokens=200,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return _strip_md(resp.content[0].text.strip())
+        return _strip_md(gtext(client, prompt, 250, 0.2).strip())
     except Exception:
-        return "O cenario politico e economico brasileiro segue movimentado com diversas pautas em destaque."
+        return "O cenario politico e economico brasileiro segue movimentado."
 
+# ── CONFIGURACAO DAS CATEGORIAS ───────────────────────────────────────────────
+CATEGORIAS = [
+    ("Politica",
+     "politica brasileira: Congresso Nacional, STF, governo federal Lula, "
+     "eleicoes 2026, partidos, ministerios, relacoes Executivo-Legislativo"),
 
-# ─────────────────────────────────────────────────────────────────────────────
-# ORQUESTRADOR
-# ─────────────────────────────────────────────────────────────────────────────
+    ("Economia",
+     "economia brasileira: mercado financeiro, bolsa, inflacao IPCA, "
+     "taxa Selic, cambio, emprego, PIB, agronegocio, comercio exterior"),
+
+    ("Cultura",
+     "cultura no Brasil: musica shows lancamentos albuns, literatura livros, "
+     "teatro, artes visuais, exposicoes, festivais, gastronomia, patrimonio"),
+
+    ("Tecnologia",
+     "tecnologia no Brasil e mundo: inteligencia artificial IA, startups, "
+     "Apple Google Microsoft Meta Amazon, ciberseguranca, inovacao, ciencia"),
+
+    ("Entretenimento",
+     "entretenimento streaming: Netflix Amazon Prime Video HBO Max Apple TV Plus "
+     "Disney Plus lancamentos series filmes, cinema bilheteria, criticas, premios"),
+]
+
+# ── ORQUESTRADOR ──────────────────────────────────────────────────────────────
 def fetch_news():
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    api_key = os.environ.get("GEMINI_API_KEY","").strip()
     if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY nao encontrada.")
-    print(f"[OK] API key ({len(api_key)} chars)")
+        raise RuntimeError("GEMINI_API_KEY nao encontrada.")
+    print(f"[OK] API key Gemini ({len(api_key)} chars)")
 
-    client    = anthropic.Anthropic(api_key=api_key)
+    client    = genai.Client(api_key=api_key)
     now_br    = datetime.now(BRASILIA)
     today_str = format_date_pt(now_br)
     print(f"[OK] {today_str} | {get_edition_label(now_br.hour)}")
 
-    # Passo 1: busca todas as noticias de uma vez (1 chamada Sonnet+search)
-    noticias = buscar_todas(client, today_str)
+    todas     = []
+    por_cat   = {}
 
-    if len(noticias) < 5:
-        raise RuntimeError(f"Apenas {len(noticias)} noticias encontradas — insuficiente.")
+    for categoria, instrucoes in CATEGORIAS:
+        print(f"\n--- {categoria} ---")
+        try:
+            # P1: busca
+            raw = p1_buscar(client, categoria, instrucoes, NEWS_PER_CAT, today_str)
+            print(f"   P1 blocos: {len(raw)}")
+            time.sleep(3)
 
-    # Passo 2: escreve corpo com Haiku (sem search, barato)
-    print(f"\n[..] Passo 2: escrevendo corpo de {len(noticias)} noticias (Haiku)...")
-    for i, n in enumerate(noticias):
-        print(f"   [{i+1:02d}/{len(noticias)}] {n['titulo'][:55]}...")
-        resumo, corpo = escrever_corpo(client, n)
-        n["resumo"] = resumo
-        n["corpo"]  = corpo
-        # Pausa minima entre chamadas Haiku (sem rate limit agressivo)
-        if i < len(noticias) - 1:
-            time.sleep(1)
+            # P2: metadados JSON (sem texto livre, nunca corrompe)
+            meta = p2_meta(client, raw, categoria)
+            print(f"   P2 meta: {len(meta)} noticias")
+            time.sleep(3)
 
-    # Passo 3: editorial
-    editorial = gerar_editorial(client, noticias, today_str)
+            # P3: corpo para cada noticia
+            for i, n in enumerate(meta):
+                print(f"   P3 [{i+1}/{len(meta)}] {n['titulo'][:50]}...")
+                resumo, corpo = p3_corpo(client, n)
+                n["resumo"] = resumo
+                n["corpo"]  = corpo
+                if i < len(meta) - 1:
+                    time.sleep(2)
 
-    # Contagem por categoria
-    por_cat = {}
-    for n in noticias:
-        por_cat[n["categoria"]] = por_cat.get(n["categoria"], 0) + 1
+            todas.extend(meta)
+            por_cat[categoria] = len(meta)
+            time.sleep(5)  # pausa entre categorias
+
+        except Exception as e:
+            print(f"   [ERRO] {categoria}: {e}", file=sys.stderr)
+            traceback.print_exc()
+            por_cat[categoria] = 0
+            time.sleep(5)
+
+    total = len(todas)
+    print(f"\n[OK] Total: {total} | {por_cat}")
+    if total < 5:
+        raise RuntimeError(f"Apenas {total} noticias — insuficiente.")
+
+    editorial = gerar_editorial(client, todas, today_str)
 
     return {
         "resumo_editorial": editorial,
-        "noticias":         noticias,
+        "noticias":         todas,
         "por_categoria":    por_cat,
         "generated_at":     now_br.strftime("%Y-%m-%dT%H:%M:%S"),
         "edition_label":    get_edition_label(now_br.hour),
         "date_display":     today_str.upper(),
     }
 
-
 def main():
-    print("=" * 52)
-    print("BOLETIM GERAL DE NOTICIAS — Gerador (Claude)")
-    print("=" * 52)
-
+    print("="*52)
+    print("BOLETIM GERAL DE NOTICIAS — Gerador (Gemini)")
+    print("="*52)
     for attempt in range(1, 3):
         try:
             print(f"\n[Tentativa {attempt}/2]")
             data = fetch_news()
             with open(OUTPUT, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
-            total = len(data["noticias"])
-            print(f"\n[OK] Salvo: {total} noticias — {data['por_categoria']}")
+            print(f"\n[OK] Salvo: {len(data['noticias'])} noticias")
             return
         except Exception as e:
             print(f"\n[ERRO] {e}", file=sys.stderr)
             traceback.print_exc()
             if attempt < 2:
-                print("Aguardando 30s...", file=sys.stderr)
-                time.sleep(30)
+                print("Aguardando 20s...", file=sys.stderr)
+                time.sleep(20)
             else:
                 sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
