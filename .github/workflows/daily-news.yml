@@ -23,7 +23,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,14 +38,14 @@ jobs:
           python-version: '3.12'
 
       - name: Instalar dependencias
-        run: pip install anthropic
+        run: pip install google-genai
 
       - name: Gerar news-data.json
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "ERRO: ANTHROPIC_API_KEY nao definida."
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "ERRO: GEMINI_API_KEY nao definida."
             exit 1
           fi
           python generate_news.py
