@@ -13,7 +13,7 @@ Arquitetura 3 passos por categoria (zero JSON intermediario com texto livre):
 Custo: gratuito (Gemini free tier — 1500 req/dia com billing)
 """
 
-import json, os, re, sys, time, traceback, urllib.request, urllib.error
+import json, os, re, sys, time, traceback
 from datetime import datetime, timezone, timedelta
 
 try:
@@ -74,17 +74,15 @@ def gjson(client, prompt, schema, max_tokens=3000):
             response_schema=schema))
     return json.loads(resp.text)
 
-def _validate_url(url):
-    """Retorna url se acessível (2xx/3xx), senão string vazia."""
+def _clean_url(url):
+    """Filtra URLs claramente inválidas sem fazer chamadas de rede."""
     if not url or not url.startswith("http"):
         return ""
-    try:
-        req = urllib.request.Request(url, method="HEAD",
-              headers={"User-Agent": "Mozilla/5.0 (compatible; NewsBot/1.0)"})
-        with urllib.request.urlopen(req, timeout=5) as r:
-            return url if r.status < 400 else ""
-    except Exception:
+    BAD = ("vertexaisearch", "grounding-api", "google.com/search",
+           "accounts.google", "support.google", "policies.google")
+    if any(b in url for b in BAD):
         return ""
+    return url
 
 def gtext(client, prompt, max_tokens=1000, temp=0.3):
     resp = client.models.generate_content(
@@ -100,9 +98,22 @@ FONTES_OK = (
     "CNN Brasil, Metropoles, Reuters Brasil, El Pais Brasil, Nexo Jornal, Bloomberg Linea, "
     "Agencia Publica, IstoE, Exame, InfoMoney, Opera Mundi, Band News, Correio Braziliense, "
     "R7 Noticias, The Verge, Wired, TechCrunch, Ars Technica, Canaltech, TecMundo, "
-    "Variety, Hollywood Reporter, Screen Rant, Rolling Stone Brasil"
+    "Variety, Hollywood Reporter, Screen Rant, Rolling Stone Brasil, "
+    "Le Monde Diplomatique Brasil, Outras Palavras, Jacobin Brasil, "
+    "The Intercept Brasil, Piauí, Quatro Cinco Um, Continente, "
+    "Agencia Sertao, Agencia Mural, AzMina, Gênero e Número, The Intercept, "
+    "BBC Brasil, Deutsche Welle Brasil, France 24 Brasil, AP News, AFP, "
+    "UOL Noticias, Terra, MSN Brasil, Gazeta do Povo, "
+    "Meio Bit, Olhar Digital, Tecmasters, PC World Brasil, "
+    "AdoroCinema, Omelete, IGN Brasil, Game Informer, Kotaku Brasil"
 )
-FONTES_NO = "Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista"
+FONTES_NO = (
+    "Jovem Pan, Brasil Paralelo, Terca Livre, Pleno News, O Antagonista, "
+    "Gazeta do Povo (opiniao), Novo Oeste, Oeste, Senso Incomum, "
+    "Estadao (colunas de opiniao de direita), Crusoé, Veja (colunas), "
+    "Portal do Bitcoin (politico), Conexao Politica, Foco do Brasil, "
+    "Record News, SBT News (politico)"
+)
 
 BLOCO = """##INICIO##
 TITULO>> titulo da noticia aqui
@@ -125,11 +136,7 @@ def _parse_blocos(txt, categoria):
         titulo = ex("TITULO")
         if not titulo or len(titulo) < 8: continue
         if any(x in titulo.lower() for x in ["n/a","nao foi","placeholder","[titulo"]): continue
-        url = ex("URL")
-        if not url.startswith("http") or "vertexaisearch" in url or "grounding-api" in url:
-            url = ""
-        else:
-            url = _validate_url(url)
+        url = _clean_url(ex("URL"))
         try: imp = min(10, max(1, int(re.search(r'\d+', ex("IMPORTANCIA")).group())))
         except: imp = 5
         noticias.append({
@@ -154,8 +161,8 @@ def _parse_blocos(txt, categoria):
             m = re.search(r'\d+', linha)
             if m: atual["importancia"] = min(10, max(1, int(m.group())))
         elif "URL>>" in linha and atual:
-            u = linha.split(">>",1)[1].strip()
-            if u.startswith("http") and "vertexaisearch" not in u:
+            u = _clean_url(linha.split(">>",1)[1].strip())
+            if u:
                 atual["url"] = u
     if atual.get("titulo"): noticias.append(atual)
 
@@ -166,17 +173,33 @@ def _parse_blocos(txt, categoria):
 
 
 def p1_buscar(client, categoria, instrucoes, n, today_str):
-    prompt = (
-        f"Hoje e {today_str}. Busque {n} noticias sobre {instrucoes} das ultimas 48h.\n"
-        f"FONTES ACEITAS: {FONTES_OK}\nPROIBIDO: {FONTES_NO}\n\n"
-        f"Para CADA noticia, escreva EXATAMENTE neste formato:\n{BLOCO}\n\n"
-        f"OBRIGATORIO: {n} blocos ##INICIO## ... ##FIM##. "
-        "Sem texto fora dos blocos. Sem N/A. "
-        "Se nao souber a URL, deixe o campo URL vazio."
-    )
-    txt = gsearch(client, prompt, 3500)
+    def _prompt(extra=""):
+        return (
+            f"Hoje e {today_str}. Pesquise AGORA {n} noticias REAIS e RECENTES (ultimas 48h) "
+            f"sobre {instrucoes}.\n"
+            f"FONTES ACEITAS: {FONTES_OK}\nPROIBIDO: {FONTES_NO}\n\n"
+            f"Para CADA noticia encontrada, escreva EXATAMENTE neste formato:\n{BLOCO}\n\n"
+            f"REGRAS ABSOLUTAS:\n"
+            f"- Voce DEVE retornar {n} blocos ##INICIO## ... ##FIM##, um por noticia.\n"
+            f"- Use APENAS noticias que voce encontrou na busca. Sem inventar.\n"
+            f"- Campo URL: coloque a URL exata do artigo encontrado. Se nao tiver, deixe vazio.\n"
+            f"- Sem texto fora dos blocos. Sem N/A. Sem placeholders.{extra}"
+        )
+
+    txt = gsearch(client, _prompt(), 4000)
     noticias = _parse_blocos(txt, categoria)
     print(f"   blocos encontrados: {len(noticias)}")
+
+    # Retry se poucos resultados
+    if len(noticias) < 3:
+        print(f"   [RETRY] poucos blocos, tentando novamente...")
+        time.sleep(5)
+        txt2 = gsearch(client, _prompt("\n- IMPORTANTE: retorne PELO MENOS 5 blocos."), 4000)
+        noticias2 = _parse_blocos(txt2, categoria)
+        print(f"   blocos retry: {len(noticias2)}")
+        if len(noticias2) > len(noticias):
+            noticias = noticias2
+
     return noticias
 
 # ── PASSO 2: estrutura metadados em JSON seguro (sem texto livre) ─────────────
@@ -221,11 +244,7 @@ def p2_meta(client, noticias_raw, categoria):
         for n in result:
             t = n.get("titulo","").strip()
             if not t or len(t) < 8: continue
-            url = n.get("url","")
-            if not url.startswith("http"):
-                url = ""
-            else:
-                url = _validate_url(url)
+            url = _clean_url(n.get("url",""))
             out.append({
                 "titulo":      t,
                 "fonte":       n.get("fonte","Redacao").strip() or "Redacao",
