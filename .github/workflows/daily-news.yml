@@ -1,12 +1,14 @@
 name: Gerar e Publicar Boletim Geral
 
 on:
-  schedule:
-    # 08h BRT = 11h UTC
-    - cron: '0 11 * * *'
-    # 17h BRT = 20h UTC
-    - cron: '0 20 * * *'
-  workflow_dispatch:
+  # Schedules desativados para evitar cobranças da Gemini API
+  # Para reativar, descomente os blocos abaixo:
+  # schedule:
+  #   # 08h BRT = 11h UTC
+  #   - cron: '0 11 * * *'
+  #   # 17h BRT = 20h UTC
+  #   - cron: '0 20 * * *'
+  # workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
